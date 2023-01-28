@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Stack, Box, InputAdornment, Alert, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/material.css';
 import useFirebase from '../../../hooks/useFirebase';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
@@ -16,7 +15,7 @@ export default function RegisterForm() {
 
   const isMountedRef = useIsMountedRef();
   const [showPassword, setShowPassword] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
+
   const [dialogShown, setDialogShown] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
@@ -32,12 +31,13 @@ export default function RegisterForm() {
       lastName: '',
       email: '',
       password: '',
+      favoriteCelebrity: '',
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values, { setErrors, setSubmitting, resetForm }) => {
-      values = { ...values, phoneNumber };
+      values = { ...values };
       try {
-        await register(values.email, values.password, values.firstName, values.lastName, values.phoneNumber);
+        await register(values.email, values.password, values.firstName, values.lastName, values.favoriteCelebrity);
         if (isMountedRef.current) {
           setSubmitting(false);
           handleOpenDialog();
@@ -56,10 +56,6 @@ export default function RegisterForm() {
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
-  };
-
-  const handleOnPhoneChange = (value) => {
-    setPhoneNumber(value);
   };
 
   const handleOpenDialog = () => {
@@ -146,27 +142,6 @@ export default function RegisterForm() {
           </Box>
 
           <Box>
-            <Typography variant="body2">Phone Number</Typography>
-            <PhoneInput
-              inputStyle={{
-                width: '100%',
-              }}
-              enableSearch="true"
-              disableSearchIcon="true"
-              searchPlaceholder="search countries"
-              specialLabel=""
-              searchStyle={{
-                width: '95%',
-                padding: '8px',
-                marginBottom: '2px',
-              }}
-              country={'us'}
-              value={phoneNumber}
-              onChange={handleOnPhoneChange}
-            />
-          </Box>
-
-          <Box>
             <Typography variant="body2">Password</Typography>
             <InputStyle
               fullWidth
@@ -191,6 +166,26 @@ export default function RegisterForm() {
               sx={{ mt: 1 }}
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
+            />
+          </Box>
+
+          <Box>
+            <Typography variant="body2">Favorite Celebrity</Typography>
+            <InputStyle
+              fullWidth
+              size="large"
+              placeholder="Favorite Celebrity"
+              {...getFieldProps('favoriteCelebrity')}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Iconify icon="eva:heart-outline" sx={{ color: 'text.disabled', width: 24, height: 24 }} />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{ mt: 1 }}
+              error={Boolean(touched.favoriteCelebrity && errors.favoriteCelebrity)}
+              helperText={touched.favoriteCelebrity && errors.favoriteCelebrity}
             />
           </Box>
 
