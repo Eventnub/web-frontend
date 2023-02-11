@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { Button, Typography, Box, Container } from '@mui/material';
+import { IconButton, Typography, Box, Container, Link, Button, useMediaQuery, useTheme } from '@mui/material';
 import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
 import Page from '../../components/Page';
@@ -10,6 +10,8 @@ import logo from '../../assets/blueLogo.png';
 import { LoginForm } from '../../sections/auth/login';
 
 export default function Login() {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
   const { loginWithGoogle, loginWithFacebook } = useFirebase();
 
   const handleLoginGoogle = async () => {
@@ -30,106 +32,190 @@ export default function Login() {
 
   return (
     <Page title="Log In">
-      <Box
-        sx={{
-          backgroundImage: `url(${bg})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          height: '100vh',
-          width: '100vw',
-          position: 'relative',
-          '&::after': {
-            content: '" "',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            height: '100%',
-            width: '100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-          },
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Box
-          sx={{
-            height: '60%',
-            width: '70%',
-            backgroundColor: 'rgb(212, 210, 210)',
-            display: 'flex',
-          }}
-        >
-          <Box width={'50%'} sx={{ zIndex: '1', position: 'absolute' }}>
+      {isMatch ? (
+        <Box display="flex" flexDirection="column" pt={3} minHeight={'100vh'}>
+          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
             <Box display="flex" flexDirection="column">
-              <Box display="flex" alignItems="center">
-                <img src={logo} alt="logo" />
-                <Typography variant="h6" sx={{ color: '#1358A5', letterSpacing: '0.1em', fontsize: '2rem' }}>
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <Link to="/" component={RouterLink} underline="none">
+                  <img src={logo} alt="logo" style={{ width: '25px', height: '25px' }} />
+                </Link>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ color: '#1358A5', fontWeight: '100', fontsize: '10px', letterSpacing: '4px' }}
+                >
                   eventnub
                 </Typography>
               </Box>
-              <Box sx={{ width: '180px' }}>
-                <Typography
-                  variant="h4"
-                  sx={{ paddingLeft: '1em', color: '#ffffff', fontWeight: '100', fontSize: '1rem' }}
+              <Typography variant="h4" sx={{ color: '#000', ml: '1.5rem', mt: '1rem' }}>
+                Sign Up
+              </Typography>
+              <Typography variant="subtitle2" sx={{ ml: '1rem', color: '#000', fontWeight: '100' }}>
+                Continue with
+              </Typography>
+              <Box display="flex" mt={'0.6rem'} ml={'1rem'} gap={'0.5rem'}>
+                <IconButton
+                  variant="outlined"
+                  sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
+                  onClick={handleLoginGoogle}
                 >
-                  Don't have an account?
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  sx={{ paddingLeft: '1.8em', color: '#ffffff', fontSize: '0.6rem', paddingTop: '1em' }}
+                  <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
+                </IconButton>
+                <IconButton
+                  variant="outlined"
+                  sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
+                  onClick={handleLoginFacebook}
                 >
-                  Join us and let's help you get that live concert experience
-                </Typography>
+                  <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
+                </IconButton>
               </Box>
-              <Box sx={{ marginTop: '1em', paddingLeft: '1em' }}>
-                <Button variant="outlined" sx={{ border: '1px solid #ffffff', color: '#ffffff' }}>
+              <Typography ml={'2.5rem'} mt={'1rem'} sx={{ color: '#000' }}>
+                OR
+              </Typography>
+            </Box>
+          </Box>
+
+          <Box padding={3}>
+            <LoginForm />
+          </Box>
+          <Box px={'1rem'}>
+            <Typography textAlign={'center'} sx={{ color: '#000' }}>
+              Already have an account?
+            </Typography>
+            <Typography variant="body2" textAlign={'center'} sx={{ color: '#000' }}>
+              Sign in to discover available concerts from your favorit artist
+            </Typography>
+            <Box display={'flex'} alignItems={'center'} mt={'1rem'} justifyContent={'center'}>
+              <Link to={PATH_AUTH.register} component={RouterLink} underline="none">
+                <Button type="submit" variant="outlined" sx={{ boxShadow: 'none' }}>
                   Create Eventnub Account
                 </Button>
+              </Link>
+            </Box>
+          </Box>
+        </Box>
+      ) : (
+        <>
+          <Box
+            sx={{
+              backgroundImage: `url(${bg})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              height: '100vh',
+              width: '100vw',
+              position: 'relative',
+              '&::after': {
+                content: '" "',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                height: '100%',
+                width: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+              },
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Box
+              sx={{
+                height: '60%',
+                width: '70%',
+                backgroundColor: 'rgba(80, 79, 79, 0.72)',
+                display: 'flex',
+              }}
+            >
+              <Box width={'50%'} sx={{ zIndex: '2', position: 'absolute' }}>
+                <Box display="flex" flexDirection="column">
+                  <Box display="flex" alignItems="center">
+                    <Link to="/" component={RouterLink} underline="none">
+                      <img src={logo} alt="logo" />
+                    </Link>
+                    <Typography variant="h6" sx={{ color: '#1358A5', letterSpacing: '0.1em', fontsize: '2rem' }}>
+                      eventnub
+                    </Typography>
+                  </Box>
+                  <Box sx={{ width: '180px' }}>
+                    <Typography
+                      variant="h4"
+                      sx={{ paddingLeft: '1em', color: '#ffffff', fontWeight: '100', fontSize: '1rem' }}
+                    >
+                      Don't have an account?
+                    </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      sx={{ paddingLeft: '1.8em', color: '#ffffff', fontSize: '0.6rem', paddingTop: '1em' }}
+                    >
+                      Join us and let's help you get that live concert experience
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginTop: '1em', paddingLeft: '1em' }}>
+                    <Link to={PATH_AUTH.register} component={RouterLink} underline="none">
+                      <Button variant="outlined" sx={{ border: '1px solid #ffffff', color: '#ffffff' }}>
+                        Create Eventnub Account
+                      </Button>
+                    </Link>
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  backgroundColor: '#fff',
+                  height: '75vh',
+                  position: 'relative',
+                  left: '50%',
+                  bottom: '10%',
+                  zIndex: '2',
+                  width: '45%',
+                  borderRadius: '5px',
+                }}
+              >
+                <Container>
+                  <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ marginTop: '1.5rem' }}>
+                    <Box>
+                      <Typography variant="h5" sx={{ color: '#000', fontWeight: '600' }}>
+                        Sign In
+                      </Typography>
+                    </Box>
+                    <Box display="flex" alignItems="center" gap={2}>
+                      <Typography variant="subtitle2" sx={{ color: '#000', fontWeight: '100' }}>
+                        With
+                      </Typography>
+                      <IconButton
+                        variant="outlined"
+                        sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
+                        onClick={handleLoginGoogle}
+                      >
+                        <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
+                      </IconButton>
+                      <IconButton
+                        variant="outlined"
+                        sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
+                        onClick={handleLoginFacebook}
+                      >
+                        <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                  <Typography align="center" my={5} variant="h6" sx={{ color: '#000' }}>
+                    Or
+                  </Typography>
+
+                  <LoginForm />
+                  <Typography variant="body2" textAlign="center" sx={{ mt: 2, color: '#000' }}>
+                    Forgot your password?{' '}
+                    {/* <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.resetPassword} underline="none">
+                Request a new one
+                </Link> */}
+                  </Typography>
+                </Container>
               </Box>
             </Box>
           </Box>
-          <Box
-            sx={{
-              backgroundColor: '#fff',
-              height: '70vh',
-              position: 'relative',
-              left: '50%',
-              bottom: '10%',
-              zIndex: '2',
-              width: '45%',
-              borderRadius: '5px',
-            }}
-          >
-            <Container>
-              <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ marginTop: '1.5rem' }}>
-                <Box>
-                  <Typography variant="h5" sx={{ color: '#000', fontWeight: '600' }}>
-                    Sign In
-                  </Typography>
-                </Box>
-                <Box display="flex" alignItems="center" gap={2}>
-                  <Typography variant="subtitle2" sx={{ color: '#000', fontWeight: '100' }}>
-                    With
-                  </Typography>
-                  <Button variant="outlined" sx={{ border: '1px solid #F5F5F5' }} onClick={handleLoginGoogle}>
-                    <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
-                  </Button>
-                  <Button variant="outlined" sx={{ border: '1px solid #F5F5F5' }} onClick={handleLoginFacebook}>
-                    <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
-                  </Button>
-                </Box>
-              </Box>
-              <Typography align="center" my={5} variant="h6" sx={{ color: '#000' }}>
-                Or
-              </Typography>
-
-              <LoginForm />
-            </Container>
-          </Box>
-        </Box>
-      </Box>
+        </>
+      )}
     </Page>
   );
 }

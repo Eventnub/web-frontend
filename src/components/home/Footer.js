@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Box, Stack, Typography, styled, InputAdornment, useTheme, Divider } from '@mui/material';
-import SendSharpIcon from '@mui/icons-material/SendSharp';
 import logoImg from '../../assets/logoImg.png';
 import InputStyle from '../InputStyle';
 

@@ -80,17 +80,6 @@ function SliderCom() {
   const theme = useTheme();
 
   const slideRef = useRef(null);
-  const StyledIconbutton = styled(IconButton)(() => ({
-    position: 'relative',
-    right: '-1rem',
-    top: '-10rem',
-    borderRadius: '50%',
-    background: 'transparent',
-    height: '2rem',
-    width: '2rem',
-    border: '1px solid #838383',
-    zIndex: '1',
-  }));
   const settings = {
     dots: false,
     infinite: true,
@@ -545,12 +534,43 @@ function SliderCom() {
           </Box>
         </Paper>
       </Slider>
-      <StyledIconbutton onClick={() => slideRef?.current.slickPrev()}>
+
+      <IconButton
+        sx={{
+          position: 'relative',
+          // right: '-1rem',
+          // top: '-10rem',
+          right: '0.3%',
+          bottom: '10rem',
+          borderRadius: '50%',
+          background: 'transparent',
+          height: '2rem',
+          width: '2rem',
+          border: '1px solid #838383',
+          zIndex: '1',
+        }}
+        onClick={() => slideRef?.current.slickPrev()}
+      >
         <KeyboardArrowLeftSharpIcon />
-      </StyledIconbutton>
-      <StyledIconbutton onClick={() => slideRef?.current.slickNext()} sx={{ left: '75rem' }}>
+      </IconButton>
+      <IconButton
+        sx={{
+          position: 'relative',
+          right: '-1rem',
+          top: '-10rem',
+          left: '74.5rem',
+          borderRadius: '50%',
+          background: 'transparent',
+          height: '2rem',
+          width: '2rem',
+          border: '1px solid #838383',
+          zIndex: '1',
+          [theme.breakpoints.down('sm')]: { left: '78%' },
+        }}
+        onClick={() => slideRef?.current.slickNext()}
+      >
         <KeyboardArrowRightSharpIcon />
-      </StyledIconbutton>
+      </IconButton>
     </Container>
   );
 }

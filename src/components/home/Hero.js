@@ -5,7 +5,7 @@ import bg from '../../assets/bg.jpg';
 
 function Hero() {
   const theme = useTheme();
-  const StyledDiv = styled('div')(({ theme, bg }) => ({
+  const StyledDiv = styled('div')(({ bg }) => ({
     backgroundImage: `url(${bg})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',

@@ -62,7 +62,6 @@ export default function LoginForm() {
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <Box>
-            {/* <Typography variant="body1">Email address</Typography> */}
             <InputStyle
               fullWidth
               size="large"
@@ -70,7 +69,7 @@ export default function LoginForm() {
               {...emailFieldProps}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start" sx={{ backgroundColor: 'blue', height: '100%', padding: '0' }}>
+                  <InputAdornment position="start">
                     <Iconify icon="eva:person-outline" sx={{ color: 'text.disabled', width: 24, height: 24 }} />
                   </InputAdornment>
                 ),
@@ -82,7 +81,6 @@ export default function LoginForm() {
           </Box>
 
           <Box>
-            {/* <Typography variant="body1">Password</Typography> */}
             <InputStyle
               fullWidth
               size="large"
@@ -110,13 +108,6 @@ export default function LoginForm() {
           </Box>
         </Stack>
 
-        <Typography variant="body2" sx={{ mt: 4, mb: 4 }}>
-          Forgot your password?{' '}
-          {/* <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.resetPassword} underline="none">
-            Request a new one
-          </Link> */}
-        </Typography>
-
         <LoadingButton
           fullWidth
           size="large"
@@ -124,10 +115,10 @@ export default function LoginForm() {
           variant="contained"
           loading={isSubmitting}
           disabled={!(formik.isValid && formik.dirty)}
+          sx={{ backgroundColor: '#1358A5', boxShadow: 'none', mt: '6%' }}
         >
           Login
         </LoadingButton>
-
         {errors.afterSubmit && (
           <Alert severity="error" sx={{ mt: 4 }}>
             {errors.afterSubmit}

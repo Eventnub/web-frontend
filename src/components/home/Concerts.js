@@ -8,7 +8,7 @@ import data from '../../constants/data';
 export default function Concerts() {
   const theme = useTheme();
 
-  const StyledLink = styled(Link)(({ theme }) => ({
+  const StyledLink = styled(Link)(() => ({
     textDecoration: 'none',
     padding: '20px',
   }));
@@ -52,7 +52,7 @@ export default function Concerts() {
                 sx={{ height: '100%', width: '100%', background: '#fff', borderRadius: '8px', position: 'relative' }}
               >
                 <Box>
-                  <Link to="/auth">
+                  <Link to="#">
                     <img
                       style={{ borderTopLeftRadius: '8px', width: '100%', borderTopRightRadius: '8px' }}
                       src={item.imageUrl}
@@ -97,7 +97,7 @@ export default function Concerts() {
                     </Typography>
                   </Box>
                 </Box>
-                <StyledLink to="/auth">
+                <StyledLink to="#">
                   <Button variant="outlined" sx={{ width: '80%', mb: '0.8em', alignItems: 'center' }}>
                     Explore Available Tickets
                   </Button>

@@ -4,7 +4,7 @@ import { TextField, Select, Button, InputAdornment, Typography } from '@mui/mate
 import * as Yup from 'yup';
 import Iconify from '../../../components/Iconify';
 
-const RegisterForm = () => {
+const RegisterFormMobile = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
@@ -37,44 +37,45 @@ const RegisterForm = () => {
     >
       {({ isSubmitting }) => (
         <Form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} autoComplete="off">
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-            <Field name="firstName">
-              {({ field, form }) => (
-                <TextField
-                  {...field}
-                  variant="outlined"
-                  placeholder="First Name"
-                  error={form.errors.firstName && form.touched.firstName}
-                  helperText={form.errors.firstName}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Iconify icon="eva:person-outline" sx={{ color: 'text.disabled', width: 24, height: 24 }} />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              )}
-            </Field>
-            <Field name="lastName">
-              {({ field, form }) => (
-                <TextField
-                  {...field}
-                  variant="outlined"
-                  placeholder="Last Name"
-                  error={form.errors.lastName && form.touched.lastName}
-                  helperText={form.errors.lastName}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Iconify icon="eva:person-outline" sx={{ color: 'text.disabled', width: 24, height: 24 }} />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              )}
-            </Field>
-          </div>
+          <Field name="firstName">
+            {({ field, form }) => (
+              <TextField
+                {...field}
+                variant="outlined"
+                placeholder="First Name"
+                fullWidth
+                error={form.errors.firstName && form.touched.firstName}
+                helperText={form.errors.firstName}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Iconify icon="eva:person-outline" sx={{ color: 'text.disabled', width: 24, height: 24 }} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
+          </Field>
+          <Field name="lastName">
+            {({ field, form }) => (
+              <TextField
+                {...field}
+                variant="outlined"
+                placeholder="Last Name"
+                fullWidth
+                error={form.errors.lastName && form.touched.lastName}
+                helperText={form.errors.lastName}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Iconify icon="eva:person-outline" sx={{ color: 'text.disabled', width: 24, height: 24 }} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
+          </Field>
+
           <Field name="email">
             {({ field, form }) => (
               <TextField
@@ -82,6 +83,7 @@ const RegisterForm = () => {
                 variant="outlined"
                 error={form.errors.email && form.touched.email}
                 placeholder="Email"
+                fullWidth
                 helperText={form.errors.email}
                 InputProps={{
                   startAdornment: (
@@ -100,6 +102,7 @@ const RegisterForm = () => {
                 type={showPassword ? 'text' : 'password'}
                 variant="outlined"
                 placeholder="Password"
+                fullWidth
                 error={form.errors.password && form.touched.password}
                 helperText={form.errors.password}
                 InputProps={{
@@ -127,6 +130,7 @@ const RegisterForm = () => {
                 error={form.errors.ageRange && form.touched.ageRange}
                 helperText={form.errors.ageRange}
                 placeholder="What is your age range"
+                fullWidth
                 displayEmpty
                 inputProps={{
                   startAdornment: (
@@ -154,6 +158,7 @@ const RegisterForm = () => {
                 variant="outlined"
                 error={form.errors.favoriteCelebrity && form.touched.favoriteCelebrity}
                 placeholder="Favorite Celebrity (Optional)"
+                fullWidth
                 helperText={form.errors.favoriteCelebrity}
                 InputProps={{
                   startAdornment: (
@@ -165,13 +170,14 @@ const RegisterForm = () => {
               />
             )}
           </Field>
-          <Button
-            type="submit"
-            variant="contained"
-            disabled={isSubmitting}
-            sx={{ boxShadow: 'none', backgroundColor: '#1358A5' }}
-          >
-            Create Account
+          <Typography textAlign={'center'} sx={{ color: '#000' }}>
+            Already have an account?
+          </Typography>
+          <Typography variant="body2" textAlign={'center'} sx={{ color: '#000' }}>
+            Sign in to discover available concerts from your favorit artist
+          </Typography>
+          <Button type="submit" variant="outlined" disabled={isSubmitting} sx={{ boxShadow: 'none' }}>
+            Create Eventnub Account
           </Button>
         </Form>
       )}
@@ -179,4 +185,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisterFormMobile;

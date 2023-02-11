@@ -71,7 +71,7 @@ export default function Navbar() {
                 Contact Us
               </StyledNavlink>
               <StyledNavlink
-                to="#"
+                to="/tickets"
                 exact
                 activeStyle={activeStyle}
                 sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}

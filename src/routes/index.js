@@ -28,7 +28,7 @@ const Register = Loadable(lazy(() => import('../pages/auth/Register')));
 
 // Dashboard
 const Events = Loadable(lazy(() => import('../pages/dashboard/Events')));
-
+const TicketsDashboard = Loadable(lazy(() => import('../pages/TicketsDashboard')));
 // Main
 const HomePage = Loadable(lazy(() => import('../pages/Home')));
 const ComingSoon = Loadable(lazy(() => import('../pages/ComingSoon')));
@@ -115,6 +115,11 @@ export default function Router() {
       path: '/',
       element: <HomePage />,
       index: true,
+    },
+
+    {
+      path: 'tickets',
+      element: <TicketsDashboard />,
     },
 
     { path: '*', element: <Navigate to="/404" replace /> },
