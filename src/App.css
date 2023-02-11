@@ -1,0 +1,9 @@
+.slick-slide div {
+  margin: 0 1rem;
+}
+
+.slick-prev::before {
+  color: white;
+  width: 50px;
+  height: 50px;
+}
