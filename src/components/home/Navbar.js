@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import logoImg from '../../assets/logoImg.png';
 import DrawerCom from './DrawerCom';
+import { PATH_AUTH } from '../../routes/paths';
 
 export default function Navbar() {
   const activeStyle = { color: '#FF6C2C' };
@@ -13,13 +14,13 @@ export default function Navbar() {
     gap: theme.spacing(3),
   }));
 
-  const StyledNavlink = styled(NavLink)(({ theme }) => ({
+  const StyledNavlink = styled(NavLink)(() => ({
     textDecoration: 'none',
     color: '#FFFFFF',
     fontWeight: '400',
   }));
 
-  const Sircle = styled('div')(({ theme }) => ({
+  const Sircle = styled('span')(() => ({
     width: '20px',
     height: '20px',
     borderRadius: '50px',
@@ -31,7 +32,7 @@ export default function Navbar() {
   }));
 
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <AppBar position="static" sx={{ background: 'transparent', boxShadow: 'none', position: 'absolute', zIndex: '1' }}>
@@ -64,7 +65,7 @@ export default function Navbar() {
               <StyledNavlink to="/" exact activeStyle={activeStyle}>
                 Home
               </StyledNavlink>
-              <StyledNavlink to="#" exact activeStyle={activeStyle}>
+              <StyledNavlink to="/about" exact activeStyle={activeStyle}>
                 About
               </StyledNavlink>
               <StyledNavlink to="#" exact activeStyle={activeStyle}>
@@ -78,7 +79,7 @@ export default function Navbar() {
               >
                 My Tickets <Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
               </StyledNavlink>
-              <StyledNavlink to="/register" exact activeStyle={activeStyle}>
+              <StyledNavlink to={PATH_AUTH.register} exact activeStyle={activeStyle}>
                 Sign Up
               </StyledNavlink>
             </NavbarLinksBox>

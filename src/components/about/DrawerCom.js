@@ -7,7 +7,7 @@ import { PATH_AUTH } from '../../routes/paths';
 export default function DrawerCom() {
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const StyledNavlink = styled(NavLink)(({ theme }) => ({
+  const StyledNavlink = styled(NavLink)(() => ({
     textDecoration: 'none',
     activeStyle: '#FF6C2C',
     color: '#FFFFFF',
@@ -62,7 +62,7 @@ export default function DrawerCom() {
         </List>
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
-        <MenuIcon sx={{ color: '#fff' }} />
+        <MenuIcon sx={{ color: '#000' }} />
       </IconButton>
     </div>
   );

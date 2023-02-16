@@ -1,10 +1,12 @@
 import React from 'react';
-import { Box, styled, IconButton, Typography } from '@mui/material';
+import { Box, styled, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ticket from '../../assets/ticket.png';
 import bg from '../../assets/bg.jpg';
 import logo from '../../assets/logoImg.png';
 
 function TicketsBar() {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
   const StyledBox = styled(Box)(() => ({
     width: '23%',
     height: '100%',
@@ -38,9 +40,15 @@ function TicketsBar() {
   return (
     <>
       <Box
-        display="flex"
         gap="2.5rem"
-        sx={{ px: '1.5rem', pt: '2rem', justifyContent: 'center', alignItems: 'center', height: '115px' }}
+        sx={{
+          display: isMatch ? 'none' : 'flex',
+          px: '1.5rem',
+          pt: '2rem',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '115px',
+        }}
       >
         <StyledBox sx={{ backgroundColor: ' rgba(255, 108, 44, 0.07)' }}>
           <StyledIconButton>

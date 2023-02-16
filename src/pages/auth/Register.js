@@ -78,6 +78,25 @@ export default function Register() {
           <Box padding={3}>
             <RegisterFormMobile />
           </Box>
+          <Box px="1rem">
+            <Typography textAlign={'center'} sx={{ color: '#000' }}>
+              Already have an account?
+            </Typography>
+            <Typography variant="body2" textAlign={'center'} sx={{ color: '#000', mb: '1rem' }}>
+              Sign in to discover available concerts from your favorit artist
+            </Typography>
+            <Box display={'flex'} alignItems={'center'} mb={'1rem'} justifyContent={'center'}>
+              <Link to={PATH_AUTH.login} component={RouterLink} underline="none">
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  sx={{ boxShadow: 'none', width: '289px', height: '47px', borderRadius: '5px' }}
+                >
+                  Sign In
+                </Button>
+              </Link>
+            </Box>
+          </Box>
         </Box>
       ) : (
         <>

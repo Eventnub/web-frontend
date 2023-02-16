@@ -3,11 +3,23 @@ import { Formik, Form, Field } from 'formik';
 import { TextField, Select, Button, InputAdornment, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import Iconify from '../../../components/Iconify';
+import { requests } from '../../../api/requests';
+import DialogSuccess from './DialogSuccess';
+import useIsMountedRef from '../../../hooks/useIsMountedRef';
 
 const RegisterFormMobile = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [dialogShown, setDialogShown] = useState(false);
+  const isMountedRef = useIsMountedRef();
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
+  };
+  const handleOpenDialog = () => {
+    setDialogShown(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogShown(false);
   };
 
   return (
@@ -28,11 +40,22 @@ const RegisterFormMobile = () => {
         favoriteCelebrity: Yup.string(),
         ageRange: Yup.string().required('Age range is required'),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={async (values, { setErrors, setSubmitting, resetForm }) => {
+        try {
+          const user = await requests.register(values);
+          if (isMountedRef.current) {
+            setSubmitting(false);
+            handleOpenDialog();
+            resetForm();
+          }
+          console.log(user);
+        } catch (error) {
+          if (isMountedRef.current) {
+            setErrors({ afterSubmit: error.message });
+            setSubmitting(false);
+          }
+          console.log(error.request);
+        }
       }}
     >
       {({ isSubmitting }) => (
@@ -170,15 +193,15 @@ const RegisterFormMobile = () => {
               />
             )}
           </Field>
-          <Typography textAlign={'center'} sx={{ color: '#000' }}>
-            Already have an account?
-          </Typography>
-          <Typography variant="body2" textAlign={'center'} sx={{ color: '#000' }}>
-            Sign in to discover available concerts from your favorit artist
-          </Typography>
-          <Button type="submit" variant="outlined" disabled={isSubmitting} sx={{ boxShadow: 'none' }}>
-            Create Eventnub Account
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={isSubmitting}
+            sx={{ boxShadow: 'none', backgroundColor: '#1358A5', color: '#fff', height: '51px' }}
+          >
+            Create Account
           </Button>
+          <DialogSuccess open={dialogShown} handleClose={handleCloseDialog} />
         </Form>
       )}
     </Formik>

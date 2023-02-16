@@ -7,7 +7,7 @@ import InputStyle from '../InputStyle';
 export default function Footer() {
   const theme = useTheme();
 
-  const StyledNavlink = styled(Link)(({ theme }) => ({
+  const StyledNavlink = styled(Link)(() => ({
     textDecoration: 'none',
     color: '#FFFFFF',
     fontWeight: '400',
@@ -40,7 +40,7 @@ export default function Footer() {
             height: '80%',
             width: '100%',
             justifyContent: 'space-between',
-            [theme.breakpoints.down('sm')]: { flexDirection: 'column', height: 'fit-content' },
+            [theme.breakpoints.down('md')]: { flexDirection: 'column', height: 'fit-content' },
           }}
         >
           <Box sx={{ width: '350px' }}>
@@ -79,13 +79,13 @@ export default function Footer() {
               <StyledNavlink to="/#">
                 <Paragraph>Contact us</Paragraph>
               </StyledNavlink>
-              <StyledNavlink to="/#">
+              <StyledNavlink to="/about">
                 <Paragraph>About</Paragraph>
               </StyledNavlink>
               <StyledNavlink to="/#">
                 <Paragraph>My Concerts</Paragraph>
               </StyledNavlink>
-              <StyledNavlink to="/#">
+              <StyledNavlink to="/tickets">
                 <Paragraph>My Tickets</Paragraph>
               </StyledNavlink>
               <StyledNavlink to="/#">
