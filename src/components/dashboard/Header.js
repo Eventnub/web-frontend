@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import LogoutButton from '../../layouts/dashboard/navbar/LogoutButton';
 import logoImg from '../../assets/blueLogo.png';
 import avatarImg from '../../assets/avatar.png';
 
@@ -49,6 +50,7 @@ function Header() {
           </Typography>
           <ExpandMoreIcon />
           <MenuIcon sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }} />
+          <LogoutButton />
         </Box>
       </Box>
       <Box

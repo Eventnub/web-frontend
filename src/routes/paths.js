@@ -35,6 +35,7 @@ export const PATH_DASHBOARD = {
   general: {
     events: path(ROOTS_DASHBOARD, '/events'),
     profile: path(ROOTS_DASHBOARD, '/profile'),
+    tickets: path(ROOTS_DASHBOARD, '/tickets'),
     settings: path(ROOTS_DASHBOARD, '/settings'),
   },
 };
