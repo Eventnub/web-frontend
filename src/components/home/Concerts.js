@@ -2,7 +2,6 @@ import { Box, Container, Typography, Grid, Button, useTheme, styled, Paper } fro
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
-
 import data from '../../constants/data';
 
 export default function Concerts() {

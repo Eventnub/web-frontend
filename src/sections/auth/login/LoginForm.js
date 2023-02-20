@@ -1,10 +1,8 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
-import { Link, Stack, Alert, Typography, InputAdornment, Box } from '@mui/material';
+import { Stack, Alert, Typography, InputAdornment, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { PATH_AUTH } from '../../../routes/paths';
 import useFirebase from '../../../hooks/useFirebase';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 import Iconify from '../../../components/Iconify';

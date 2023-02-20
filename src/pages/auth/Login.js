@@ -87,7 +87,11 @@ export default function Login() {
             </Typography>
             <Box display={'flex'} alignItems={'center'} mt={'1rem'} justifyContent={'center'}>
               <Link to={PATH_AUTH.register} component={RouterLink} underline="none">
-                <Button type="submit" variant="outlined" sx={{ boxShadow: 'none' }}>
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  sx={{ boxShadow: 'none', width: '289px', height: '47px', borderRadius: '5px' }}
+                >
                   Create Eventnub Account
                 </Button>
               </Link>
@@ -204,12 +208,11 @@ export default function Login() {
                   </Typography>
 
                   <LoginForm />
-                  <Typography variant="body2" textAlign="center" sx={{ mt: 2, color: '#000' }}>
-                    Forgot your password?{' '}
-                    {/* <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.resetPassword} underline="none">
-                Request a new one
-                </Link> */}
-                  </Typography>
+                  <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.forgetPassword} underline="none">
+                    <Typography textAlign="center" sx={{ color: '#000', mt: 2 }}>
+                      Forgot Password?
+                    </Typography>
+                  </Link>
                 </Container>
               </Box>
             </Box>

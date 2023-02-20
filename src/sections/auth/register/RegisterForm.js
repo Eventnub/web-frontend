@@ -3,11 +3,24 @@ import { Formik, Form, Field } from 'formik';
 import { TextField, Select, Button, InputAdornment, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import Iconify from '../../../components/Iconify';
+import { requests } from '../../../api/requests';
+import DialogSuccess from './DialogSuccess';
+import useIsMountedRef from '../../../hooks/useIsMountedRef';
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [dialogShown, setDialogShown] = useState(false);
+  const isMountedRef = useIsMountedRef();
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
+  };
+
+  const handleOpenDialog = () => {
+    setDialogShown(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogShown(false);
   };
 
   return (
@@ -28,11 +41,23 @@ const RegisterForm = () => {
         favoriteCelebrity: Yup.string(),
         ageRange: Yup.string().required('Age range is required'),
       })}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={async (values, { setErrors, setSubmitting, resetForm }) => {
+        try {
+          const user = await requests.register(values);
+          if (isMountedRef.current) {
+            setSubmitting(false);
+            handleOpenDialog();
+            resetForm();
+          }
+
+          console.log(user);
+        } catch (error) {
+          if (isMountedRef.current) {
+            setErrors({ afterSubmit: error.message });
+            setSubmitting(false);
+          }
+          console.log(error.request);
+        }
       }}
     >
       {({ isSubmitting }) => (
@@ -147,6 +172,48 @@ const RegisterForm = () => {
               </Select>
             )}
           </Field>
+
+          {/* <Field name="ageRange">
+            {({ field, form }) => (
+              <Select
+                {...field}
+                variant="outlined"
+                error={form.errors.ageRange && form.touched.ageRange}
+                helperText={form.errors.ageRange}
+                displayEmpty
+                inputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Iconify icon="eva:calendar-outline" sx={{ color: 'text.disabled', width: 24, height: 24 }} />
+                    </InputAdornment>
+                  ),
+                }}
+                value={field.value || ''}
+                onChange={(event) => form.setFieldValue(field.name, event.target.value)}
+                // Add the following two props to enable the field to be selectable
+                MenuProps={{
+                  anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  },
+                  transformOrigin: {
+                    vertical: 'top',
+                    horizontal: 'left',
+                  },
+                  getContentAnchorEl: null,
+                }}
+              >
+                <MenuItem value="" disabled>
+                  What is your age range
+                </MenuItem>
+                <MenuItem value="18-24">18-24</MenuItem>
+                <MenuItem value="25-34">25-34</MenuItem>
+                <MenuItem value="35-44">35-44</MenuItem>
+                <MenuItem value="45-54">45-54</MenuItem>
+                <MenuItem value="55+">55+</MenuItem>
+              </Select>
+            )}
+          </Field> */}
           <Field name="favoriteCelebrity">
             {({ field, form }) => (
               <TextField
@@ -169,10 +236,11 @@ const RegisterForm = () => {
             type="submit"
             variant="contained"
             disabled={isSubmitting}
-            sx={{ boxShadow: 'none', backgroundColor: '#1358A5' }}
+            sx={{ boxShadow: 'none', backgroundColor: '#1358A5', height: '59px', borderRadius: '5px' }}
           >
             Create Account
           </Button>
+          <DialogSuccess open={dialogShown} handleClose={handleCloseDialog} />
         </Form>
       )}
     </Formik>

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, styled, IconButton, Typography } from '@mui/material';
+import { Box, styled, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ticket from '../../assets/ticket.png';
-import bg from '../../assets/bg.jpg';
-import logo from '../../assets/logoImg.png';
+import Ticket from './Ticket';
 
 function TicketsBar() {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
   const StyledBox = styled(Box)(() => ({
     width: '23%',
     height: '100%',
@@ -38,9 +39,15 @@ function TicketsBar() {
   return (
     <>
       <Box
-        display="flex"
         gap="2.5rem"
-        sx={{ px: '1.5rem', pt: '2rem', justifyContent: 'center', alignItems: 'center', height: '115px' }}
+        sx={{
+          display: isMatch ? 'none' : 'flex',
+          px: '1.5rem',
+          pt: '2rem',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '115px',
+        }}
       >
         <StyledBox sx={{ backgroundColor: ' rgba(255, 108, 44, 0.07)' }}>
           <StyledIconButton>
@@ -87,27 +94,9 @@ function TicketsBar() {
         flexWrap="wrap"
         gap="3rem"
       >
-        <Box sx={{ height: '282px', width: '45%', display: 'flex', position: 'relative', borderRadius: '20px' }}>
-          <Box sx={{ width: '30%', backgroundColor: '#000' }}>hi</Box>
-          <Box
-            sx={{
-              width: '70%',
-              borderLeft: '3px dotted white',
-              backgroundImage: `url(${bg})`,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundColor: 'rgba(0, 0, 0, 0.69)',
-            }}
-          >
-            2
-          </Box>
-          <img
-            src={logo}
-            alt="logo"
-            style={{ position: 'absolute', bottom: 0, left: '28%', width: '120px', height: '120px' }}
-          />
-        </Box>
+        <Ticket />
+        <Ticket />
+        <Ticket />
       </Box>
     </>
   );

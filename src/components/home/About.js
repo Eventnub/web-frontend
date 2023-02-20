@@ -1,9 +1,7 @@
 import React from 'react';
-import { Container, Box, Typography, useTheme } from '@mui/material';
+import { Container, Box, Typography } from '@mui/material';
 
 export default function About() {
-  const theme = useTheme();
-
   return (
     <Container maxWidth="sm" sx={{ marginTop: '90px', marginBottom: '90px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
