@@ -9,7 +9,7 @@ function Ticket() {
   return (
     <>
       <Box sx={{ height: '282px', width: '571px', display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ height: '90%', backgroundColor: 'green' }}>
+        <Box sx={{ height: '90%' }}>
           <Box
             sx={{
               height: '100%',
@@ -22,7 +22,7 @@ function Ticket() {
               sx={{
                 width: '30%',
                 backgroundColor: '#000',
-                display: 'flex',
+                display: { xs: 'none', sm: 'flex', md: 'flex' },
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 color: '#fff',
@@ -48,7 +48,7 @@ function Ticket() {
             </Box>
             <Box
               sx={{
-                width: '70%',
+                width: { xs: '100%', sm: '', md: '70%' },
                 borderLeft: '3px dotted white',
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
                 backgroundSize: 'cover',
@@ -104,10 +104,18 @@ function Ticket() {
             </Box>
           </Box>
         </Box>
-        <Box sx={{ height: '10%', display: 'flex', justifyContent: 'flex-end', mt: '.5rem', gap: '.7rem' }}>
+        <Box
+          sx={{
+            height: '10%',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            mt: '.5rem',
+            gap: '.7rem',
+          }}
+        >
           <Box
             sx={{
-              width: '24%',
+              width: { xs: '38%', sm: '', md: '24%' },
               height: '100%',
               backgroundColor: '#FF6C2C',
               borderRadius: '5px',
@@ -122,7 +130,7 @@ function Ticket() {
           </Box>
           <Box
             sx={{
-              width: '12%',
+              width: { xs: '20%', md: '12%' },
               height: '100%',
               backgroundColor: '#FF6C2C',
               borderRadius: '5px',
