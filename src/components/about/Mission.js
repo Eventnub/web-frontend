@@ -15,8 +15,22 @@ function Mission() {
     color: '#000',
   });
   return (
-    <Box sx={{ my: '7rem', px: '3rem', display: 'flex', gap: '1rem' }}>
-      <Box width="50%" display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+    <Box
+      sx={{
+        my: '7rem',
+        px: '3rem',
+        display: 'flex',
+        gap: '1rem',
+        flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+      }}
+    >
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        sx={{ width: { xs: '100%', sm: '100%', md: '50%' } }}
+      >
         <Title mb="2rem">Our Mission</Title>
         <Text>An event platform that helps offer fans an</Text>
         <Text>opportunity to get free</Text>
@@ -24,7 +38,13 @@ function Mission() {
         <Text>concerts, events, or shows of celebrities</Text>
         <Text>through various gamified activities</Text>
       </Box>
-      <Box width="50%" display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+      <Box
+        sx={{ width: { xs: '100%', sm: '100%', md: '50%' } }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+      >
         <Title mb="2rem">Our Vision</Title>
         <Text>An event platform that helps offer fans an</Text>
         <Text>opportunity to get free</Text>

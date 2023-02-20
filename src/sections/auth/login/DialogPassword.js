@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Box, Dialog, DialogTitle, DialogContent, DialogContentText } from '@mui/material';
+import { Box, Dialog, DialogContent, DialogContentText } from '@mui/material';
 
 export default function SuccessDialog({ open, handleClose }) {
   return (

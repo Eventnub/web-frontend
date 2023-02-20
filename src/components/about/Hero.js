@@ -6,7 +6,7 @@ import concert from '../../assets/concerts.png';
 function Hero() {
   const Num = styled(Typography)({
     fontWeight: '300',
-    fontSize: '48px',
+    fontSize: '2.5rem',
     lineHeight: '70.33px',
     color: '#000',
     textAlign: 'center',
@@ -18,19 +18,28 @@ function Hero() {
     color: '#000',
     textAlign: 'center',
   });
+
   return (
     <Box>
-      <Box sx={{ height: '95vh', backgroundColor: '#fff' }}>
+      <Box sx={{ height: { xs: 'fit-content', sm: 'fit-content', md: '95vh' }, backgroundColor: '#fff' }}>
         <Navbar />
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: '7%' }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
             <Typography
               sx={{
                 fontWeight: '200',
                 color: '#000',
-                fontSize: { xs: '36px', sm: '36px', md: '48px' },
+                fontSize: { xs: '1.5rem', sm: '1.5rem', md: '2.5rem' },
                 lineHeight: { xs: '43.5px', sm: '43.5px', md: '58px' },
                 mb: '1.5rem',
+                textAlign: 'center',
               }}
             >
               We are Eventnub
@@ -40,14 +49,19 @@ function Hero() {
                 color: '#000',
                 fontWeight: '400',
                 fontsize: { xs: '16px', sm: '16px', md: '24px' },
+                textAlign: 'center',
               }}
             >
               An event platform that helps offer fans an opportunity to get free
             </Typography>
-            <Typography sx={{ color: '#000', fontWeight: '400', fontsize: '24px', lineHeight: '146.52%' }}>
+            <Typography
+              sx={{ color: '#000', fontWeight: '400', fontsize: '24px', lineHeight: '146.52%', textAlign: 'center' }}
+            >
               and highly discounted passes/tickets to attend concerts, events, or shows of celebrities
             </Typography>
-            <Typography sx={{ color: '#000', fontWeight: '400', fontsize: '24px', lineHeight: '146.52%' }}>
+            <Typography
+              sx={{ color: '#000', fontWeight: '400', fontsize: '24px', lineHeight: '146.52%', textAlign: 'center' }}
+            >
               through various gamified activities
             </Typography>
             <Button
@@ -63,7 +77,7 @@ function Hero() {
             >
               Contact us
             </Button>
-            <Box display="flex" gap={25} mt={10}>
+            <Box display="flex" my={10} sx={{ gap: { xs: 5, sm: 5, md: 25 } }}>
               <Box display="flex" flexDirection="column">
                 <Num>3.5M</Num>
                 <Title>HAPPY FANS</Title>

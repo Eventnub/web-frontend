@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Box, Button, useMediaQuery, useTheme, styled } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, useMediaQuery, useTheme, styled } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/blueLogo.png';
 import { PATH_AUTH } from '../../routes/paths';

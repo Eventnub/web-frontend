@@ -6,8 +6,8 @@ function TeamCard() {
   return (
     <Box
       sx={{
-        height: '45%',
-        width: '25%',
+        height: { xs: '357px', sm: '45%', md: '45%' },
+        width: { xs: '80%', sm: '25%', md: '25%' },
         backgroundImage: `url(${bg})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100% 100%',

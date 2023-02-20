@@ -6,7 +6,6 @@ import DrawerCom from './DrawerCom';
 import { PATH_AUTH } from '../../routes/paths';
 
 export default function Navbar() {
-  const activeStyle = { color: '#FF6C2C' };
   const NavbarLinksBox = styled(Box)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -62,29 +61,16 @@ export default function Navbar() {
         ) : (
           <>
             <NavbarLinksBox style={{ display: 'flex', justifyContent: 'center', flex: 1 }}>
-              <StyledNavlink to="/" exact activeStyle={activeStyle}>
-                Home
-              </StyledNavlink>
-              <StyledNavlink to="/about" exact activeStyle={activeStyle}>
-                About
-              </StyledNavlink>
-              <StyledNavlink to="#" exact activeStyle={activeStyle}>
-                Contact Us
-              </StyledNavlink>
-              <StyledNavlink
-                to="/tickets"
-                exact
-                activeStyle={activeStyle}
-                sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-              >
+              <StyledNavlink to="/">Home</StyledNavlink>
+              <StyledNavlink to="/about">About</StyledNavlink>
+              <StyledNavlink to="#">Contact Us</StyledNavlink>
+              <StyledNavlink to="/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 My Tickets <Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
               </StyledNavlink>
-              <StyledNavlink to={PATH_AUTH.register} exact activeStyle={activeStyle}>
-                Sign Up
-              </StyledNavlink>
+              <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>
             </NavbarLinksBox>
             <NavbarLinksBox style={{ display: 'flex', justifyContent: 'end' }}>
-              <StyledNavlink to="#" exact activeStyle={activeStyle}>
+              <StyledNavlink to="#">
                 <Button variant="outlined" sx={{ border: '1px solid #FF6C2C', color: '#fff' }}>
                   + Create a Concert
                 </Button>

@@ -42,7 +42,6 @@ const RegisterForm = () => {
         ageRange: Yup.string().required('Age range is required'),
       })}
       onSubmit={async (values, { setErrors, setSubmitting, resetForm }) => {
-        // console.log(values);
         try {
           const user = await requests.register(values);
           if (isMountedRef.current) {
@@ -173,6 +172,48 @@ const RegisterForm = () => {
               </Select>
             )}
           </Field>
+
+          {/* <Field name="ageRange">
+            {({ field, form }) => (
+              <Select
+                {...field}
+                variant="outlined"
+                error={form.errors.ageRange && form.touched.ageRange}
+                helperText={form.errors.ageRange}
+                displayEmpty
+                inputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Iconify icon="eva:calendar-outline" sx={{ color: 'text.disabled', width: 24, height: 24 }} />
+                    </InputAdornment>
+                  ),
+                }}
+                value={field.value || ''}
+                onChange={(event) => form.setFieldValue(field.name, event.target.value)}
+                // Add the following two props to enable the field to be selectable
+                MenuProps={{
+                  anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  },
+                  transformOrigin: {
+                    vertical: 'top',
+                    horizontal: 'left',
+                  },
+                  getContentAnchorEl: null,
+                }}
+              >
+                <MenuItem value="" disabled>
+                  What is your age range
+                </MenuItem>
+                <MenuItem value="18-24">18-24</MenuItem>
+                <MenuItem value="25-34">25-34</MenuItem>
+                <MenuItem value="35-44">35-44</MenuItem>
+                <MenuItem value="45-54">45-54</MenuItem>
+                <MenuItem value="55+">55+</MenuItem>
+              </Select>
+            )}
+          </Field> */}
           <Field name="favoriteCelebrity">
             {({ field, form }) => (
               <TextField

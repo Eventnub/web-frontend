@@ -10,7 +10,7 @@ export default function DrawerCom() {
   const StyledNavlink = styled(NavLink)(() => ({
     textDecoration: 'none',
     activeStyle: '#FF6C2C',
-    color: '#FFFFFF',
+    color: '#000',
     fontWeight: '400',
     cursor: 'pointer',
   }));
@@ -19,7 +19,7 @@ export default function DrawerCom() {
     <div>
       <Drawer
         open={openDrawer}
-        PaperProps={{ sx: { backgroundColor: 'rgba(0, 0, 0, 0.79)' } }}
+        PaperProps={{ sx: { backgroundColor: '#fff' } }}
         onClose={() => setOpenDrawer(false)}
         anchor="right"
       >
@@ -34,7 +34,7 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                <StyledNavlink to="#">About</StyledNavlink>
+                <StyledNavlink to="/about">About</StyledNavlink>
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
@@ -48,7 +48,7 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                <StyledNavlink to="tickets">My Tickets</StyledNavlink>
+                <StyledNavlink to="/tickets">My Tickets</StyledNavlink>
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>

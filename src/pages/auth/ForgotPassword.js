@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { Box, Link, Typography, Button, TextField } from '@mui/material';
 import { PATH_AUTH } from '../../routes/paths';
@@ -63,7 +63,7 @@ function ForgotPassword() {
             })}
             onSubmit={async (values, { setErrors, setSubmitting, resetForm }) => {
               try {
-                const email = await requests.forgot(values);
+                await requests.forgot(values);
                 if (isMountedRef.current) {
                   setSubmitting(false);
                   handleOpenDialog();

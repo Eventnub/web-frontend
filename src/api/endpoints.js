@@ -1,8 +1,6 @@
 const BASE_URL = 'https://eventnub.onrender.com/api';
 
-const getFullUrl = (endpoint) => {
-  return `${BASE_URL}/${endpoint}`;
-};
+const getFullUrl = (endpoint) => `${BASE_URL}/${endpoint}`;
 
 export const endpoints = {
   register: getFullUrl('auth/register'),

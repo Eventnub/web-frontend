@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Box, Stack, Typography, styled, InputAdornment, useTheme, Divider } from '@mui/material';
+import { Container, Box, Stack, Typography, styled, useTheme, Divider } from '@mui/material';
 import logoImg from '../../assets/logoImg.png';
 import InputStyle from '../InputStyle';
 
@@ -98,17 +98,7 @@ export default function Footer() {
               Newsletter
             </Typography>
             <Paragraph sx={{ my: '15px' }}>Don't miss any update of our moment.</Paragraph>
-            <InputStyle
-              size="medium"
-              placeholder="Email"
-              inputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Divider orientation="vertical" flexItem sx={{ height: 28, m: 0.5 }} />
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <InputStyle size="medium" placeholder="Email" />
           </Box>
         </Box>
         <Divider sx={{ paddingBottom: '20px', paddingTop: '20px' }} />

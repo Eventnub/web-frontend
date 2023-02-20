@@ -7,10 +7,7 @@ const jsonHeader = {
   },
 };
 export const requests = {
-  register: (data) => {
-    return axios.post(endpoints.register, data, jsonHeader);
-  },
-  forgot: (data) => {
-    return axios.post(endpoints.forgot, data, jsonHeader);
-  },
+  register: (data) => axios.post(endpoints.register, data, jsonHeader),
+
+  forgot: (data) => axios.post(endpoints.forgot, data, jsonHeader),
 };
