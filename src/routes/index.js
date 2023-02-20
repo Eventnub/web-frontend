@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes, useLocation } from 'react-router-dom';
 // layouts
-import DashboardLayout from '../layouts/dashboard';
+import PlainDashboardLayout from '../layouts/dashboard/Plain';
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // guards
 import GuestGuard from '../guards/GuestGuard';
@@ -78,34 +78,17 @@ export default function Router() {
         },
       ],
     },
-
-    // Dashboard Routes with Nav
-    // {
-    //   path: 'login',
-    //   element: (
-    //     <GuestGuard>
-    //       <Login />
-    //     </GuestGuard>
-    //   ),
-    // },
-    // {
-    //   path: 'register',
-    //   element: (
-    //     <GuestGuard>
-    //       <Register />
-    //     </GuestGuard>
-    //   ),
-    // },
     {
       path: 'dashboard',
       element: (
         <AuthGuard>
-          <DashboardLayout />
+          <PlainDashboardLayout />
         </AuthGuard>
       ),
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         { path: 'events', element: <Events /> },
+        {path: 'tickets', element: <TicketsDashboard />},
       ],
     },
 
@@ -125,11 +108,6 @@ export default function Router() {
       path: '/',
       element: <HomePage />,
       index: true,
-    },
-
-    {
-      path: 'tickets',
-      element: <TicketsDashboard />,
     },
     {
       path: 'about',

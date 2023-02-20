@@ -3,6 +3,7 @@ import { createContext, useEffect, useReducer, useState } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { FIREBASE_API } from '../config';
+import { requests } from '../api/requests';
 
 if (!firebase.apps.length) {
   firebase.initializeApp(FIREBASE_API);
@@ -32,7 +33,6 @@ const FirebaseContext = createContext({
   ...initialState,
   method: 'firebase',
   login: () => Promise.resolve(),
-  register: () => Promise.resolve(),
   loginWithGoogle: () => Promise.resolve(),
   loginWithFaceBook: () => Promise.resolve(),
   logout: () => Promise.resolve(),
@@ -48,8 +48,11 @@ function FirebaseProvider({ children }) {
 
   useEffect(
     () =>
-      firebase.auth().onAuthStateChanged((user) => {
+      firebase.auth().onAuthStateChanged(async (user) => {
         if (user && user.emailVerified) {
+          const idToken = await firebase.auth().currentUser.getIdToken();
+          const { data } = await requests.getUser(user.uid, idToken);
+          user = { ...user, ...data };
           setProfile(user);
           dispatch({
             type: 'INITIALISE',
@@ -81,16 +84,6 @@ function FirebaseProvider({ children }) {
     const provider = new firebase.auth.FacebookAuthProvider();
     return firebase.auth().signInWithPopup(provider);
   };
-
-  const register = (email, password, firstName, lastName, phoneNumber) =>
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(async (res) => {
-        // TODO: Call API to create user document in collection
-        console.log({ email, password, firstName, lastName, phoneNumber });
-        res.user.sendEmailVerification();
-      });
 
   const logout = async () => {
     await firebase.auth().signOut();
@@ -139,9 +132,9 @@ function FirebaseProvider({ children }) {
           firstName: profile?.firstName || '',
           lastName: profile?.lastName || '',
           gender: profile?.gender || '',
+          likedEvents: profile?.likedEvents || [],
         },
         login,
-        register,
         loginWithGoogle,
         loginWithFacebook,
         logout,
