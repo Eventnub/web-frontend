@@ -21,7 +21,7 @@ function Header() {
         px: '1.5rem',
         pt: '0.5rem',
         boxShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)',
-        width: { xs: '100vw', sm: '100vw', md: '100%' },
+        width: { xs: '100%', sm: '100%', md: '100%' },
       }}
     >
       <Box display="flex" justifyContent="space-between">

@@ -34,7 +34,7 @@ export default function Navbar() {
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <AppBar position="static" sx={{ background: 'transparent', boxShadow: 'none', position: 'absolute', zIndex: '1' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
       <Toolbar style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
         {isMatch && <Box />}
 
@@ -63,8 +63,9 @@ export default function Navbar() {
             <NavbarLinksBox style={{ display: 'flex', justifyContent: 'center', flex: 1 }}>
               <StyledNavlink to="/">Home</StyledNavlink>
               <StyledNavlink to="/about">About</StyledNavlink>
-              <StyledNavlink to="#">Contact Us</StyledNavlink>
-              <StyledNavlink to="/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
+              <StyledNavlink to="#">My Concerts</StyledNavlink>
+              <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 My Tickets <Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
               </StyledNavlink>
               <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>

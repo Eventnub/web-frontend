@@ -96,6 +96,11 @@ export default function Login() {
                 </Button>
               </Link>
             </Box>
+            <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.forgetPassword} underline="none">
+              <Typography textAlign="center" sx={{ color: '#000', mt: 2 }}>
+                Forgot Password?
+              </Typography>
+            </Link>
           </Box>
         </Box>
       ) : (

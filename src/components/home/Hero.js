@@ -5,27 +5,35 @@ import bg from '../../assets/bg.jpg';
 
 function Hero() {
   const theme = useTheme();
-  const StyledDiv = styled('div')(({ bg }) => ({
-    backgroundImage: `url(${bg})`,
+  // const StyledDiv = styled('div')(({ bg }) => ({
+  //   backgroundImage: `url(${bg})`,
+  //   backgroundSize: 'cover',
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundPosition: 'center',
+  //   width: '100%',
+  //   height: 'fit-content',
+  //   position: 'relative',
+  //   '&::after': {
+  //     content: '" "',
+  //     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  //     height: '100%',
+  //     width: '100%',
+  //     position: 'absolute',
+  //     top: 0,
+  //     left: 0,
+  //   },
+  // }));
+  const StyledDiv = styled(Box)({
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    width: '100%',
     height: 'fit-content',
-    position: 'relative',
-    '&::after': {
-      content: '" "',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      height: '100%',
-      width: '100%',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-    },
-  }));
+    width: '100%',
+  });
   return (
     <Box>
-      <StyledDiv bg={bg}>
+      <StyledDiv>
         <Navbar />
         <Box
           sx={{

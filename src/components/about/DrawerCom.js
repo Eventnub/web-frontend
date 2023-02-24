@@ -41,14 +41,21 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                <StyledNavlink to="#">Contact Us</StyledNavlink>
+                <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                <StyledNavlink to="/tickets">My Tickets</StyledNavlink>
+                <StyledNavlink to="#">My Concerts</StyledNavlink>
+              </ListItemText>
+            </ListItemIcon>
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <ListItemText>
+                <StyledNavlink to="/dashboard/tickets">My Tickets</StyledNavlink>
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>

@@ -76,7 +76,7 @@ export default function Footer() {
               Quik Links
             </Typography>
             <Stack spacing={1} sx={{ marginTop: '15px' }}>
-              <StyledNavlink to="/#">
+              <StyledNavlink to="/contact-us">
                 <Paragraph>Contact us</Paragraph>
               </StyledNavlink>
               <StyledNavlink to="/about">
@@ -85,7 +85,7 @@ export default function Footer() {
               <StyledNavlink to="/#">
                 <Paragraph>My Concerts</Paragraph>
               </StyledNavlink>
-              <StyledNavlink to="/tickets">
+              <StyledNavlink to="/dashboard/tickets">
                 <Paragraph>My Tickets</Paragraph>
               </StyledNavlink>
               <StyledNavlink to="/#">
