@@ -32,7 +32,9 @@ const Events = Loadable(lazy(() => import('../pages/dashboard/Events')));
 const TicketsDashboard = Loadable(lazy(() => import('../pages/TicketsDashboard')));
 // Main
 const HomePage = Loadable(lazy(() => import('../pages/Home')));
+const EventDetailsPage = Loadable(lazy(() => import('../pages/EventDetailsPage')));
 const AboutPage = Loadable(lazy(() => import('../pages/About')));
+const ContactUsPage = Loadable(lazy(() => import('../pages/ContactUs')));
 const ComingSoon = Loadable(lazy(() => import('../pages/ComingSoon')));
 const Maintenance = Loadable(lazy(() => import('../pages/Maintenance')));
 const Page500 = Loadable(lazy(() => import('../pages/Page500')));
@@ -88,7 +90,7 @@ export default function Router() {
       children: [
         { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         { path: 'events', element: <Events /> },
-        {path: 'tickets', element: <TicketsDashboard />},
+        { path: 'tickets', element: <TicketsDashboard /> },
       ],
     },
 
@@ -112,6 +114,14 @@ export default function Router() {
     {
       path: 'about',
       element: <AboutPage />,
+    },
+    {
+      path: 'event-details/:eventId',
+      element: <EventDetailsPage />,
+    },
+    {
+      path: 'contact-us',
+      element: <ContactUsPage />,
     },
 
     { path: '*', element: <Navigate to="/404" replace /> },

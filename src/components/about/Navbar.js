@@ -47,9 +47,9 @@ export default function Navbar() {
             <NavbarLinksBox>
               <StyledNavlink to="/">Home</StyledNavlink>
               <StyledNavlink to="/about">About</StyledNavlink>
-              <StyledNavlink to="#">Contact Us</StyledNavlink>
+              <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
               <StyledNavlink to="#">My Concerts</StyledNavlink>
-              <StyledNavlink to="/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 My Tickets<Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
               </StyledNavlink>
               <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>
