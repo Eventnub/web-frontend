@@ -1,50 +1,44 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Box, Button, Stack, Typography, Container, IconButton } from '@mui/material';
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
+import { requests } from '../../api/requests';
+import DialogEvent from './DialogEvent';
 
 export default function SliderCom() {
+  const [data, setData] = useState([]);
   const slideRef = useRef(null);
-  const data = [
-    {
-      id: 1,
-      price: '$50.00',
-      type: 'Couples Regular',
-      description: 'First 20 lucky winners Get it FREE by taking a quiz game',
-      action: 'Join quiz and win ticket with $5',
-      buy: 'Buy with $50',
-    },
-    {
-      id: 2,
-      price: '$100.00',
-      type: 'Couples VIP',
-      description: 'First 10 lucky winners Get it FREE by taking a quiz game',
-      action: 'Join quiz and win ticket with $5',
-      buy: 'Buy with $100',
-    },
-    {
-      id: 3,
-      price: '$200.00',
-      type: 'Couples VIP',
-      description: 'First 5 lucky winners Get it FREE by taking a quiz game',
-      action: 'Join quiz and win ticket with $5',
-      buy: 'Buy with $200',
-    },
-    {
-      id: 4,
-      price: '$400.00',
-      type: 'Couples Regular',
-      description: 'First 20 lucky winners Get it FREE by taking a quiz game',
-      action: 'Join quiz and win ticket with $5',
-      buy: 'Buy with $50',
-    },
-  ];
+  const { eventId } = useParams();
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const { data } = await requests.getEvent(eventId);
+        setData(data.tickets);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchEvents();
+  }, [eventId]);
+
+  const [dialogShown, setDialogShown] = useState(false);
+
+  const handleOpenDialog = () => {
+    setDialogShown(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogShown(false);
+  };
+
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -81,23 +75,26 @@ export default function SliderCom() {
     <Container maxWidth="xl" sx={{ position: 'relative' }}>
       <Slider {...settings} ref={slideRef}>
         {data.map((item) => (
-          <Box key={item.id} sx={{ backgroundColor: '#595959', width: '250px', height: '330px', p: '5% 1% 1% 1%' }}>
+          <Box key={item.price} sx={{ backgroundColor: '#595959', width: '250px', height: '330px', p: '5% 1% 1% 1%' }}>
             <Stack>
-              <Typography sx={{ color: '#FF6C2C', fontSize: '2rem', fontWeight: '600', mb: '1%' }}>
-                {item.price}
+              <Typography sx={{ color: '#FFF', fontSize: '2rem', fontWeight: '600', mb: '1%' }}>
+                {`$${item.price}`}
               </Typography>
               <Typography sx={{ fontSize: '1.5rem', color: '#fff', fontWeight: '400' }}>{item.type}</Typography>
               <Typography sx={{ fontSize: '1rem', color: '#fff', fontWeight: '400', mt: '6.5%', maxWidth: '276px' }}>
-                {item.description}
+                First 20 lucky winners Get it FREE by taking a quiz game
               </Typography>
+
               <Button
                 variant="outlined"
                 sx={{ boxShadow: 'none', my: '7%', border: '1px solid #FF6C2C', color: '#fff' }}
+                onClick={handleOpenDialog}
               >
-                {item.action}
+                Play a game and win ticket with $5
               </Button>
+
               <Button variant="outlined" sx={{ boxShadow: 'none', border: '1px solid #FF6C2C', color: '#fff' }}>
-                {item.buy}
+                {`Buy with $${item.price}`}
               </Button>
             </Stack>
           </Box>
@@ -133,6 +130,7 @@ export default function SliderCom() {
       >
         <KeyboardArrowRightSharpIcon />
       </IconButton>
+      <DialogEvent open={dialogShown} handleClose={handleCloseDialog} />
     </Container>
   );
 }

@@ -27,26 +27,6 @@ export default function Hero() {
             }}
           >
             <Typography sx={{ fontSize: '2rem', color: '#000', fontWeight: '600', mb: '3%' }}>Get in Touch</Typography>
-            {/* <Typography
-              sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: { xs: '1rem', sm: '1.2rem', md: '1.2rem' } }}
-            >
-              We are eager to discuss your concert needs, and answer
-            </Typography>
-            <Typography
-              sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: { xs: '1rem', sm: '1.2rem', md: '1.2rem' } }}
-            >
-              the pressing questions you may have.
-            </Typography>
-            <Typography
-              sx={{
-                color: '#6B6B6B',
-                fontWeight: '400',
-                fontSize: { xs: '1rem', sm: '1.2rem', md: '1.2rem' },
-                mb: '8%',
-              }}
-            >
-              Reach us on our social media pages below.
-            </Typography> */}
             <Typography
               textAlign="center"
               sx={{

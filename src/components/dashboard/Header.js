@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Box, InputBase, Typography, Link, Avatar, IconButton, Paper } from '@mui/material';
+import { Box, InputBase, Typography, Link, Avatar, IconButton, Paper, Menu, MenuItem } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -10,6 +10,15 @@ import logoImg from '../../assets/blueLogo.png';
 import avatarImg from '../../assets/avatar.png';
 
 function Header() {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box
       display="flex"
@@ -48,9 +57,15 @@ function Header() {
           >
             Peter Akwa
           </Typography>
-          <ExpandMoreIcon />
+          <IconButton onClick={handleMenuClick}>
+            <ExpandMoreIcon />
+          </IconButton>
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+            <MenuItem onClick={handleMenuClose}>
+              <LogoutButton />
+            </MenuItem>
+          </Menu>
           <MenuIcon sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }} />
-          <LogoutButton />
         </Box>
       </Box>
       <Box

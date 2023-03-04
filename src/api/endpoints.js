@@ -7,4 +7,6 @@ export const endpoints = {
   forgot: getFullUrl('auth/send-forgot-password-email'),
   getUser: getFullUrl('users'),
   getEvents: getFullUrl('events'),
+  getQuestions: getFullUrl('questions/get-event-quiz'),
+  submitEventQuizAnswers: getFullUrl('questions/submit-event-quiz-answers'),
 };

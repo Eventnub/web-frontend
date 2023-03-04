@@ -36,7 +36,7 @@ export default function Events() {
               sx={{ height: '392px', width: '366px', background: '#fff', borderRadius: '8px', position: 'relative' }}
             >
               <Box sx={{ width: '100%', height: '213px' }}>
-                <Link to={`event-details/${item.uid}`}>
+                <Link to={`/event-details/${item.uid}`}>
                   <img
                     style={{
                       borderTopLeftRadius: '8px',
@@ -46,7 +46,7 @@ export default function Events() {
                       objectFit: 'contain',
                     }}
                     src={item.photoUrl}
-                    alt="Live concert"
+                    alt={item.name}
                   />
                 </Link>
               </Box>
