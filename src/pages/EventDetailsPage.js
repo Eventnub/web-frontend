@@ -1,8 +1,8 @@
 import React from 'react';
-import Hero from '../components/event/Hero';
-import TicketSection from '../components/event/TicketSection';
+import Hero from '../components/eventDetails/Hero';
+import TicketSection from '../components/eventDetails/TicketSection';
 import Page from '../components/Page';
-import EventSection from '../components/event/EventSection';
+import EventSection from '../components/eventDetails/EventSection';
 import Footer from '../components/home/Footer';
 
 export default function EventDetailsPage() {

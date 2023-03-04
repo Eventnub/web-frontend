@@ -12523,10 +12523,10 @@
     "react-date-object" "^2.1.5"
     "react-element-popper" "^2.1.6"
 
-"react-paystack@^4.0.1":
-  "integrity" "sha512-6bJ+kHlJZqHupnezlA96tlZh+GQc1giNesLN1vvjQ1lsK8mavjF24uyiwyewInOUSs42+9hx1eP8gZTIgHLYLg=="
-  "resolved" "https://registry.npmjs.org/react-paystack/-/react-paystack-4.0.1.tgz"
-  "version" "4.0.1"
+"react-paystack@^4.0.2":
+  "integrity" "sha512-D5aLMOejrd7i9EXGWnDA1X/v8Uz6ei2pgb3ZwTT2daGRB8XtZ1CZCXENfr/6o/UDb2fGb0xbFiYSLge6cV1guQ=="
+  "resolved" "https://registry.npmjs.org/react-paystack/-/react-paystack-4.0.2.tgz"
+  "version" "4.0.2"
 
 "react-phone-input-2@^2.15.0":
   "integrity" "sha512-60EOJSgmRFl9Ar89/JznaDsdB9FNf5T6nvQf0sN1t3X7exrKHbUT3ij7HZn2Y7jigcPv9EkdyzVr0MiOk1FKmw=="

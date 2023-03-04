@@ -52,7 +52,7 @@ function FirebaseProvider({ children }) {
         if (user && user.emailVerified) {
           const idToken = await firebase.auth().currentUser.getIdToken();
           const { data } = await requests.getUser(user.uid, idToken);
-          user = { ...user, ...data };
+          user = { ...user, ...data, idToken };
           setProfile(user);
           dispatch({
             type: 'INITIALISE',
@@ -133,6 +133,7 @@ function FirebaseProvider({ children }) {
           lastName: profile?.lastName || '',
           gender: profile?.gender || '',
           likedEvents: profile?.likedEvents || [],
+          idToken: profile?.idToken || '',
         },
         login,
         loginWithGoogle,
