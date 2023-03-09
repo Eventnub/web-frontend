@@ -35,16 +35,21 @@ const HomePage = Loadable(lazy(() => import('../pages/Home')));
 const EventDetailsPage = Loadable(lazy(() => import('../pages/EventDetailsPage')));
 const AboutPage = Loadable(lazy(() => import('../pages/About')));
 const ContactUsPage = Loadable(lazy(() => import('../pages/ContactUs')));
+const ComingSoon = Loadable(lazy(() => import('../pages/ComingSoon')));
+const Maintenance = Loadable(lazy(() => import('../pages/Maintenance')));
+const Page500 = Loadable(lazy(() => import('../pages/Page500')));
+const NotFound = Loadable(lazy(() => import('../pages/Page404')));
+
+// Games
 const QuizPage = Loadable(lazy(() => import('../pages/Quiz')));
 const QuizCompletedPage = Loadable(lazy(() => import('../pages/QuizCompleted')));
 const QuestionPage = Loadable(lazy(() => import('../pages/Question')));
 const RafflePage = Loadable(lazy(() => import('../pages/Raffle')));
 const BeatGameActivatedPage = Loadable(lazy(() => import('../pages/BeatGameActivated')));
 const NameTheBeatPage = Loadable(lazy(() => import('../pages/NameTheBeat')));
-const ComingSoon = Loadable(lazy(() => import('../pages/ComingSoon')));
-const Maintenance = Loadable(lazy(() => import('../pages/Maintenance')));
-const Page500 = Loadable(lazy(() => import('../pages/Page500')));
-const NotFound = Loadable(lazy(() => import('../pages/Page404')));
+
+// Payment
+const CheckOutPage = Loadable(lazy(() => import('../pages/CheckOutPage')));
 
 export default function Router() {
   return useRoutes([
@@ -170,6 +175,14 @@ export default function Router() {
       element: (
         <AuthGuard>
           <NameTheBeatPage />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: 'payment/:eventId',
+      element: (
+        <AuthGuard>
+          <CheckOutPage />
         </AuthGuard>
       ),
     },

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Typography, Radio, RadioGroup, FormControlLabel, FormControl, styled } from '@mui/material';
+import { Box, Typography, Radio, RadioGroup, FormControlLabel, FormControl, styled, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import useFirebase from '../hooks/useFirebase';
 import { requests } from '../api/requests';
+import QuizTakenDialog from '../components/raffle/QuizTakenDialog';
 import Page from '../components/Page';
 import logo from '../assets/blueLogo.png';
 
@@ -33,23 +34,47 @@ const StyledCard = styled(Box)({
 
 export default function Question() {
   const [questions, setQuestions] = useState([]);
+  const [dialogShown, setDialogShown] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState('');
   const [answers, setAnswers] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
   const [isLastQuestion, setIsLastQuestion] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(null);
+  const [time, setTime] = useState(1500);
+  const [timerOn, setTimerOn] = useState(true);
   const navigate = useNavigate();
-
-  // const handleChange = (questionId, value) => {
-  //   setCurrentQuestionAnswer({ ...answers, [questionId]: value });
-  // };
 
   const handleChange = (value) => {
     setCurrentQuestionAnswer(value);
   };
 
+  const handleOpenDialog = () => {
+    setDialogShown(true);
+  };
+
   const { eventId } = useParams();
   const { user } = useFirebase();
+
+  useEffect(() => {
+    if (time <= 0) {
+      setTimerOn(false);
+    }
+
+    const interval = setInterval(() => {
+      setTime((prevTime) => prevTime - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [time]);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60)
+      .toString()
+      .padStart(2, '0');
+    const seconds = (time % 60).toString().padStart(2, '0');
+    return `00 : ${minutes} : ${seconds}`;
+  };
 
   const handleNext = () => {
     if (currentQuestionIndex < 2) {
@@ -74,7 +99,12 @@ export default function Question() {
           setIsSubmitting(false);
           navigate('/quiz-completed');
         } catch (error) {
-          console.log(error);
+          if (error.response && error.response.status === 400) {
+            setIsSubmitting(false);
+            handleOpenDialog();
+          } else {
+            setErrorMessage('An error occurred. Please try again later.');
+          }
         }
       };
       handleSubmit();
@@ -123,7 +153,7 @@ export default function Question() {
               textAlign: 'center',
             }}
           >
-            <Typography sx={{ color: '#000', fontWeight: '600', fontSize: '1.3rem' }}>00 : 25 : 05</Typography>
+            <Typography sx={{ color: '#000', fontWeight: '600', fontSize: '1.3rem' }}>{formatTime(time)}</Typography>
           </Box>
         </Box>
 
@@ -179,6 +209,12 @@ export default function Question() {
           >
             {currentQuestionIndex === 2 ? 'Submit' : 'Next'}
           </LoadingButton>
+          <QuizTakenDialog open={dialogShown} />
+          {errorMessage && (
+            <Alert severity="error" sx={{ mt: 4 }}>
+              {errorMessage}
+            </Alert>
+          )}
         </StyledCard>
       </Box>
     </Page>
