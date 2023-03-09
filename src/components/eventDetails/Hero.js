@@ -36,8 +36,6 @@ export default function Hero() {
     fetchEvents();
   }, [eventId]);
 
-  const location = `${event.venue}, ${event.state}, ${event.country}`;
-
   return (
     <>
       {isMatch ? (
@@ -123,7 +121,9 @@ export default function Hero() {
               <Box sx={{ flex: 1 }}>
                 <Stack>
                   <Typography sx={{ fontsize: '0.75rem', fontWeight: '600', color: '#808080' }}>Location</Typography>
-                  <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>{location}</Typography>
+                  <Typography
+                    sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}
+                  >{`${event.venue}, ${event.state}, ${event.country}`}</Typography>
                 </Stack>
               </Box>
             </Box>
@@ -239,7 +239,9 @@ export default function Hero() {
                 <Box sx={{ p: '2%' }}>
                   <Stack>
                     <Typography sx={{ fontSize: '1rem', color: '#808080', fontWeight: '200' }}>Location</Typography>
-                    <Typography sx={{ fontSize: '.8rem', color: '#000', fontWeight: '200' }}>{location}</Typography>
+                    <Typography
+                      sx={{ fontSize: '.8rem', color: '#000', fontWeight: '200' }}
+                    >{`${event.venue}, ${event.state}, ${event.country}`}</Typography>
                   </Stack>
                 </Box>
               </Box>

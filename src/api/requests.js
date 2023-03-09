@@ -24,4 +24,10 @@ export const requests = {
     axios.get(`${endpoints.getQuestions}/${eventId}`, getJsonHeaderWithAuthToken(idToken)),
   submitEventQuizAnswers: (eventId, idToken, data) =>
     axios.post(`${endpoints.submitEventQuizAnswers}/${eventId}`, data, getJsonHeaderWithAuthToken(idToken)),
+  verifyTicketPayment: (idToken, data) =>
+    axios.post(endpoints.verifyTicketPayment, data, getJsonHeaderWithAuthToken(idToken)),
+  getEventRaffleDraw: (eventId, idToken) =>
+    axios.get(`${endpoints.getEventRaffleDraw}/${eventId}`, getJsonHeaderWithAuthToken(idToken)),
+  submitEventRaffleDrawChoice: (eventId, idToken, data) =>
+    axios.post(`${endpoints.submitEventRaffleDrawChoice}/${eventId}`, data, getJsonHeaderWithAuthToken(idToken)),
 };

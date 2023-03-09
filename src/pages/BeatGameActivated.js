@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, styled, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Page from '../components/Page';
 import logo from '../assets/blueLogo.png';
 import microphone from '../assets/microphone.png';
@@ -20,7 +20,7 @@ const Title = styled(Typography)({
   fontSize: '1.7rem',
 });
 export default function PlayTheBeat() {
-  // const { eventId } = useParams();
+  const { eventId } = useParams();
   return (
     <Page title="Beat Game Activated">
       <Container>
@@ -61,8 +61,7 @@ export default function PlayTheBeat() {
               variant="contained"
               sx={{ boxShadow: 'none', background: '#1358A5', borderRadius: '5px', width: '70%' }}
               component={Link}
-              // to={`/name-the-beat/${eventId}`}
-              to={'/'}
+              to={`/name-the-beat/${eventId}`}
             >
               Alright let’s play the game
             </Button>

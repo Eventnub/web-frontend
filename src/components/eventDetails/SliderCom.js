@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Box, Button, Stack, Typography, Container, IconButton } from '@mui/material';
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
@@ -7,7 +7,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { requests } from '../../api/requests';
-import DialogEvent from './DialogEvent';
 
 export default function SliderCom() {
   const [data, setData] = useState([]);
@@ -25,16 +24,6 @@ export default function SliderCom() {
 
     fetchEvents();
   }, [eventId]);
-
-  const [dialogShown, setDialogShown] = useState(false);
-
-  const handleOpenDialog = () => {
-    setDialogShown(true);
-  };
-
-  const handleCloseDialog = () => {
-    setDialogShown(false);
-  };
 
   const settings = {
     dots: false,
@@ -88,7 +77,13 @@ export default function SliderCom() {
               <Button
                 variant="outlined"
                 sx={{ boxShadow: 'none', my: '7%', border: '1px solid #FF6C2C', color: '#fff' }}
-                onClick={handleOpenDialog}
+                component={Link}
+                to={`/payment/${eventId}`}
+                state={{ amount: 500, index: item.index, objective: 'to play game' }}
+                // onClick={() => {
+                //   localStorage.setItem('ticketPrice', 100);
+                //   window.location.href = `/payment/${eventId}`;
+                // }}
               >
                 Play a game and win ticket with $5
               </Button>
@@ -130,7 +125,6 @@ export default function SliderCom() {
       >
         <KeyboardArrowRightSharpIcon />
       </IconButton>
-      <DialogEvent open={dialogShown} handleClose={handleCloseDialog} />
     </Container>
   );
 }

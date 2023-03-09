@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LogoutButton from '../../layouts/dashboard/navbar/LogoutButton';
 import logoImg from '../../assets/blueLogo.png';
 import avatarImg from '../../assets/avatar.png';
+import useFirebase from '../../hooks/useFirebase';
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -19,6 +20,8 @@ function Header() {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const { user } = useFirebase();
   return (
     <Box
       display="flex"
@@ -55,7 +58,7 @@ function Header() {
               display: { xs: 'none', sm: 'none', md: 'block' },
             }}
           >
-            Peter Akwa
+            {`${user.firstName} ${user.lastName}`}
           </Typography>
           <IconButton onClick={handleMenuClick}>
             <ExpandMoreIcon />
