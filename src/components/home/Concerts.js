@@ -26,7 +26,7 @@ export default function Concerts() {
               [theme.breakpoints.down('sm')]: { fontSize: 16, width: '100', textAlign: 'center' },
             }}
           >
-            Up Coming Concerts
+            Up Coming Events
           </Typography>
           <Box sx={{ flex: '0.6' }}>
             <SearchBar />

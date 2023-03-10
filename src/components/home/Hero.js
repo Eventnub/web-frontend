@@ -15,6 +15,12 @@ function Hero() {
     [theme.breakpoints.down('sm')]: { height: 'fit-content' },
     [theme.breakpoints.down('md')]: { height: 'fit-content' },
   });
+
+  const handleButtonClick = () => {
+    const nextSection = document.getElementById('nextSection');
+    nextSection.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <Box>
       <StyledDiv>
@@ -100,8 +106,9 @@ function Hero() {
                 <Typography
                   component="h5"
                   sx={{ color: '#fff', fontWeight: '700', [theme.breakpoints.down('sm')]: { fontSize: '12px' } }}
+                  onClick={handleButtonClick}
                 >
-                  Find Your Next Concert
+                  Find Your Next Event
                 </Typography>
               </Button>
             </Box>

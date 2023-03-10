@@ -64,7 +64,11 @@ export default function SliderCom() {
     <Container maxWidth="xl" sx={{ position: 'relative' }}>
       <Slider {...settings} ref={slideRef}>
         {data.map((item) => (
-          <Box key={item.price} sx={{ backgroundColor: '#595959', width: '250px', height: '330px', p: '5% 1% 1% 1%' }}>
+          <Box
+            key={item.price}
+            sx={{ backgroundColor: '#595959', width: '250px', height: '330px', p: '5% 1% 1% 1%' }}
+            id="tickets"
+          >
             <Stack>
               <Typography sx={{ color: '#FFF', fontSize: '2rem', fontWeight: '600', mb: '1%' }}>
                 {`$${item.price}`}

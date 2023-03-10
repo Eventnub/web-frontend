@@ -22,6 +22,11 @@ export default function Hero() {
     width: '100%',
   });
 
+  const handleButtonClick = () => {
+    const nextSection = document.getElementById('tickets');
+    nextSection.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const { eventId } = useParams();
   useEffect(() => {
     async function fetchEvents() {
@@ -79,7 +84,11 @@ export default function Hero() {
                 <DrawerCom />
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10%' }}>
-                <Button variant="contained" sx={{ boxShadow: 'none', backgroundColor: '#1358A5' }}>
+                <Button
+                  variant="contained"
+                  sx={{ boxShadow: 'none', backgroundColor: '#1358A5' }}
+                  onClick={handleButtonClick}
+                >
                   Find Available Tickets
                 </Button>
                 <Box sx={{ display: 'flex', gap: '1rem' }}>
@@ -179,13 +188,16 @@ export default function Hero() {
                       borderRadius: '10px',
                     }}
                   >
-                    <Typography sx={{ color: '#fff', fontSize: '1rem', fontWeight: '200', textAlign: 'center' }}>
+                    <Typography
+                      sx={{ color: '#fff', fontSize: '1rem', fontWeight: '200', textAlign: 'center' }}
+                      onClick={handleButtonClick}
+                    >
                       Find Available Tickets
                     </Typography>
                   </Button>
                 </Box>
                 <Box sx={{ width: '45%' }}>
-                  <img src={event.photoUrl} alt={event.n} style={{ height: '100%', width: '100%' }} />
+                  <img src={event.photoUrl} alt={event.name} style={{ height: '100%', width: '100%' }} />
                 </Box>
               </Box>
               <Typography sx={{ pl: '2%', color: '#fff', fontSize: '1.25rem', fontWeight: '200', mt: '1%' }}>
