@@ -28,7 +28,7 @@ export default function Events() {
   const month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
   return (
     <>
-      <Grid container spacing={5} sx={{ marginTop: '15px' }}>
+      <Grid container spacing={5} sx={{ marginTop: '15px' }} id="nextSection">
         {displayData.map((item) => (
           <Grid item sm={12} md={4} lg={4} key={item.uid}>
             <Paper

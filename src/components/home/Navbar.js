@@ -66,7 +66,10 @@ export default function Navbar() {
               <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
               <StyledNavlink to="#">My Concerts</StyledNavlink>
               <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                My Tickets <Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
+                My Tickets{' '}
+                <Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+                  0
+                </Sircle>
               </StyledNavlink>
               <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>
             </NavbarLinksBox>
