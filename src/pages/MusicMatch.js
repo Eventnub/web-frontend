@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, styled, Avatar } from '@mui/material';
-// import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
-// import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
-import AudioPlayer from 'react-modern-audio-player';
+import { Box, Typography, styled, Avatar, IconButton } from '@mui/material';
+import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
+import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
 import Page from '../components/Page';
 import logo from '../assets/Vector.png';
 import microphone from '../assets/old-microphone.png';
@@ -11,6 +10,7 @@ import avatar from '../assets/avatar.png';
 import { requests } from '../api/requests';
 import useFirebase from '../hooks/useFirebase';
 import VoiceRecorder from '../components/musicMatch/VoiceRecorder';
+import sound from '../assets/sound.mp3';
 // import VoiceRecorder2 from '../components/musicMatch/VoiceRecorder2';
 
 const Container = styled(Box)({
@@ -22,56 +22,46 @@ const Container = styled(Box)({
   alignItems: 'center',
 });
 export default function MusicMatch() {
-  // const [audio] = useState(new Audio(musicMatch.));
-  // const [isPlaying, setIsPlaying] = useState(false);
+  const [audio] = useState(new Audio(sound));
+  const [isPlaying, setIsPlaying] = useState(false);
   const [musicMatch, setMusicMatch] = useState(null);
   const { eventId } = useParams();
   const { user } = useFirebase();
-  const [progressType] = useState('waveform');
-  // const [playerPlacement, setPlayerPlacement] = useState('bottom-left');
-  // const [interfacePlacement, setInterfacePlacement] = useState();
-  // const [playListPlacement, setPlayListPlacement] = useState('bottom');
-  // const [volumeSliderPlacement, setVolumeSliderPlacement] = useState();
-  const [theme] = useState();
-  // const [width, setWidth] = useState('100%');
-  const [activeUI] = useState({ playButton: true, trackTime: true, artwork: true });
-  // const [duration, setDuration] = useState(0);
-  // const [currentTime, setCurrentTime] = useState(0);
 
-  // const togglePlay = () => {
-  //   if (isPlaying) {
-  //     audio.pause();
-  //   } else {
-  //     audio.play();
-  //   }
-  //   setIsPlaying(!isPlaying);
-  // };
+  const togglePlay = () => {
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
 
-  const playList = [
-    {
-      name: 'name',
-      writer: 'writer',
-      // img: 'image.jpg',
-      src: musicMatch?.audioUrl,
-      id: 1,
-    },
-  ];
+  // const playList = [
+  //   {
+  //     name: 'name',
+  //     writer: 'writer',
+  //     // img: 'image.jpg',
+  //     src: musicMatch?.audioUrl,
+  //     id: 1,
+  //   },
+  // ];
 
   // const updateTime = () => {
   //   setDuration(audio.duration);
   //   setCurrentTime(audio.currentTime);
   // };
 
-  // useEffect(() => {
-  //   audio.addEventListener('ended', () => {
-  //     setIsPlaying(false);
-  //   });
-  //   return () => {
-  //     audio.removeEventListener('ended', () => {
-  //       setIsPlaying(false);
-  //     });
-  //   };
-  // }, [audio]);
+  useEffect(() => {
+    audio.addEventListener('ended', () => {
+      setIsPlaying(false);
+    });
+    return () => {
+      audio.removeEventListener('ended', () => {
+        setIsPlaying(false);
+      });
+    };
+  }, [audio]);
 
   useEffect(() => {
     async function getEventMusicMatch() {
@@ -187,14 +177,14 @@ export default function MusicMatch() {
                   background: '#fff',
                 }}
               >
-                {/* <IconButton onClick={togglePlay}>
+                <IconButton onClick={togglePlay}>
                   {isPlaying ? (
                     <PauseCircleOutlineOutlinedIcon sx={{ color: '#D587FF', fontSize: '4rem' }} />
                   ) : (
                     <PlayCircleFilledWhiteOutlinedIcon sx={{ color: '#D587FF', fontSize: '4rem' }} />
                   )}
-                </IconButton> */}
-                {musicMatch && (
+                </IconButton>
+                {/* {musicMatch && (
                   <AudioPlayer
                     playList={playList}
                     activeUI={{
@@ -214,7 +204,7 @@ export default function MusicMatch() {
                       // width,
                     }}
                   />
-                )}
+                )} */}
               </Box>
               <Box>
                 <VoiceRecorder />
