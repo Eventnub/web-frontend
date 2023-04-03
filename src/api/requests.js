@@ -13,6 +13,12 @@ const getJsonHeaderWithAuthToken = (idToken) => ({
     Authorization: `Bearer ${idToken}`,
   },
 });
+const getMultipartHeaderWithAuthToken = (idToken) => ({
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    Authorization: `Bearer ${idToken}`,
+  },
+});
 
 export const requests = {
   register: (data) => axios.post(endpoints.register, data, jsonHeader),
@@ -30,4 +36,23 @@ export const requests = {
     axios.get(`${endpoints.getEventRaffleDraw}/${eventId}`, getJsonHeaderWithAuthToken(idToken)),
   submitEventRaffleDrawChoice: (eventId, idToken, data) =>
     axios.post(`${endpoints.submitEventRaffleDrawChoice}/${eventId}`, data, getJsonHeaderWithAuthToken(idToken)),
+  uploadUserProfilePhoto: (idToken, data) =>
+    axios.post(`${endpoints.uploadUserProfilePhoto}`, data, getMultipartHeaderWithAuthToken(idToken)),
+  changeUserToHost: (idToken, data) =>
+    axios.post(endpoints.changeUserToHost, data, getJsonHeaderWithAuthToken(idToken)),
+  createEvent: (idToken, data) =>
+    axios.post(`${endpoints.createEvent}`, data, getMultipartHeaderWithAuthToken(idToken)),
+  getCreatorEvents: (idToken, creatorId) =>
+    axios.get(`${endpoints.getCreatorEvents}/${creatorId}`, getJsonHeaderWithAuthToken(idToken)),
+  getCreatorEvent: (eventId) => axios.get(`${endpoints.getCreatorEvents}/${eventId}`, jsonHeader),
+  updateEvent: (eventId, data, idToken) =>
+    axios.patch(`${endpoints.getEvents}/${eventId}`, data, getMultipartHeaderWithAuthToken(idToken)),
+  getUserPaymentForEvent: (eventId, idToken) =>
+    axios.get(`${endpoints.getUserPaymentForEvent}/${eventId}`, getJsonHeaderWithAuthToken(idToken)),
+  verifyStripePayment: (idToken, data) =>
+    axios.post(endpoints.verifyStripePayment, data, getJsonHeaderWithAuthToken(idToken)),
+  getEventMusicMatch: (idToken, eventId) =>
+    axios.get(`${endpoints.getEventMusicMatch}/${eventId}`, getJsonHeaderWithAuthToken(idToken)),
+  transcribeAudio: (idToken, data) =>
+    axios.post(endpoints.transcribeAudio, data, getMultipartHeaderWithAuthToken(idToken)),
 };

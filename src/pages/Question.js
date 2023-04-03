@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Typography, Radio, RadioGroup, FormControlLabel, FormControl, styled, Alert } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  styled,
+  Alert,
+  CircularProgress,
+} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import useFirebase from '../hooks/useFirebase';
 import { requests } from '../api/requests';
@@ -41,8 +51,7 @@ export default function Question() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLastQuestion, setIsLastQuestion] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(null);
-  // const [time, setTime] = useState(1500);
-  // const [timerOn, setTimerOn] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (value) => {
@@ -55,26 +64,6 @@ export default function Question() {
 
   const { eventId } = useParams();
   const { user } = useFirebase();
-
-  // useEffect(() => {
-  //   if (time <= 0) {
-  //     setTimerOn(false);
-  //   }
-
-  //   const interval = setInterval(() => {
-  //     setTime((prevTime) => prevTime - 1);
-  //   }, 1000);
-
-  //   return () => clearInterval(interval);
-  // }, [time]);
-
-  // const formatTime = (time) => {
-  //   const minutes = Math.floor(time / 60)
-  //     .toString()
-  //     .padStart(2, '0');
-  //   const seconds = (time % 60).toString().padStart(2, '0');
-  //   return `00 : ${minutes} : ${seconds}`;
-  // };
 
   const handleNext = () => {
     if (currentQuestionIndex < 2) {
@@ -114,9 +103,11 @@ export default function Question() {
   useEffect(() => {
     async function fetchQuestions() {
       try {
+        setIsLoading(true);
         if (user.idToken) {
           const { data } = await requests.getQuestions(eventId, user.idToken);
           setQuestions(data);
+          setIsLoading(false);
         }
       } catch (error) {
         console.log(error);
@@ -161,38 +152,44 @@ export default function Question() {
           <Typography sx={{ mt: '2%', ml: '2%', fontSize: '1.5rem', fontWeight: '600', color: '#848484' }}>
             {currentQuestionIndex + 1}/<span style={{ fontSize: '.8rem', fontWeight: '200' }}>{questions.length}</span>
           </Typography>
-          {questions.length > 0 && (
-            <Box sx={{ mt: '10%', textAlign: 'center' }}>
-              <Typography sx={{ color: '#000', fontSize: '2rem', fontWeight: '400' }}>
-                {questions[currentQuestionIndex]?.question}
-              </Typography>
-              <FormControl component="fieldset" sx={{ mt: '2%' }}>
-                <RadioGroup>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      gap: '2rem',
-                      flexDirection: { xs: 'column', sm: 'row', md: 'row' },
-                    }}
-                  >
-                    {questions[currentQuestionIndex]?.answerOptions?.map((option) => (
-                      <StyledOption key={option}>
-                        <StyledLabel
-                          value={option}
-                          control={
-                            <Radio onChange={() => handleChange(option)} checked={option === currentQuestionAnswer} />
-                          }
-                          label={option}
-                        />
-                      </StyledOption>
-                    ))}
-                  </Box>
-                </RadioGroup>
-              </FormControl>
-            </Box>
-          )}
+
+          <Box sx={{ mt: '10%', textAlign: 'center' }}>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <>
+                <Typography sx={{ color: '#000', fontSize: '2rem', fontWeight: '400' }}>
+                  {questions[currentQuestionIndex]?.question}
+                </Typography>
+                <FormControl component="fieldset" sx={{ mt: '2%' }}>
+                  <RadioGroup>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '2rem',
+                        flexDirection: { xs: 'column', sm: 'row', md: 'row' },
+                      }}
+                    >
+                      {questions[currentQuestionIndex]?.answerOptions?.map((option) => (
+                        <StyledOption key={option}>
+                          <StyledLabel
+                            value={option}
+                            control={
+                              <Radio onChange={() => handleChange(option)} checked={option === currentQuestionAnswer} />
+                            }
+                            label={option}
+                          />
+                        </StyledOption>
+                      ))}
+                    </Box>
+                  </RadioGroup>
+                </FormControl>
+              </>
+            )}
+          </Box>
+
           <LoadingButton
             variant="contained"
             loading={isSubmitting}

@@ -118,7 +118,7 @@ function FirebaseProvider({ children }) {
         user: {
           id: auth.uid || profile?.id,
           email: auth.email || profile?.email,
-          photoURL: auth.photoURL || profile?.photoURL,
+          photoURL: profile?.photoUrl || auth.photoURL,
           displayName: auth.displayName || profile?.displayName,
           phoneNumber: auth.phoneNumber || profile?.phoneNumber || '',
           country: profile?.country || '',
@@ -134,6 +134,7 @@ function FirebaseProvider({ children }) {
           gender: profile?.gender || '',
           likedEvents: profile?.likedEvents || [],
           idToken: profile?.idToken || '',
+          role: profile?.role || '',
         },
         login,
         loginWithGoogle,

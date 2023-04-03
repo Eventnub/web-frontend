@@ -6,10 +6,11 @@ import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // guards
 import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
-// config
-import { PATH_AFTER_LOGIN } from '../config';
+
 // components
 import LoadingScreen from '../components/LoadingScreen';
+
+import RenderAfterLogin from './RenderAfterLogin';
 
 const Loadable = (Component) => (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -30,6 +31,8 @@ const ForgotPassword = Loadable(lazy(() => import('../pages/auth/ForgotPassword'
 // Dashboard
 const Events = Loadable(lazy(() => import('../pages/dashboard/Events')));
 const TicketsDashboard = Loadable(lazy(() => import('../pages/TicketsDashboard')));
+const ProfilePage = Loadable(lazy(() => import('../pages/ProfilePage')));
+
 // Main
 const HomePage = Loadable(lazy(() => import('../pages/Home')));
 const EventDetailsPage = Loadable(lazy(() => import('../pages/EventDetailsPage')));
@@ -40,13 +43,20 @@ const Maintenance = Loadable(lazy(() => import('../pages/Maintenance')));
 const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 
+// Events
+const BecomeEventHostPage = Loadable(lazy(() => import('../pages/BecomeEventHost')));
+const CreateEventPage = Loadable(lazy(() => import('../pages/myEvent/CreateEvent')));
+const MyEventsPage = Loadable(lazy(() => import('../pages/myEvent/MyEventsPage')));
+const MyEvetnDetailsPage = Loadable(lazy(() => import('../pages/myEvent/MyEventDetailsPage')));
+const UpdateEvent = Loadable(lazy(() => import('../pages/myEvent/UpdateEvent')));
+
 // Games
 const QuizPage = Loadable(lazy(() => import('../pages/Quiz')));
 const QuizCompletedPage = Loadable(lazy(() => import('../pages/QuizCompleted')));
 const QuestionPage = Loadable(lazy(() => import('../pages/Question')));
 const RafflePage = Loadable(lazy(() => import('../pages/Raffle')));
 const BeatGameActivatedPage = Loadable(lazy(() => import('../pages/BeatGameActivated')));
-const NameTheBeatPage = Loadable(lazy(() => import('../pages/NameTheBeat')));
+const MusicMatchPage = Loadable(lazy(() => import('../pages/MusicMatch')));
 
 // Payment
 const CheckOutPage = Loadable(lazy(() => import('../pages/CheckOutPage')));
@@ -99,9 +109,10 @@ export default function Router() {
         </AuthGuard>
       ),
       children: [
-        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+        { element: <RenderAfterLogin />, index: true },
         { path: 'events', element: <Events /> },
         { path: 'tickets', element: <TicketsDashboard /> },
+        { path: 'profile', element: <ProfilePage /> },
       ],
     },
 
@@ -125,6 +136,46 @@ export default function Router() {
     {
       path: 'about',
       element: <AboutPage />,
+    },
+    {
+      path: 'become-event-host',
+      element: (
+        <AuthGuard>
+          <BecomeEventHostPage />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: 'create-event',
+      element: (
+        <AuthGuard>
+          <CreateEventPage />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: 'update-event/:eventId',
+      element: (
+        <AuthGuard>
+          <UpdateEvent />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: 'my-events',
+      element: (
+        <AuthGuard>
+          <MyEventsPage />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: 'my-event-details/:eventId',
+      element: (
+        <AuthGuard>
+          <MyEvetnDetailsPage />
+        </AuthGuard>
+      ),
     },
     {
       path: 'event-details/:eventId',
@@ -171,10 +222,10 @@ export default function Router() {
       ),
     },
     {
-      path: 'name-the-beat/:eventId',
+      path: 'music-match/:eventId',
       element: (
         <AuthGuard>
-          <NameTheBeatPage />
+          <MusicMatchPage />
         </AuthGuard>
       ),
     },

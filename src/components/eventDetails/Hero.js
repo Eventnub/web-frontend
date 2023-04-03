@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Box, Button, Container, Stack, styled, Typography, Divider, useTheme, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  styled,
+  Typography,
+  Divider,
+  useTheme,
+  useMediaQuery,
+  CircularProgress,
+} from '@mui/material';
 import Navbar from '../home/Navbar';
 import DrawerCom from './DrawerCom';
 import { requests } from '../../api/requests';
@@ -11,6 +22,8 @@ import twitter from '../../assets/Twitter.png';
 
 export default function Hero() {
   const [event, setEvent] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const { eventId } = useParams();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
   const StyledBox = styled(Box)({
@@ -27,12 +40,13 @@ export default function Hero() {
     nextSection.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const { eventId } = useParams();
   useEffect(() => {
     async function fetchEvents() {
       try {
+        setIsLoading(true);
         const { data } = await requests.getEvent(eventId);
         setEvent(data);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -40,6 +54,7 @@ export default function Hero() {
 
     fetchEvents();
   }, [eventId]);
+  console.log(event);
 
   return (
     <>
@@ -70,17 +85,22 @@ export default function Hero() {
               }}
             >
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography
-                  sx={{
-                    color: '#fff',
-                    textTransform: 'capitalize',
-                    fontSize: '1.25rem',
-                    fontWeight: '800',
-                    maxWidth: '159px',
-                  }}
-                >
-                  {event.name}
-                </Typography>
+                {isLoading ? (
+                  <CircularProgress />
+                ) : (
+                  <Typography
+                    sx={{
+                      color: '#fff',
+                      textTransform: 'capitalize',
+                      fontSize: '1.25rem',
+                      fontWeight: '800',
+                      maxWidth: '159px',
+                    }}
+                  >
+                    {event.name}
+                  </Typography>
+                )}
+
                 <DrawerCom />
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10%' }}>
@@ -115,14 +135,22 @@ export default function Hero() {
                 <Box sx={{ flex: 1 }}>
                   <Stack sx={{ pt: '3%' }}>
                     <Typography sx={{ fontsize: '0.75rem', fontWeight: '600', color: '#808080' }}>Date</Typography>
-                    <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>{event.date}</Typography>
+                    {isLoading ? (
+                      <CircularProgress />
+                    ) : (
+                      <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>{event.date}</Typography>
+                    )}
                   </Stack>
                 </Box>
                 <Divider orientation="vertical" flexItem sx={{ height: '70%', alignSelf: 'center', mx: 2 }} />
                 <Box sx={{ flex: 1 }}>
                   <Stack sx={{ pt: '3%' }}>
                     <Typography sx={{ fontsize: '0.75rem', fontWeight: '600', color: '#808080' }}>Time</Typography>
-                    <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>{event.time}</Typography>
+                    {isLoading ? (
+                      <CircularProgress />
+                    ) : (
+                      <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>{event.time}</Typography>
+                    )}
                   </Stack>
                 </Box>
               </Box>
@@ -130,9 +158,13 @@ export default function Hero() {
               <Box sx={{ flex: 1 }}>
                 <Stack>
                   <Typography sx={{ fontsize: '0.75rem', fontWeight: '600', color: '#808080' }}>Location</Typography>
-                  <Typography
-                    sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}
-                  >{`${event.venue}, ${event.state}, ${event.country}`}</Typography>
+                  {isLoading ? (
+                    <CircularProgress />
+                  ) : (
+                    <Typography
+                      sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}
+                    >{`${event.venue}, ${event.state}, ${event.country}`}</Typography>
+                  )}
                 </Stack>
               </Box>
             </Box>
@@ -150,9 +182,13 @@ export default function Hero() {
             >
               Description
             </Typography>
-            <Typography sx={{ textAlign: 'center', fontWeight: '400', color: '#000', fontSize: '0.75rem' }}>
-              {event.description}
-            </Typography>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <Typography sx={{ textAlign: 'center', fontWeight: '400', color: '#000', fontSize: '0.75rem' }}>
+                {event.description}
+              </Typography>
+            )}
           </Box>
         </>
       ) : (
@@ -164,17 +200,22 @@ export default function Hero() {
                 sx={{ display: 'flex', height: '55%', px: '2%', mt: '5%', gap: '5%', justifyContent: 'space-between' }}
               >
                 <Box sx={{ width: '35%', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-                  <Typography
-                    sx={{
-                      textTransform: 'capitalize',
-                      fontSize: '2.5rem',
-                      color: '#fff',
-                      fontWeight: '600',
-                      lineHeight: '2.5rem',
-                    }}
-                  >
-                    {event.name}
-                  </Typography>
+                  {isLoading ? (
+                    <CircularProgress />
+                  ) : (
+                    <Typography
+                      sx={{
+                        textTransform: 'capitalize',
+                        fontSize: '2.5rem',
+                        color: '#fff',
+                        fontWeight: '600',
+                        lineHeight: '2.5rem',
+                      }}
+                    >
+                      {event.name}
+                    </Typography>
+                  )}
+
                   <Typography sx={{ color: '#fff', fontSize: '1.75rem', fontWeight: '200' }}>
                     Don’t Miss Out on Your Next Favorite Concert. Win a Free or Sponsored Ticket Now!
                   </Typography>
@@ -197,7 +238,13 @@ export default function Hero() {
                   </Button>
                 </Box>
                 <Box sx={{ width: '45%' }}>
-                  <img src={event.photoUrl} alt={event.name} style={{ height: '100%', width: '100%' }} />
+                  {isLoading ? (
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <CircularProgress />
+                    </Box>
+                  ) : (
+                    <img src={event.photoUrl} alt={event.name} style={{ height: '100%', width: '100%' }} />
+                  )}
                 </Box>
               </Box>
               <Typography sx={{ pl: '2%', color: '#fff', fontSize: '1.25rem', fontWeight: '200', mt: '1%' }}>
@@ -224,9 +271,13 @@ export default function Hero() {
                   <Box sx={{ flex: 1, p: '2%' }}>
                     <Stack>
                       <Typography sx={{ fontSize: '1rem', color: '#808080', fontWeight: '200' }}>Date</Typography>
-                      <Typography sx={{ color: '#000', fontSize: '1.5rem', fontWeight: '400' }}>
-                        {event.date}
-                      </Typography>
+                      {isLoading ? (
+                        <CircularProgress />
+                      ) : (
+                        <Typography sx={{ color: '#000', fontSize: '1.5rem', fontWeight: '400' }}>
+                          {event.date}
+                        </Typography>
+                      )}
                     </Stack>
                   </Box>
                   <Divider
@@ -237,9 +288,13 @@ export default function Hero() {
                   <Box sx={{ flex: 1, p: '2%' }}>
                     <Stack>
                       <Typography sx={{ fontSize: '1rem', color: '#808080', fontWeight: '200' }}>Time</Typography>
-                      <Typography sx={{ color: '#000', fontSize: '1.5rem', fontWeight: '400' }}>
-                        {event.time}
-                      </Typography>
+                      {isLoading ? (
+                        <CircularProgress />
+                      ) : (
+                        <Typography sx={{ color: '#000', fontSize: '1.5rem', fontWeight: '400' }}>
+                          {event.time}
+                        </Typography>
+                      )}
                     </Stack>
                   </Box>
                 </Box>
@@ -251,9 +306,13 @@ export default function Hero() {
                 <Box sx={{ p: '2%' }}>
                   <Stack>
                     <Typography sx={{ fontSize: '1rem', color: '#808080', fontWeight: '200' }}>Location</Typography>
-                    <Typography
-                      sx={{ fontSize: '.8rem', color: '#000', fontWeight: '200' }}
-                    >{`${event.venue}, ${event.state}, ${event.country}`}</Typography>
+                    {isLoading ? (
+                      <CircularProgress />
+                    ) : (
+                      <Typography
+                        sx={{ fontSize: '.8rem', color: '#000', fontWeight: '200' }}
+                      >{`${event.venue}, ${event.state}, ${event.country}`}</Typography>
+                    )}
                   </Stack>
                 </Box>
               </Box>
@@ -261,7 +320,11 @@ export default function Hero() {
           </Box>
           <Box sx={{ height: 'auto', backgroundColor: '#fff', mt: '9%', px: '2%' }}>
             <Typography sx={{ color: '#000', fontSize: '1.3rem', fontWeight: '400', mb: '1%' }}>Description</Typography>
-            <Typography sx={{ color: '#000', fontsize: '.8rem' }}>{event.description}</Typography>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <Typography sx={{ color: '#000', fontsize: '.8rem' }}>{event.description}</Typography>
+            )}
           </Box>
         </>
       )}

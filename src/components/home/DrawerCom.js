@@ -3,10 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { Drawer, List, ListItemButton, ListItemText, ListItemIcon, styled, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { PATH_AUTH } from '../../routes/paths';
+import useFirebase from '../../hooks/useFirebase';
 
 export default function DrawerCom() {
   const [openDrawer, setOpenDrawer] = useState(false);
-
+  const { isAuthenticated, user } = useFirebase();
   const StyledNavlink = styled(NavLink)(() => ({
     textDecoration: 'none',
     activeStyle: '#FF6C2C',
@@ -48,7 +49,8 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                <StyledNavlink to="#">My Concerts</StyledNavlink>
+                <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
+                {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>}
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
@@ -62,7 +64,7 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>
+                {!isAuthenticated && <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>}
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>

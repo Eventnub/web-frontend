@@ -3,7 +3,8 @@ import { useLocation } from 'react-router';
 import { useParams, useNavigate } from 'react-router-dom';
 import { usePaystackPayment } from 'react-paystack';
 import useFirebase from '../hooks/useFirebase';
-import DialogEvent from '../components/eventDetails/DialogEvent';
+import SelectGameDialog from '../components/eventDetails/SelectGameDialog';
+import PaymentSuccessDialog from '../components/eventDetails/PaymentSuccessDialog';
 import { requests } from '../api/requests';
 
 export default function CheckOutPage() {
@@ -12,6 +13,7 @@ export default function CheckOutPage() {
   const index = location.state?.index;
   const objective = location.state?.objective;
   const [dialogShown, setDialogShown] = useState(false);
+  const [paymentDialogShown, setPaymentDialogShown] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
   const { user } = useFirebase();
   const { email, idToken } = user;
@@ -29,8 +31,8 @@ export default function CheckOutPage() {
     setDialogShown(true);
   };
 
-  const handleCloseDialog = () => {
-    setDialogShown(false);
+  const handleOpenPaymentDialog = () => {
+    setPaymentDialogShown(true);
   };
 
   const onSuccess = (response) => {
@@ -50,7 +52,11 @@ export default function CheckOutPage() {
       }
     };
     verifyPayment();
-    handleOpenDialog();
+    if (objective === 'to buy') {
+      handleOpenPaymentDialog();
+    } else {
+      handleOpenDialog();
+    }
   };
 
   const onClose = () => {
@@ -66,5 +72,10 @@ export default function CheckOutPage() {
       initializePayment(onSuccess, onClose);
     }
   });
-  return <DialogEvent open={dialogShown} handleClose={handleCloseDialog} />;
+  return (
+    <>
+      <SelectGameDialog open={dialogShown} />;
+      <PaymentSuccessDialog open={paymentDialogShown} />
+    </>
+  );
 }
