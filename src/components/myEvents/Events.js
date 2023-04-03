@@ -92,8 +92,7 @@ export default function Events() {
               alignItems: 'center',
               flexWrap: 'wrap',
               mt: '2.5rem',
-              justifyContent: 'space-between',
-              gap: '2rem',
+              gap: '5rem',
               height: 'auto',
             }}
           >

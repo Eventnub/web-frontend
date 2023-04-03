@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, styled, Avatar, IconButton } from '@mui/material';
+import { Box, Typography, styled, Avatar, IconButton, Stack } from '@mui/material';
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
 import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
 import Page from '../components/Page';
@@ -157,12 +157,18 @@ export default function MusicMatch() {
                   alignItems: 'center',
                   gap: '1rem',
                   background: '#fff',
+                  m: 'auto',
                 }}
               >
                 <Avatar src={avatar} sx={{ width: 30, height: 30 }} />
-                <Typography sx={{ color: '#000', fontWeight: '400', fontSize: '.8rem' }}>
-                  {musicMatch?.songTitle} by {musicMatch?.songArtist}
-                </Typography>
+                <Stack>
+                  <Typography sx={{ color: '#000', fontWeight: '400', fontSize: '.8rem' }}>
+                    {musicMatch?.songTitle}
+                  </Typography>
+                  <Typography sx={{ color: '#000', fontWeight: '400', fontSize: '.8rem' }}>
+                    by {musicMatch?.songArtist}
+                  </Typography>
+                </Stack>
               </Box>
               <Box
                 sx={{
@@ -175,6 +181,7 @@ export default function MusicMatch() {
                   display: 'flex',
                   alignItems: 'center',
                   background: '#fff',
+                  mb: '.6rem',
                 }}
               >
                 <IconButton onClick={togglePlay}>
@@ -206,10 +213,15 @@ export default function MusicMatch() {
                   />
                 )} */}
               </Box>
-              <Box>
-                <VoiceRecorder />
-                {/* <VoiceRecorder2 /> */}
+              <Box
+                sx={{ bgcolor: '#DBDBDB', width: '50%', m: 'auto', height: '50px', borderRadius: '360px', p: '.5rem' }}
+              >
+                <Typography sx={{ textAlign: 'center', color: '#000', fontWeight: '600' }}>00 : 25 : 05</Typography>
               </Box>
+            </Box>
+            <Box sx={{ m: 'auto', height: '35%', width: '50%', margin: 'auto', mt: '.5rem' }}>
+              <VoiceRecorder />
+              {/* <VoiceRecorder2 /> */}
             </Box>
           </Box>
         </Box>

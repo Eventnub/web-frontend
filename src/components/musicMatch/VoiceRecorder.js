@@ -49,6 +49,13 @@ const VoiceRecorder = () => {
     setRecording(false);
   };
 
+  const resetRecording = () => {
+    setRecording(false);
+    setAudioURL(null);
+    setAudioFile(null);
+    setStream(null);
+  };
+
   const uploadRecording = async () => {
     const blobFile = new File([audioFile], 'recorded_audio');
     const formData = new FormData();
@@ -63,13 +70,37 @@ const VoiceRecorder = () => {
   console.log({ audioFile });
 
   return (
-    <div>
-      <Button onClick={startRecording} disabled={recording}>
-        Start Recording
-      </Button>
-      <Button onClick={stopRecording} disabled={!recording}>
-        Stop Recording
-      </Button>
+    <div style={{ display: 'flex', flexDirection: 'column', padding: '.8rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '.8rem' }}>
+        <Button
+          onClick={startRecording}
+          disabled={recording}
+          variant="contained"
+          sx={{
+            boxShadow: 'none',
+            bgcolor: '#FF6C2C',
+            '&:hover': {
+              backgroundColor: '#FF6C2C',
+            },
+          }}
+        >
+          Start Recording
+        </Button>
+        <Button
+          onClick={stopRecording}
+          disabled={!recording}
+          variant="contained"
+          sx={{
+            boxShadow: 'none',
+            bgcolor: '#FF6C2C',
+            '&:hover': {
+              backgroundColor: '#FF6C2C',
+            },
+          }}
+        >
+          Stop Recording
+        </Button>
+      </div>
       {audioURL && (
         <audio controls>
           <source src={audioURL} type="audio/ogg" />
@@ -78,7 +109,10 @@ const VoiceRecorder = () => {
         </audio>
       )}
       {/* {error && <p>{error}</p>} */}
-      <Button onClick={uploadRecording}>Upload</Button>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '.8rem' }}>
+        <Button onClick={uploadRecording}>Upload</Button>
+        <Button onClick={resetRecording}>Reset</Button>
+      </div>
     </div>
   );
 };
