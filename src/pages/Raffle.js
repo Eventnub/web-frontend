@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Button, Typography, Alert } from '@mui/material';
+import { Box, Button, Typography, Alert, CircularProgress } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import useFirebase from '../hooks/useFirebase';
 import { requests } from '../api/requests';
@@ -16,6 +16,7 @@ export default function Raffle() {
   const [isSubmitting, setIsSubmitting] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [raffle, setRaffle] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { eventId } = useParams();
   const { user } = useFirebase();
 
@@ -30,9 +31,11 @@ export default function Raffle() {
   useEffect(() => {
     async function fetchRaffle() {
       try {
+        setIsLoading(true);
         if (user.idToken) {
           const { data } = await requests.getEventRaffleDraw(eventId, user.idToken);
           setRaffle(data);
+          setIsLoading(false);
         }
       } catch (error) {
         console.log(error);
@@ -92,25 +95,33 @@ export default function Raffle() {
         </Typography>
         <Box sx={{ height: '75%', width: '100%', px: { xs: '5%', sm: '10%', md: '18%' } }}>
           <Box sx={{ height: '100%', width: '100%', display: 'flex', flexWrap: 'wrap', gap: '1rem', mt: '2%' }}>
-            {nums.map((value) => (
-              <Button
-                key={value}
-                variant="outlined"
-                disabled={selectedButtons.length === 5 && !selectedButtons.includes(value)}
-                onClick={() => handleButtonClick(value)}
-                sx={{
-                  borderRadius: '50%',
-                  width: '64px',
-                  height: '64px',
-                  boxShadow: 'none',
-                  color: '#000',
-                  background: selectedButtons.includes(value) ? 'grey' : '#fff',
-                  border: '1px solid #8F8F8F',
-                }}
-              >
-                {value}
-              </Button>
-            ))}
+            {isLoading ? (
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                <CircularProgress />
+              </Box>
+            ) : (
+              <>
+                {nums.map((value) => (
+                  <Button
+                    key={value}
+                    variant="outlined"
+                    disabled={selectedButtons.length === 5 && !selectedButtons.includes(value)}
+                    onClick={() => handleButtonClick(value)}
+                    sx={{
+                      borderRadius: '50%',
+                      width: '64px',
+                      height: '64px',
+                      boxShadow: 'none',
+                      color: '#000',
+                      background: selectedButtons.includes(value) ? 'grey' : '#fff',
+                      border: '1px solid #8F8F8F',
+                    }}
+                  >
+                    {value}
+                  </Button>
+                ))}
+              </>
+            )}
           </Box>
           <Box sx={{ textAlign: 'center', mt: '4%' }}>
             <LoadingButton

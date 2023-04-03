@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import logoImg from '../../assets/logoImg.png';
 import DrawerCom from './DrawerCom';
 import { PATH_AUTH } from '../../routes/paths';
+import useFirebase from '../../hooks/useFirebase';
 
 export default function Navbar() {
   const NavbarLinksBox = styled(Box)(({ theme }) => ({
@@ -32,6 +33,7 @@ export default function Navbar() {
 
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+  const { isAuthenticated, user } = useFirebase();
 
   return (
     <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
@@ -64,19 +66,24 @@ export default function Navbar() {
               <StyledNavlink to="/">Home</StyledNavlink>
               <StyledNavlink to="/about">About</StyledNavlink>
               <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
-              <StyledNavlink to="#">My Concerts</StyledNavlink>
+              {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>}
               <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 My Tickets{' '}
                 <Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
                   0
                 </Sircle>
               </StyledNavlink>
-              <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>
+              {!isAuthenticated && <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>}
             </NavbarLinksBox>
             <NavbarLinksBox style={{ display: 'flex', justifyContent: 'end' }}>
               <StyledNavlink to="#">
-                <Button variant="outlined" sx={{ border: '1px solid #FF6C2C', color: '#fff' }}>
-                  + Create a Concert
+                <Button
+                  variant="outlined"
+                  component={NavLink}
+                  to={user.role === 'host' ? '/create-event' : '/become-event-host'}
+                  sx={{ border: '1px solid #FF6C2C', color: '#fff' }}
+                >
+                  + Create A Event
                 </Button>
               </StyledNavlink>
             </NavbarLinksBox>

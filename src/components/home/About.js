@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Box, Typography } from '@mui/material';
 
 export default function About() {
@@ -17,7 +18,12 @@ export default function About() {
           <Typography paragraph align="center" sx={{ color: '#000', fontWeight: '200' }}>
             As an artist you can join our existing artists and create events to enable your fans get free tickets to
             your events, you can {''}
-            <span style={{ color: 'blue' }}>contact us</span> to get started as an artist.
+            <span style={{ color: 'blue' }}>
+              <Link to="/contact-us" style={{ color: 'blue', textDecoration: 'none' }}>
+                contact us
+              </Link>
+            </span>{' '}
+            to get started as an artist.
           </Typography>
         </Box>
       </Box>

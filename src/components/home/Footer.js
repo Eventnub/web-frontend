@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { Container, Box, Stack, Typography, styled, useTheme, Divider } from '@mui/material';
 import logoImg from '../../assets/logoImg.png';
 import InputStyle from '../InputStyle';
+import useFirebase from '../../hooks/useFirebase';
 
 export default function Footer() {
   const theme = useTheme();
+  const { isAuthenticated } = useFirebase();
 
   const StyledNavlink = styled(Link)(() => ({
     textDecoration: 'none',
@@ -82,9 +84,11 @@ export default function Footer() {
               <StyledNavlink to="/about">
                 <Paragraph>About</Paragraph>
               </StyledNavlink>
-              <StyledNavlink to="/#">
-                <Paragraph>My Concerts</Paragraph>
-              </StyledNavlink>
+              {isAuthenticated && (
+                <StyledNavlink to="/my-events">
+                  <Paragraph>My Events</Paragraph>
+                </StyledNavlink>
+              )}
               <StyledNavlink to="/dashboard/tickets">
                 <Paragraph>My Tickets</Paragraph>
               </StyledNavlink>

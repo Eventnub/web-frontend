@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Typography, Button, styled } from '@mui/material';
 import Navbar from './Navbar';
 import concert from '../../assets/concerts.png';
@@ -66,6 +67,8 @@ function Hero() {
             </Typography>
             <Button
               variant="contained"
+              component={Link}
+              to={'/contact-us'}
               sx={{
                 boxShadow: 'none',
                 mt: '2.5rem',
@@ -95,7 +98,7 @@ function Hero() {
         </Box>
       </Box>
       <Box sx={{}}>
-        <img src={concert} alt="trailer park concert" style={{ width: '100%', height: '450px' }} />
+        <img src={concert} alt="trailer park concert" style={{ width: '100%' }} />
       </Box>
     </Box>
   );
