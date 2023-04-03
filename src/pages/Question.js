@@ -86,7 +86,7 @@ export default function Question() {
           setIsSubmitting(true);
           await requests.submitEventQuizAnswers(eventId, user.idToken, { answers: [...answers, answer] });
           setIsSubmitting(false);
-          navigate('/quiz-completed');
+          navigate(`/music-match/${eventId}`);
         } catch (error) {
           if (error.response && error.response.status === 400) {
             setIsSubmitting(false);
