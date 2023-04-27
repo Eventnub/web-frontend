@@ -322,30 +322,31 @@ const CreateEventForm = () => {
               </Box>
               <Box
                 sx={{
-                  width: '50%',
+                  width: '100%',
                   mt: '1rem',
                   display: 'flex',
                   justifyContent: 'flex-end',
-                  gap: '1rem',
                 }}
               >
-                <StyledTextField
-                  variant="outlined"
-                  placeholder="Artist Name"
-                  value={currentArtist}
-                  onChange={(e) => {
-                    setCurrentArtist(e.target.value);
-                  }}
-                  sx={{ '& .MuiOutlinedInput-root': { height: '3rem' } }}
-                />
-                <Button
-                  variant="contained"
-                  startIcon={<AddIcon />}
-                  onClick={handleAddArtist}
-                  sx={{ background: '#FF6C2C', boxShadow: 'none', width: '50%', height: '3rem' }}
-                >
-                  Add Artist
-                </Button>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <StyledTextField
+                    variant="outlined"
+                    placeholder="Artist Name"
+                    value={currentArtist}
+                    onChange={(e) => {
+                      setCurrentArtist(e.target.value);
+                    }}
+                    sx={{ '& .MuiOutlinedInput-root': { height: '3rem' } }}
+                  />
+                  <Button
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={handleAddArtist}
+                    sx={{ background: '#FF6C2C', boxShadow: 'none', width: '50%', height: '3rem' }}
+                  >
+                    Add Artist
+                  </Button>
+                </Box>
               </Box>
             </Box>
             <Box
@@ -361,7 +362,7 @@ const CreateEventForm = () => {
               }}
             >
               <Typography sx={{ color: '#525252', fontWeight: '600', fontSize: '1.5rem' }}>
-                Add Tickets For This Concert (Optional)
+                Add Tickets For This Event (Optional)
               </Typography>
               <Typography sx={{ color: '#ABABAB', fontWeight: '400', fontSize: '1rem' }}>
                 Add the available tickets for this concert and their prices respectively
@@ -453,7 +454,7 @@ const CreateEventForm = () => {
                   background: '#FF6C2C',
                   boxShadow: 'none',
                   width: '20%',
-                  height: '10%',
+                  height: '3rem',
                   mt: '1rem',
                   borderRadius: '10px',
                   alignSelf: 'flex-end',

@@ -25,16 +25,17 @@ const StyledLabel = styled(FormControlLabel)({
   },
   '& .MuiRadio-root': {
     color: '#fff',
-    textAlign: 'center',
-    pl: '7%',
   },
 });
+
 const StyledOption = styled(Box)({
   background: '#6EC6D2',
   height: '10%',
-  width: '130px',
+  // width: '130px',
   borderRadius: '30px',
+  pl: '2rem',
 });
+
 const StyledCard = styled(Box)({
   height: '80%',
   borderRadius: '10px',
@@ -177,7 +178,12 @@ export default function Question() {
                           <StyledLabel
                             value={option}
                             control={
-                              <Radio onChange={() => handleChange(option)} checked={option === currentQuestionAnswer} />
+                              <Radio
+                                onChange={() => handleChange(option)}
+                                checked={option === currentQuestionAnswer}
+                                size="small"
+                                sx={{ ml: '1rem' }}
+                              />
                             }
                             label={option}
                           />

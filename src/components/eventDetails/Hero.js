@@ -20,20 +20,20 @@ import instagram from '../../assets/Instagram.png';
 import facebook from '../../assets/Facebook.png';
 import twitter from '../../assets/Twitter.png';
 
+const StyledBox = styled(Box)({
+  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  height: '100vh',
+  width: '100%',
+});
 export default function Hero() {
   const [event, setEvent] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { eventId } = useParams();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
-  const StyledBox = styled(Box)({
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    height: '100vh',
-    width: '100%',
-  });
 
   const handleButtonClick = () => {
     const nextSection = document.getElementById('tickets');
@@ -54,7 +54,6 @@ export default function Hero() {
 
     fetchEvents();
   }, [eventId]);
-  console.log(event);
 
   return (
     <>

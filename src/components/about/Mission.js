@@ -10,9 +10,10 @@ function Mission() {
     textAlign: 'center',
   });
   const Text = styled(Typography)({
-    fontSize: '14px',
+    fontSize: '1rem',
     fontWeight: '400',
     color: '#000',
+    textAlign: 'center',
   });
   return (
     <Box
@@ -21,36 +22,34 @@ function Mission() {
         px: '3rem',
         display: 'flex',
         gap: '1rem',
-        flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ width: { xs: '100%', sm: '100%', md: '50%' } }}
-      >
+      <Box>
         <Title mb="2rem">Our Mission</Title>
-        <Text>An event platform that helps offer fans an</Text>
-        <Text>opportunity to get free</Text>
-        <Text>and highly discounted passes/tickets to attend</Text>
-        <Text>concerts, events, or shows of celebrities</Text>
-        <Text>through various gamified activities</Text>
+        <Text>At Eventnub, we're on a mission to make live events more accessible and inclusive. Through</Text>
+        <Text>our gamified activities, we offer event enthusiasts the chance to attend their favorite</Text>
+        <Text>celebrities' events for free or at heavily discounted prices.</Text>
+        <Text sx={{ mt: '1rem' }}>
+          We're committed to building a community that supports both fans and celebrities, and we
+        </Text>
+        <Text>believe that events are a powerful way to bring people together and create unforgettable</Text>
+        <Text>experiences. Our goal is to connect fans with the celebrities they love and help emerging</Text>
+        <Text>celebrities grow their fanbase.</Text>
+        <Text sx={{ mt: '1rem' }}>
+          We're dedicated to providing our customers with high-quality service and the most engaging
+        </Text>
+        <Text>and entertaining events possible. Join us today and be a part of the event revolution!</Text>
       </Box>
-      <Box
-        sx={{ width: { xs: '100%', sm: '100%', md: '50%' } }}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-      >
+      <Box mt="4rem" display="flex" flexDirection="column" alignItems="center" justifyContent="center">
         <Title mb="2rem">Our Vision</Title>
-        <Text>An event platform that helps offer fans an</Text>
-        <Text>opportunity to get free</Text>
-        <Text>and highly discounted passes/tickets to attend</Text>
-        <Text>concerts, events, or shows of celebrities</Text>
-        <Text>through various gamified activities</Text>
+        <Text>At Eventnub, our vision is to revolutionize the event industry by connecting fans with their</Text>
+        <Text>favorite celebrities and empowering emerging celebrities to grow their fanbase. We strive to</Text>
+        <Text> make events accessible and inclusive to all through our gamified activities. Join us on our</Text>
+        <Text>journey to create unforgettable experiences and a supportive community that celebrates </Text>
+        <Text>diversity and creativity.</Text>
       </Box>
     </Box>
   );

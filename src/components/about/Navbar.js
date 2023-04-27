@@ -31,7 +31,7 @@ const Sircle = styled('span')(() => ({
 export default function Navbar() {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('md'));
-  const { isAuthenticated, user } = useFirebase();
+  const { isAuthenticated } = useFirebase();
 
   return (
     <AppBar position="static" sx={{ backgroundColor: '#fff', boxShadow: 'none' }}>
@@ -50,7 +50,7 @@ export default function Navbar() {
               <StyledNavlink to="/">Home</StyledNavlink>
               <StyledNavlink to="/about">About</StyledNavlink>
               <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
-              {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>}
+              {/* {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>} */}
               <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 My Tickets<Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
               </StyledNavlink>

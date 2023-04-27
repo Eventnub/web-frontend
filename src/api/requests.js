@@ -55,4 +55,6 @@ export const requests = {
     axios.get(`${endpoints.getEventMusicMatch}/${eventId}`, getJsonHeaderWithAuthToken(idToken)),
   transcribeAudio: (idToken, data) =>
     axios.post(endpoints.transcribeAudio, data, getMultipartHeaderWithAuthToken(idToken)),
+  submitAudioRecording: (idToken, data) =>
+    axios.post(endpoints.submitAudioRecording, data, getMultipartHeaderWithAuthToken(idToken)),
 };

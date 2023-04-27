@@ -146,7 +146,10 @@ export default function ProfilePage() {
                     fontSize: '1.3rem',
                   }}
                 >{`${user.firstName} ${user.lastName}`}</Typography>
-                <Typography sx={{ color: '#3A3A3A', fontSize: '1rem', fontWeight: '400' }}>Event host</Typography>
+                {user.role === 'host' && (
+                  <Typography sx={{ color: '#3A3A3A', fontSize: '1rem', fontWeight: '400' }}>Event host</Typography>
+                )}
+
                 <Box>
                   {uploadStage && (
                     <Typography variant="caption" sx={{ textAlign: 'center', color: 'success.dark' }}>

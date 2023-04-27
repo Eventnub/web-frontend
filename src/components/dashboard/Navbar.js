@@ -19,6 +19,7 @@ const Circle = styled('span')(() => ({
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { user } = useFirebase();
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,7 +29,6 @@ export default function Navbar() {
     setAnchorEl(null);
   };
 
-  const { user, isAuthenticated } = useFirebase();
   return (
     <AppBar position="static" sx={{ background: '#fff', boxShadow: 'none' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -53,11 +53,11 @@ export default function Navbar() {
             <Link component={RouterLink} underline="none" to="/contact-us">
               <Typography sx={{ color: '#000', fontWeight: '200', fontSize: '.9rem' }}>Contact Us</Typography>
             </Link>
-            {isAuthenticated && user.role === 'host' && (
+            {/* {isAuthenticated && user.role === 'host' && (
               <Link component={RouterLink} underline="none" to="/my-events">
                 <Typography sx={{ color: '#000', fontWeight: '200', fontSize: '.9rem' }}>My Events</Typography>
               </Link>
-            )}
+            )} */}
             <Link component={RouterLink} underline="none" to="/dashboard/tickets">
               <Typography
                 sx={{

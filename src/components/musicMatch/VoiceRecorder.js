@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { LoadingButton } from '@mui/lab';
+import PropTypes from 'prop-types';
 import { requests } from '../../api/requests';
 import useFirebase from '../../hooks/useFirebase';
 
 let mediaRecorder;
 const chunks = [];
 
-const VoiceRecorder = () => {
+const VoiceRecorder = ({ musicMatchId }) => {
   const [recording, setRecording] = useState(false);
   const [audioURL, setAudioURL] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
   const [stream, setStream] = useState(null);
   const { user } = useFirebase();
+  const navigate = useNavigate();
 
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -60,14 +65,16 @@ const VoiceRecorder = () => {
     const blobFile = new File([audioFile], 'recorded_audio');
     const formData = new FormData();
     formData.append('audio', blobFile);
+    formData.append('musicUnisonId', musicMatchId);
     try {
-      const { data } = await requests.transcribeAudio(user.idToken, formData);
-      console.log(data);
+      setIsSubmitting(true);
+      await requests.submitAudioRecording(user.idToken, formData);
+      setIsSubmitting(false);
+      navigate('/quiz-completed');
     } catch (error) {
       console.log(error.request);
     }
   };
-  console.log({ audioFile });
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', padding: '.8rem' }}>
@@ -109,12 +116,25 @@ const VoiceRecorder = () => {
         </audio>
       )}
       {/* {error && <p>{error}</p>} */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '.8rem' }}>
-        <Button onClick={uploadRecording}>Upload</Button>
-        <Button onClick={resetRecording}>Reset</Button>
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.2rem' }}>
+        <LoadingButton
+          loading={isSubmitting}
+          variant="contained"
+          sx={{ bgcolor: '#1358A5', boxShadow: 'none' }}
+          onClick={uploadRecording}
+        >
+          Submit
+        </LoadingButton>
+        <Button variant="contained" sx={{ bgcolor: '#1358A5', boxShadow: 'none' }} onClick={resetRecording}>
+          Reset
+        </Button>
+      </Box>
     </div>
   );
 };
 
 export default VoiceRecorder;
+
+VoiceRecorder.propTypes = {
+  musicMatchId: PropTypes.string,
+};

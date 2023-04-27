@@ -59,7 +59,7 @@ function Hero() {
                 [theme.breakpoints.down('sm')]: { fontSize: '1.5em', fontWeight: 'normal' },
               }}
             >
-              Made For Artist & Fans
+              Made for Celebrities and Fans
             </Typography>
             <Typography
               variant="h4"
@@ -70,7 +70,7 @@ function Hero() {
                 [theme.breakpoints.down('sm')]: { fontSize: '1em', fontWeight: 'normal' },
               }}
             >
-              Don’t Miss Out on Your Next Favorite Concert
+              Discover Your Next Favorite Event and stand a chance
             </Typography>
             <Typography
               variant="h4"
@@ -81,7 +81,7 @@ function Hero() {
                 [theme.breakpoints.down('sm')]: { fontSize: '1em', fontWeight: 200 },
               }}
             >
-              Win A Free or Sponsored Ticket Now!
+              to win a Free or Sponsored Ticket Today!
             </Typography>
             <Box
               sx={{

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, styled, Avatar, IconButton, Stack } from '@mui/material';
-import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
-import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
+import { Box, Typography, styled, Stack } from '@mui/material';
+// import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
+// import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
 import Page from '../components/Page';
 import logo from '../assets/Vector.png';
 import microphone from '../assets/old-microphone.png';
-import avatar from '../assets/avatar.png';
 import { requests } from '../api/requests';
 import useFirebase from '../hooks/useFirebase';
 import VoiceRecorder from '../components/musicMatch/VoiceRecorder';
-import sound from '../assets/sound.mp3';
-// import VoiceRecorder2 from '../components/musicMatch/VoiceRecorder2';
+import MusicMatchInfoDialog from '../components/musicMatch/MusicMatchInfoDialog';
 
 const Container = styled(Box)({
   width: '100%',
@@ -22,20 +20,28 @@ const Container = styled(Box)({
   alignItems: 'center',
 });
 export default function MusicMatch() {
-  const [audio] = useState(new Audio(sound));
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [audio] = useState(new Audio(sound));
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [musicMatch, setMusicMatch] = useState(null);
+  const [musicMatchInfoDialogShown, setMusicMatchInfoDialogShown] = useState(false);
   const { eventId } = useParams();
   const { user } = useFirebase();
 
-  const togglePlay = () => {
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
-    }
-    setIsPlaying(!isPlaying);
+  const handleOpenDialog = () => {
+    setMusicMatchInfoDialogShown(true);
   };
+  const handleCloseDialog = () => {
+    setMusicMatchInfoDialogShown(false);
+  };
+
+  // const togglePlay = () => {
+  //   if (isPlaying) {
+  //     audio.pause();
+  //   } else {
+  //     audio.play();
+  //   }
+  //   setIsPlaying(!isPlaying);
+  // };
 
   // const playList = [
   //   {
@@ -52,23 +58,22 @@ export default function MusicMatch() {
   //   setCurrentTime(audio.currentTime);
   // };
 
-  useEffect(() => {
-    audio.addEventListener('ended', () => {
-      setIsPlaying(false);
-    });
-    return () => {
-      audio.removeEventListener('ended', () => {
-        setIsPlaying(false);
-      });
-    };
-  }, [audio]);
+  // useEffect(() => {
+  //   audio.addEventListener('ended', () => {
+  //     setIsPlaying(false);
+  //   });
+  //   return () => {
+  //     audio.removeEventListener('ended', () => {
+  //       setIsPlaying(false);
+  //     });
+  //   };
+  // }, [audio]);
 
   useEffect(() => {
     async function getEventMusicMatch() {
       try {
         const { data } = await requests.getEventMusicMatch(user.idToken, eventId);
-        setMusicMatch(data[0]);
-        console.log(data);
+        setMusicMatch(data);
       } catch (error) {
         console.log(error);
       }
@@ -76,7 +81,12 @@ export default function MusicMatch() {
     getEventMusicMatch();
   }, [eventId, user.idToken]);
 
-  console.log({ musicMatch });
+  useEffect(() => {
+    function openDialog() {
+      handleOpenDialog();
+    }
+    openDialog();
+  }, []);
 
   return (
     <Page title="Music Match">
@@ -160,13 +170,13 @@ export default function MusicMatch() {
                   m: 'auto',
                 }}
               >
-                <Avatar src={avatar} sx={{ width: 30, height: 30 }} />
-                <Stack>
+                <Stack direction="row" spacing={0.5}>
                   <Typography sx={{ color: '#000', fontWeight: '400', fontSize: '.8rem' }}>
                     {musicMatch?.songTitle}
                   </Typography>
+                  <Typography sx={{ color: '#000', fontWeight: '400', fontSize: '.8rem' }}>by</Typography>
                   <Typography sx={{ color: '#000', fontWeight: '400', fontSize: '.8rem' }}>
-                    by {musicMatch?.songArtist}
+                    {musicMatch?.songArtist}
                   </Typography>
                 </Stack>
               </Box>
@@ -184,34 +194,19 @@ export default function MusicMatch() {
                   mb: '.6rem',
                 }}
               >
-                <IconButton onClick={togglePlay}>
+                {/* <IconButton onClick={togglePlay}>
                   {isPlaying ? (
                     <PauseCircleOutlineOutlinedIcon sx={{ color: '#D587FF', fontSize: '4rem' }} />
                   ) : (
                     <PlayCircleFilledWhiteOutlinedIcon sx={{ color: '#D587FF', fontSize: '4rem' }} />
                   )}
-                </IconButton>
-                {/* {musicMatch && (
-                  <AudioPlayer
-                    playList={playList}
-                    activeUI={{
-                      ...activeUI,
-                      progress: progressType,
-                    }}
-                    // placement={{
-                    //   player: playerPlacement,
-                    //   interface: {
-                    //     templateArea: interfacePlacement,
-                    //   },
-                    //   playList: playListPlacement,
-                    //   volumeSlider: volumeSliderPlacement,
-                    // }}
-                    rootContainerProps={{
-                      colorScheme: theme,
-                      // width,
-                    }}
-                  />
-                )} */}
+                </IconButton> */}
+                {musicMatch && (
+                  <audio controls>
+                    <source src={musicMatch?.audioUrl} type="audio/mp3" />
+                    <track src="thg.vtt" kind="captions" label="English" />
+                  </audio>
+                )}
               </Box>
               <Box
                 sx={{ bgcolor: '#DBDBDB', width: '50%', m: 'auto', height: '50px', borderRadius: '360px', p: '.5rem' }}
@@ -220,10 +215,10 @@ export default function MusicMatch() {
               </Box>
             </Box>
             <Box sx={{ m: 'auto', height: '35%', width: '50%', margin: 'auto', mt: '.5rem' }}>
-              <VoiceRecorder />
-              {/* <VoiceRecorder2 /> */}
+              <VoiceRecorder musicMatchId={musicMatch?.uid} />
             </Box>
           </Box>
+          <MusicMatchInfoDialog open={musicMatchInfoDialogShown} handleClose={handleCloseDialog} />
         </Box>
       </Container>
     </Page>

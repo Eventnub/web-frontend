@@ -18,6 +18,7 @@ export const endpoints = {
   getCreatorEvents: getFullUrl('events/get-creator-events'),
   getUserPaymentForEvent: getFullUrl('payments/get-user-payment-for-event'),
   verifyStripePayment: getFullUrl('payments/handle-stripe-ticket-payment'),
-  getEventMusicMatch: getFullUrl('music-unison/get-event-music-unisons'),
+  getEventMusicMatch: getFullUrl('music-unison/get-event-music-unison'),
   transcribeAudio: getFullUrl('music-unison/transcribe-audio'),
+  submitAudioRecording: getFullUrl('music-unison/submit-event-music-unison-audio'),
 };
