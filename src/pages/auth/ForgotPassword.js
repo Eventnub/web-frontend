@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Box, Link, Typography, Button, TextField } from '@mui/material';
+import { Box, Link, Typography, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { PATH_AUTH } from '../../routes/paths';
 import logo from '../../assets/blueLogo.png';
 import { requests } from '../../api/requests';
@@ -93,9 +94,10 @@ function ForgotPassword() {
                   )}
                 </Field>
 
-                <Button
+                <LoadingButton
                   type="submit"
                   variant="contained"
+                  loading={isSubmitting}
                   sx={{
                     backgroundColor: '#1358A5',
                     boxShadow: 'none',
@@ -107,7 +109,7 @@ function ForgotPassword() {
                   fullWidth
                 >
                   Submit
-                </Button>
+                </LoadingButton>
                 <DialogSuccess open={dialogShown} handleClose={handleCloseDialog} />
               </Form>
             )}

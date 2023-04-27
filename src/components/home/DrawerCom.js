@@ -7,7 +7,7 @@ import useFirebase from '../../hooks/useFirebase';
 
 export default function DrawerCom() {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const { isAuthenticated, user } = useFirebase();
+  const { isAuthenticated } = useFirebase();
   const StyledNavlink = styled(NavLink)(() => ({
     textDecoration: 'none',
     activeStyle: '#FF6C2C',
@@ -46,14 +46,14 @@ export default function DrawerCom() {
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
-          <ListItemButton>
+          {/* <ListItemButton>
             <ListItemIcon>
               <ListItemText>
                 <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
                 {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>}
               </ListItemText>
             </ListItemIcon>
-          </ListItemButton>
+          </ListItemButton> */}
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>

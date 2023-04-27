@@ -1,3 +1,4 @@
+/* eslint dot-notation: ["error", { "allowKeywords": false }] */
 import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { TextField, Select, InputAdornment, Typography, Alert, MenuItem } from '@mui/material';
@@ -47,6 +48,10 @@ const RegisterForm = () => {
       })}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
+          if (!values.favoriteCelebrity) {
+            delete values.favoriteCelebrity;
+          }
+          console.log({ values });
           await requests.register(values);
           if (isMountedRef.current) {
             setSubmitting(false);

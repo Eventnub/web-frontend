@@ -165,7 +165,12 @@ export default function TicketCarousel() {
           {data.map((item) => (
             <Box
               key={item.index}
-              sx={{ backgroundColor: '#595959', width: '250px', height: '330px', p: '5% 1% 1% 1%' }}
+              sx={{
+                backgroundColor: '#595959',
+                width: '250px',
+                height: '330px',
+                p: '5% 1% 1% 1%',
+              }}
               id="tickets"
             >
               <Stack>
@@ -173,13 +178,11 @@ export default function TicketCarousel() {
                   {`$${item.price}`}
                 </Typography>
                 <Typography sx={{ fontSize: '1.5rem', color: '#fff', fontWeight: '400' }}>{item.type}</Typography>
-                <Typography sx={{ fontSize: '1rem', color: '#fff', fontWeight: '400', mt: '6.5%', maxWidth: '276px' }}>
-                  First 20 lucky winners Get it FREE by taking a quiz game
-                </Typography>
-
+              </Stack>
+              <Stack>
                 <Button
                   variant="outlined"
-                  sx={{ boxShadow: 'none', my: '7%', border: '1px solid #FF6C2C', color: '#fff' }}
+                  sx={{ boxShadow: 'none', my: '7%', border: '1px solid #FF6C2C', color: '#fff', mt: '6rem' }}
                   onClick={() => handleOpenDialog(item.price * 0.1, item.index)}
                 >
                   Play a game and win ticket
@@ -192,17 +195,17 @@ export default function TicketCarousel() {
                 >
                   {`Buy with $${item.price}`}
                 </Button>
-                <SelectGameDialog
-                  open={dialogShown}
-                  handleClose={handleCloseDialog}
-                  extraPaymentData={extraPaymentData}
-                />
-                <SelectPaymentOption
-                  open={paymentDialogShown}
-                  handleClose={handleClosePaymentDialog}
-                  extraPaymentData={extraPaymentData}
-                />
               </Stack>
+              <SelectGameDialog
+                open={dialogShown}
+                handleClose={handleCloseDialog}
+                extraPaymentData={extraPaymentData}
+              />
+              <SelectPaymentOption
+                open={paymentDialogShown}
+                handleClose={handleClosePaymentDialog}
+                extraPaymentData={extraPaymentData}
+              />
             </Box>
           ))}
         </Slider>

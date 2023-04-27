@@ -1,29 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Box, Typography, Grid, Button, styled, Paper, IconButton, CircularProgress } from '@mui/material';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
-import { requests } from '../../api/requests';
 
-export default function Events() {
-  const [events, setEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    async function fetchEvents() {
-      try {
-        setIsLoading(true);
-        const { data } = await requests.getEvents();
-        setEvents(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchEvents();
-  }, []);
+export default function Events({ events, isLoading }) {
   const displayData = events?.slice(0, 5);
-
   const StyledLink = styled(Link)(() => ({
     textDecoration: 'none',
     padding: '20px',
@@ -32,14 +14,14 @@ export default function Events() {
   return (
     <>
       {isLoading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: '3rem' }}>
           <CircularProgress />
         </Box>
       ) : (
         <>
           <Grid container spacing={5} sx={{ marginTop: '15px' }} id="nextSection">
-            {displayData.map((item) => (
-              <Grid item sm={12} md={4} lg={4} key={item.uid}>
+            {displayData?.map((item) => (
+              <Grid item xs={12} sm={12} md={4} lg={4} key={item.uid}>
                 <Paper
                   elevation={10}
                   sx={{
@@ -151,3 +133,8 @@ export default function Events() {
     </>
   );
 }
+
+Events.propTypes = {
+  events: PropTypes.array,
+  isLoading: PropTypes.bool,
+};
