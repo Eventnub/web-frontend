@@ -111,7 +111,6 @@ export default function TicketCarousel() {
       try {
         const { data } = await requests.getUserPaymentForEvent(eventId, user.idToken);
         setPayStatus(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }

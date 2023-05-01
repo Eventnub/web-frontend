@@ -24,14 +24,21 @@ function Hero() {
     color: '#000',
     fontWeight: '400',
     fontSize: '1rem',
-    textAlign: 'center',
+    // textAlign: 'center',
   });
 
   return (
     <Box>
       <Box sx={{ height: { xs: 'fit-content', sm: 'fit-content', md: 'fit-content' }, backgroundColor: '#fff' }}>
         <Navbar />
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: '2%' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            mt: '2%',
+          }}
+        >
           <Box
             sx={{
               display: 'flex',

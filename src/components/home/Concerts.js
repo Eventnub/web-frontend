@@ -43,7 +43,7 @@ export default function Concerts() {
 
   return (
     <Box>
-      <Container maxWidth="xl">
+      <Container>
         <Box
           sx={{
             display: 'flex',

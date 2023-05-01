@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Dialog, DialogTitle, DialogContent, Button, Typography, Box, useTheme } from '@mui/material';
 
-export default function QuizTakenDialog({ open, handleClose }) {
+export default function QuizTakenDialog({ open, handleClose, errorMessage }) {
   const theme = useTheme();
   return (
     <Dialog
@@ -26,7 +26,7 @@ export default function QuizTakenDialog({ open, handleClose }) {
       </DialogTitle>
       <DialogContent>
         <Typography sx={{ textAlign: 'center', color: '#6B6B6B', fontSize: '1rem', fontWeight: '300' }}>
-          You've already taken this quiz
+          {errorMessage}
         </Typography>
         <Box sx={{ mt: '8%', textAlign: 'center' }}>
           <Button
@@ -46,4 +46,5 @@ export default function QuizTakenDialog({ open, handleClose }) {
 QuizTakenDialog.propTypes = {
   open: PropTypes.bool,
   handleClose: PropTypes.func,
+  errorMessage: PropTypes.string,
 };

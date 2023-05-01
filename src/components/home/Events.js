@@ -11,6 +11,7 @@ export default function Events({ events, isLoading }) {
     padding: '20px',
   }));
   const month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  console.log(events);
   return (
     <>
       {isLoading ? (
@@ -93,10 +94,10 @@ export default function Events({ events, isLoading }) {
                   <Box sx={{ display: 'flex', marginTop: '15px', padding: '10px' }}>
                     <Box sx={{ marginRight: '10px' }}>
                       <Typography variant="h6" sx={{ color: '#000' }}>
-                        {item.date.substring(0, 2)}
+                        {item.date.substring(8)}
                       </Typography>
                       <Typography variant="h6" sx={{ color: '#000' }}>
-                        {month[Number(item.date.substring(3, 5)) - 1]}
+                        {month[Number(item.date.substring(5, 7)) - 1]}
                       </Typography>
                     </Box>
                     <Box>

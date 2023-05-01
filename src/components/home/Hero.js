@@ -29,6 +29,7 @@ function Hero() {
           sx={{
             display: 'flex',
             alignContent: 'center',
+            alignItems: { xl: 'center' },
             justifyContent: 'center',
             position: 'relative',
             padding: '10% 0 30% 0',
