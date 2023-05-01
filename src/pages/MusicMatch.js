@@ -99,11 +99,12 @@ export default function MusicMatch() {
               flex: 1,
               borderTopLeftRadius: '20px',
               borderBottomLeftRadius: '20px',
-              display: 'flex',
+              // display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               flexDirection: 'column',
               boxShadow: ' 0px 2px 4px rgba(0, 0, 0, 0.25)',
+              display: { xs: 'none', md: 'flex' },
             }}
           >
             <Box

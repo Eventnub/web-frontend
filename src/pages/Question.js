@@ -8,7 +8,6 @@ import {
   FormControlLabel,
   FormControl,
   styled,
-  Alert,
   CircularProgress,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -63,6 +62,8 @@ export default function Question() {
     setDialogShown(true);
   };
 
+  const isNextDisabled = !currentQuestionAnswer;
+
   const { eventId } = useParams();
   const { user } = useFirebase();
 
@@ -81,7 +82,6 @@ export default function Question() {
       const answer = { questionId: questions[currentQuestionIndex].uid, answer: currentQuestionAnswer };
       setAnswers([...answers, answer]);
       setIsLastQuestion(false);
-      console.log([...answers, answer]);
       const handleSubmit = async () => {
         try {
           setIsSubmitting(true);
@@ -89,12 +89,17 @@ export default function Question() {
           setIsSubmitting(false);
           navigate(`/music-match/${eventId}`);
         } catch (error) {
-          if (error.response && error.response.status === 400) {
-            setIsSubmitting(false);
-            handleOpenDialog();
-          } else {
-            setErrorMessage('An error occurred. Please try again later.');
-          }
+          // if (error.response && error.response.status === 400) {
+          //   setIsSubmitting(false);
+          //   handleOpenDialog();
+          //   console.log(error.request.responseText);
+          // } else {
+          //   setErrorMessage('An error occurred. Please try again later.');
+          // }
+          setErrorMessage(error.response.data.message);
+          setIsSubmitting(false);
+          handleOpenDialog();
+          console.log(error.response.data.message);
         }
       };
       handleSubmit();
@@ -209,15 +214,11 @@ export default function Question() {
               width: '10%',
             }}
             onClick={handleNext}
+            disabled={isNextDisabled}
           >
             {currentQuestionIndex === 2 ? 'Submit' : 'Next'}
           </LoadingButton>
-          <QuizTakenDialog open={dialogShown} />
-          {errorMessage && (
-            <Alert severity="error" sx={{ mt: 4 }}>
-              {errorMessage}
-            </Alert>
-          )}
+          <QuizTakenDialog open={dialogShown} errorMessage={errorMessage} />
         </StyledCard>
       </Box>
     </Page>
