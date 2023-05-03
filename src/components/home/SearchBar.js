@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Select, MenuItem, Button, useTheme, Box } from '@mui/material';
 
-const SearchBar = ({ handleSearchEvent }) => {
+const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
   const [name, setName] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
@@ -100,18 +100,27 @@ const SearchBar = ({ handleSearchEvent }) => {
       >
         <Select value={country} onChange={handleCountryChange} displayEmpty style={{ height: '100%' }}>
           <MenuItem value="">Country</MenuItem>
-          <MenuItem value={10}>Option 1</MenuItem>
-          <MenuItem value={20}>Option 2</MenuItem>
+          {countries.map((c) => (
+            <MenuItem value={c} key={Math.random()}>
+              {c}
+            </MenuItem>
+          ))}
         </Select>
         <Select value={state} onChange={handleStateChange} displayEmpty style={{ height: '100%' }}>
           <MenuItem value="">State</MenuItem>
-          <MenuItem value={10}>Option 1</MenuItem>
-          <MenuItem value={20}>Option 2</MenuItem>
+          {states.map((s) => (
+            <MenuItem value={s} key={Math.random()}>
+              {s}
+            </MenuItem>
+          ))}
         </Select>
         <Select value={artist} onChange={handleArtistChange} displayEmpty style={{ height: '100%' }}>
           <MenuItem value="">Artist</MenuItem>
-          <MenuItem value={10}>Option 1</MenuItem>
-          <MenuItem value={20}>Option 2</MenuItem>
+          {artists.map((a) => (
+            <MenuItem value={a} key={Math.random()}>
+              {a}
+            </MenuItem>
+          ))}
         </Select>
         {/* <Select value={date} onChange={handleDateChange} displayEmpty style={{ marginRight: '10px', height: '40px' }}>
           <MenuItem value="">Date</MenuItem>
@@ -145,5 +154,8 @@ const SearchBar = ({ handleSearchEvent }) => {
 
 SearchBar.propTypes = {
   handleSearchEvent: PropTypes.func,
+  countries: PropTypes.array,
+  states: PropTypes.array,
+  artists: PropTypes.array,
 };
 export default SearchBar;

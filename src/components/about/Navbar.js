@@ -37,7 +37,9 @@ export default function Navbar() {
     <AppBar position="static" sx={{ backgroundColor: '#fff', boxShadow: 'none' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <img src={logo} alt="logo" style={{ width: '37px', height: '37px' }} />
+          <StyledNavlink to={'/'}>
+            <img src={logo} alt="logo" style={{ width: '37px', height: '37px' }} />
+          </StyledNavlink>
           <Typography sx={{ fontWeight: '600', letterSpacing: '.3rem', fontSize: '1.5rem', color: '#1358A5' }}>
             eventnub
           </Typography>
