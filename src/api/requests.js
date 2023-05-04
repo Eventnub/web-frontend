@@ -57,4 +57,7 @@ export const requests = {
     axios.post(endpoints.transcribeAudio, data, getMultipartHeaderWithAuthToken(idToken)),
   submitAudioRecording: (idToken, data) =>
     axios.post(endpoints.submitAudioRecording, data, getMultipartHeaderWithAuthToken(idToken)),
+  getUserAcquiredTickets: (idToken, uid) =>
+    axios.get(`${endpoints.getUserAcquiredTickets}/${uid}`, getJsonHeaderWithAuthToken(idToken)),
+  submitContactUsMessage: (data) => axios.post(endpoints.submitContactUsMessage, data, jsonHeader),
 };

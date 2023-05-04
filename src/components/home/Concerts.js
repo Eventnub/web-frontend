@@ -73,14 +73,15 @@ export default function Concerts() {
 
   return (
     <Box>
-      <Container maxWidth="xl">
+      <Container maxWidth="3xl">
         <Box
           sx={{
             display: 'flex',
             marginTop: '3em',
             justifyContent: 'space-between',
             gap: '2.5rem',
-            [theme.breakpoints.down('sm')]: { flexDirection: 'column' },
+            flexDirection: { xs: 'column', lg: 'row' },
+            // [theme.breakpoints.down('sm')]: { flexDirection: 'column' },
           }}
         >
           <Typography

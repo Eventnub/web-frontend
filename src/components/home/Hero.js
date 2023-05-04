@@ -10,10 +10,8 @@ function Hero() {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    height: '100vh',
+    height: { xs: 'fit-content', lg: '100vh' },
     width: '100%',
-    [theme.breakpoints.down('sm')]: { height: 'fit-content' },
-    [theme.breakpoints.down('md')]: { height: 'fit-content' },
   });
 
   const handleButtonClick = () => {
@@ -29,14 +27,11 @@ function Hero() {
           sx={{
             display: 'flex',
             alignContent: 'center',
-            alignItems: { xl: 'center' },
+            // alignItems: { xl: 'center' },
             justifyContent: 'center',
             position: 'relative',
             padding: '10% 0 30% 0',
-            [theme.breakpoints.down('sm')]: { padding: '5% 0 5% 0', height: '40vh' },
-          }}
-          lg={{
-            height: 'fit-content',
+            [theme.breakpoints.down('sm')]: { padding: '5% 0 5% 0', height: '30vh' },
           }}
         >
           <Box
@@ -48,16 +43,17 @@ function Hero() {
               alignItems: 'center',
               zIndex: '1',
               width: '100%',
-              [theme.breakpoints.down('sm')]: { marginTop: '100px' },
+              // [theme.breakpoints.down('sm')]: { marginTop: '100px' },
+              mt: { xs: 5, md: 0 },
             }}
           >
             <Typography
               variant="h3"
               sx={{
-                fontSize: '40px',
+                // fontSize: '40px',
                 color: '#fff',
                 fontWeight: '800',
-                [theme.breakpoints.down('sm')]: { fontSize: '1.5em', fontWeight: 'normal' },
+                // [theme.breakpoints.down('sm')]: { fontSize: '1.5em', fontWeight: 'normal' },
               }}
             >
               Made for Celebrities and Fans
@@ -67,7 +63,7 @@ function Hero() {
               sx={{
                 fontWeight: '400',
                 color: '#fff',
-                align: 'center',
+                textAlign: 'center',
                 [theme.breakpoints.down('sm')]: { fontSize: '1em', fontWeight: 'normal' },
               }}
             >
@@ -90,18 +86,18 @@ function Hero() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginTop: '40px',
-                [theme.breakpoints.down('sm')]: { marginTop: '40px' },
+                // [theme.breakpoints.down('sm')]: { marginTop: '40px' },
               }}
             >
               <Button
                 variant="contained"
                 sx={{
                   width: '100%',
-                  height: '10vh',
+                  height: { xs: '5vh', lg: '10vh' },
                   boxShadow: 'none',
                   backgroundColor: '#1358A5',
                   padding: '0 20px',
-                  [theme.breakpoints.down('sm')]: { width: '50vw', height: '50px' },
+                  // [theme.breakpoints.down('sm')]: { width: '50vw', height: '50px' },
                 }}
               >
                 <Typography

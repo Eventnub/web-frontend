@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Box, Button, Typography, styled, useTheme, IconButton, Avatar, Alert } from '@mui/material';
+import { Box, Button, Typography, useTheme, IconButton, Avatar, Alert } from '@mui/material';
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import Resizer from 'react-image-file-resizer';
 import path from 'path';
@@ -10,17 +10,17 @@ import Footer from '../components/home/Footer';
 import image from '../assets/music-banner.png';
 import { requests } from '../api/requests';
 
-const Text = styled(Typography)({
-  color: '#4E4E4E',
-  fontWeight: '600',
-  fontsize: '1rem',
-});
+// const Text = styled(Typography)({
+//   color: '#4E4E4E',
+//   fontWeight: '600',
+//   fontsize: '1rem',
+// });
 
-const Title = styled(Typography)({
-  color: '#4E4E4E',
-  fontSize: '.8rem',
-  fontWeight: '400',
-});
+// const Title = styled(Typography)({
+//   color: '#4E4E4E',
+//   fontSize: '.8rem',
+//   fontWeight: '400',
+// });
 
 const resizeFile = (file) =>
   new Promise((resolve) => {
@@ -186,7 +186,7 @@ export default function ProfilePage() {
             </IconButton>
           </Box>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             background: '#F8F8F8',
             mt: '12%',
@@ -261,12 +261,12 @@ export default function ProfilePage() {
               Change Account
             </Button>
           </Box>
-        </Box>
+        </Box> */}
         <Box
           sx={{
             background: '#F8F8F8',
             height: 'auto',
-            mt: '1.5%',
+            mt: '10rem',
             borderRadius: '10px',
             px: '3%',
             py: '1.5%',

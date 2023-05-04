@@ -137,7 +137,7 @@ export default function TicketCarousel() {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -154,7 +154,7 @@ export default function TicketCarousel() {
     ],
   };
   return (
-    <Container maxWidth="xl" sx={{ position: 'relative' }}>
+    <Container maxWidth="3xl" sx={{ position: 'relative' }}>
       {isLoading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <CircularProgress />

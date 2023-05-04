@@ -21,4 +21,6 @@ export const endpoints = {
   getEventMusicMatch: getFullUrl('music-unison/get-event-music-unison'),
   transcribeAudio: getFullUrl('music-unison/transcribe-audio'),
   submitAudioRecording: getFullUrl('music-unison/submit-event-music-unison-audio'),
+  getUserAcquiredTickets: getFullUrl('tickets/get-user-acquired-tickets'),
+  submitContactUsMessage: getFullUrl('contact-us'),
 };

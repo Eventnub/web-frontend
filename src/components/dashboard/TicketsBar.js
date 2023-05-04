@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, styled, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ticket from '../../assets/ticket.png';
-import Ticket from './Ticket';
+import Tickets from './Ticket';
+import { requests } from '../../api/requests';
+import useFirebase from '../../hooks/useFirebase';
 
 function TicketsBar() {
   const theme = useTheme();
+  const [tickets, setTickets] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useFirebase();
   const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
   const StyledBox = styled(Box)(() => ({
     width: '23%',
@@ -35,6 +40,23 @@ function TicketsBar() {
     display: 'flex',
     flexDirection: 'column',
   }));
+
+  useEffect(() => {
+    async function fetcTickets() {
+      try {
+        setIsLoading(true);
+        const { data } = await requests.getUserAcquiredTickets(user.idToken, user.id);
+        setTickets(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetcTickets();
+  }, [user.idToken, user.id]);
+
+  console.log(tickets);
 
   return (
     <>
@@ -88,15 +110,17 @@ function TicketsBar() {
       </Box>
       <Box
         margin="1rem"
-        minHeight="70vh"
-        sx={{ background: '#fff', padding: '1rem', borderRadius: '10px' }}
+        // minHeight="70vh"
+        sx={{ background: '#fff', padding: '1rem', borderRadius: '10px', height: 'auto' }}
         display="flex"
         flexWrap="wrap"
         gap="3rem"
       >
-        <Ticket />
-        <Ticket />
-        <Ticket />
+        {tickets.length === 0 ? (
+          <Typography>You have not purchased any ticket</Typography>
+        ) : (
+          <Tickets tickets={tickets} isLoading={isLoading} />
+        )}
       </Box>
     </>
   );
