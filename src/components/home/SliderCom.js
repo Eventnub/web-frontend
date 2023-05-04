@@ -59,7 +59,7 @@ function SliderCom() {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -77,7 +77,7 @@ function SliderCom() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 8, position: 'relative' }}>
+    <Container maxWidth="3xl" sx={{ mt: 8, position: 'relative' }}>
       <Slider {...settings} ref={slideRef}>
         {data.map((item) => (
           <Box
@@ -95,7 +95,12 @@ function SliderCom() {
               <Box component="span" sx={{}}>
                 <Rating name="read-only" value={value} readOnly size="small" />
               </Box>
-              <Box component="span" sx={{ height: '5Opx', marginTop: '.9rem' }}>
+              <Box
+                component="span"
+                sx={{
+                  marginTop: '.9rem',
+                }}
+              >
                 <Typography variant="body1" paragraph sx={{ fontSize: '.8rem', color: '#838383', fontWeight: '400' }}>
                   "{item.testimony}"
                 </Typography>
@@ -135,43 +140,6 @@ function SliderCom() {
           </Box>
         ))}
       </Slider>
-
-      {/* <IconButton
-        sx={{
-          position: 'relative',
-          // right: '-1rem',
-          // top: '-10rem',
-          right: '0.3%',
-          bottom: '10rem',
-          borderRadius: '50%',
-          background: 'transparent',
-          height: '2rem',
-          width: '2rem',
-          border: '1px solid #838383',
-          zIndex: '1',
-        }}
-        onClick={() => slideRef?.current.slickPrev()}
-      >
-        <KeyboardArrowLeftSharpIcon />
-      </IconButton>
-      <IconButton
-        sx={{
-          position: 'relative',
-          right: '',
-          bottom: '-10%',
-          left: '',
-          borderRadius: '50%',
-          background: 'transparent',
-          height: '2rem',
-          width: '2rem',
-          border: '1px solid #838383',
-          zIndex: '1',
-          [theme.breakpoints.down('sm')]: { left: '78%' },
-        }}
-        onClick={() => slideRef?.current.slickNext()}
-      >
-        <KeyboardArrowRightSharpIcon />
-      </IconButton> */}
       <IconButton
         sx={{
           borderRadius: '50%',

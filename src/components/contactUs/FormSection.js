@@ -1,7 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Box, Typography, TextField, Button } from '@mui/material';
+import { Box, Typography, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import Swal from 'sweetalert2';
+import { requests } from '../../api/requests';
 
 export default function FormSection() {
   const initialValues = {
@@ -24,13 +27,28 @@ export default function FormSection() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          // Handle form submission here
-          console.log(values);
-          resetForm();
+        onSubmit={async (values, { resetForm, setSubmitting }) => {
+          try {
+            await requests.submitContactUsMessage(values);
+            setSubmitting(false);
+            Swal.fire({
+              title: 'Success!',
+              text: 'Your form has been submitted.',
+              icon: 'success',
+              confirmButtonText: 'Okay',
+              confirmButtonAttributes: {
+                href: '/',
+                target: '_self',
+              },
+            });
+            resetForm();
+          } catch (error) {
+            console.log(error);
+            resetForm();
+          }
         }}
       >
-        {({ values, errors, touched, handleChange }) => (
+        {({ values, errors, touched, handleChange, isSubmitting }) => (
           <Form autoComplete="off">
             <Box
               sx={{
@@ -88,13 +106,15 @@ export default function FormSection() {
               />
             </Box>
             <Box style={{ marginTop: '5%' }}>
-              <Button
+              <LoadingButton
                 fullWidth
                 variant="contained"
+                type="submit"
+                loading={isSubmitting}
                 sx={{ boxShadow: 'none', backgroundColor: '#1358A5', height: '47px', borderRadius: '5px' }}
               >
                 Send Message
-              </Button>
+              </LoadingButton>
             </Box>
           </Form>
         )}

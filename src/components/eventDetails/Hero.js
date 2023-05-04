@@ -12,6 +12,7 @@ import {
   useMediaQuery,
   CircularProgress,
 } from '@mui/material';
+import moment from 'moment';
 import Navbar from '../home/Navbar';
 import DrawerCom from './DrawerCom';
 import { requests } from '../../api/requests';
@@ -30,9 +31,12 @@ const StyledBox = styled(Box)({
 });
 export default function Hero() {
   const [event, setEvent] = useState({});
+  const { date, time } = event;
   const [isLoading, setIsLoading] = useState(false);
   const { eventId } = useParams();
   const theme = useTheme();
+  const formattedDate = moment(date).format('Do MMM, YYYY').toUpperCase();
+  const formattedTime = moment(time, 'HH:mm').format('h:mm A');
   const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleButtonClick = () => {
@@ -137,7 +141,9 @@ export default function Hero() {
                     {isLoading ? (
                       <CircularProgress />
                     ) : (
-                      <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>{event.date}</Typography>
+                      <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>
+                        {formattedDate}
+                      </Typography>
                     )}
                   </Stack>
                 </Box>
@@ -148,7 +154,9 @@ export default function Hero() {
                     {isLoading ? (
                       <CircularProgress />
                     ) : (
-                      <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>{event.time}</Typography>
+                      <Typography sx={{ fontsize: '.8rem', color: '#000', fontWeight: '600' }}>
+                        {formattedTime}
+                      </Typography>
                     )}
                   </Stack>
                 </Box>
@@ -274,7 +282,7 @@ export default function Hero() {
                         <CircularProgress />
                       ) : (
                         <Typography sx={{ color: '#000', fontSize: '1.5rem', fontWeight: '400' }}>
-                          {event.date}
+                          {formattedDate}
                         </Typography>
                       )}
                     </Stack>
@@ -291,7 +299,7 @@ export default function Hero() {
                         <CircularProgress />
                       ) : (
                         <Typography sx={{ color: '#000', fontSize: '1.5rem', fontWeight: '400' }}>
-                          {event.time}
+                          {formattedTime}
                         </Typography>
                       )}
                     </Stack>

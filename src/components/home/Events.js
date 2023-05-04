@@ -11,7 +11,7 @@ export default function Events({ events, isLoading }) {
     padding: '20px',
   }));
   const month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-  console.log(events);
+
   return (
     <>
       {isLoading ? (
@@ -22,12 +22,12 @@ export default function Events({ events, isLoading }) {
         <>
           <Grid container spacing={5} sx={{ marginTop: '15px' }} id="nextSection">
             {displayData?.map((item) => (
-              <Grid item xs={12} sm={12} md={4} lg={4} key={item.uid}>
+              <Grid item xs={12} sm={12} md={6} lg={4} key={item.uid}>
                 <Paper
                   elevation={10}
                   sx={{
                     height: '392px',
-                    width: '366px',
+                    // width: '366px',
                     background: '#fff',
                     borderRadius: '8px',
                     position: 'relative',
@@ -41,7 +41,7 @@ export default function Events({ events, isLoading }) {
                           width: '100%',
                           borderTopRightRadius: '8px',
                           height: '100%',
-                          objectFit: 'contain',
+                          // objectFit: 'contain',
                         }}
                         src={item.photoUrl}
                         alt={item.name}
@@ -104,16 +104,26 @@ export default function Events({ events, isLoading }) {
                       <Typography variant="h6" sx={{ color: '#000' }}>
                         {item.name}
                       </Typography>
-                      <Typography paragraph sx={{ color: '#000' }}>
+                      <Typography
+                        paragraph
+                        sx={{
+                          color: '#000',
+                        }}
+                      >
                         {item.description}
                       </Typography>
                     </Box>
                   </Box>
-                  <StyledLink to={`/event-details/${item.uid}#tickets`}>
-                    <Button variant="outlined" sx={{ width: '80%', mb: '0.8em', alignItems: 'center' }}>
+                  <Box sx={{ p: 1 }}>
+                    <Button
+                      variant="outlined"
+                      component={StyledLink}
+                      to={`/event-details/${item.uid}#ticketSection`}
+                      sx={{ width: '80%', mb: '0.8em', alignItems: 'center' }}
+                    >
                       Explore Available Tickets
                     </Button>
-                  </StyledLink>
+                  </Box>
                 </Paper>
               </Grid>
             ))}

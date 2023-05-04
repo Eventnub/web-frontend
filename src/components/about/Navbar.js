@@ -30,7 +30,7 @@ const Sircle = styled('span')(() => ({
 
 export default function Navbar() {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+  const isMatch = useMediaQuery(theme.breakpoints.down('lg'));
   const { isAuthenticated } = useFirebase();
 
   return (
