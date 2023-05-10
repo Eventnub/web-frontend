@@ -56,8 +56,6 @@ function TicketsBar() {
     fetcTickets();
   }, [user.idToken, user.id]);
 
-  console.log(tickets);
-
   return (
     <>
       <Box
@@ -76,7 +74,7 @@ function TicketsBar() {
             <img src={ticket} alt="ticket" style={{ width: '75%', height: '75%' }} />
           </StyledIconButton>
           <Div display="flex" flexDirection="column">
-            <Number variant="h6">03</Number>
+            <Number variant="h6">0</Number>
             <Title variant="body2">Active Tickets</Title>
           </Div>
         </StyledBox>
@@ -85,7 +83,7 @@ function TicketsBar() {
             <img src={ticket} alt="ticket" style={{ width: '75%', height: '75%' }} />
           </StyledIconButton>
           <Div>
-            <Number variant="h6">34</Number>
+            <Number variant="h6">0</Number>
             <Title variant="body2">Total Tickets</Title>
           </Div>
         </StyledBox>
@@ -94,7 +92,7 @@ function TicketsBar() {
             <img src={ticket} alt="ticket" style={{ width: '75%', height: '75%' }} />
           </StyledIconButton>
           <Div>
-            <Number variant="h6">22</Number>
+            <Number variant="h6">0</Number>
             <Title variant="body2">Tickets Paid </Title>
           </Div>
         </StyledBox>
@@ -103,7 +101,7 @@ function TicketsBar() {
             <img src={ticket} alt="ticket" style={{ width: '75%', height: '75%' }} />
           </StyledIconButton>
           <Div>
-            <Number variant="h6">12</Number>
+            <Number variant="h6">0</Number>
             <Title variant="body2">Tickets Won</Title>
           </Div>
         </StyledBox>

@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Box, Typography, Grid, Button, styled, Paper, IconButton, CircularProgress } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
 import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 
 export default function Events({ events, isLoading }) {
   const displayData = events?.slice(0, 5);
+  const [open, setOpen] = useState(false);
+  const [itemId, setItemId] = useState(null);
   const StyledLink = styled(Link)(() => ({
     textDecoration: 'none',
     padding: '20px',
   }));
   const month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = (uid) => {
+    setItemId(uid);
+    setOpen((prev) => !prev);
+  };
+
+  const ref = useRef(null);
+  useEffect(() => {
+    const checkClickedOutSide = (e) => {
+      if (itemId != null && ref.current && !ref.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('click', checkClickedOutSide);
+    return () => {
+      document.removeEventListener('click', checkClickedOutSide);
+    };
+  }, [itemId]);
 
   return (
     <>
@@ -91,7 +116,7 @@ export default function Events({ events, isLoading }) {
                     </IconButton>
                     <Typography sx={{ color: '#FF6C2C', fontsize: '1rem', fontWeight: '600' }}>3k</Typography>
                   </Box>
-                  <Box sx={{ display: 'flex', marginTop: '15px', padding: '10px' }}>
+                  <Box sx={{ display: 'flex', marginTop: '15px', padding: '1rem' }}>
                     <Box sx={{ marginRight: '10px' }}>
                       <Typography variant="h6" sx={{ color: '#000' }}>
                         {item.date.substring(8)}
@@ -104,17 +129,48 @@ export default function Events({ events, isLoading }) {
                       <Typography variant="h6" sx={{ color: '#000' }}>
                         {item.name}
                       </Typography>
-                      <Typography
-                        paragraph
-                        sx={{
-                          color: '#000',
+                      <Tooltip
+                        title={item.description}
+                        arrow
+                        onClose={handleTooltipClose}
+                        open={item.uid === itemId && open}
+                        disableFocusListener
+                        disableHoverListener
+                        disableTouchListener
+                        PopperProps={{
+                          disablePortal: true,
                         }}
                       >
-                        {item.description}
-                      </Typography>
+                        <Typography
+                          paragraph
+                          sx={{
+                            color: '#000',
+                          }}
+                        >
+                          {item.description.length >= 40 ? (
+                            <Box>
+                              {item.description.substring(0, 78)}
+                              <span
+                                ref={ref}
+                                role="button"
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') handleTooltipOpen(item.uid);
+                                }}
+                                style={{ cursor: 'pointer' }}
+                                tabIndex="0"
+                                onClick={() => handleTooltipOpen(item.uid)}
+                              >
+                                ...
+                              </span>
+                            </Box>
+                          ) : (
+                            item.description
+                          )}
+                        </Typography>
+                      </Tooltip>
                     </Box>
                   </Box>
-                  <Box sx={{ p: 1 }}>
+                  <Box sx={{ p: '1rem', position: 'absolute', bottom: 0, left: 0, right: 0 }}>
                     <Button
                       variant="outlined"
                       component={StyledLink}

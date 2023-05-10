@@ -40,18 +40,18 @@ function Tickets({ tickets, isLoading }) {
                   >
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '.3rem' }}>
                       <Typography sx={{ color: '#fff', fontWeight: '400', fontSize: '0.9rem', lineHeight: '1.2rem' }}>
-                        {ticket.event.name}
+                        {ticket?.event.name}
                       </Typography>
                       <Typography sx={{ color: '#FF6C2C', fontWeight: '400', fontSize: '.8rem', lineHeight: '.9rem' }}>
-                        By {ticket.event.host}
+                        By {ticket?.event.host}
                       </Typography>
                     </Box>
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                       <Typography sx={{ color: '#fff', fontSize: '.8rem', fontWeight: '400' }}>
-                        $<span style={{ fontSize: '1.5rem', fontWeight: '600' }}>{ticket.ticket.price}</span>
+                        $<span style={{ fontSize: '1.5rem', fontWeight: '600' }}>{ticket?.ticket.price}</span>
                       </Typography>
                       <Typography sx={{ color: '#fff', fontSize: '.7rem', fontWeight: '400', maxWidth: '68px' }}>
-                        {ticket.ticket.type}
+                        {ticket?.ticket.type}
                       </Typography>
                     </Box>
                   </Box>
@@ -88,7 +88,7 @@ function Tickets({ tickets, isLoading }) {
                         <Typography
                           sx={{ color: '#FF6C2C', fontWeight: '600', fontSize: '.8rem', lineHeight: '.9rem' }}
                         >
-                          By {ticket.event.host}
+                          By {ticket?.event.host}
                         </Typography>
                       </Box>
                       <Box>
@@ -98,26 +98,26 @@ function Tickets({ tickets, isLoading }) {
                       </Box>
                     </Box>
                     <Typography sx={{ color: '#fff', fontSize: '1rem', fontWeight: '600', lineHeight: '1.5rem' }}>
-                      {ticket.ticket.type}
+                      {ticket?.ticket.type}
                     </Typography>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                         <Typography sx={{ fontSize: '.75rem', color: '#FF6C2C' }}>Date</Typography>
                         <Typography sx={{ color: '#fff', fontSize: '.82rem', fontWeight: '600' }}>
-                          {moment(ticket.event.date).format('Do MMM YYYY').toUpperCase()}
+                          {moment(ticket?.event.date).format('Do MMM YYYY').toUpperCase()}
                         </Typography>
                       </Box>
                       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                         <Typography sx={{ fontSize: '.75rem', color: '#FF6C2C' }}>Time</Typography>
                         <Typography sx={{ color: '#fff', fontSize: '.82rem', fontWeight: '600' }}>
-                          {moment(ticket.event.time, 'HH:mm').format('h:mm A')}
+                          {moment(ticket?.event.time, 'HH:mm').format('h:mm A')}
                         </Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex' }}>
                       <LocationOnOutlinedIcon sx={{ color: '#ff6c2c' }} />
                       <Typography sx={{ color: '#fff', fontSize: '0.82rem', fontWeight: '200' }}>
-                        {`${ticket.event.venue}, ${ticket.event.state}, ${ticket.event.country}`}
+                        {`${ticket?.event.venue}, ${ticket.event.state}, ${ticket.event.country}`}
                       </Typography>
                     </Box>
                   </Box>

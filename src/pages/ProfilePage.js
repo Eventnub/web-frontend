@@ -7,7 +7,7 @@ import Page from '../components/Page';
 import Navbar from '../components/dashboard/Navbar';
 import useFirebase from '../hooks/useFirebase';
 import Footer from '../components/home/Footer';
-import image from '../assets/music-banner.png';
+// import image from '../assets/music-banner.png';
 import { requests } from '../api/requests';
 
 // const Text = styled(Typography)({
@@ -276,7 +276,7 @@ export default function ProfilePage() {
           <Typography sx={{ color: '#4E4E4E', fontWeight: '400', fontSize: '.8rem' }}>
             You don’t have any registered event at the moment
           </Typography>
-          <Box
+          {/* <Box
             sx={{
               mt: '1.5%',
               display: 'flex',
@@ -365,7 +365,7 @@ export default function ProfilePage() {
                 </Box>
               </Box>
             </Box>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
       <Footer />

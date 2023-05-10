@@ -4,6 +4,10 @@ import { Box, Stack, Typography, styled, useTheme, Divider } from '@mui/material
 import logoImg from '../../assets/logoImg.png';
 import InputStyle from '../InputStyle';
 // import useFirebase from '../../hooks/useFirebase';
+import facebook from '../../assets/Facebook.png';
+import linkedin from '../../assets/linkedin.png';
+import twitter from '../../assets/Twitter.png';
+import instagram from '../../assets/Instagram.png';
 
 export default function Footer() {
   const theme = useTheme();
@@ -21,9 +25,9 @@ export default function Footer() {
   });
 
   const Paragraph = styled(Typography)({
-    fontSize: '13px',
+    fontSize: '.8rem',
     color: '#fff',
-    fontWeight: '100',
+    fontWeight: '400',
   });
 
   return (
@@ -74,7 +78,22 @@ export default function Footer() {
               </Typography>
             </Box>
             <Box sx={{ marginTop: '15px' }}>
-              <Paragraph>Making Events Accessible and Inclusive for All</Paragraph>
+              <Paragraph>Making Events Accessible </Paragraph>
+              <Paragraph>and Inclusive for All</Paragraph>
+              <Stack direction="row" alignItems="center" mt="1rem" spacing={2}>
+                <a href="https://www.linkedin.com/company/glob-eventnub/" target="_blank" rel="noreferrer">
+                  <img src={linkedin} alt="linkedin" style={{ width: '25px', height: '25px' }} />
+                </a>
+                <Link to="#">
+                  <img src={facebook} alt="facebook" style={{ width: '25px', height: '25px' }} />
+                </Link>
+                <a href="https://twitter.com/globeventnub?s=20" target="_blank" rel="noreferrer">
+                  <img src={twitter} alt="twitter" style={{ width: '25px', height: '25px' }} />
+                </a>
+                <a href="https://instagram.com/globeventnub?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer">
+                  <img src={instagram} alt="instagram" style={{ width: '25px', height: '25px' }} />
+                </a>
+              </Stack>
             </Box>
           </Stack>
         </Box>

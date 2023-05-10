@@ -8,14 +8,16 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { requests } from '../../api/requests';
 import SelectGameDialog from './SelectGameDialog';
-import SelectPaymentOption from './SelectPaymentOptionDialog';
+// import SelectPaymentOption from './SelectPaymentOptionDialog';
 import useFirebase from '../../hooks/useFirebase';
+import ComingSoonDialog from './ComingSoonDialog';
 
 export default function TicketCarousel() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [dialogShown, setDialogShown] = useState(false);
-  const [paymentDialogShown, setPaymentDialogShown] = useState(false);
+  const [comingSoonDialogShown, setComingSoonDialogShown] = useState(false);
+  // const [paymentDialogShown, setPaymentDialogShown] = useState(false);
   const [payStatus, setPayStatus] = useState(null);
   const [extraPaymentData, setExtraPaymentData] = useState({
     objective: '',
@@ -56,29 +58,35 @@ export default function TicketCarousel() {
     setDialogShown(false);
   };
 
-  const handleOpenPaymentDialog = (objective, amount, index) => {
-    if (isAuthenticated) {
-      if (payStatus !== null) {
-        alert('You have already purchased this ticket');
-        return null;
-      }
-      setExtraPaymentData({
-        objective,
-        amount,
-        index,
-      });
-      setPaymentDialogShown(true);
-    } else {
-      let redirectUrl = encodeURIComponent(location.pathname);
-      redirectUrl = `${redirectUrl}`;
-      navigate(`/auth/login?redirectUrl=${redirectUrl}`);
-    }
-    return null;
+  const handleCloseComingSoonDialog = () => {
+    setComingSoonDialogShown(false);
   };
+  const handleOpenComingSoonDialog = () => {
+    setComingSoonDialogShown(true);
+  };
+  // const handleOpenPaymentDialog = (objective, amount, index) => {
+  //   if (isAuthenticated) {
+  //     if (payStatus !== null) {
+  //       alert('You have already purchased this ticket');
+  //       return null;
+  //     }
+  //     setExtraPaymentData({
+  //       objective,
+  //       amount,
+  //       index,
+  //     });
+  //     setPaymentDialogShown(true);
+  //   } else {
+  //     let redirectUrl = encodeURIComponent(location.pathname);
+  //     redirectUrl = `${redirectUrl}`;
+  //     navigate(`/auth/login?redirectUrl=${redirectUrl}`);
+  //   }
+  //   return null;
+  // };
 
-  const handleClosePaymentDialog = () => {
-    setPaymentDialogShown(false);
-  };
+  // const handleClosePaymentDialog = () => {
+  //   setPaymentDialogShown(false);
+  // };
 
   // useEffect(() => {
   //   const searchParams = new URLSearchParams(window.location.search);
@@ -167,7 +175,7 @@ export default function TicketCarousel() {
               sx={{
                 backgroundColor: '#595959',
                 width: '250px',
-                height: '330px',
+                height: '380px',
                 p: '5% 1% 1% 1%',
               }}
               id="tickets"
@@ -177,7 +185,11 @@ export default function TicketCarousel() {
                   {`$${item.price}`}
                 </Typography>
                 <Typography sx={{ fontSize: '1.5rem', color: '#fff', fontWeight: '400' }}>{item.type}</Typography>
+                <Typography sx={{ color: '#fff', fontWeight: '600', fontSize: '1rem' }}>
+                  Pay ${item.price * 0.15} of the ticket price and get it for free by playing a game.
+                </Typography>
               </Stack>
+
               <Stack>
                 <Button
                   variant="outlined"
@@ -189,7 +201,8 @@ export default function TicketCarousel() {
 
                 <Button
                   variant="outlined"
-                  onClick={() => handleOpenPaymentDialog('purchase', item.price, item.index)}
+                  // onClick={() => handleOpenPaymentDialog('purchase', item.price, item.index)}
+                  onClick={handleOpenComingSoonDialog}
                   sx={{ boxShadow: 'none', border: '1px solid #FF6C2C', color: '#fff' }}
                 >
                   {`Buy with $${item.price}`}
@@ -200,11 +213,12 @@ export default function TicketCarousel() {
                 handleClose={handleCloseDialog}
                 extraPaymentData={extraPaymentData}
               />
-              <SelectPaymentOption
+              <ComingSoonDialog open={comingSoonDialogShown} handleClose={handleCloseComingSoonDialog} />
+              {/* <SelectPaymentOption
                 open={paymentDialogShown}
-                handleClose={handleClosePaymentDialog}
+                // handleClose={handleClosePaymentDialog}
                 extraPaymentData={extraPaymentData}
-              />
+              /> */}
             </Box>
           ))}
         </Slider>
