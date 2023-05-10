@@ -46,11 +46,18 @@ export default function Hero() {
               We are eager to discuss your concert needs, and answer the pressing questions you may have. Reach us on
               our social media pages below.
             </Typography>
-            <Box sx={{ display: 'flex', gap: '30%', justifyContent: 'center', alignItems: 'center', mt: '8%' }}>
-              <img src={linkedin} alt="Linkedin logo" style={{ height: '37px', width: '37px' }} />
+
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: '3rem', mt: '8%', justifyContent: 'center' }}>
+              <a href="https://www.linkedin.com/company/glob-eventnub/" target="_blank" rel="noreferrer">
+                <img src={linkedin} alt="Linkedin logo" style={{ height: '37px', width: '37px' }} />
+              </a>
               <img src={facebook} alt="facebook logo" />
-              <img src={twitter} alt="twitter logo" />
-              <img src={instagram} alt="instagram logo" />
+              <a href="https://twitter.com/globeventnub?s=20" target="_blank" rel="noreferrer">
+                <img src={twitter} alt="twitter logo" />
+              </a>
+              <a href="https://instagram.com/globeventnub?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer">
+                <img src={instagram} alt="instagram logo" />
+              </a>
             </Box>
           </Box>
         </Box>

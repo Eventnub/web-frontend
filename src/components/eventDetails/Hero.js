@@ -250,7 +250,11 @@ export default function Hero() {
                       <CircularProgress />
                     </Box>
                   ) : (
-                    <img src={event.photoUrl} alt={event.name} style={{ height: '100%', width: '100%' }} />
+                    <img
+                      src={event.photoUrl}
+                      alt={event.name}
+                      style={{ height: '100%', maxWidth: '100%', display: 'block', objectFit: 'fill' }}
+                    />
                   )}
                 </Box>
               </Box>
@@ -263,7 +267,7 @@ export default function Hero() {
                 <img src={instagram} alt="instagram logo" />
               </Stack>
             </StyledBox>
-            <Container maxWidth="xl" sx={{ position: 'absolute', bottom: '-78px' }}>
+            <Container maxWidth="3xl" sx={{ position: 'absolute', bottom: '-78px' }}>
               <Box
                 sx={{
                   width: '100%',
