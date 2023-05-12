@@ -24,7 +24,7 @@ function Hero() {
     color: '#000',
     fontWeight: '400',
     fontSize: '1rem',
-    // textAlign: 'center',
+    // textAlign: { xs: 'center', lg: 'left' },
   });
 
   return (

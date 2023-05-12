@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Drawer, List, ListItemButton, ListItemText, ListItemIcon, styled, IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Drawer, List, ListItemButton, ListItemText, ListItemIcon, styled } from '@mui/material';
+import PropTypes from 'prop-types';
 import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
 
-export default function DrawerCom() {
-  const [openDrawer, setOpenDrawer] = useState(false);
+export default function DrawerCom({ open, handleClose }) {
   const { isAuthenticated } = useFirebase();
+
   const StyledNavlink = styled(NavLink)(() => ({
     textDecoration: 'none',
     activeStyle: '#FF6C2C',
-    color: '#FFFFFF',
+    color: '#000',
     fontWeight: '400',
     cursor: 'pointer',
   }));
 
   return (
     <div>
-      <Drawer
-        open={openDrawer}
-        PaperProps={{ sx: { backgroundColor: 'rgba(0, 0, 0, 0.79)' } }}
-        onClose={() => setOpenDrawer(false)}
-        anchor="right"
-      >
+      <Drawer open={open} PaperProps={{ sx: { backgroundColor: '#fff' } }} onClose={handleClose} anchor="right">
         <List>
-          <ListItemButton open={openDrawer} onClose={() => setOpenDrawer(false)}>
+          <ListItemButton open={open} onClose={handleClose}>
             <ListItemIcon>
               <ListItemText>
                 <StyledNavlink to="/">Home</StyledNavlink>
@@ -49,7 +44,6 @@ export default function DrawerCom() {
           {/* <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
                 {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>}
               </ListItemText>
             </ListItemIcon>
@@ -64,15 +58,17 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                {!isAuthenticated && <StyledNavlink to={PATH_AUTH.login}>Sign In</StyledNavlink>}
+                {!isAuthenticated && <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>}
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
         </List>
       </Drawer>
-      <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
-        <MenuIcon sx={{ color: '#fff' }} />
-      </IconButton>
     </div>
   );
 }
+
+DrawerCom.propTypes = {
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
+};

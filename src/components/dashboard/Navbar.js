@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import LogoutButton from '../../layouts/dashboard/navbar/LogoutButton';
 import useFirebase from '../../hooks/useFirebase';
 import logo from '../../assets/blueLogo.png';
+import DrawerCom from './DrawerCom';
 
 const Circle = styled('span')(() => ({
   width: '20px',
@@ -19,6 +20,7 @@ const Circle = styled('span')(() => ({
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [showDrawer, setShowDrawer] = useState(false);
   const { user } = useFirebase();
 
   const handleMenuClick = (event) => {
@@ -27,6 +29,13 @@ export default function Navbar() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDrawerClose = () => {
+    setShowDrawer(!showDrawer);
+  };
+  const handleDrawerOpen = () => {
+    setShowDrawer(true);
   };
 
   return (
@@ -98,9 +107,10 @@ export default function Navbar() {
               <LogoutButton />
             </MenuItem>
           </Menu>
-          <IconButton>
+          <IconButton onClick={handleDrawerOpen}>
             <MenuIcon sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }} />
           </IconButton>
+          <DrawerCom open={showDrawer} handleClose={handleDrawerClose} />
         </Box>
       </Toolbar>
     </AppBar>
