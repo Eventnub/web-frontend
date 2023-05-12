@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { Box, Rating, useTheme, Typography, Avatar, Container, IconButton } from '@mui/material';
+import { Box, Rating, Typography, Container, IconButton } from '@mui/material';
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import avatarImg from '../../assets/avatar.png';
+// import avatarImg from '../../assets/avatar.png';
 
 const data = [
   {
@@ -37,7 +37,6 @@ const data = [
 
 function SliderCom() {
   const [value] = useState(5);
-  const theme = useTheme();
 
   const slideRef = useRef(null);
   const settings = {
@@ -81,7 +80,7 @@ function SliderCom() {
       <Slider {...settings} ref={slideRef}>
         {data.map((item) => (
           <Box
-            sx={{ border: '1px solid #838383', borderRadius: '10px', height: '320px', py: '1.2rem', px: '.5rem' }}
+            sx={{ border: '1px solid #838383', borderRadius: '10px', height: '300px', py: '1.2rem', px: '.5rem' }}
             key={Math.random()}
           >
             <Box
@@ -117,7 +116,7 @@ function SliderCom() {
                 }}
                 component="span"
               >
-                <Avatar
+                {/* <Avatar
                   src={avatarImg}
                   alt="avatar"
                   sx={{
@@ -130,7 +129,7 @@ function SliderCom() {
                     [theme.breakpoints.down('sm')]: { width: 40, height: 40 },
                   }}
                   component="span"
-                />
+                /> */}
 
                 <Typography sx={{ fontSize: '1rem', marginTop: '10px', fontWeight: '600', color: '#838383' }}>
                   {item.name}

@@ -51,7 +51,7 @@ export default function Events({ events, isLoading }) {
                 <Paper
                   elevation={10}
                   sx={{
-                    height: '392px',
+                    height: '410px',
                     // width: '366px',
                     background: '#fff',
                     borderRadius: '8px',
@@ -170,7 +170,7 @@ export default function Events({ events, isLoading }) {
                       </Tooltip>
                     </Box>
                   </Box>
-                  <Box sx={{ p: '1rem', position: 'absolute', bottom: 0, left: 0, right: 0 }}>
+                  <Box sx={{ p: '1rem', position: 'absolute', bottom: 0, left: 0, right: 0, mt: '.8rem' }}>
                     <Button
                       variant="outlined"
                       component={StyledLink}

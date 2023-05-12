@@ -32,6 +32,7 @@ export default function TicketCarousel() {
 
   const handleOpenDialog = (amount, index) => {
     if (isAuthenticated) {
+      console.log({ amount, index });
       if (payStatus !== null) {
         if (payStatus.objective === 'quiz and music match') {
           navigate(`/quiz/${eventId}`);
@@ -53,6 +54,9 @@ export default function TicketCarousel() {
     }
     return null;
   };
+
+  console.log({ payStatus });
+  console.log({ dialogShown });
 
   const handleCloseDialog = () => {
     setDialogShown(false);
@@ -194,7 +198,7 @@ export default function TicketCarousel() {
                 <Button
                   variant="outlined"
                   sx={{ boxShadow: 'none', my: '7%', border: '1px solid #FF6C2C', color: '#fff', mt: '6rem' }}
-                  onClick={() => handleOpenDialog(item.price * 0.1, item.index)}
+                  onClick={() => handleOpenDialog(item.price * 0.15, item.index)}
                 >
                   Play a game and win ticket
                 </Button>

@@ -3,17 +3,18 @@ import { Box, styled, Typography, Button, useTheme } from '@mui/material';
 import Navbar from './Navbar';
 import bg from '../../assets/bg.jpg';
 
+const StyledDiv = styled(Box)(({ theme }) => ({
+  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'center',
+  height: 'fit-content',
+  [theme.breakpoints.up('lg')]: { height: '100vh' },
+  width: '100%',
+}));
+
 function Hero() {
   const theme = useTheme();
-  const StyledDiv = styled(Box)({
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    height: { xs: 'fit-content', lg: '100vh' },
-    width: '100%',
-  });
-
   const handleButtonClick = () => {
     const nextSection = document.getElementById('nextSection');
     nextSection.scrollIntoView({ behavior: 'smooth' });
@@ -29,21 +30,19 @@ function Hero() {
             alignContent: 'center',
             // alignItems: { xl: 'center' },
             justifyContent: 'center',
-            position: 'relative',
             padding: '10% 0 30% 0',
-            [theme.breakpoints.down('sm')]: { padding: '5% 0 5% 0', height: '30vh' },
+            [theme.breakpoints.down('md')]: { padding: '5% 0 5% 0' },
           }}
         >
           <Box
             sx={{
-              position: 'absolute',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
               zIndex: '1',
               width: '100%',
-              // [theme.breakpoints.down('sm')]: { marginTop: '100px' },
+              [theme.breakpoints.down('md')]: { px: '.8rem' },
               mt: { xs: 5, md: 0 },
             }}
           >
@@ -54,6 +53,7 @@ function Hero() {
                 color: '#fff',
                 fontWeight: '800',
                 // [theme.breakpoints.down('sm')]: { fontSize: '1.5em', fontWeight: 'normal' },
+                [theme.breakpoints.down('md')]: { textAlign: 'center' },
               }}
             >
               Made for Celebrities and Fans
@@ -64,7 +64,7 @@ function Hero() {
                 fontWeight: '400',
                 color: '#fff',
                 textAlign: 'center',
-                [theme.breakpoints.down('sm')]: { fontSize: '1em', fontWeight: 'normal' },
+                [theme.breakpoints.down('md')]: { fontSize: '1em', fontWeight: 'normal' },
               }}
             >
               Discover Your Next Favorite Event and stand a chance
@@ -74,7 +74,7 @@ function Hero() {
               sx={{
                 fontWeight: '400',
                 color: '#fff',
-                align: 'center',
+                textAlign: 'center',
                 [theme.breakpoints.down('sm')]: { fontSize: '1em', fontWeight: 200 },
               }}
             >

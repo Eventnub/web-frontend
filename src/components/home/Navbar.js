@@ -72,7 +72,7 @@ export default function Navbar() {
                   0
                 </Sircle>
               </StyledNavlink>
-              {!isAuthenticated && <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>}
+              {!isAuthenticated && <StyledNavlink to={PATH_AUTH.login}>Sign In</StyledNavlink>}
               {/* {isAuthenticated && (
                 <StyledNavlink to="/dashboard/profile">
                   <Avatar src={user?.photoURL} alt={user?.firstName} sx={{ width: '2rem', height: '2rem' }} />

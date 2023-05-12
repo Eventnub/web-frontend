@@ -64,7 +64,7 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                {!isAuthenticated && <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>}
+                {!isAuthenticated && <StyledNavlink to={PATH_AUTH.login}>Sign In</StyledNavlink>}
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
