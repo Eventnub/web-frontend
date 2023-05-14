@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Typography, Button, styled } from '@mui/material';
 import Navbar from './Navbar';
 import concert from '../../assets/concerts.png';
@@ -19,11 +20,25 @@ function Hero() {
     textAlign: 'center',
   });
 
+  const Text = styled(Typography)({
+    color: '#000',
+    fontWeight: '400',
+    fontSize: '1rem',
+    // textAlign: { xs: 'center', lg: 'left' },
+  });
+
   return (
     <Box>
-      <Box sx={{ height: { xs: 'fit-content', sm: 'fit-content', md: '95vh' }, backgroundColor: '#fff' }}>
+      <Box sx={{ height: { xs: 'fit-content', sm: 'fit-content', md: 'fit-content' }, backgroundColor: '#fff' }}>
         <Navbar />
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: '7%' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            mt: '2%',
+          }}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -44,28 +59,32 @@ function Hero() {
             >
               We are Eventnub
             </Typography>
-            <Typography
-              sx={{
-                color: '#000',
-                fontWeight: '400',
-                fontsize: { xs: '16px', sm: '16px', md: '24px' },
-                textAlign: 'center',
-              }}
-            >
-              An event platform that helps offer fans an opportunity to get free
-            </Typography>
-            <Typography
-              sx={{ color: '#000', fontWeight: '400', fontsize: '24px', lineHeight: '146.52%', textAlign: 'center' }}
-            >
-              and highly discounted passes/tickets to attend concerts, events, or shows of celebrities
-            </Typography>
-            <Typography
-              sx={{ color: '#000', fontWeight: '400', fontsize: '24px', lineHeight: '146.52%', textAlign: 'center' }}
-            >
-              through various gamified activities
-            </Typography>
+            <Text>Welcome to Eventnub, the ultimate event platform that brings fans and celebrities</Text>
+            <Text>together. Our mission is to provide event enthusiasts and fans of all kinds with the</Text>
+            <Text>opportunity to experience their favorite celebrities' live events, without the burden of</Text>
+            <Text>high ticket costs</Text>
+            <Text sx={{ mt: '1rem' }}>
+              We achieve this by offering a unique approach to ticketing through various gamified
+            </Text>
+            <Text>activities that are fun and engaging. By playing our "how well you know your fan" game,</Text>
+            <Text>fans have the chance to win free or highly discounted passes to attend events of their</Text>
+            <Text>favorite celebrities.</Text>
+            <Text mt="1rem">
+              As a platform, we strive to create a community that supports both fans and celebrities
+            </Text>
+            <Text>alike. Our goal is to connect fans with the celebrities they love and help emerging</Text>
+            <Text>celebrities grow their fanbase.</Text>
+            <Text sx={{ mt: '1rem' }}>
+              At Eventnub, we believe that events are a great way to bring people together. That's{' '}
+            </Text>
+            <Text>why we are dedicated to providing an innovative and accessible way for fans to</Text>
+            <Text>experience their favorite celebrities' events. Join our community today and discover a</Text>
+            <Text>world of unforgettable events and experiences.</Text>
+
             <Button
               variant="contained"
+              component={Link}
+              to={'/contact-us'}
               sx={{
                 boxShadow: 'none',
                 mt: '2.5rem',
@@ -95,7 +114,7 @@ function Hero() {
         </Box>
       </Box>
       <Box sx={{}}>
-        <img src={concert} alt="trailer park concert" style={{ width: '100%', height: '450px' }} />
+        <img src={concert} alt="trailer park concert" style={{ width: '100%' }} />
       </Box>
     </Box>
   );

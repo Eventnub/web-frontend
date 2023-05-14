@@ -1,41 +1,42 @@
-import { AppBar, Toolbar, Typography, Box, Button, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, useMediaQuery, useTheme, Avatar } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import logoImg from '../../assets/logoImg.png';
 import DrawerCom from './DrawerCom';
 import { PATH_AUTH } from '../../routes/paths';
+import useFirebase from '../../hooks/useFirebase';
 
+const NavbarLinksBox = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '5rem',
+}));
+
+const StyledNavlink = styled(NavLink)(() => ({
+  textDecoration: 'none',
+  color: '#FFFFFF',
+  fontWeight: '400',
+}));
+
+const Sircle = styled('span')(() => ({
+  width: '20px',
+  height: '20px',
+  borderRadius: '50px',
+  color: 'black',
+  display: 'inline-block',
+  background: '#FF6C2C',
+  textAlign: 'center',
+  fontSize: '10px',
+}));
 export default function Navbar() {
-  const NavbarLinksBox = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: theme.spacing(3),
-  }));
-
-  const StyledNavlink = styled(NavLink)(() => ({
-    textDecoration: 'none',
-    color: '#FFFFFF',
-    fontWeight: '400',
-  }));
-
-  const Sircle = styled('span')(() => ({
-    width: '20px',
-    height: '20px',
-    borderRadius: '50px',
-    color: 'black',
-    display: 'inline-block',
-    background: '#FF6C2C',
-    textAlign: 'center',
-    fontSize: '10px',
-  }));
-
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+  const isMatch = useMediaQuery(theme.breakpoints.down('lg'));
+  const { isAuthenticated, user } = useFirebase();
 
   return (
-    <AppBar position="static" sx={{ background: 'transparent', boxShadow: 'none', position: 'absolute', zIndex: '1' }}>
-      <Toolbar style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
         {isMatch && <Box />}
 
         <Box style={{ display: 'flex', alignItems: 'center' }}>
@@ -60,22 +61,41 @@ export default function Navbar() {
           <DrawerCom />
         ) : (
           <>
-            <NavbarLinksBox style={{ display: 'flex', justifyContent: 'center', flex: 1 }}>
+            <NavbarLinksBox style={{ display: 'flex', flex: '1' }}>
               <StyledNavlink to="/">Home</StyledNavlink>
               <StyledNavlink to="/about">About</StyledNavlink>
-              <StyledNavlink to="#">Contact Us</StyledNavlink>
-              <StyledNavlink to="/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                My Tickets <Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
+              <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
+              {/* {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>} */}
+              <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                My Tickets{' '}
+                <Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
+                  0
+                </Sircle>
               </StyledNavlink>
-              <StyledNavlink to={PATH_AUTH.register}>Sign Up</StyledNavlink>
+              {!isAuthenticated && <StyledNavlink to={PATH_AUTH.login}>Sign In</StyledNavlink>}
+              {/* {isAuthenticated && (
+                <StyledNavlink to="/dashboard/profile">
+                  <Avatar src={user?.photoURL} alt={user?.firstName} sx={{ width: '2rem', height: '2rem' }} />
+                </StyledNavlink>
+              )} */}
             </NavbarLinksBox>
-            <NavbarLinksBox style={{ display: 'flex', justifyContent: 'end' }}>
+            {/* <NavbarLinksBox style={{ display: 'flex', justifyContent: 'end' }}>
               <StyledNavlink to="#">
-                <Button variant="outlined" sx={{ border: '1px solid #FF6C2C', color: '#fff' }}>
-                  + Create a Concert
+                <Button
+                  variant="outlined"
+                  component={NavLink}
+                  to={user.role === 'host' ? '/create-event' : '/become-event-host'}
+                  sx={{ border: '1px solid #FF6C2C', color: '#fff' }}
+                >
+                  + Create A Event 
                 </Button>
               </StyledNavlink>
-            </NavbarLinksBox>
+            </NavbarLinksBox> */}
+            {isAuthenticated && (
+              <StyledNavlink to="/dashboard/profile">
+                <Avatar src={user?.photoURL} alt={user?.firstName} sx={{ width: '2rem', height: '2rem' }} />
+              </StyledNavlink>
+            )}
           </>
         )}
       </Toolbar>

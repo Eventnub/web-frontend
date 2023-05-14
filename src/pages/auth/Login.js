@@ -5,6 +5,7 @@ import useFirebase from '../../hooks/useFirebase';
 import Page from '../../components/Page';
 import GoogleIcon from '../../assets/images/auth/google.png';
 import FacebookIcon from '../../assets/images/auth/facebook.png';
+import AppleIcon from '../../assets/apple.png';
 import bg from '../../assets/background-img.png';
 import logo from '../../assets/blueLogo.png';
 import { LoginForm } from '../../sections/auth/login';
@@ -54,6 +55,9 @@ export default function Login() {
                 Continue with
               </Typography>
               <Box display="flex" mt={'0.6rem'} ml={'1rem'} gap={'0.5rem'}>
+                <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
+                  <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
+                </IconButton>
                 <IconButton
                   variant="outlined"
                   sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
@@ -96,6 +100,11 @@ export default function Login() {
                 </Button>
               </Link>
             </Box>
+            <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.forgetPassword} underline="none">
+              <Typography textAlign="center" sx={{ color: '#000', mt: 2 }}>
+                Forgot Password?
+              </Typography>
+            </Link>
           </Box>
         </Box>
       ) : (
@@ -187,6 +196,9 @@ export default function Login() {
                       <Typography variant="subtitle2" sx={{ color: '#000', fontWeight: '100' }}>
                         With
                       </Typography>
+                      <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
+                        <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
+                      </IconButton>
                       <IconButton
                         variant="outlined"
                         sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}

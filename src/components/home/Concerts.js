@@ -1,31 +1,87 @@
-import { Box, Container, Typography, Grid, Button, useTheme, styled, Paper } from '@mui/material';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Box, Container, Typography, useTheme } from '@mui/material';
 import SearchBar from './SearchBar';
-import data from '../../constants/data';
+import Events from './Events';
+import { requests } from '../../api/requests';
 
 export default function Concerts() {
+  const [events, setEvents] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [artists, setArtists] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filteredEvent, setFilteredEvent] = useState([]);
   const theme = useTheme();
 
-  const StyledLink = styled(Link)(() => ({
-    textDecoration: 'none',
-    padding: '20px',
-  }));
+  const handleSearchEvent = (name, country, state, artist) => {
+    let fEventByName = [];
+    let fEventByCountry = [];
+    let fEventByState = [];
+    let fEventByArtist = [];
+    if (name) {
+      fEventByName = events.filter((event) => event.name.toLowerCase().indexOf(name.toLowerCase()) !== -1);
+    }
+    if (country) {
+      fEventByCountry = filteredEvent.filter(
+        (event) => event.country.toLowerCase().indexOf(country.toLowerCase()) !== -1
+      );
+    }
+    if (state) {
+      fEventByState = filteredEvent.filter((event) => event.state.toLowerCase().indexOf(state.toLowerCase()) !== -1);
+    }
+    if (artist) {
+      fEventByArtist = filteredEvent.filter((event) => event.artists.includes(artist));
+    }
 
-  const [displayData, setDisplayData] = useState(data.slice(0, 6));
-
-  const handleLoadMore = () => {
-    setDisplayData(displayData.concat(data.slice(displayData.length, displayData.length + 6)));
+    const fEvent = [...new Set([...fEventByCountry, ...fEventByName, ...fEventByState, ...fEventByArtist])];
+    setFilteredEvent(fEvent);
+    console.log({ fEvent });
   };
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        setIsLoading(true);
+        const { data } = await requests.getEvents();
+        setEvents(data);
+        setFilteredEvent(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchEvents();
+  }, []);
+
+  useEffect(() => {
+    let countries = [];
+    let states = [];
+    let artists = [];
+    events.forEach((event) => {
+      countries.push(event.country);
+      states.push(event.state);
+      artists.push(...event.artists);
+    });
+    countries = [...new Set(countries)];
+    states = [...new Set(states)];
+    artists = [...new Set(artists)];
+    setCountries(countries);
+    setStates(states);
+    setArtists(artists);
+  }, [events]);
+
   return (
     <Box>
-      <Container maxWidth="xl">
+      <Container maxWidth="3xl">
         <Box
           sx={{
             display: 'flex',
             marginTop: '3em',
             justifyContent: 'space-between',
-            [theme.breakpoints.down('sm')]: { flexDirection: 'column' },
+            gap: '2.5rem',
+            flexDirection: { xs: 'column', lg: 'row' },
+            // [theme.breakpoints.down('sm')]: { flexDirection: 'column' },
           }}
         >
           <Typography
@@ -37,84 +93,13 @@ export default function Concerts() {
               [theme.breakpoints.down('sm')]: { fontSize: 16, width: '100', textAlign: 'center' },
             }}
           >
-            Up Coming Concerts
+            Up Coming Events
           </Typography>
-          <Box sx={{ flex: '0.6' }}>
-            <SearchBar />
+          <Box sx={{ flex: 1 }}>
+            <SearchBar handleSearchEvent={handleSearchEvent} countries={countries} states={states} artists={artists} />
           </Box>
         </Box>
-        <Grid container spacing={5} sx={{ marginTop: '15px' }}>
-          {displayData.map((item) => (
-            <Grid item sm={12} md={4} lg={4} key={item.id}>
-              <Paper
-                elevation={10}
-                sx={{ height: '100%', width: '100%', background: '#fff', borderRadius: '8px', position: 'relative' }}
-              >
-                <Box>
-                  <Link to="#">
-                    <img
-                      style={{ borderTopLeftRadius: '8px', width: '100%', borderTopRightRadius: '8px' }}
-                      src={item.imageUrl}
-                      alt="Live concert"
-                    />
-                  </Link>
-                </Box>
-
-                <Box
-                  sx={{
-                    background: '#fff',
-                    width: '12%',
-                    height: '5%',
-                    position: 'absolute',
-                    top: '8px',
-                    left: '8px',
-                    borderRadius: '5px',
-                    padding: '0.3em',
-                    textAlign: 'center',
-                    fontSize: '10px',
-                    color: '#000000',
-                    fontWeight: '400',
-                  }}
-                >
-                  {item.badge}
-                </Box>
-                <Box sx={{ display: 'flex', marginTop: '15px', padding: '10px' }}>
-                  <Box sx={{ marginRight: '10px' }}>
-                    <Typography variant="h6" sx={{ color: '#000' }}>
-                      {item.day}
-                    </Typography>
-                    <Typography variant="h6" sx={{ color: '#000' }}>
-                      {item.month}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="h6" sx={{ color: '#000' }}>
-                      {item.title}
-                    </Typography>
-                    <Typography paragraph sx={{ color: '#000' }}>
-                      {item.description}
-                    </Typography>
-                  </Box>
-                </Box>
-                <StyledLink to="#">
-                  <Button variant="outlined" sx={{ width: '80%', mb: '0.8em', alignItems: 'center' }}>
-                    Explore Available Tickets
-                  </Button>
-                </StyledLink>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px' }}>
-          <Button
-            variant="contained"
-            disableElevation
-            sx={{ background: 'rgba(19, 88, 165, 0.06)', color: 'black', borderRadius: '10px', boxShadow: 'none' }}
-            onClick={handleLoadMore}
-          >
-            Load More Concerts
-          </Button>
-        </Box>
+        <Events events={filteredEvent} isLoading={isLoading} />
       </Container>
     </Box>
   );

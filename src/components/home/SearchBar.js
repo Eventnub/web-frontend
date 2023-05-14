@@ -1,28 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { TextField, Select, MenuItem, Button, useTheme, Box } from '@mui/material';
 
-const SearchBar = () => {
-  const [value1, setValue1] = React.useState('');
-  const [value2, setValue2] = React.useState('');
+const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
+  const [name, setName] = useState('');
+  const [state, setState] = useState('');
+  const [country, setCountry] = useState('');
+  const [date, setDate] = useState('');
+  const [artist, setArtist] = useState('');
   const theme = useTheme();
 
-  const handleChange1 = (event) => {
-    setValue1(event.target.value);
+  const handleSearch = () => {
+    handleSearchEvent(name, country, state, artist, date);
   };
 
-  const handleChange2 = (event) => {
-    setValue2(event.target.value);
+  const handleStateChange = (event) => {
+    setState(event.target.value);
+  };
+
+  const handleCountryChange = (event) => {
+    setCountry(event.target.value);
+  };
+
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+  };
+
+  const handleArtistChange = (event) => {
+    setArtist(event.target.value);
   };
 
   return (
     <Box
       sx={{
         display: 'flex',
-        justifyContents: 'space-between',
+        // justifyContents: 'space-between',
         alignItems: 'center',
-        border: '1px solid #F4F4F4',
+        border: '2px solid #F4F4F4',
         height: '100%',
         width: '100%',
+        borderRadius: '5px',
         [theme.breakpoints.down('sm')]: {
           flexDirection: 'column',
           width: '100%',
@@ -31,24 +48,32 @@ const SearchBar = () => {
     >
       <Box
         sx={{
-          width: '100%',
+          width: '40%',
           border: '1px solid #F4F4F4',
+          height: '100%',
           background: '#F4F4F4',
           paddingLeft: '10px',
           marginRight: '10px',
+          display: 'flex',
+          alignItems: 'center',
+          [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            height: '100%',
+            marginRight: 0,
+          },
         }}
       >
         <TextField
-          label="Concert Name"
-          value={value1}
-          onChange={handleChange1}
+          placeholder="Event Name"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
           variant="standard"
           InputProps={{ disableUnderline: true }}
           sx={{
             marginRight: '16px',
             outline: 'none',
             background: '#F4F4F4',
-            height: '50px',
+            height: '100%',
             width: '100%',
             padding: '10px',
             [theme.breakpoints.down('sm')]: {
@@ -64,29 +89,54 @@ const SearchBar = () => {
           display: 'flex',
           alignItems: 'center',
           width: '100%',
+          gap: '.5rem',
+          py: '.5rem',
           [theme.breakpoints.down('sm')]: {
             marginTop: '10px',
+            flexWrap: 'wrap',
+            gap: '1rem',
           },
         }}
       >
-        <Select value={value2} onChange={handleChange2} displayEmpty style={{ marginRight: '10px', height: '40px' }}>
-          <MenuItem value="">Artist</MenuItem>
-          <MenuItem value={10}>Option 1</MenuItem>
-          <MenuItem value={20}>Option 2</MenuItem>
+        <Select value={country} onChange={handleCountryChange} displayEmpty style={{ height: '100%' }}>
+          <MenuItem value="">Country</MenuItem>
+          {countries.map((c) => (
+            <MenuItem value={c} key={Math.random()}>
+              {c}
+            </MenuItem>
+          ))}
         </Select>
-        <Select value={value2} onChange={handleChange2} displayEmpty style={{ marginRight: '10px', height: '40px' }}>
+        <Select value={state} onChange={handleStateChange} displayEmpty style={{ height: '100%' }}>
+          <MenuItem value="">State</MenuItem>
+          {states.map((s) => (
+            <MenuItem value={s} key={Math.random()}>
+              {s}
+            </MenuItem>
+          ))}
+        </Select>
+        <Select value={artist} onChange={handleArtistChange} displayEmpty style={{ height: '100%' }}>
+          <MenuItem value="">Artist</MenuItem>
+          {artists.map((a) => (
+            <MenuItem value={a} key={Math.random()}>
+              {a}
+            </MenuItem>
+          ))}
+        </Select>
+        {/* <Select value={date} onChange={handleDateChange} displayEmpty style={{ marginRight: '10px', height: '40px' }}>
           <MenuItem value="">Date</MenuItem>
           <MenuItem value={10}>Option 1</MenuItem>
           <MenuItem value={20}>Option 2</MenuItem>
-        </Select>
+        </Select> */}
+        <TextField type="date" value={date} onChange={handleDateChange} style={{ height: '100%' }} />
         <Button
           variant="contained"
           disableElevation
+          onClick={handleSearch}
           sx={{
-            width: '200px',
-            height: '40px',
+            width: '30%',
+            height: '100%',
             background: '#FF6C2C',
-            boxShadow: '0',
+            boxShadow: 'none',
             borderRadius: '20px',
             marginRight: '5px',
             '&:hover': {
@@ -102,4 +152,10 @@ const SearchBar = () => {
   );
 };
 
+SearchBar.propTypes = {
+  handleSearchEvent: PropTypes.func,
+  countries: PropTypes.array,
+  states: PropTypes.array,
+  artists: PropTypes.array,
+};
 export default SearchBar;

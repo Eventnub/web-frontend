@@ -6,6 +6,7 @@ import useFirebase from '../../hooks/useFirebase';
 import { RegisterForm } from '../../sections/auth/register';
 import GoogleIcon from '../../assets/images/auth/google.png';
 import FacebookIcon from '../../assets/images/auth/facebook.png';
+import AppleIcon from '../../assets/apple.png';
 import bg from '../../assets/background-img.png';
 import logo from '../../assets/blueLogo.png';
 import RegisterFormMobile from '../../sections/auth/register/RegisterFormMobile';
@@ -53,7 +54,11 @@ export default function Register() {
               <Typography variant="subtitle2" sx={{ ml: '1rem', color: '#000', fontWeight: '100' }}>
                 Continue with
               </Typography>
+
               <Box display="flex" mt={'0.6rem'} ml={'1rem'} gap={'0.5rem'}>
+                <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
+                  <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
+                </IconButton>
                 <IconButton
                   variant="outlined"
                   sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
@@ -139,6 +144,7 @@ export default function Register() {
                     position: 'absolute',
                     zIndex: '2',
                     minHeight: '80vh',
+                    height: 'auto',
                     left: '7%',
                     bottom: '-20%',
                     borderRadius: '5px',
@@ -156,6 +162,9 @@ export default function Register() {
                       <Typography variant="subtitle2" sx={{ color: '#000', fontWeight: '100' }}>
                         With
                       </Typography>
+                      <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
+                        <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
+                      </IconButton>
                       <IconButton
                         variant="outlined"
                         sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
