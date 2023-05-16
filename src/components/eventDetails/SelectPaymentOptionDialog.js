@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Dialog, DialogTitle, DialogContent, Button, Typography } from '@mui/material';
+import { Box, Dialog, DialogTitle, DialogContent, Button, Typography, Stack } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import StripeCheckout from 'react-stripe-checkout';
 import { usePaystackPayment } from 'react-paystack';
@@ -121,7 +121,11 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
             <Typography sx={{ color: '#4E4E4E', fontSize: '1rem', fontWeight: '600' }}>
               How do you want to pay?
             </Typography>
-            <Box sx={{ display: 'flex', gap: '2rem', mt: '2rem' }}>
+            <Stack
+              sx={{ mt: { xs: '1rem', md: '2rem' } }}
+              direction={{ xs: 'column', md: 'row' }}
+              spacing={{ xs: 1, md: 4 }}
+            >
               <Button
                 variant="contained"
                 endIcon={<img src={paystackLogo} alt="paystack" />}
@@ -139,8 +143,8 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
                   background: '#fff',
                   color: '#022069',
                   fontWeight: '600',
-                  fontSize: '1.5rem',
-                  height: '91px',
+                  fontSize: { xs: '1rem', md: '1.5rem' },
+                  height: { xs: '41px', md: '91px' },
                   border: '2px solid #FF6C2C',
                   '&:hover': {
                     backgroundColor: '#fff',
@@ -168,10 +172,11 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
                       display: 'flex',
                       justifyContent: 'space-between',
                       background: '#fff',
+                      alignItems: 'center',
                       color: '#022069',
                       fontWeight: '600',
-                      fontSize: '1.5rem',
-                      height: '91px',
+                      fontSize: { xs: '1rem', md: '1.5rem' },
+                      height: { xs: '41px', md: '91px' },
                       border: '2px solid #FF6C2C',
                       '&:hover': {
                         backgroundColor: '#fff',
@@ -182,7 +187,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
                   </Button>
                 </StripeCheckout>
               </Box>
-            </Box>
+            </Stack>
           </Box>
         </DialogContent>
       </Dialog>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { TextField, Select, MenuItem, Button, useTheme, Box } from '@mui/material';
+import { TextField, Select, MenuItem, Button, useTheme, Box, Stack } from '@mui/material';
 
 const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
   const [name, setName] = useState('');
@@ -34,7 +34,6 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
     <Box
       sx={{
         display: 'flex',
-        // justifyContents: 'space-between',
         alignItems: 'center',
         border: '2px solid #F4F4F4',
         height: '100%',
@@ -84,7 +83,9 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
         />
       </Box>
 
-      <Box
+      <Stack
+        spacing={2}
+        direction="row"
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -147,7 +148,7 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
         >
           Search
         </Button>
-      </Box>
+      </Stack>
     </Box>
   );
 };

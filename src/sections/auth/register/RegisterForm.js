@@ -51,7 +51,6 @@ const RegisterForm = () => {
           if (!values.favoriteCelebrity) {
             delete values.favoriteCelebrity;
           }
-          console.log({ values });
           await requests.register(values);
           if (isMountedRef.current) {
             setSubmitting(false);
@@ -68,7 +67,6 @@ const RegisterForm = () => {
               setErrorMessage('An error occurred. Please try again later.');
             }
           }
-          console.log(error.request);
         }
       }}
     >

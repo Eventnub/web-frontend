@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { IconButton, Typography, Box, Container, Link, Button, useMediaQuery, useTheme } from '@mui/material';
+import { IconButton, Typography, Box, Container, Link, Button, useMediaQuery, useTheme, Stack } from '@mui/material';
 import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
 import Page from '../../components/Page';
@@ -12,7 +12,7 @@ import { LoginForm } from '../../sections/auth/login';
 
 export default function Login() {
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+  const isMatch = useMediaQuery(theme.breakpoints.down('lg'));
   const { loginWithGoogle, loginWithFacebook } = useFirebase();
 
   const handleLoginGoogle = async () => {
@@ -49,12 +49,12 @@ export default function Login() {
                 </Typography>
               </Box>
               <Typography variant="h4" sx={{ color: '#000', ml: '1.5rem', mt: '1rem' }}>
-                Sign Up
+                Sign In
               </Typography>
               <Typography variant="subtitle2" sx={{ ml: '1rem', color: '#000', fontWeight: '100' }}>
                 Continue with
               </Typography>
-              <Box display="flex" mt={'0.6rem'} ml={'1rem'} gap={'0.5rem'}>
+              <Stack spacing={1} direction="row">
                 <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
                   <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
                 </IconButton>
@@ -72,14 +72,14 @@ export default function Login() {
                 >
                   <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
                 </IconButton>
-              </Box>
-              <Typography ml={'2.5rem'} mt={'1rem'} sx={{ color: '#000' }}>
+              </Stack>
+              <Typography mt={'1rem'} sx={{ color: '#000', textAlign: 'center' }}>
                 OR
               </Typography>
             </Box>
           </Box>
 
-          <Box padding={3}>
+          <Box px={{ xs: 2, md: 15 }} py={{ xs: 3, md: 10 }}>
             <LoginForm />
           </Box>
           <Box px={'1rem'}>
