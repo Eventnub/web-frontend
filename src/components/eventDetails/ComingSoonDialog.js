@@ -7,11 +7,12 @@ export default function PaymentDialog({ open, handleClose }) {
     <Dialog
       open={open}
       onClose={handleClose}
+      maxWidth="sm"
       PaperProps={{
         sx: {
           background: '#fff',
-          height: { xs: '20%', md: '25%', lg: '38%' },
-          width: { xs: '80%', md: '50%', lg: '33%' },
+          // height: { xs: '20%', md: '25%', lg: '38%' },
+          // width: { xs: '80%', md: '50%', lg: '33%' },
           boxShadow: '0px, 0px rgba(0, 0, 0, 0.25)',
           borderRadius: '7px',
           // [theme.breakpoints.down('sm')]: { width: '80%', height: '35%' },

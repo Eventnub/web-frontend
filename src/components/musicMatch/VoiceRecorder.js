@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Box } from '@mui/material';
+import { Button, Box, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
 import PropTypes from 'prop-types';
@@ -77,8 +77,8 @@ const VoiceRecorder = ({ musicMatchId }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', padding: '.8rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '.8rem' }}>
+    <Stack sx={{ padding: '.8rem' }}>
+      <Stack justifyContent="space-between" direction="row" spacing={2} sx={{ marginBottom: '.8rem' }}>
         <Button
           onClick={startRecording}
           disabled={recording}
@@ -107,7 +107,7 @@ const VoiceRecorder = ({ musicMatchId }) => {
         >
           Stop Recording
         </Button>
-      </div>
+      </Stack>
       {audioURL && (
         <audio controls>
           <source src={audioURL} type="audio/ogg" />
@@ -129,7 +129,7 @@ const VoiceRecorder = ({ musicMatchId }) => {
           Reset
         </Button>
       </Box>
-    </div>
+    </Stack>
   );
 };
 

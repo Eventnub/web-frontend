@@ -1,5 +1,5 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { Link, Typography, Box, Button, useTheme, useMediaQuery, IconButton } from '@mui/material';
+import { Link, Typography, Box, Button, useTheme, useMediaQuery, IconButton, Stack } from '@mui/material';
 import { PATH_AUTH } from '../../routes/paths';
 import Page from '../../components/Page';
 import useFirebase from '../../hooks/useFirebase';
@@ -14,7 +14,7 @@ import RegisterFormMobile from '../../sections/auth/register/RegisterFormMobile'
 export default function Register() {
   const { loginWithGoogle, loginWithFacebook } = useFirebase();
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down('md'));
+  const isMatch = useMediaQuery(theme.breakpoints.down('lg'));
 
   const handleLoginGoogle = async () => {
     try {
@@ -48,14 +48,14 @@ export default function Register() {
                   eventnub
                 </Typography>
               </Box>
-              <Typography variant="h4" sx={{ color: '#000', ml: '1.5rem', mt: '1rem' }}>
+              <Typography variant="h4" sx={{ color: '#000', textAlign: 'center', mt: '1rem' }}>
                 Sign Up
               </Typography>
-              <Typography variant="subtitle2" sx={{ ml: '1rem', color: '#000', fontWeight: '100' }}>
+              <Typography variant="subtitle2" sx={{ textAlign: 'center', color: '#000', fontWeight: '100' }}>
                 Continue with
               </Typography>
 
-              <Box display="flex" mt={'0.6rem'} ml={'1rem'} gap={'0.5rem'}>
+              <Stack direction="row" spacing={1}>
                 <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
                   <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
                 </IconButton>
@@ -73,14 +73,14 @@ export default function Register() {
                 >
                   <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
                 </IconButton>
-              </Box>
-              <Typography ml={'2.5rem'} mt={'1rem'} sx={{ color: '#000' }}>
+              </Stack>
+              <Typography textAlign="center" sx={{ color: '#000' }}>
                 OR
               </Typography>
             </Box>
           </Box>
 
-          <Box padding={3}>
+          <Box px={{ xs: 2, md: 15 }} py={{ xs: 3, md: 10 }}>
             <RegisterFormMobile />
           </Box>
           <Box px="1rem">

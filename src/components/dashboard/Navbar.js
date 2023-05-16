@@ -52,7 +52,7 @@ export default function Navbar() {
           </Link>
         </Box>
         <Box display="flex" alignItems="center" gap={1}>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: '3rem', gap: '2rem' }}>
+          <Box sx={{ display: { xs: 'none', lg: 'flex' }, mr: '3rem', gap: '2rem' }}>
             <Link component={RouterLink} underline="none" to="/">
               <Typography sx={{ color: '#000', fontWeight: '200', fontSize: '.9rem' }}>Home</Typography>
             </Link>
@@ -108,7 +108,7 @@ export default function Navbar() {
             </MenuItem>
           </Menu>
           <IconButton onClick={handleDrawerOpen}>
-            <MenuIcon sx={{ display: { md: 'none', lg: 'none', xl: 'none' } }} />
+            <MenuIcon sx={{ display: { lg: 'none', xl: 'none' } }} />
           </IconButton>
           <DrawerCom open={showDrawer} handleClose={handleDrawerClose} />
         </Box>

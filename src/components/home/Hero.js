@@ -84,7 +84,7 @@ function Hero() {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'center', 
                 marginTop: '40px',
                 // [theme.breakpoints.down('sm')]: { marginTop: '40px' },
               }}

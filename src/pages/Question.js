@@ -9,6 +9,7 @@ import {
   FormControl,
   styled,
   CircularProgress,
+  Stack,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import useFirebase from '../hooks/useFirebase';
@@ -125,15 +126,13 @@ export default function Question() {
 
   return (
     <Page title="Questions">
-      <Box
+      <Stack
         sx={{
           height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
           px: '3%',
         }}
       >
-        <Box sx={{ height: '15%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Stack direction="row" sx={{ height: '15%', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <img src={logo} alt="logo" style={{ width: '44px', height: '44px' }} />
             <Typography sx={{ fontWeight: '600', letterSpacing: '.3rem', fontSize: '1.3rem', color: '#1358A5' }}>
@@ -142,17 +141,21 @@ export default function Question() {
           </Box>
           <Box
             sx={{
-              width: { xs: '35%', sm: '20%', md: '13%' },
-              height: { xs: '34%', sm: '34%', md: '34%' },
+              width: { xs: '35%', md: '25%', lg: '13%' },
+              height: { xs: '34%', md: '34%' },
               background: '#DBDBDB',
               borderRadius: '10px',
-              p: '4px',
               textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            <Typography sx={{ color: '#000', fontWeight: '600', fontSize: '1.3rem' }}>00 : 25 : 00</Typography>
+            <Typography sx={{ color: '#000', fontWeight: '600', fontSize: { xs: '1rem', md: '1.3rem' } }}>
+              00 : 25 : 00
+            </Typography>
           </Box>
-        </Box>
+        </Stack>
 
         <StyledCard>
           <Typography sx={{ mt: '2%', ml: '2%', fontSize: '1.5rem', fontWeight: '600', color: '#848484' }}>
@@ -167,17 +170,9 @@ export default function Question() {
                 <Typography sx={{ color: '#000', fontSize: '2rem', fontWeight: '400' }}>
                   {questions[currentQuestionIndex]?.question}
                 </Typography>
-                <FormControl component="fieldset" sx={{ mt: '2%' }}>
+                <FormControl component="fieldset" sx={{ mt: '4%' }}>
                   <RadioGroup>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        gap: '2rem',
-                        flexDirection: { xs: 'column', sm: 'row', md: 'row' },
-                      }}
-                    >
+                    <Stack direction="row" spacing={4} flexWrap="wrap">
                       {questions[currentQuestionIndex]?.answerOptions?.map((option) => (
                         <StyledOption key={option}>
                           <StyledLabel
@@ -194,12 +189,47 @@ export default function Question() {
                           />
                         </StyledOption>
                       ))}
-                    </Box>
+                    </Stack>
                   </RadioGroup>
                 </FormControl>
               </>
             )}
           </Box>
+          {/* <Box sx={{ mt: '10%', textAlign: 'center' }}>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <>
+                <Typography sx={{ color: '#000', fontSize: '2rem', fontWeight: '400' }}>
+                  {questions[currentQuestionIndex]?.question}
+                </Typography>
+                <FormControl component="fieldset" sx={{ mt: '4%' }}>
+                  <RadioGroup>
+                    <Grid container spacing={2}>
+                      {questions[currentQuestionIndex]?.answerOptions?.map((option) => (
+                        <Grid item xs={6} md={3} key={option}>
+                          <StyledOption>
+                            <StyledLabel
+                              value={option}
+                              control={
+                                <Radio
+                                  onChange={() => handleChange(option)}
+                                  checked={option === currentQuestionAnswer}
+                                  size="small"
+                                  sx={{ ml: '1rem' }}
+                                />
+                              }
+                              label={option}
+                            />
+                          </StyledOption>
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </RadioGroup>
+                </FormControl>
+              </>
+            )}
+          </Box> */}
 
           <LoadingButton
             variant="contained"
@@ -220,7 +250,7 @@ export default function Question() {
           </LoadingButton>
           <QuizTakenDialog open={dialogShown} errorMessage={errorMessage} />
         </StyledCard>
-      </Box>
+      </Stack>
     </Page>
   );
 }

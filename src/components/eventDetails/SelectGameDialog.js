@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Dialog, DialogTitle, DialogContent, Button, Typography, Divider } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Button, Typography, Divider, Stack } from '@mui/material';
 import quizIcon from '../../assets/quiz-icon.png';
 import raffleIcon from '../../assets/raffle-icon.png';
 import SelectPaymentOptionDialog from './SelectPaymentOptionDialog';
@@ -40,30 +40,26 @@ export default function SelectGameDialog({ open, handleClose, extraPaymentData }
           <Typography sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: '1.1rem' }}>
             Win a free ticket to attend this event by playing any of the available games below
           </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', mt: '2rem', gap: '1.5rem' }}>
-            <Box
+          <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} mt="2rem">
+            <Stack
               sx={{
                 flex: 1,
                 background: '#F4FEFF',
                 boxShadow: '0px 2px 35px 1px rgba(0, 0, 0, 0.25)',
                 height: '245px',
-                display: 'flex',
-                flexDirection: 'column',
               }}
             >
-              <Box sx={{ height: '20%', width: '100%', p: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <Stack sx={{ height: '20%', width: '100%', p: '1rem', alignItems: 'center' }} direction="row" spacing={2}>
                 <img src={quizIcon} alt="quiz" />
                 <Typography sx={{ fontSize: '1rem', fontWeight: '400', color: '#000' }}>Quiz</Typography>
-              </Box>
+              </Stack>
               <Divider />
-              <Box
+              <Stack
                 sx={{
                   p: '1rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
                   height: '80%',
                 }}
+                justifyContent="space-between"
               >
                 <Typography sx={{ color: '#6B6B6B', fontSize: '.9rem', fontWeight: '400' }}>
                   Win a free ticket to attend the event by taking a quiz to prove how well you know the featured
@@ -72,35 +68,37 @@ export default function SelectGameDialog({ open, handleClose, extraPaymentData }
                 <Button
                   variant="contained"
                   onClick={() => handleOpenDialog('quiz and music match')}
-                  sx={{ boxShadow: 'none', background: '#1358A5', borderRadius: '360px', alignSelf: 'flex-start' }}
+                  sx={{
+                    boxShadow: 'none',
+                    background: '#1358A5',
+                    borderRadius: '360px',
+                    alignSelf: 'flex-start',
+                    mt: 2,
+                  }}
                 >
                   Play Game
                 </Button>
-              </Box>
-            </Box>
-            <Box
+              </Stack>
+            </Stack>
+            <Stack
               sx={{
                 flex: 1,
                 background: '#F4FEFF',
                 boxShadow: '0px 2px 35px 1px rgba(0, 0, 0, 0.25)',
                 height: '245px',
-                display: 'flex',
-                flexDirection: 'column',
               }}
             >
-              <Box sx={{ height: '20%', width: '100%', p: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <Stack sx={{ height: '20%', width: '100%', p: '1rem', alignItems: 'center' }} direction="row" spacing={2}>
                 <img src={raffleIcon} alt="quiz" />
                 <Typography sx={{ fontSize: '1rem', fontWeight: '400', color: '#000' }}>Raffle Draw</Typography>
-              </Box>
+              </Stack>
               <Divider />
-              <Box
+              <Stack
                 sx={{
                   p: '1rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
                   height: '80%',
                 }}
+                justifyContent="space-between"
               >
                 <Typography sx={{ color: '#6B6B6B', fontSize: '.9rem', fontWeight: '400' }}>
                   Win a free ticket to attend this event by winning a raffle draw. Pick 5 numbers and get the ticket
@@ -111,17 +109,17 @@ export default function SelectGameDialog({ open, handleClose, extraPaymentData }
                   onClick={() => handleOpenDialog('raffle draw')}
                   sx={{
                     boxShadow: 'none',
-                    mt: '2rem',
                     background: '#1358A5',
                     borderRadius: '360px',
                     alignSelf: 'flex-start',
+                    mt: 2,
                   }}
                 >
                   Play Game
                 </Button>
-              </Box>
-            </Box>
-          </Box>
+              </Stack>
+            </Stack>
+          </Stack>
         </DialogContent>
       </Dialog>
       <SelectPaymentOptionDialog

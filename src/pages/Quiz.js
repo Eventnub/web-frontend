@@ -45,18 +45,21 @@ export default function Quiz() {
           <Typography textAlign="center" sx={{ color: '#000', fontWeight: '600', fontSize: '1.5rem' }}>
             Congratulations! you have joined successfully
           </Typography>
-          <Typography sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: '1.25rem' }}>
+          <Typography textAlign="center" sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: '1.25rem' }}>
             You are just a step away to get your FREE ticket to {event.name}.
           </Typography>
           <Box
             sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', mt: '6%' }}
           >
-            <Typography textAlign="center" sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: '1.25rem' }}>
+            <Typography
+              textAlign="center"
+              sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: { xs: '1rem', md: '1.25rem' } }}
+            >
               The quiz will start in
             </Typography>
             <Box
               sx={{
-                width: '50%',
+                width: '70%',
                 height: '80px',
                 backgroundColor: '#F7F7F7',
                 mt: '1%',
@@ -86,7 +89,7 @@ export default function Quiz() {
             <Button
               variant="contained"
               sx={{
-                width: '50%',
+                width: '70%',
                 height: '39px',
                 boxShadow: 'none',
                 mb: '2%',
@@ -101,7 +104,7 @@ export default function Quiz() {
             <Button
               variant="contained"
               sx={{
-                width: '50%',
+                width: '70%',
                 height: '39px',
                 boxShadow: 'none',
                 mb: '2%',

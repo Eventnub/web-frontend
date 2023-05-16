@@ -100,7 +100,7 @@ export default function ProfilePage() {
   return (
     <Page title="User Profile">
       <Navbar />
-      <Box sx={{ px: '2.2rem', height: '100vh', mt: '2%', mb: '8%' }}>
+      <Box sx={{ px: '2.2rem', height: '100vh', mt: '2%' }}>
         <Box sx={{ background: '#EDF5F6', height: '20%', borderRadius: '10px', position: 'relative' }}>
           <Box
             sx={{
