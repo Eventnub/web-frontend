@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Box, styled, Link, Menu, MenuItem, Avatar, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, styled, Link, Popover, Avatar, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutButton from '../../layouts/dashboard/navbar/LogoutButton';
@@ -102,12 +102,20 @@ export default function Navbar() {
           <IconButton onClick={handleMenuClick}>
             <ExpandMoreIcon />
           </IconButton>
-          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-            <MenuItem onClick={handleMenuClose}>
+          <Popover
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+          >
+            <Box sx={{ p: 1, bgcolor: '#fff' }}>
               <LogoutButton />
-            </MenuItem>
-          </Menu>
-          <IconButton onClick={handleDrawerOpen}>
+            </Box>
+          </Popover>
+          <IconButton onClick={handleDrawerOpen} sx={{ display: { lg: 'none', xl: 'none' } }}>
             <MenuIcon sx={{ display: { lg: 'none', xl: 'none' } }} />
           </IconButton>
           <DrawerCom open={showDrawer} handleClose={handleDrawerClose} />

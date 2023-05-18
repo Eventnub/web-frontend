@@ -40,7 +40,15 @@ export default function Navbar() {
           <StyledNavlink to={'/'}>
             <img src={logo} alt="logo" style={{ width: '37px', height: '37px' }} />
           </StyledNavlink>
-          <Typography sx={{ fontWeight: '600', letterSpacing: '.3rem', fontSize: '1.5rem', color: '#1358A5' }}>
+          <Typography
+            sx={{
+              fontWeight: '600',
+              letterSpacing: { xs: '.1rem', md: '.3rem' },
+              fontSize: { xs: '.8rem', md: '1.5rem' },
+              color: '#1358A5',
+              // display: { xs: 'none', md: 'block' },
+            }}
+          >
             eventnub
           </Typography>
         </Box>

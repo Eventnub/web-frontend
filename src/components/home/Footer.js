@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Stack, Typography, styled, useTheme, Divider } from '@mui/material';
+import { Box, Stack, Typography, styled, useTheme, Divider, TextField, IconButton } from '@mui/material';
 import logoImg from '../../assets/logoImg.png';
-import InputStyle from '../InputStyle';
+// import InputStyle from '../InputStyle';
 // import useFirebase from '../../hooks/useFirebase';
 import facebook from '../../assets/Facebook.png';
 import linkedin from '../../assets/linkedin.png';
 import twitter from '../../assets/Twitter.png';
 import instagram from '../../assets/Instagram.png';
+import sendIcon from '../../assets/sendIcon.png';
 
 export default function Footer() {
   const theme = useTheme();
@@ -126,7 +127,28 @@ export default function Footer() {
             Newsletter
           </Typography>
           <Paragraph sx={{ my: '15px' }}>Don't miss any update of our moment.</Paragraph>
-          <InputStyle size="medium" placeholder="Email" />
+          {/* <InputStyle size="medium" placeholder="Email" /> */}
+          <TextField
+            placeholder="Email"
+            variant="outlined"
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  border: '1.5px solid #fff',
+                  borderRadius: '30px',
+                },
+              },
+            }}
+            InputProps={{
+              endAdornment: (
+                <>
+                  <IconButton style={{ borderLeft: '1.5px solid #fff', borderRadius: 0 }} edge="end">
+                    <img src={sendIcon} alt="send" />
+                  </IconButton>
+                </>
+              ),
+            }}
+          />
         </Box>
       </Box>
       <Divider sx={{ paddingBottom: '20px', paddingTop: '20px' }} />
