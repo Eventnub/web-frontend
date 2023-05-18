@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Drawer, List, ListItemButton, ListItemText, ListItemIcon, styled, IconButton } from '@mui/material';
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  ListItemIcon,
+  styled,
+  IconButton,
+  Avatar,
+  Stack,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
 
 export default function DrawerCom() {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const { isAuthenticated } = useFirebase();
+  const { isAuthenticated, user } = useFirebase();
   const StyledNavlink = styled(NavLink)(() => ({
     textDecoration: 'none',
     activeStyle: '#FF6C2C',
@@ -70,9 +80,16 @@ export default function DrawerCom() {
           </ListItemButton>
         </List>
       </Drawer>
-      <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
-        <MenuIcon sx={{ color: '#fff' }} />
-      </IconButton>
+      <Stack direction="row" alignItems="center">
+        {isAuthenticated && (
+          <StyledNavlink to="/dashboard/profile">
+            <Avatar src={user?.photoURL} alt={user?.firstName} sx={{ width: '2rem', height: '2rem' }} />
+          </StyledNavlink>
+        )}
+        <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+          <MenuIcon sx={{ color: '#fff' }} />
+        </IconButton>
+      </Stack>
     </div>
   );
 }

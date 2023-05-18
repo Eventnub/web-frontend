@@ -12,6 +12,7 @@ import {
   useMediaQuery,
   CircularProgress,
 } from '@mui/material';
+import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from 'react-share';
 import moment from 'moment';
 import Navbar from '../home/Navbar';
 import DrawerCom from './DrawerCom';
@@ -38,6 +39,7 @@ export default function Hero() {
   const formattedDate = moment(date).format('Do MMM, YYYY').toUpperCase();
   const formattedTime = moment(time, 'HH:mm').format('h:mm A');
   const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
+  const currentPageUrl = window.location.href;
 
   const handleButtonClick = () => {
     const nextSection = document.getElementById('tickets');
@@ -262,8 +264,15 @@ export default function Hero() {
                 Share with friends
               </Typography>
               <Stack direction="row" spacing="2%" sx={{ px: '2%', mt: '1%' }}>
-                <img src={facebook} alt="facebook logo" />
+                {/* <img src={facebook} alt="facebook logo" />
                 <img src={twitter} alt="twitter logo" />
+                <img src={instagram} alt="instagram logo" /> */}
+                <FacebookShareButton url={currentPageUrl} hashtag="#eventNub">
+                  <FacebookIcon round size={45} />
+                </FacebookShareButton>
+                <TwitterShareButton url={currentPageUrl}>
+                  <TwitterIcon round size={45} />
+                </TwitterShareButton>
                 <img src={instagram} alt="instagram logo" />
               </Stack>
             </StyledBox>
