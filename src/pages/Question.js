@@ -16,6 +16,7 @@ import useFirebase from '../hooks/useFirebase';
 import { requests } from '../api/requests';
 import QuizTakenDialog from '../components/raffle/QuizTakenDialog';
 import Page from '../components/Page';
+import CountdownTimerQuestion from '../components/CountdownTimerQuestion';
 import logo from '../assets/blueLogo.png';
 
 const StyledLabel = styled(FormControlLabel)({
@@ -43,6 +44,8 @@ const StyledCard = styled(Box)({
   position: 'relative',
 });
 
+const quizEndTime = Date.now() + 10 * 1000;
+
 export default function Question() {
   const [questions, setQuestions] = useState([]);
   const [dialogShown, setDialogShown] = useState(false);
@@ -53,6 +56,7 @@ export default function Question() {
   const [isLastQuestion, setIsLastQuestion] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isTimeElapsed, setIsTimeElapsed] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (value) => {
@@ -90,13 +94,6 @@ export default function Question() {
           setIsSubmitting(false);
           navigate(`/music-match/${eventId}`);
         } catch (error) {
-          // if (error.response && error.response.status === 400) {
-          //   setIsSubmitting(false);
-          //   handleOpenDialog();
-          //   console.log(error.request.responseText);
-          // } else {
-          //   setErrorMessage('An error occurred. Please try again later.');
-          // }
           setErrorMessage(error.response.data.message);
           setIsSubmitting(false);
           handleOpenDialog();
@@ -107,6 +104,25 @@ export default function Question() {
     }
     setCurrentQuestionAnswer('');
   };
+
+  const handleTimeElapsed = async () => {
+    setIsTimeElapsed(true);
+
+    if (answers.length > 0) {
+      try {
+        setIsSubmitting(true);
+        await requests.submitEventQuizAnswers(eventId, user.idToken, { answers });
+        setIsSubmitting(false);
+        navigate(`/music-match/${eventId}`);
+      } catch (error) {
+        setErrorMessage(error.response.data.message);
+        setIsSubmitting(false);
+        handleOpenDialog();
+        console.log(error.response.data.message);
+      }
+    }
+  };
+
   useEffect(() => {
     async function fetchQuestions() {
       try {
@@ -151,9 +167,13 @@ export default function Question() {
               justifyContent: 'center',
             }}
           >
-            <Typography sx={{ color: '#000', fontWeight: '600', fontSize: { xs: '1rem', md: '1.3rem' } }}>
-              00 : 25 : 00
-            </Typography>
+            {questions.length > 0 && (
+              <CountdownTimerQuestion
+                countdownDate={quizEndTime}
+                isTimeElapsed={isTimeElapsed}
+                onTimeElapsed={handleTimeElapsed}
+              />
+            )}
           </Box>
         </Stack>
 
