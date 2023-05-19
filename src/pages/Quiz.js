@@ -16,7 +16,9 @@ export default function Quiz() {
       try {
         const { data } = await requests.getEvent(eventId);
         setEvent(data);
-        setCountdownDate(Date.now() + 10000);
+        if (data.gameStartTimestamp > 0) {
+          setCountdownDate(data.gameStartTimestamp);
+        }
       } catch (error) {
         console.log(error);
       }
