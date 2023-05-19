@@ -331,7 +331,6 @@ export default function MusicMatch() {
                 </Box>
                 <Box sx={{ m: 'auto', height: '35%', width: '50%', margin: 'auto', mt: '.5rem' }}>
                   <VoiceRecorder musicMatchId={musicMatch?.uid} />
-                  {/* <VoiceRecorder2 /> */}
                 </Box>
               </Box>
               <MusicMatchInfoDialog open={musicMatchInfoDialogShown} handleClose={handleCloseDialog} />
