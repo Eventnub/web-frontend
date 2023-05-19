@@ -7,7 +7,7 @@ import { requests } from '../../api/requests';
 import useFirebase from '../../hooks/useFirebase';
 
 let mediaRecorder;
-// const chunks = [];
+const chunks = [];
 
 const VoiceRecorder = ({ musicMatchId }) => {
   const [recording, setRecording] = useState(false);
@@ -19,32 +19,32 @@ const VoiceRecorder = ({ musicMatchId }) => {
   const navigate = useNavigate();
 
   const startRecording = async () => {
-    const md = navigator.mediaDevices;
-    const audioContext = window.AudioContext;
-    const mediaStream = window.MediaStreamAudioSourceNode;
-    const audioWorklet = AudioWorkletNode;
-    console.log(JSON.stringify({ audioContext, mediaStream, audioWorklet }));
-    console.log(md);
-    // const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    // const md = navigator.mediaDevices;
+    // const audioContext = window.AudioContext;
+    // const mediaStream = window.MediaStreamAudioSourceNode;
+    // const audioWorklet = AudioWorkletNode;
+    // console.log(JSON.stringify({ audioContext, mediaStream, audioWorklet }));
+    // console.log(md);
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     // setStream(stream);
     // window.alert(stream);
 
-    // // mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
-    // mediaRecorder = new MediaRecorder(stream);
+    // mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
+    mediaRecorder = new MediaRecorder(stream);
 
-    // mediaRecorder.addEventListener('dataavailable', (event) => {
-    //   chunks.push(event.data);
-    // });
+    mediaRecorder.addEventListener('dataavailable', (event) => {
+      chunks.push(event.data);
+    });
 
-    // mediaRecorder.addEventListener('stop', () => {
-    //   const audioBlob = new Blob(chunks, { type: 'audio/mp3' });
-    //   const audioUrl = URL.createObjectURL(audioBlob);
-    //   setAudioURL(audioUrl);
-    //   setAudioFile(audioBlob);
-    // });
+    mediaRecorder.addEventListener('stop', () => {
+      const audioBlob = new Blob(chunks, { type: 'audio/mp3' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      setAudioURL(audioUrl);
+      setAudioFile(audioBlob);
+    });
 
-    // mediaRecorder.start();
-    // setRecording(true);
+    mediaRecorder.start();
+    setRecording(true);
   };
 
   const stopRecording = () => {

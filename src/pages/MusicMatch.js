@@ -9,8 +9,8 @@ import blueLogo from '../assets/blueLogo.png';
 import microphone from '../assets/old-microphone.png';
 import { requests } from '../api/requests';
 import useFirebase from '../hooks/useFirebase';
-// import VoiceRecorder from '../components/musicMatch/VoiceRecorder';
-import VoiceRecorder2 from '../components/musicMatch/VoiceRecorder2';
+import VoiceRecorder from '../components/musicMatch/VoiceRecorder';
+// import VoiceRecorder2 from '../components/musicMatch/VoiceRecorder2';
 import MusicMatchInfoDialog from '../components/musicMatch/MusicMatchInfoDialog';
 
 const Container = styled(Box)({
@@ -188,8 +188,8 @@ export default function MusicMatch() {
                 </Box>
               </Stack>
               <Box sx={{ m: 'auto', height: '35%', width: { xs: '100%', md: '50%' }, margin: 'auto', mt: '.5rem' }}>
-                {/* <VoiceRecorder musicMatchId={musicMatch?.uid} /> */}
-                <VoiceRecorder2 />
+                <VoiceRecorder musicMatchId={musicMatch?.uid} />
+                {/* <VoiceRecorder2 /> */}
               </Box>
             </Box>
           </Stack>
@@ -330,8 +330,8 @@ export default function MusicMatch() {
                   </Box>
                 </Box>
                 <Box sx={{ m: 'auto', height: '35%', width: '50%', margin: 'auto', mt: '.5rem' }}>
-                  {/* <VoiceRecorder musicMatchId={musicMatch?.uid} /> */}
-                  <VoiceRecorder2 />
+                  <VoiceRecorder musicMatchId={musicMatch?.uid} />
+                  {/* <VoiceRecorder2 /> */}
                 </Box>
               </Box>
               <MusicMatchInfoDialog open={musicMatchInfoDialogShown} handleClose={handleCloseDialog} />
