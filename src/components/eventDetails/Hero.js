@@ -19,8 +19,6 @@ import DrawerCom from './DrawerCom';
 import { requests } from '../../api/requests';
 import bg from '../../assets/bg.jpg';
 import instagram from '../../assets/Instagram.png';
-import facebook from '../../assets/Facebook.png';
-import twitter from '../../assets/Twitter.png';
 
 const StyledBox = styled(Box)({
   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
@@ -116,11 +114,19 @@ export default function Hero() {
                 >
                   Find Available Tickets
                 </Button>
-                <Box sx={{ display: 'flex', gap: '1rem' }}>
-                  <img src={facebook} alt="facebook logo" />
-                  <img src={twitter} alt="twitter logo" />
-                  <img src={instagram} alt="instagram logo" />
-                </Box>
+                <Stack direction="row" spacing={1}>
+                  <FacebookShareButton url={currentPageUrl} hashtag="#eventNub">
+                    <FacebookIcon round size={37} />
+                  </FacebookShareButton>
+                  <TwitterShareButton
+                    url={currentPageUrl}
+                    title={event?.name}
+                    hashtags={['#EventNub', '#GlobeEventNub']}
+                  >
+                    <TwitterIcon round size={37} />
+                  </TwitterShareButton>
+                  <img src={instagram} alt="instagram logo" style={{ width: '37px', height: '37px' }} />
+                </Stack>
               </Box>
             </Box>
           </Box>
@@ -264,16 +270,13 @@ export default function Hero() {
                 Share with friends
               </Typography>
               <Stack direction="row" spacing="2%" sx={{ px: '2%', mt: '1%' }}>
-                {/* <img src={facebook} alt="facebook logo" />
-                <img src={twitter} alt="twitter logo" />
-                <img src={instagram} alt="instagram logo" /> */}
                 <FacebookShareButton url={currentPageUrl} hashtag="#eventNub">
                   <FacebookIcon round size={45} />
                 </FacebookShareButton>
                 <TwitterShareButton url={currentPageUrl}>
                   <TwitterIcon round size={45} />
                 </TwitterShareButton>
-                <img src={instagram} alt="instagram logo" />
+                <img src={instagram} alt="instagram logo" style={{ width: '45px', height: '45px' }} />
               </Stack>
             </StyledBox>
             <Container maxWidth="3xl" sx={{ position: 'absolute', bottom: '-78px' }}>
