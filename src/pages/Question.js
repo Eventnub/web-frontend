@@ -44,7 +44,7 @@ const StyledCard = styled(Box)({
   position: 'relative',
 });
 
-const quizEndTime = Date.now() + 10 * 1000;
+const quizEndTime = Date.now() + 5 * 60 * 1000;
 
 export default function Question() {
   const [questions, setQuestions] = useState([]);

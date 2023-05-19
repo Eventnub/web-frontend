@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { isFutureDate } from '../utils/compareTime';
 import useCountdown from '../hooks/useCountdown';
 
@@ -18,6 +18,7 @@ export default function CountdownTimerQuestion({ countdownDate, isTimeElapsed, o
     if (!isFutureDate(dateThen)) {
       onTimeElapsed();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [days, hours, minutes, seconds]);
 
   if (isTimeElapsed) {
