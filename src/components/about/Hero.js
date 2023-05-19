@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Typography, Button, styled } from '@mui/material';
+import { Box, Typography, Button, styled, Stack } from '@mui/material';
 import Navbar from './Navbar';
 import concert from '../../assets/concerts.png';
 
@@ -25,11 +25,12 @@ function Hero() {
     fontWeight: '400',
     fontSize: '1rem',
     // textAlign: { xs: 'center', lg: 'left' },
+    textAlign: 'center',
   });
 
   return (
     <Box>
-      <Box sx={{ height: { xs: 'fit-content', sm: 'fit-content', md: 'fit-content' }, backgroundColor: '#fff' }}>
+      <Box sx={{ height: 'fit-content', backgroundColor: '#fff' }}>
         <Navbar />
         <Box
           sx={{
@@ -45,6 +46,7 @@ function Hero() {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
+              px: '2rem',
             }}
           >
             <Typography
@@ -96,7 +98,7 @@ function Hero() {
             >
               Contact us
             </Button>
-            <Box display="flex" my={10} sx={{ gap: { xs: 5, sm: 5, md: 25 } }}>
+            <Stack direction="row" my={{ xs: 5, md: 10 }} spacing={{ xs: 5, md: 25 }}>
               <Box display="flex" flexDirection="column">
                 <Num>3.5M</Num>
                 <Title>HAPPY FANS</Title>
@@ -109,11 +111,11 @@ function Hero() {
                 <Num>15</Num>
                 <Title>STAFF</Title>
               </Box>
-            </Box>
+            </Stack>
           </Box>
         </Box>
       </Box>
-      <Box sx={{}}>
+      <Box>
         <img src={concert} alt="trailer park concert" style={{ width: '100%' }} />
       </Box>
     </Box>

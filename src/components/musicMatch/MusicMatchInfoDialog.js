@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types';
-import { Dialog, DialogTitle, DialogContent, Button, Typography, Box, useTheme } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Button, Typography, Box } from '@mui/material';
 
 export default function SuccessDialog({ open, handleClose }) {
-  const theme = useTheme();
   return (
     <Dialog
       open={open}
       onClose={handleClose}
+      maxWidth="xs"
       PaperProps={{
         sx: {
           background: '#fff',
-          height: '50%',
-          width: '25%',
+          // height: '50%',
+          // width: '25%',
           boxShadow: '0px 0px 9px 1px rgba(0, 0, 0, 0.25)',
           borderRadius: '7px',
-          [theme.breakpoints.down('sm')]: { width: '80%', height: '30%' },
+          // [theme.breakpoints.down('sm')]: { width: '80%', height: '30%' },
         },
       }}
     >

@@ -37,7 +37,7 @@ export default function Navbar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        {isMatch && <Box />}
+        {/* {isMatch && <Box />} */}
 
         <Box style={{ display: 'flex', alignItems: 'center' }}>
           <StyledNavlink to={'/'}>
@@ -58,7 +58,9 @@ export default function Navbar() {
           </Typography>
         </Box>
         {isMatch ? (
-          <DrawerCom />
+          <>
+            <DrawerCom />
+          </>
         ) : (
           <>
             <NavbarLinksBox style={{ display: 'flex', flex: '1' }}>

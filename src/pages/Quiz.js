@@ -48,7 +48,7 @@ export default function Quiz() {
             <Button
               variant="contained"
               sx={{
-                width: '50%',
+                width: '70%',
                 height: '39px',
                 boxShadow: 'none',
                 mb: '2%',
