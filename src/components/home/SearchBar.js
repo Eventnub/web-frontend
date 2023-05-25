@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Select, MenuItem, Button, useTheme, Box, Stack } from '@mui/material';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
   const [name, setName] = useState('');
@@ -129,6 +132,9 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
           <MenuItem value={20}>Option 2</MenuItem>
         </Select> */}
         <TextField type="date" value={date} onChange={handleDateChange} style={{ height: '100%' }} />
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker value={date} onChange={handleDateChange} />
+        </LocalizationProvider> */}
         <Button
           variant="contained"
           disableElevation

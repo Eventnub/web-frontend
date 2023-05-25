@@ -29,6 +29,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
         ticketIndex: index,
         objective,
       });
+
       if (objective === 'quiz and music match') {
         navigate(`/quiz/${eventId}`);
       }
@@ -38,12 +39,12 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
       if (objective === 'purchase') {
         handleOpenPaymentSuccessfulDialog();
       }
-
-      console.log(data);
+      const paymentId = data.data.uid;
+      localStorage.setItem('paymentId', paymentId);
     } catch (error) {
       console.log(error.request);
     }
-    console.log(token); // replace with your actual code to handle the token
+    // replace with your actual code to handle the token
     // navigate(`/quiz/${eventId}`);
   };
 
@@ -70,6 +71,10 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
           ticketIndex: index,
           objective,
         });
+        const paymentId = data.data.uid;
+        localStorage.setItem('paymentId', paymentId);
+        console.log(paymentId);
+
         console.log(data);
       } catch (error) {
         console.log(error);
@@ -100,7 +105,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
       <Dialog
         open={open}
         onClose={handleClose}
-        fullWidth="true"
+        fullWidth
         maxWidth="md"
         PaperProps={{
           sx: {

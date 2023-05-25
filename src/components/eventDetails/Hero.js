@@ -18,7 +18,6 @@ import Navbar from '../home/Navbar';
 import DrawerCom from './DrawerCom';
 import { requests } from '../../api/requests';
 import bg from '../../assets/bg.jpg';
-import instagram from '../../assets/Instagram.png';
 
 const StyledBox = styled(Box)({
   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
@@ -125,7 +124,7 @@ export default function Hero() {
                   >
                     <TwitterIcon round size={37} />
                   </TwitterShareButton>
-                  <img src={instagram} alt="instagram logo" style={{ width: '37px', height: '37px' }} />
+                  {/* <img src={instagram} alt="instagram logo" style={{ width: '37px', height: '37px' }} /> */}
                 </Stack>
               </Box>
             </Box>
@@ -276,7 +275,7 @@ export default function Hero() {
                 <TwitterShareButton url={currentPageUrl}>
                   <TwitterIcon round size={45} />
                 </TwitterShareButton>
-                <img src={instagram} alt="instagram logo" style={{ width: '45px', height: '45px' }} />
+                {/* <img src={instagram} alt="instagram logo" style={{ width: '45px', height: '45px' }} /> */}
               </Stack>
             </StyledBox>
             <Container maxWidth="3xl" sx={{ position: 'absolute', bottom: '-78px' }}>

@@ -58,6 +58,7 @@ export default function Question() {
   const [isLoading, setIsLoading] = useState(false);
   const [isTimeElapsed, setIsTimeElapsed] = useState(false);
   const navigate = useNavigate();
+  const paymentId = localStorage.getItem('paymentId');
 
   const handleChange = (value) => {
     setCurrentQuestionAnswer(value);
@@ -90,7 +91,7 @@ export default function Question() {
       const handleSubmit = async () => {
         try {
           setIsSubmitting(true);
-          await requests.submitEventQuizAnswers(eventId, user.idToken, { answers: [...answers, answer] });
+          await requests.submitEventQuizAnswers(eventId, user.idToken, { answers: [...answers, answer], paymentId });
           setIsSubmitting(false);
           navigate(`/music-match/${eventId}`);
         } catch (error) {
@@ -190,9 +191,9 @@ export default function Question() {
                 <Typography sx={{ color: '#000', fontSize: '2rem', fontWeight: '400' }}>
                   {questions[currentQuestionIndex]?.question}
                 </Typography>
-                <FormControl component="fieldset" sx={{ mt: '4%' }}>
+                <FormControl component="fieldset" sx={{ mt: { xs: '6%', md: '4%' } }}>
                   <RadioGroup>
-                    <Stack direction="row" spacing={4} flexWrap="wrap">
+                    <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
                       {questions[currentQuestionIndex]?.answerOptions?.map((option) => (
                         <StyledOption key={option}>
                           <StyledLabel

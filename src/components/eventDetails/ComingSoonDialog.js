@@ -7,7 +7,7 @@ export default function PaymentDialog({ open, handleClose }) {
     <Dialog
       open={open}
       onClose={handleClose}
-      maxWidth="sm"
+      maxWidth="xs"
       PaperProps={{
         sx: {
           background: '#fff',

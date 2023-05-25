@@ -18,7 +18,7 @@ export default function TicketCarousel() {
   const [dialogShown, setDialogShown] = useState(false);
   const [comingSoonDialogShown, setComingSoonDialogShown] = useState(false);
   // const [paymentDialogShown, setPaymentDialogShown] = useState(false);
-  const [payStatus, setPayStatus] = useState(null);
+  const [userPayments, setUserPayments] = useState([]);
   const [extraPaymentData, setExtraPaymentData] = useState({
     objective: '',
     amount: 0,
@@ -32,21 +32,42 @@ export default function TicketCarousel() {
 
   const handleOpenDialog = (amount, index) => {
     if (isAuthenticated) {
-      console.log({ amount, index });
-      if (payStatus !== null) {
-        if (payStatus.objective === 'quiz and music match') {
+      const payments = userPayments.filter((payment) => payment.ticketIndex === index);
+      console.log(payments);
+      // When user has no payment record
+      if (payments.length === 0) {
+        setDialogShown(true);
+      }
+      if (payments.length >= 1) {
+        const [unplayedPayment] = payments.filter((payment) => {
+          const { objective, extraData } = payment;
+          return (
+            (objective === 'quiz and music match' && !extraData.hasPlayedQuiz && !extraData.hasPlayedMusicUnison) ||
+            (objective === 'raffle draw' && !extraData.hasPlayedRaffleDraw)
+          );
+        });
+        if (unplayedPayment && unplayedPayment.objective === 'quiz and music match') {
+          const paymentId = unplayedPayment.uid;
+          localStorage.setItem('paymentId', paymentId);
           navigate(`/quiz/${eventId}`);
         }
-        if (payStatus.objective === 'raffle draw') {
+        if (unplayedPayment && unplayedPayment.objective === 'raffle draw') {
+          const paymentId = unplayedPayment.uid;
+          localStorage.setItem('paymentId', paymentId);
           navigate(`/raffle/${eventId}`);
         }
-        return null;
+        if (!unplayedPayment) {
+          const response = window.confirm('You have participated in the game, are you sure you want to play again');
+          if (response) {
+            setDialogShown(true);
+          }
+        }
+        console.log(unplayedPayment);
       }
       setExtraPaymentData({
         amount,
         index,
       });
-      setDialogShown(true);
     } else {
       let redirectUrl = encodeURIComponent(location.pathname);
       redirectUrl = `${redirectUrl}`;
@@ -54,9 +75,6 @@ export default function TicketCarousel() {
     }
     return null;
   };
-
-  console.log({ payStatus });
-  console.log({ dialogShown });
 
   const handleCloseDialog = () => {
     setDialogShown(false);
@@ -122,7 +140,8 @@ export default function TicketCarousel() {
     async function fetchPaymentStatusForEvent() {
       try {
         const { data } = await requests.getUserPaymentForEvent(eventId, user.idToken);
-        setPayStatus(data);
+        setUserPayments(data);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }

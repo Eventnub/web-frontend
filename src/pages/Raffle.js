@@ -27,6 +27,7 @@ export default function Raffle() {
       setSelectedButtons([...selectedButtons, value]);
     }
   };
+  const paymentId = localStorage.getItem('paymentId');
 
   useEffect(() => {
     async function fetchRaffle() {
@@ -65,6 +66,7 @@ export default function Raffle() {
     try {
       setIsSubmitting(true);
       await requests.submitEventRaffleDrawChoice(eventId, user.idToken, {
+        paymentId,
         chosenNumbers: selectedButtons,
       });
       setIsSubmitting(false);
