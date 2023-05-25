@@ -23,7 +23,7 @@ export default function SelectGameDialog({ open, handleClose, extraPaymentData }
       <Dialog
         open={open}
         onClose={handleClose}
-        fullWidth="true"
+        fullWidth
         maxWidth="md"
         PaperProps={{
           sx: {

@@ -17,18 +17,11 @@ const VoiceRecorder = ({ musicMatchId }) => {
   const [stream, setStream] = useState(null);
   const { user } = useFirebase();
   const navigate = useNavigate();
+  const paymentId = localStorage.getItem('paymentId');
 
   const startRecording = async () => {
-    // const md = navigator.mediaDevices;
-    // const audioContext = window.AudioContext;
-    // const mediaStream = window.MediaStreamAudioSourceNode;
-    // const audioWorklet = AudioWorkletNode;
-    // console.log(JSON.stringify({ audioContext, mediaStream, audioWorklet }));
-    // console.log(md);
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    // setStream(stream);
-    // window.alert(stream);
-
+    setStream(stream);
     // mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
     mediaRecorder = new MediaRecorder(stream);
 
@@ -50,7 +43,6 @@ const VoiceRecorder = ({ musicMatchId }) => {
   const stopRecording = () => {
     if (stream.getAudioTracks) {
       const tracks = stream.getAudioTracks();
-      console.log({ tracks });
       tracks.forEach((track) => {
         track.stop();
       });
@@ -73,6 +65,7 @@ const VoiceRecorder = ({ musicMatchId }) => {
     const formData = new FormData();
     formData.append('audio', blobFile);
     formData.append('musicUnisonId', musicMatchId);
+    formData.append(paymentId);
     try {
       setIsSubmitting(true);
       await requests.submitAudioRecording(user.idToken, formData);

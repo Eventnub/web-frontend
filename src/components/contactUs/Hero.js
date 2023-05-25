@@ -51,7 +51,9 @@ export default function Hero() {
               <a href="https://www.linkedin.com/company/glob-eventnub/" target="_blank" rel="noreferrer">
                 <img src={linkedin} alt="Linkedin logo" style={{ height: '37px', width: '37px' }} />
               </a>
-              <img src={facebook} alt="facebook logo" />
+              <a href="https://www.facebook.com/globeventnub" target="_blank" rel="noreferrer">
+                <img src={facebook} alt="facebook logo" />
+              </a>
               <a href="https://twitter.com/globeventnub?s=20" target="_blank" rel="noreferrer">
                 <img src={twitter} alt="twitter logo" />
               </a>

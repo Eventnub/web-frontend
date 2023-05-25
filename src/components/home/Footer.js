@@ -85,9 +85,9 @@ export default function Footer() {
                 <a href="https://www.linkedin.com/company/glob-eventnub/" target="_blank" rel="noreferrer">
                   <img src={linkedin} alt="linkedin" style={{ width: '25px', height: '25px' }} />
                 </a>
-                <Link to="#">
+                <a href="https://www.facebook.com/globeventnub" target="_blank" rel="noreferrer">
                   <img src={facebook} alt="facebook" style={{ width: '25px', height: '25px' }} />
-                </Link>
+                </a>
                 <a href="https://twitter.com/globeventnub?s=20" target="_blank" rel="noreferrer">
                   <img src={twitter} alt="twitter" style={{ width: '25px', height: '25px' }} />
                 </a>

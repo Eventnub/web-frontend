@@ -16,7 +16,7 @@ export const endpoints = {
   changeUserToHost: getFullUrl('users/change-user-to-host'),
   createEvent: getFullUrl('events'),
   getCreatorEvents: getFullUrl('events/get-creator-events'),
-  getUserPaymentForEvent: getFullUrl('payments/get-user-payment-for-event'),
+  getUserPaymentForEvent: getFullUrl('payments/get-user-payments-for-event'),
   verifyStripePayment: getFullUrl('payments/handle-stripe-ticket-payment'),
   getEventMusicMatch: getFullUrl('music-unison/get-event-music-unison'),
   transcribeAudio: getFullUrl('music-unison/transcribe-audio'),
