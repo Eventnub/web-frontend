@@ -11,11 +11,13 @@ import SelectGameDialog from './SelectGameDialog';
 // import SelectPaymentOption from './SelectPaymentOptionDialog';
 import useFirebase from '../../hooks/useFirebase';
 import ComingSoonDialog from './ComingSoonDialog';
+import PlayGameAgainNotificationDialog from './PlayGameAgainNotificationDialog';
 
 export default function TicketCarousel() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [dialogShown, setDialogShown] = useState(false);
+  const [playGameAgainDialogShown, setPlayGameAgainDialogShown] = useState(false);
   const [comingSoonDialogShown, setComingSoonDialogShown] = useState(false);
   // const [paymentDialogShown, setPaymentDialogShown] = useState(false);
   const [userPayments, setUserPayments] = useState([]);
@@ -57,12 +59,8 @@ export default function TicketCarousel() {
           navigate(`/raffle/${eventId}`);
         }
         if (!unplayedPayment) {
-          const response = window.confirm('You have participated in the game, are you sure you want to play again');
-          if (response) {
-            setDialogShown(true);
-          }
+          handleOpenPlayGameAgainDialog();
         }
-        console.log(unplayedPayment);
       }
       setExtraPaymentData({
         amount,
@@ -80,46 +78,28 @@ export default function TicketCarousel() {
     setDialogShown(false);
   };
 
+  const handleOpenPlayGameAgainDialog = () => {
+    setPlayGameAgainDialogShown(true);
+  };
+
+  const handleClosePlayGameAgainDialog = () => {
+    setPlayGameAgainDialogShown(false);
+  };
+
+  const handleCancel = () => {
+    setPlayGameAgainDialogShown(false);
+  };
+
+  const handleContinue = () => {
+    setDialogShown(true);
+  };
+
   const handleCloseComingSoonDialog = () => {
     setComingSoonDialogShown(false);
   };
   const handleOpenComingSoonDialog = () => {
     setComingSoonDialogShown(true);
   };
-  // const handleOpenPaymentDialog = (objective, amount, index) => {
-  //   if (isAuthenticated) {
-  //     if (payStatus !== null) {
-  //       alert('You have already purchased this ticket');
-  //       return null;
-  //     }
-  //     setExtraPaymentData({
-  //       objective,
-  //       amount,
-  //       index,
-  //     });
-  //     setPaymentDialogShown(true);
-  //   } else {
-  //     let redirectUrl = encodeURIComponent(location.pathname);
-  //     redirectUrl = `${redirectUrl}`;
-  //     navigate(`/auth/login?redirectUrl=${redirectUrl}`);
-  //   }
-  //   return null;
-  // };
-
-  // const handleClosePaymentDialog = () => {
-  //   setPaymentDialogShown(false);
-  // };
-
-  // useEffect(() => {
-  //   const searchParams = new URLSearchParams(window.location.search);
-  //   const objectiveParam = searchParams.get('objective');
-  //   // const amountParam = searchParams.get('amount');
-  //   if (objectiveParam === 'to play game') {
-  //     setDialogShown(true);
-  //   } else if (objectiveParam === 'to buy') {
-  //     setPaymentDialogShown(true);
-  //   }
-  // }, []);
 
   useEffect(() => {
     async function fetchEvents() {
@@ -237,11 +217,12 @@ export default function TicketCarousel() {
                 extraPaymentData={extraPaymentData}
               />
               <ComingSoonDialog open={comingSoonDialogShown} handleClose={handleCloseComingSoonDialog} />
-              {/* <SelectPaymentOption
-                open={paymentDialogShown}
-                // handleClose={handleClosePaymentDialog}
-                extraPaymentData={extraPaymentData}
-              /> */}
+              <PlayGameAgainNotificationDialog
+                open={playGameAgainDialogShown}
+                handleClose={handleClosePlayGameAgainDialog}
+                handleCancel={handleCancel}
+                handleContinue={handleContinue}
+              />
             </Box>
           ))}
         </Slider>

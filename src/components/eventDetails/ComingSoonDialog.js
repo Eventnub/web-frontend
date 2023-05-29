@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Dialog, DialogTitle, DialogContent, Button, Typography, Box } from '@mui/material';
 import infoIcon from '../../assets/information-outline.png';
 
-export default function PaymentDialog({ open, handleClose }) {
+export default function ComingSoonDialog({ open, handleClose }) {
   return (
     <Dialog
       open={open}
@@ -11,11 +11,8 @@ export default function PaymentDialog({ open, handleClose }) {
       PaperProps={{
         sx: {
           background: '#fff',
-          // height: { xs: '20%', md: '25%', lg: '38%' },
-          // width: { xs: '80%', md: '50%', lg: '33%' },
           boxShadow: '0px, 0px rgba(0, 0, 0, 0.25)',
           borderRadius: '7px',
-          // [theme.breakpoints.down('sm')]: { width: '80%', height: '35%' },
         },
       }}
     >
@@ -51,7 +48,7 @@ export default function PaymentDialog({ open, handleClose }) {
   );
 }
 
-PaymentDialog.propTypes = {
+ComingSoonDialog.propTypes = {
   open: PropTypes.bool,
   handleClose: PropTypes.func,
 };
