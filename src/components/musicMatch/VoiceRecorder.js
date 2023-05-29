@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Box, Stack } from '@mui/material';
+import { Button, Box, Stack, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
+import { keyframes } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { requests } from '../../api/requests';
 import useFirebase from '../../hooks/useFirebase';
@@ -9,9 +10,67 @@ import useFirebase from '../../hooks/useFirebase';
 let mediaRecorder;
 const chunks = [];
 
+const quietKeyframes = keyframes`
+  25% {
+    transform: scaleY(.6);
+  }
+  50% {
+    transform: scaleY(.4);
+  }
+  75% {
+    transform: scaleY(.8);
+  }
+`;
+
+const normalKeyframes = keyframes`
+  25% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(.4);
+  }
+  75% {
+    transform: scaleY(.6);
+  }
+`;
+
+const loudKeyframes = keyframes`
+  25% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(.4);
+  }
+  75% {
+    transform: scaleY(1.2);
+  }
+`;
+
+const BoxContainer = styled('div')(({ visible }) => ({
+  display: visible ? 'flex' : 'none',
+  justifyContent: 'space-between',
+  height: '64px',
+  '--boxSize': '8px',
+  '--gutter': '4px',
+  width: '100%',
+}));
+
+const StyledBox = styled('div')(({ animationName }) => ({
+  transform: 'scaleY(.4)',
+  height: '100%',
+  width: 'var(--boxSize)',
+  background: '#000',
+  animationDuration: '1.2s',
+  animationTimingFunction: 'ease-in-out',
+  animationIterationCount: 'infinite',
+  borderRadius: '8px',
+  animationName,
+}));
+
 const VoiceRecorder = ({ musicMatchId }) => {
   const [recording, setRecording] = useState(false);
   const [audioURL, setAudioURL] = useState(null);
+  const [recordingStarted, setRecordingStarted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
   const [stream, setStream] = useState(null);
@@ -20,6 +79,7 @@ const VoiceRecorder = ({ musicMatchId }) => {
   const paymentId = localStorage.getItem('paymentId');
 
   const startRecording = async () => {
+    setRecordingStarted(true);
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     setStream(stream);
     // mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
@@ -41,6 +101,7 @@ const VoiceRecorder = ({ musicMatchId }) => {
   };
 
   const stopRecording = () => {
+    setRecordingStarted(false);
     if (stream.getAudioTracks) {
       const tracks = stream.getAudioTracks();
       tracks.forEach((track) => {
@@ -58,6 +119,7 @@ const VoiceRecorder = ({ musicMatchId }) => {
     setAudioURL(null);
     setAudioFile(null);
     setStream(null);
+    window.location.reload();
   };
 
   const uploadRecording = async () => {
@@ -65,7 +127,7 @@ const VoiceRecorder = ({ musicMatchId }) => {
     const formData = new FormData();
     formData.append('audio', blobFile);
     formData.append('musicUnisonId', musicMatchId);
-    formData.append(paymentId);
+    formData.append('paymentId', paymentId);
     try {
       setIsSubmitting(true);
       await requests.submitAudioRecording(user.idToken, formData);
@@ -108,6 +170,19 @@ const VoiceRecorder = ({ musicMatchId }) => {
           Stop Recording
         </Button>
       </Stack>
+
+      <BoxContainer visible={recordingStarted}>
+        <StyledBox animationName={quietKeyframes} />
+        <StyledBox animationName={normalKeyframes} />
+        <StyledBox animationName={quietKeyframes} />
+        <StyledBox animationName={loudKeyframes} />
+        <StyledBox animationName={quietKeyframes} />
+        <StyledBox animationName={quietKeyframes} />
+        <StyledBox animationName={normalKeyframes} />
+        <StyledBox animationName={quietKeyframes} />
+        <StyledBox animationName={loudKeyframes} />
+        <StyledBox animationName={quietKeyframes} />
+      </BoxContainer>
       {audioURL && (
         <audio controls>
           <source src={audioURL} type="audio/ogg" />
