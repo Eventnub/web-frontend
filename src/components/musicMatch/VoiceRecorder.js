@@ -134,17 +134,34 @@ const VoiceRecorder = ({ musicMatchId }) => {
     }
   };
 
+  // const stopRecording = () => {
+  //   setRecordingStarted(false);
+  //   if (stream.getAudioTracks) {
+  //     const tracks = stream.getAudioTracks();
+  //     tracks.forEach((track) => {
+  //       track.stop();
+  //     });
+  //   } else {
+  //     console.log('No Tracks Found');
+  //   }
+  //   mediaRecorder.stop();
+  //   setRecording(false);
+  // };
+
   const stopRecording = () => {
     setRecordingStarted(false);
-    if (stream.getAudioTracks) {
-      const tracks = stream.getAudioTracks();
+    if (stream && stream.getTracks) {
+      const tracks = stream.getTracks();
       tracks.forEach((track) => {
         track.stop();
       });
     } else {
       console.log('No Tracks Found');
     }
-    mediaRecorder.stop();
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+      mediaRecorder.stop();
+      chunks.length = 0; // Clear the chunks array
+    }
     setRecording(false);
   };
 
