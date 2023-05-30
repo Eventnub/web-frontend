@@ -78,26 +78,60 @@ const VoiceRecorder = ({ musicMatchId }) => {
   const navigate = useNavigate();
   const paymentId = localStorage.getItem('paymentId');
 
+  // const startRecording = async () => {
+  //   setRecordingStarted(true);
+  //   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //   setStream(stream);
+  //   // mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
+  //   mediaRecorder = new MediaRecorder(stream);
+
+  //   mediaRecorder.addEventListener('dataavailable', (event) => {
+  //     chunks.push(event.data);
+  //   });
+
+  //   mediaRecorder.addEventListener('stop', () => {
+  //     const audioBlob = new Blob(chunks, { type: 'audio/mp3' });
+  //     const audioUrl = URL.createObjectURL(audioBlob);
+  //     setAudioURL(audioUrl);
+  //     setAudioFile(audioBlob);
+  //   });
+
+  //   mediaRecorder.start();
+  //   setRecording(true);
+  // };
+
   const startRecording = async () => {
-    setRecordingStarted(true);
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    setStream(stream);
-    // mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
-    mediaRecorder = new MediaRecorder(stream);
+    try {
+      setRecordingStarted(true);
+      const permissionResult = await navigator.permissions.query({ name: 'microphone' });
 
-    mediaRecorder.addEventListener('dataavailable', (event) => {
-      chunks.push(event.data);
-    });
+      if (permissionResult.state === 'granted' || permissionResult.state === 'prompt') {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        setStream(stream);
+        // mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
+        mediaRecorder = new MediaRecorder(stream);
 
-    mediaRecorder.addEventListener('stop', () => {
-      const audioBlob = new Blob(chunks, { type: 'audio/mp3' });
-      const audioUrl = URL.createObjectURL(audioBlob);
-      setAudioURL(audioUrl);
-      setAudioFile(audioBlob);
-    });
+        mediaRecorder.addEventListener('dataavailable', (event) => {
+          chunks.push(event.data);
+        });
 
-    mediaRecorder.start();
-    setRecording(true);
+        mediaRecorder.addEventListener('stop', () => {
+          const audioBlob = new Blob(chunks, { type: 'audio/mp3' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          setAudioURL(audioUrl);
+          setAudioFile(audioBlob);
+        });
+
+        mediaRecorder.start();
+        setRecording(true);
+      } else {
+        // Handle microphone permission denial
+        console.log('Microphone permission denied');
+      }
+    } catch (error) {
+      // Handle any errors that occur during getUserMedia
+      console.error('Error accessing media devices:', error);
+    }
   };
 
   const stopRecording = () => {
