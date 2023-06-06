@@ -75,9 +75,27 @@ function FirebaseProvider({ children }) {
     }
   };
 
-  const loginWithGoogle = () => {
+  const loginWithGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    return firebase.auth().signInWithPopup(provider);
+    const { user } = await firebase.auth().signInWithPopup(provider);
+    const names = user.displayName.split(' ');
+    const data = {
+      provider: 'Google',
+      credentials: {
+        uid: user.uid,
+        firstName: names[0] ? names[0] : 'Not set',
+        lastName: names[1] ? names[1] : 'Not set',
+        email: user.email,
+        favoriteCelebrity: 'Not set',
+        ageRange: 'Not set',
+      },
+    };
+
+    try {
+      await requests.registerViaProvider(data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const loginWithFacebook = () => {
