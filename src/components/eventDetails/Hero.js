@@ -12,7 +12,7 @@ import {
   useMediaQuery,
   CircularProgress,
 } from '@mui/material';
-import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from 'react-share';
+import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from 'react-share'; 
 import moment from 'moment';
 import Navbar from '../home/Navbar';
 import DrawerCom from './DrawerCom';
