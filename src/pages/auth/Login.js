@@ -4,8 +4,8 @@ import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
 import Page from '../../components/Page';
 import GoogleIcon from '../../assets/images/auth/google.png';
-import FacebookIcon from '../../assets/images/auth/facebook.png';
-import AppleIcon from '../../assets/apple.png';
+// import FacebookIcon from '../../assets/images/auth/facebook.png';
+// import AppleIcon from '../../assets/apple.png';
 import bg from '../../assets/background-img.png';
 import logo from '../../assets/blueLogo.png';
 import { LoginForm } from '../../sections/auth/login';
@@ -13,7 +13,7 @@ import { LoginForm } from '../../sections/auth/login';
 export default function Login() {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('lg'));
-  const { loginWithGoogle, loginWithFacebook } = useFirebase();
+  const { loginWithGoogle } = useFirebase();
 
   const handleLoginGoogle = async () => {
     try {
@@ -23,13 +23,13 @@ export default function Login() {
     }
   };
 
-  const handleLoginFacebook = async () => {
-    try {
-      await loginWithFacebook();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const handleLoginFacebook = async () => {
+  //   try {
+  //     await loginWithFacebook();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <Page title="Log In">
@@ -54,10 +54,10 @@ export default function Login() {
               <Typography variant="subtitle2" sx={{ ml: '1rem', color: '#000', fontWeight: '100' }}>
                 Continue with
               </Typography>
-              <Stack spacing={1} direction="row">
-                <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
+              <Stack spacing={1} direction="row" justifyContent="center">
+                {/* <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
                   <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
-                </IconButton>
+                </IconButton> */}
                 <IconButton
                   variant="outlined"
                   sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
@@ -65,13 +65,13 @@ export default function Login() {
                 >
                   <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
                 </IconButton>
-                <IconButton
+                {/* <IconButton
                   variant="outlined"
                   sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
                   onClick={handleLoginFacebook}
                 >
                   <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
-                </IconButton>
+                </IconButton> */}
               </Stack>
               <Typography mt={'1rem'} sx={{ color: '#000', textAlign: 'center' }}>
                 OR
@@ -196,9 +196,9 @@ export default function Login() {
                       <Typography variant="subtitle2" sx={{ color: '#000', fontWeight: '100' }}>
                         With
                       </Typography>
-                      <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
+                      {/* <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
                         <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
-                      </IconButton>
+                      </IconButton> */}
                       <IconButton
                         variant="outlined"
                         sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
@@ -206,13 +206,13 @@ export default function Login() {
                       >
                         <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
                       </IconButton>
-                      <IconButton
+                      {/* <IconButton
                         variant="outlined"
                         sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
                         onClick={handleLoginFacebook}
                       >
                         <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
-                      </IconButton>
+                      </IconButton> */}
                     </Box>
                   </Box>
                   <Typography align="center" my={5} variant="h6" sx={{ color: '#000' }}>
