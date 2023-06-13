@@ -84,7 +84,7 @@ function Hero() {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center', 
+                justifyContent: 'center',
                 marginTop: '40px',
                 // [theme.breakpoints.down('sm')]: { marginTop: '40px' },
               }}
@@ -102,7 +102,7 @@ function Hero() {
               >
                 <Typography
                   component="h5"
-                  sx={{ color: '#fff', fontWeight: '700', [theme.breakpoints.down('sm')]: { fontSize: '12px' } }}
+                  sx={{ color: '#fff', fontWeight: '700', px: 4, [theme.breakpoints.down('sm')]: { fontSize: '12px' } }}
                   onClick={handleButtonClick}
                 >
                   Find Your Next Event

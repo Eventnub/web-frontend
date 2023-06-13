@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Box, Typography, Grid, Button, styled, Paper, IconButton, CircularProgress } from '@mui/material';
+import { Box, Typography, Grid, Button, styled, Paper, CircularProgress } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
-import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
+// import { IconButton  } from '@mui/material';
+// import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 
 export default function Events({ events, isLoading }) {
   const displayData = events?.slice(0, 5);
@@ -66,7 +67,7 @@ export default function Events({ events, isLoading }) {
                           width: '100%',
                           borderTopRightRadius: '8px',
                           height: '100%',
-                          // objectFit: 'contain',
+                          objectFit: 'cover',
                         }}
                         src={item.photoUrl}
                         alt={item.name}
@@ -92,7 +93,7 @@ export default function Events({ events, isLoading }) {
                   >
                     {item.type}
                   </Box>
-                  <Box
+                  {/* <Box
                     sx={{
                       background: 'rgba(255, 255, 255, 0.72)',
                       width: '16%',
@@ -115,7 +116,7 @@ export default function Events({ events, isLoading }) {
                       <ThumbUpOffAltOutlinedIcon sx={{ color: '#FF6C2C', width: '22px', height: '20px' }} />
                     </IconButton>
                     <Typography sx={{ color: '#FF6C2C', fontsize: '1rem', fontWeight: '600' }}>3k</Typography>
-                  </Box>
+                  </Box> */}
                   <Box sx={{ display: 'flex', marginTop: '15px', padding: '1rem' }}>
                     <Box sx={{ marginRight: '10px' }}>
                       <Typography variant="h6" sx={{ color: '#000' }}>
@@ -172,10 +173,12 @@ export default function Events({ events, isLoading }) {
                   </Box>
                   <Box sx={{ p: '1rem', position: 'absolute', bottom: 0, left: 0, right: 0, mt: '.8rem' }}>
                     <Button
+                      fullWidth
+                      size="large"
                       variant="outlined"
                       component={StyledLink}
                       to={`/event-details/${item.uid}#ticketSection`}
-                      sx={{ width: '80%', mb: '0.8em', alignItems: 'center' }}
+                      sx={{ mb: '0.8em', alignItems: 'center' }}
                     >
                       Explore Available Tickets
                     </Button>
