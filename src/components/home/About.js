@@ -3,7 +3,7 @@ import { Container, Box, Typography } from '@mui/material';
 
 export default function About() {
   return (
-    <Container maxWidth="sm" sx={{ marginTop: '4rem', marginBottom: '4rem' }}>
+    <Container sx={{ marginTop: '4rem', marginBottom: '4rem' }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <Typography sx={{ marginBottom: '40px', color: '#000', fontSize: '25px', fontWeight: 'bold' }}>
           How it Works
