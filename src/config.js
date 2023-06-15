@@ -17,6 +17,8 @@ export const FIREBASE_API = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
+export const MIXPANEL_API = "eeec135c90e54e1b2662351363c80f54";
+
 export const COGNITO_API = {
   userPoolId: process.env.REACT_APP_AWS_COGNITO_USER_POOL_ID,
   clientId: process.env.REACT_APP_AWS_COGNITO_CLIENT_ID,

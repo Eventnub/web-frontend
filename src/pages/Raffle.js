@@ -8,6 +8,7 @@ import Page from '../components/Page';
 import RaffleSuccessDialog from '../components/raffle/RaffleSuccessDialog';
 import AlreadySubmittedDialog from '../components/raffle/AlreadySubmitDialog';
 import logo from '../assets/blueLogo.png';
+import mixpanel from '../utils/mixpanel';
 
 export default function Raffle() {
   const [selectedButtons, setSelectedButtons] = useState([]);
@@ -69,6 +70,12 @@ export default function Raffle() {
         paymentId,
         chosenNumbers: selectedButtons,
       });
+
+      mixpanel.track('Game played', {
+        gameType: 'Raffle Draw',
+        userEmail: user.email,
+      });
+
       setIsSubmitting(false);
       handleOpenDialog();
     } catch (error) {

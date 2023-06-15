@@ -6,6 +6,7 @@ import { keyframes } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { requests } from '../../api/requests';
 import useFirebase from '../../hooks/useFirebase';
+import mixpanel from '../../utils/mixpanel';
 
 let mediaRecorder;
 const chunks = [];
@@ -131,6 +132,12 @@ const VoiceRecorder = ({ musicMatchId }) => {
     try {
       setIsSubmitting(true);
       await requests.submitAudioRecording(user.idToken, formData);
+
+      mixpanel.track('Game played', {
+        gameType: 'Music Match',
+        userEmail: user.email,
+      });
+
       setIsSubmitting(false);
       navigate('/quiz-completed');
     } catch (error) {

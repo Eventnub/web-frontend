@@ -18,6 +18,7 @@ import Navbar from '../home/Navbar';
 import DrawerCom from './DrawerCom';
 import { requests } from '../../api/requests';
 import bg from '../../assets/bg.jpg';
+import mixpanel from '../../utils/mixpanel';
 
 const StyledBox = styled(Box)({
   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
@@ -50,6 +51,14 @@ export default function Hero() {
         const { data } = await requests.getEvent(eventId);
         setEvent(data);
         setIsLoading(false);
+
+        mixpanel.track('Event details viewed', {
+          eventName: data.name,
+          eventUid: data.uid,
+          eventCountry: data.country,
+          eventState: data.state,
+          eventVenue: data.venue,
+        });
       } catch (error) {
         console.log(error);
       }

@@ -10336,6 +10336,11 @@
     "for-in" "^1.0.2"
     "is-extendable" "^1.0.1"
 
+"mixpanel-browser@^2.47.0":
+  "integrity" "sha512-Ldrva0fRBEIFWmEibBQO1PulfpJVF3pf28Guk09lDirDaSQqqU/xs9zQLwN2rL5VwVtsP1aD3JaCgaa98EjojQ=="
+  "resolved" "https://registry.npmjs.org/mixpanel-browser/-/mixpanel-browser-2.47.0.tgz"
+  "version" "2.47.0"
+
 "mjolnir.js@^2.5.0":
   "integrity" "sha512-rGA7+BJKvXI0ypxQD/+rQE/sW26kmc8UIZWhmQrjhwCf/zvhbcBlsu2vPB6w0Kv/rVnVFEONTSQqC0vFEpQvIA=="
   "resolved" "https://registry.npmjs.org/mjolnir.js/-/mjolnir.js-2.6.0.tgz"

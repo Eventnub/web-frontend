@@ -5,6 +5,7 @@ import { Box, Typography, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Swal from 'sweetalert2';
 import { requests } from '../../api/requests';
+import mixpanel from '../../utils/mixpanel';
 
 export default function FormSection() {
   const initialValues = {
@@ -30,6 +31,12 @@ export default function FormSection() {
         onSubmit={async (values, { resetForm, setSubmitting }) => {
           try {
             await requests.submitContactUsMessage(values);
+
+            mixpanel.track('Contact form submitted', {
+              userName: values.name,
+              userEmail: values.email,
+            });
+
             setSubmitting(false);
             Swal.fire({
               title: 'Success!',

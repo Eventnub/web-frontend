@@ -8,6 +8,7 @@ import Iconify from '../../../components/Iconify';
 import { requests } from '../../../api/requests';
 import DialogSuccess from './DialogSuccess';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
+import mixpanel from '../../../utils/mixpanel';
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -52,6 +53,12 @@ const RegisterForm = () => {
             delete values.favoriteCelebrity;
           }
           await requests.register(values);
+          mixpanel.track('Signed up', {
+            name: `${values.firstName} ${values.firstName}`,
+            email: values.email,
+            favoriteCelebrity: values.favoriteCelebrity,
+            method: 'Email and password',
+          });
           if (isMountedRef.current) {
             setSubmitting(false);
             handleOpenDialog();
