@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { FIREBASE_API } from '../config';
 import { requests } from '../api/requests';
+import mixpanel from '../utils/mixpanel';
 
 if (!firebase.apps.length) {
   firebase.initializeApp(FIREBASE_API);
@@ -93,6 +94,12 @@ function FirebaseProvider({ children }) {
 
     try {
       await requests.registerViaProvider(data);
+      mixpanel.track('Signed up', {
+        name: user.displayName,
+        email: user.email,
+        favoriteCelebrity: "Not set",
+        method: 'Google',
+      });
     } catch (error) {
       console.log(error.message);
     }

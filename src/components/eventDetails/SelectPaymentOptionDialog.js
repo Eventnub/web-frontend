@@ -10,6 +10,7 @@ import paystackLogo from '../../assets/paystack-icon.png';
 import useFirebase from '../../hooks/useFirebase';
 import PaymentSuccessDialog from './PaymentSuccessDialog';
 import { requests } from '../../api/requests';
+import mixpanel from '../../utils/mixpanel';
 
 export default function SelectPaymentOption({ open, handleClose, extraPaymentData }) {
   const [paymentSuccessfulDialogShown, setPaymentSuccessdulDialogShown] = useState(false);
@@ -28,6 +29,14 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
         eventId,
         ticketIndex: index,
         objective,
+      });
+
+      mixpanel.track('Payment made', {
+        userEmail: user.email,
+        paymentService: 'stripe',
+        paymentObjective: objective,
+        paymentEventId: eventId,
+        paymentTicketIndex: index
       });
 
       if (objective === 'quiz and music match') {
@@ -71,6 +80,15 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
           ticketIndex: index,
           objective,
         });
+
+        mixpanel.track('Payment made', {
+          userEmail: user.email,
+          paymentService: 'paystack',
+          paymentObjective: objective,
+          paymentEventId: eventId,
+          paymentTicketIndex: index,
+        });
+
         const paymentId = data.data.uid;
         localStorage.setItem('paymentId', paymentId);
         console.log(paymentId);

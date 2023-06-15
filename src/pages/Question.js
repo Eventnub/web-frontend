@@ -18,6 +18,7 @@ import QuizTakenDialog from '../components/raffle/QuizTakenDialog';
 import Page from '../components/Page';
 import CountdownTimerQuestion from '../components/CountdownTimerQuestion';
 import logo from '../assets/blueLogo.png';
+import mixpanel from '../utils/mixpanel';
 
 const StyledLabel = styled(FormControlLabel)({
   '& .MuiTypography-body1': {
@@ -92,6 +93,12 @@ export default function Question() {
         try {
           setIsSubmitting(true);
           await requests.submitEventQuizAnswers(eventId, user.idToken, { answers: [...answers, answer], paymentId });
+
+          mixpanel.track('Game played', {
+            gameType: 'Quiz',
+            userEmail: user.email,
+          });
+
           setIsSubmitting(false);
           navigate(`/music-match/${eventId}`);
         } catch (error) {
