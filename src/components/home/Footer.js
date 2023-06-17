@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Stack, Typography, styled, useTheme, Divider, TextField, IconButton } from '@mui/material';
 import logoImg from '../../assets/logoImg.png';
-// import InputStyle from '../InputStyle';
-// import useFirebase from '../../hooks/useFirebase';
 import facebook from '../../assets/Facebook.png';
 import linkedin from '../../assets/linkedin.png';
 import twitter from '../../assets/Twitter.png';
@@ -12,8 +10,6 @@ import sendIcon from '../../assets/sendIcon.png';
 
 export default function Footer() {
   const theme = useTheme();
-  // const { isAuthenticated } = useFirebase();
-
   const StyledNavlink = styled(Link)(() => ({
     textDecoration: 'none',
     color: '#FFFFFF',
@@ -32,20 +28,12 @@ export default function Footer() {
   });
 
   return (
-    // <Container
-    //   maxWidth="xl"
-    //   sx={{
-    //     backgroundColor: '#1358A5',
-    //     color: '#fff',
-    //     [theme.breakpoints.down('sm')]: { padding: '30px' },
-    //   }}
-    // >
     <Box
       sx={{
         backgroundColor: '#1358A5',
         color: '#fff',
         width: '100%',
-        px: '1rem',
+        px: { xs: '2rem', md: '5rem' },
         [theme.breakpoints.down('sm')]: { padding: '30px' },
       }}
     >
@@ -79,8 +67,8 @@ export default function Footer() {
               </Typography>
             </Box>
             <Box sx={{ marginTop: '15px' }}>
-              <Paragraph>Making Events Accessible </Paragraph>
-              <Paragraph>and Inclusive for All</Paragraph>
+              <Paragraph>Made for Afrobeat artistes</Paragraph>
+              <Paragraph>and true fans</Paragraph>
               <Stack direction="row" alignItems="center" mt="1rem" spacing={2}>
                 <a href="https://www.linkedin.com/company/glob-eventnub/" target="_blank" rel="noreferrer">
                   <img src={linkedin} alt="linkedin" style={{ width: '25px', height: '25px' }} />
@@ -164,6 +152,5 @@ export default function Footer() {
         <StyledTypograph>Copyright 2023 Eventnub.com</StyledTypograph>
       </Box>
     </Box>
-    // </Container>
   );
 }

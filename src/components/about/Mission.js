@@ -27,20 +27,8 @@ function Mission() {
         alignItems: 'center',
       }}
     >
-      <Box sx={{ width: '600px', maxWidth: '100%' }}>
-        <Title mb="2rem">Our Mission</Title>
-        <Text>
-          At Eventnub, our vision is to revolutionize the event industry by connecting true fans with their favorite
-          celebrities and empowering emerging celebrities to grow their fanbase. We strive to make events accessible and
-          inclusive to all through our gamified activities.
-        </Text>
-        <Text sx={{ mt: 2 }}>
-          Join us on our journey to create unforgettable experiences and a supportive community that celebrates
-          diversity and creativity.
-        </Text>
-      </Box>
       <Box
-        mt="4rem"
+        // mt="4rem"
         display="flex"
         flexDirection="column"
         alignItems="center"
