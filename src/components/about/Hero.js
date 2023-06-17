@@ -62,7 +62,7 @@ function Hero() {
                 textAlign: 'center',
               }}
             >
-              We are Eventnub
+              Our Mission
             </Typography>
             <Text>
               Welcome to Eventnub, the ultimate Afrobeat event platform made for artists and true fans. Our mission is
