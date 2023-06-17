@@ -4,30 +4,31 @@ import { Box, Typography, Button, styled, Stack } from '@mui/material';
 import Navbar from './Navbar';
 import concert from '../../assets/concerts.png';
 
+const Num = styled(Typography)({
+  fontWeight: '300',
+  fontSize: '2.5rem',
+  lineHeight: '70.33px',
+  color: '#000',
+  textAlign: 'center',
+});
+
+const Title = styled(Typography)({
+  fontsize: '20px',
+  fontWeight: '500',
+  lineHeight: '29.3px',
+  color: '#000',
+  textAlign: 'center',
+});
+
+const Text = styled(Typography)({
+  color: '#000',
+  fontWeight: '400',
+  fontSize: '1rem',
+  textAlign: 'center',
+  marginTop: '1.2rem',
+});
+
 function Hero() {
-  const Num = styled(Typography)({
-    fontWeight: '300',
-    fontSize: '2.5rem',
-    lineHeight: '70.33px',
-    color: '#000',
-    textAlign: 'center',
-  });
-  const Title = styled(Typography)({
-    fontsize: '20px',
-    fontWeight: '500',
-    lineHeight: '29.3px',
-    color: '#000',
-    textAlign: 'center',
-  });
-
-  const Text = styled(Typography)({
-    color: '#000',
-    fontWeight: '400',
-    fontSize: '1rem',
-    // textAlign: { xs: 'center', lg: 'left' },
-    textAlign: 'center',
-  });
-
   return (
     <Box>
       <Box sx={{ height: 'fit-content', backgroundColor: '#fff' }}>
@@ -47,13 +48,15 @@ function Hero() {
               justifyContent: 'center',
               alignItems: 'center',
               px: '2rem',
+              width: '700px',
+              maxWidth: '100%',
             }}
           >
             <Typography
               sx={{
-                fontWeight: '200',
+                fontWeight: '500',
                 color: '#000',
-                fontSize: { xs: '1.5rem', sm: '1.5rem', md: '2.5rem' },
+                fontSize: { xs: '1.5rem', md: '2.5rem' },
                 lineHeight: { xs: '43.5px', sm: '43.5px', md: '58px' },
                 mb: '1.5rem',
                 textAlign: 'center',
@@ -61,30 +64,28 @@ function Hero() {
             >
               We are Eventnub
             </Typography>
-            <Text>Welcome to Eventnub, the ultimate event platform that brings fans and celebrities</Text>
-            <Text>together. Our mission is to provide event enthusiasts and fans of all kinds with the</Text>
-            <Text>opportunity to experience their favorite celebrities' live events, without the burden of</Text>
-            <Text>high ticket costs</Text>
-            <Text sx={{ mt: '1rem' }}>
-              We achieve this by offering a unique approach to ticketing through various gamified
+            <Text>
+              Welcome to Eventnub, the ultimate Afrobeat event platform made for artists and true fans. Our mission is
+              to make Afrobeat events accessible to genuine fans who have longed to see their favorite artists perform
+              but can’t afford the high cost of tickets.
             </Text>
-            <Text>activities that are fun and engaging. By playing our "how well you know your fan" game,</Text>
-            <Text>fans have the chance to win free or highly discounted passes to attend events of their</Text>
-            <Text>favorite celebrities.</Text>
-            <Text mt="1rem">
-              As a platform, we strive to create a community that supports both fans and celebrities
+            <Text>
+              We achieve this by offering a unique approach to ticketing through various gamified activities that are
+              fun and engaging. By playing the ‘How well you know your artiste’ game, fans have the chance to win free
+              or highly discounted passes to attend events of their favorite Afrobeat celebrities.
             </Text>
-            <Text>alike. Our goal is to connect fans with the celebrities they love and help emerging</Text>
-            <Text>celebrities grow their fanbase.</Text>
-            <Text sx={{ mt: '1rem' }}>
-              At Eventnub, we believe that events are a great way to bring people together. That's{' '}
+            <Text>
+              As a platform, we strive to create a community that supports true fans and celebrities alike. We aim to
+              connect fans with the celebrities they love and help emerging artists grow their fanbase.
             </Text>
-            <Text>why we are dedicated to providing an innovative and accessible way for fans to</Text>
-            <Text>experience their favorite celebrities' events. Join our community today and discover a</Text>
-            <Text>world of unforgettable events and experiences.</Text>
-
+            <Text>
+              At Eventnub, we believe that events are a great way to bring people together. That's why we are dedicated
+              to providing an innovative and accessible way for true fans to experience their favorite celebrities'
+              events. Join our community today and discover a world of unforgettable events and experiences.
+            </Text>
             <Button
               variant="contained"
+              size="large"
               component={Link}
               to={'/contact-us'}
               sx={{

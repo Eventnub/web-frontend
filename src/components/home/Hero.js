@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import bg from '../../assets/bg.jpg';
 
 const StyledDiv = styled(Box)(({ theme }) => ({
-  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
+  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), url(${bg})`,
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
@@ -28,7 +28,6 @@ function Hero() {
           sx={{
             display: 'flex',
             alignContent: 'center',
-            // alignItems: { xl: 'center' },
             justifyContent: 'center',
             padding: '10% 0 30% 0',
             [theme.breakpoints.down('md')]: { padding: '5% 0 5% 0' },
@@ -49,10 +48,8 @@ function Hero() {
             <Typography
               variant="h3"
               sx={{
-                // fontSize: '40px',
                 color: '#fff',
                 fontWeight: '800',
-                // [theme.breakpoints.down('sm')]: { fontSize: '1.5em', fontWeight: 'normal' },
                 [theme.breakpoints.down('md')]: { textAlign: 'center' },
               }}
             >
@@ -64,21 +61,12 @@ function Hero() {
                 fontWeight: '400',
                 color: '#fff',
                 textAlign: 'center',
+                width: '600px',
+                maxWidth: '100%',
                 [theme.breakpoints.down('md')]: { fontSize: '1em', fontWeight: 'normal' },
               }}
             >
-              Discover Your Next Favorite Event and stand a chance
-            </Typography>
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: '400',
-                color: '#fff',
-                textAlign: 'center',
-                [theme.breakpoints.down('sm')]: { fontSize: '1em', fontWeight: 200 },
-              }}
-            >
-              to win a Free or Sponsored Ticket Today!
+              Discover Your Next Favorite Event and stand a chance to win a Free or Sponsored Ticket Today!
             </Typography>
             <Box
               sx={{
@@ -86,27 +74,22 @@ function Hero() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginTop: '40px',
-                // [theme.breakpoints.down('sm')]: { marginTop: '40px' },
               }}
             >
               <Button
                 variant="contained"
+                size="large"
                 sx={{
                   width: '100%',
-                  height: { xs: '5vh', lg: '10vh' },
                   boxShadow: 'none',
                   backgroundColor: '#1358A5',
-                  padding: '0 20px',
-                  // [theme.breakpoints.down('sm')]: { width: '50vw', height: '50px' },
+                  fontWeight: '700',
+                  fontSize: '1rem',
+                  padding: '1rem 5rem',
                 }}
+                onClick={handleButtonClick}
               >
-                <Typography
-                  component="h5"
-                  sx={{ color: '#fff', fontWeight: '700', px: 4, [theme.breakpoints.down('sm')]: { fontSize: '12px' } }}
-                  onClick={handleButtonClick}
-                >
-                  Find Your Next Event
-                </Typography>
+                Find Your Next Event
               </Button>
             </Box>
           </Box>
