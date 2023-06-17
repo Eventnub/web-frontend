@@ -198,7 +198,7 @@ export default function Register() {
                     <Typography variant="h4" sx={{ color: '#ffffff', fontWeight: '100', fontSize: '1rem' }}>
                       Already have an account?
                     </Typography>
-                    <Typography variant="subtitle2" sx={{ color: '#ffffff', fontSize: '0.6rem', paddingTop: '1em' }}>
+                    <Typography variant="subtitle2" sx={{ color: '#ffffff', fontSize: '0.8rem', paddingTop: '1em' }}>
                       Sign in to discover available concerts from your favorite artist
                     </Typography>
                   </Box>
