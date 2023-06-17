@@ -188,34 +188,30 @@ export default function Register() {
               </Box>
               <Box position="relative" zIndex="4">
                 <Box marginLeft={10} display="flex" flexDirection="column">
-                  <Box display="flex" alignItems="center">
-                    <Link to="/" component={RouterLink} underline="none">
-                      <img src={logo} alt="logo" />
-                    </Link>
+                  <Link to="/" component={RouterLink} underline="none" sx={{ display: 'flex', alignItems: 'center' }}>
+                    <img src={logo} alt="logo" />
                     <Typography variant="h6" sx={{ color: '#1358A5', letterSpacing: '0.1em', fontsize: '2rem' }}>
                       eventnub
                     </Typography>
-                  </Box>
-                  <Box sx={{ width: '180px' }}>
-                    <Typography
-                      variant="h4"
-                      sx={{ paddingLeft: '1em', color: '#ffffff', fontWeight: '100', fontSize: '1rem' }}
-                    >
+                  </Link>
+                  <Box sx={{ width: '180px', ml: 4 }}>
+                    <Typography variant="h4" sx={{ color: '#ffffff', fontWeight: '100', fontSize: '1rem' }}>
                       Already have an account?
                     </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      sx={{ paddingLeft: '1.8em', color: '#ffffff', fontSize: '0.6rem', paddingTop: '1em' }}
-                    >
+                    <Typography variant="subtitle2" sx={{ color: '#ffffff', fontSize: '0.6rem', paddingTop: '1em' }}>
                       Sign in to discover available concerts from your favorite artist
                     </Typography>
                   </Box>
-                  <Box sx={{ marginTop: '1em', paddingLeft: '1em' }}>
-                    <Link to={PATH_AUTH.login} component={RouterLink} underline="none">
-                      <Button variant="outlined" sx={{ border: '1px solid #ffffff', color: '#ffffff', margin: 'auto' }}>
-                        Sign In
-                      </Button>
-                    </Link>
+                  <Box sx={{ marginTop: '1em', ml: 4 }}>
+                    <Button
+                      component={RouterLink}
+                      to={PATH_AUTH.login}
+                      underline="none"
+                      variant="outlined"
+                      sx={{ border: '1px solid #ffffff', color: '#ffffff', margin: 'auto' }}
+                    >
+                      Sign In
+                    </Button>
                   </Box>
                 </Box>
               </Box>
