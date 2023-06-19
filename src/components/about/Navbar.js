@@ -36,22 +36,19 @@ export default function Navbar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: '#fff', boxShadow: 'none' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <StyledNavlink to={'/'}>
-            <img src={logo} alt="logo" style={{ width: '37px', height: '37px' }} />
-          </StyledNavlink>
+        <StyledNavlink to={'/'} sx={{ display: 'flex', alignItems: 'center' }}>
+          <img src={logo} alt="logo" style={{ width: '70px', height: '70px' }} />
           <Typography
             sx={{
               fontWeight: '600',
-              letterSpacing: { xs: '.1rem', md: '.3rem' },
-              fontSize: { xs: '.8rem', md: '1.5rem' },
+              letterSpacing: { xs: '.1rem', md: '.2rem' },
+              fontSize: { xs: '.8rem', md: '1.1rem' },
               color: '#1358A5',
-              // display: { xs: 'none', md: 'block' },
             }}
           >
             eventnub
           </Typography>
-        </Box>
+        </StyledNavlink>
         {isMatch ? (
           <DrawerCom />
         ) : (
