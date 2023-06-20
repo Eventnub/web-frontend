@@ -1,5 +1,5 @@
-import { AppBar, Toolbar, Typography, Box, useMediaQuery, useTheme, styled } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, Button, Box, useMediaQuery, useTheme, styled } from '@mui/material';
+import { NavLink, Link as RouterLink } from 'react-router-dom';
 import logo from '../../assets/blueLogo.png';
 import { PATH_AUTH } from '../../routes/paths';
 import DrawerCom from './DrawerCom';
@@ -57,11 +57,14 @@ export default function Navbar() {
               <StyledNavlink to="/">Home</StyledNavlink>
               <StyledNavlink to="/about">About</StyledNavlink>
               <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
-              {/* {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>} */}
               <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 My Tickets<Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
               </StyledNavlink>
-              {!isAuthenticated && <StyledNavlink to={PATH_AUTH.login}>Sign In</StyledNavlink>}
+              {!isAuthenticated && (
+                <Button variant="contained" sx={{ bgcolor: '#CC5A27' }} component={RouterLink} to={PATH_AUTH.login}>
+                  Sign In
+                </Button>
+              )}
             </NavbarLinksBox>
           </>
         )}

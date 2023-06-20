@@ -50,7 +50,8 @@ function Hero() {
               sx={{
                 color: '#fff',
                 fontWeight: '800',
-                [theme.breakpoints.down('md')]: { textAlign: 'center' },
+                textAlign: 'center',
+                fontSize: { xs: '1.3rem', md: '2rem' },
               }}
             >
               Made for Celebrities and Fans
@@ -63,7 +64,7 @@ function Hero() {
                 textAlign: 'center',
                 width: '600px',
                 maxWidth: '100%',
-                [theme.breakpoints.down('md')]: { fontSize: '1em', fontWeight: 'normal' },
+                fontSize: { xs: '1rem', md: '1.5rem' },
               }}
             >
               Discover Your Next Favorite Event and stand a chance to win a Free or Sponsored Ticket Today!

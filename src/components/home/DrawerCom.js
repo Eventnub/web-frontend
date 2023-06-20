@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link as RouterLink } from 'react-router-dom';
 import {
   Drawer,
+  Button,
   List,
   ListItemButton,
   ListItemText,
@@ -56,14 +57,6 @@ export default function DrawerCom() {
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
-          {/* <ListItemButton>
-            <ListItemIcon>
-              <ListItemText>
-                <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
-                {isAuthenticated && user.role === 'host' && <StyledNavlink to="/my-events">My Events</StyledNavlink>}
-              </ListItemText>
-            </ListItemIcon>
-          </ListItemButton> */}
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
@@ -74,7 +67,11 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                {!isAuthenticated && <StyledNavlink to={PATH_AUTH.login}>Sign In</StyledNavlink>}
+                {!isAuthenticated && (
+                  <Button variant="contained" sx={{ bgcolor: '#CC5A27' }} component={RouterLink} to={PATH_AUTH.login}>
+                    Sign In
+                  </Button>
+                )}
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
