@@ -179,7 +179,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
               <Box sx={{ flex: 1 }}>
                 <StripeCheckout
                   token={onToken}
-                  stripeKey="pk_test_51Mpz28LArcLAwVgA09YE8VZAUFZR7NVPMUu2CMH359osn4nSZvoCO4PgZMBGtTZKK8FNmnFylvJl7OnzB9VhqdXy00u08JqhD3"
+                  stripeKey="pk_live_51NJWgPLWplPuQFeHbyHKseV2ZeGDedXX7XdMDAaBTK1eUlEV6WtVnsgnSzyxQEE8YG0r02vReuXRcBJjUKlZxAsJ000qEMzcij"
                   name="Your App Name"
                   amount={amount}
                   currency="USD"
