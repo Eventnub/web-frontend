@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, styled, Typography, Button, useTheme } from '@mui/material';
 import Navbar from './Navbar';
-import bg from '../../assets/bg.jpg';
+import bg from '../../assets/bgImg-lhd.png';
 
 const StyledDiv = styled(Box)(({ theme }) => ({
   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)), url(${bg})`,

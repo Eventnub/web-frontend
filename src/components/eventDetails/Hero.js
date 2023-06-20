@@ -17,7 +17,7 @@ import moment from 'moment';
 import Navbar from '../home/Navbar';
 import DrawerCom from './DrawerCom';
 import { requests } from '../../api/requests';
-import bg from '../../assets/bg.jpg';
+import bg from '../../assets/bgImg-lhd.png';
 import mixpanel from '../../utils/mixpanel';
 
 const StyledBox = styled(Box)({
