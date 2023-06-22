@@ -11,12 +11,14 @@ const StyledNavlink = styled(NavLink)(() => ({
   fontWeight: '400',
   fontSize: '16px',
 }));
+
 const NavbarLinksBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   gap: theme.spacing(6),
 }));
+
 const Sircle = styled('span')(() => ({
   width: '20px',
   height: '20px',
@@ -34,7 +36,7 @@ export default function Navbar() {
   const { isAuthenticated } = useFirebase();
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#fff', boxShadow: 'none' }}>
+    <AppBar position="static" sx={{ backgroundColor: '#fff', boxShadow: 'none', p: '1.2rem' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <StyledNavlink to={'/'} sx={{ display: 'flex', alignItems: 'center' }}>
           <img src={logo} alt="logo" style={{ width: '70px', height: '70px' }} />

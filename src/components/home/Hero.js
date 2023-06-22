@@ -15,6 +15,7 @@ const StyledDiv = styled(Box)(({ theme }) => ({
 
 function Hero() {
   const theme = useTheme();
+  
   const handleButtonClick = () => {
     const nextSection = document.getElementById('nextSection');
     nextSection.scrollIntoView({ behavior: 'smooth' });
@@ -74,7 +75,8 @@ function Hero() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: '40px',
+                mt: '2rem',
+                mb: '4rem',
               }}
             >
               <Button
@@ -84,9 +86,10 @@ function Hero() {
                   width: '100%',
                   boxShadow: 'none',
                   backgroundColor: '#1358A5',
+                  border: '2px solid #fff',
                   fontWeight: '700',
                   fontSize: '1rem',
-                  padding: '1rem 5rem',
+                  padding: '1rem 3rem',
                 }}
                 onClick={handleButtonClick}
               >

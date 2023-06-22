@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { requests } from '../../api/requests';
+import { toFixedFloat } from '../../utils/formatNumber';
 import SelectGameDialog from './SelectGameDialog';
 // import SelectPaymentOption from './SelectPaymentOptionDialog';
 import useFirebase from '../../hooks/useFirebase';
@@ -188,7 +189,7 @@ export default function TicketCarousel() {
                 </Typography>
                 <Typography sx={{ fontSize: '1.5rem', color: '#fff', fontWeight: '400' }}>{item.type}</Typography>
                 <Typography sx={{ color: '#fff', fontWeight: '600', fontSize: '1rem' }}>
-                  Pay ${item.price * 0.15} of the ticket price and get it for free by playing a game.
+                  Pay ${toFixedFloat(item.price * 0.15)} of the ticket price and get it for free by playing a game.
                 </Typography>
               </Stack>
 
@@ -196,7 +197,7 @@ export default function TicketCarousel() {
                 <Button
                   variant="outlined"
                   sx={{ boxShadow: 'none', my: '7%', border: '1px solid #FF6C2C', color: '#fff', mt: '6rem' }}
-                  onClick={() => handleOpenDialog(item.price * 0.15, item.index)}
+                  onClick={() => handleOpenDialog(toFixedFloat(item.price * 0.15), item.index)}
                 >
                   Play a game and win ticket
                 </Button>

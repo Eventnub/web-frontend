@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { TextField, Select, MenuItem, Button, useTheme, Box, Stack } from '@mui/material';
+import { TextField, Select, MenuItem, Button, Grid } from '@mui/material';
 
 const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
   const [name, setName] = useState('');
@@ -8,7 +8,6 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
   const [country, setCountry] = useState('');
   const [date, setDate] = useState('');
   const [artist, setArtist] = useState('');
-  const theme = useTheme();
 
   const handleSearch = () => {
     handleSearchEvent(name, country, state, artist, date);
@@ -31,75 +30,20 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        border: '2px solid #F4F4F4',
-        height: '100%',
-        width: '100%',
-        borderRadius: '5px',
-        [theme.breakpoints.down('sm')]: {
-          flexDirection: 'column',
-          width: '100%',
-        },
-      }}
-    >
-      <Box
-        sx={{
-          width: '40%',
-          border: '1px solid #F4F4F4',
-          height: '100%',
-          background: '#F4F4F4',
-          paddingLeft: '10px',
-          marginRight: '10px',
-          display: 'flex',
-          alignItems: 'center',
-          [theme.breakpoints.down('sm')]: {
-            width: '100%',
-            height: '100%',
-            marginRight: 0,
-          },
-        }}
-      >
+    <Grid container spacing={1}>
+      <Grid item xs={12} md={3}>
         <TextField
+          fullWidth
+          variant="standard"
           placeholder="Event Name"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          variant="standard"
           InputProps={{ disableUnderline: true }}
-          sx={{
-            marginRight: '16px',
-            outline: 'none',
-            background: '#F4F4F4',
-            height: '100%',
-            width: '100%',
-            padding: '10px',
-            [theme.breakpoints.down('sm')]: {
-              width: '100%',
-              height: '100%',
-            },
-          }}
+          sx={{ background: '#F4F4F4', height: { xs: '3.5rem', md: '100%' }, p: 1 }}
         />
-      </Box>
-
-      <Stack
-        spacing={2}
-        direction="row"
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          width: '100%',
-          gap: '.5rem',
-          py: '.5rem',
-          [theme.breakpoints.down('sm')]: {
-            marginTop: '10px',
-            flexWrap: 'wrap',
-            gap: '1rem',
-          },
-        }}
-      >
-        <Select value={country} onChange={handleCountryChange} displayEmpty style={{ height: '100%' }}>
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <Select fullWidth value={country} onChange={handleCountryChange} displayEmpty>
           <MenuItem value="">Country</MenuItem>
           {countries.map((c) => (
             <MenuItem value={c} key={Math.random()}>
@@ -107,7 +51,9 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
             </MenuItem>
           ))}
         </Select>
-        <Select value={state} onChange={handleStateChange} displayEmpty style={{ height: '100%' }}>
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <Select fullWidth value={state} onChange={handleStateChange} displayEmpty>
           <MenuItem value="">State</MenuItem>
           {states.map((s) => (
             <MenuItem value={s} key={Math.random()}>
@@ -115,7 +61,9 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
             </MenuItem>
           ))}
         </Select>
-        <Select value={artist} onChange={handleArtistChange} displayEmpty style={{ height: '100%' }}>
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <Select fullWidth value={artist} onChange={handleArtistChange} displayEmpty>
           <MenuItem value="">Artist</MenuItem>
           {artists.map((a) => (
             <MenuItem value={a} key={Math.random()}>
@@ -123,20 +71,21 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
             </MenuItem>
           ))}
         </Select>
-        <TextField type="date" value={date} onChange={handleDateChange} style={{ height: '100%' }} />
-        {/* <DatePicker showIcon onChange={handleDateChange} placeholderText="Select a weekday" /> */}
-
+      </Grid>
+      <Grid item xs={6} md={2}>
+        <TextField fullWidth type="date" value={date} onChange={handleDateChange} />
+      </Grid>
+      <Grid item xs={12} md={1}>
         <Button
+          fullWidth
           variant="contained"
           disableElevation
           onClick={handleSearch}
           sx={{
-            width: '30%',
-            height: '100%',
             background: '#FF6C2C',
             boxShadow: 'none',
-            borderRadius: '20px',
-            marginRight: '5px',
+            borderRadius: '15px',
+            height: { xs: '4rem', md: '100%' },
             '&:hover': {
               backgroundColor: '#CC5A27',
               boxShadow: 'none',
@@ -145,8 +94,8 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
         >
           Search
         </Button>
-      </Stack>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };
 

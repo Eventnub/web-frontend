@@ -36,9 +36,8 @@ export default function Navbar() {
   const { isAuthenticated, user } = useFirebase();
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', p: '1.2rem' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        {/* {isMatch && <Box />} */}
         <Box style={{ display: 'flex', alignItems: 'center' }}>
           <StyledNavlink to={'/'}>
             <img src={logoImg} alt="logo" style={{ marginRight: '10px' }} />
