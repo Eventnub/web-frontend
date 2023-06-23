@@ -63,7 +63,20 @@ export default function Navbar() {
                 My Tickets<Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
               </StyledNavlink>
               {!isAuthenticated && (
-                <Button variant="contained" sx={{ bgcolor: '#CC5A27' }} component={RouterLink} to={PATH_AUTH.login}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    bgcolor: '#CC5A27',
+                    border: '1px solid #CC5A27',
+                    '&:hover': {
+                      color: '#CC5A27',
+                      bgcolor: 'transparent',
+                      border: '1px solid #CC5A27',
+                    },
+                  }}
+                  component={RouterLink}
+                  to={PATH_AUTH.login}
+                >
                   Sign In
                 </Button>
               )}

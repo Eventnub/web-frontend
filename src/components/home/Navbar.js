@@ -84,7 +84,20 @@ export default function Navbar() {
                 <Avatar src={user?.photoURL} alt={user?.firstName} sx={{ width: '2rem', height: '2rem' }} />
               </StyledNavlink>
             ) : (
-              <Button variant="contained" sx={{ bgcolor: '#CC5A27' }} component={RouterLink} to={PATH_AUTH.login}>
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: '#CC5A27',
+                  border: '1px solid #CC5A27',
+                  '&:hover': {
+                    color: '#CC5A27',
+                    bgcolor: 'transparent',
+                    border: '1px solid #CC5A27',
+                  },
+                }}
+                component={RouterLink}
+                to={PATH_AUTH.login}
+              >
                 Sign In
               </Button>
             )}
