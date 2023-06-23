@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, Stack, Typography, Container, IconButton, CircularProgress } from '@mui/material';
+import { Box, Button, Typography, Container, IconButton, CircularProgress } from '@mui/material';
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 import 'slick-carousel/slick/slick.css';
@@ -9,7 +9,6 @@ import Slider from 'react-slick';
 import { requests } from '../../api/requests';
 import { toFixedFloat } from '../../utils/formatNumber';
 import SelectGameDialog from './SelectGameDialog';
-// import SelectPaymentOption from './SelectPaymentOptionDialog';
 import useFirebase from '../../hooks/useFirebase';
 import ComingSoonDialog from './ComingSoonDialog';
 import PlayGameAgainNotificationDialog from './PlayGameAgainNotificationDialog';
@@ -20,7 +19,6 @@ export default function TicketCarousel() {
   const [dialogShown, setDialogShown] = useState(false);
   const [playGameAgainDialogShown, setPlayGameAgainDialogShown] = useState(false);
   const [comingSoonDialogShown, setComingSoonDialogShown] = useState(false);
-  // const [paymentDialogShown, setPaymentDialogShown] = useState(false);
   const [userPayments, setUserPayments] = useState([]);
   const [extraPaymentData, setExtraPaymentData] = useState({
     objective: '',
@@ -164,69 +162,110 @@ export default function TicketCarousel() {
       },
     ],
   };
+
+  if (isLoading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
-    <Container maxWidth="3xl" sx={{ position: 'relative' }}>
-      {isLoading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <Slider {...settings} ref={slideRef}>
-          {data.map((item) => (
-            <Box
-              key={item.index}
+    <Container maxWidth="xl" sx={{ position: 'relative' }}>
+      <Slider {...settings} ref={slideRef}>
+        {data.map((item) => (
+          <Box
+            key={item.index}
+            sx={{
+              backgroundColor: '#595959',
+              width: '250px',
+              borderRadius: '1rem',
+              p: '1rem',
+            }}
+            id="tickets"
+          >
+            <Typography
               sx={{
-                backgroundColor: '#595959',
-                width: '250px',
-                height: '380px',
-                p: '5% 1% 1% 1%',
+                color: '#FFF',
+                fontSize: '2rem',
+                fontWeight: '600',
+                mb: '0.8rem',
               }}
-              id="tickets"
             >
-              <Stack>
-                <Typography sx={{ color: '#FFF', fontSize: '2rem', fontWeight: '600', mb: '1%' }}>
-                  {`$${item.price}`}
-                </Typography>
-                <Typography sx={{ fontSize: '1.5rem', color: '#fff', fontWeight: '400' }}>{item.type}</Typography>
-                <Typography sx={{ color: '#fff', fontWeight: '600', fontSize: '1rem' }}>
-                  Pay ${toFixedFloat(item.price * 0.15)} of the ticket price and get it for free by playing a game.
-                </Typography>
-              </Stack>
+              {`$${item.price}`}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '1.5rem',
+                color: '#fff',
+                fontWeight: '400',
+              }}
+            >
+              {item.type}
+            </Typography>
+            <Typography
+              sx={{
+                color: '#fff',
+                fontWeight: '600',
+                fontSize: '1rem',
+              }}
+            >
+              {`Pay $${toFixedFloat(item.price * 0.15)} of the ticket price and 
+              get it for free by playing a game.`}
+            </Typography>
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={() => handleOpenDialog(toFixedFloat(item.price * 0.15), item.index)}
+              sx={{
+                boxShadow: 'none',
+                backgroundColor: '#FF6C2C',
+                border: '1px solid #FF6C2C',
+                color: '#fff',
+                mt: { xs: '6rem', md: '8rem' },
+                p: '0.5rem',
+                mb: '1rem',
+                '&:hover': {
+                  color: '#FF6C2C',
+                  backgroundColor: 'transparent',
+                  border: '1px solid #FF6C2C',
+                },
+              }}
+            >
+              Play a game and win ticket
+            </Button>
 
-              <Stack>
-                <Button
-                  variant="outlined"
-                  sx={{ boxShadow: 'none', my: '7%', border: '1px solid #FF6C2C', color: '#fff', mt: '6rem' }}
-                  onClick={() => handleOpenDialog(toFixedFloat(item.price * 0.15), item.index)}
-                >
-                  Play a game and win ticket
-                </Button>
+            <Button
+              fullWidth
+              variant="outlined"
+              onClick={handleOpenComingSoonDialog}
+              sx={{
+                boxShadow: 'none',
+                color: '#FF6C2C',
+                border: '1px solid #FF6C2C',
+                p: '0.5rem',
+                '&:hover': {
+                  color: '#fff',
+                  bgcolor: '#FF6C2C',
+                  border: '1px solid #FF6C2C',
+                },
+              }}
+            >
+              {`Buy with $${item.price}`}
+            </Button>
+          </Box>
+        ))}
+      </Slider>
 
-                <Button
-                  variant="outlined"
-                  // onClick={() => handleOpenPaymentDialog('purchase', item.price, item.index)}
-                  onClick={handleOpenComingSoonDialog}
-                  sx={{ boxShadow: 'none', border: '1px solid #FF6C2C', color: '#fff' }}
-                >
-                  {`Buy with $${item.price}`}
-                </Button>
-              </Stack>
-              <SelectGameDialog
-                open={dialogShown}
-                handleClose={handleCloseDialog}
-                extraPaymentData={extraPaymentData}
-              />
-              <ComingSoonDialog open={comingSoonDialogShown} handleClose={handleCloseComingSoonDialog} />
-              <PlayGameAgainNotificationDialog
-                open={playGameAgainDialogShown}
-                handleClose={handleClosePlayGameAgainDialog}
-                handleCancel={handleCancel}
-                handleContinue={handleContinue}
-              />
-            </Box>
-          ))}
-        </Slider>
-      )}
+      <SelectGameDialog open={dialogShown} handleClose={handleCloseDialog} extraPaymentData={extraPaymentData} />
+      <ComingSoonDialog open={comingSoonDialogShown} handleClose={handleCloseComingSoonDialog} />
+      <PlayGameAgainNotificationDialog
+        open={playGameAgainDialogShown}
+        handleClose={handleClosePlayGameAgainDialog}
+        handleCancel={handleCancel}
+        handleContinue={handleContinue}
+      />
 
       <IconButton
         sx={{
