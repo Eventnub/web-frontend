@@ -1,16 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Typography, Button, Box, Container } from '@mui/material';
 import TicketCarousel from './TicketCarousel';
+import ConditionalPopup from '../home/ConditionalPopup';
 
 export default function TicketSection() {
-  useEffect(() => {
+  const [isFromAdvert, setIsfromAdvert] = useState(false);
+
+  const handleRedirectFromAdvert = () => {
+    let isRedirectFromAdvert;
+    const queryString = window.location.search;
+
+    if (queryString) {
+      const urlParams = new URLSearchParams(queryString);
+      isRedirectFromAdvert = urlParams.get('redirect_from_advert');
+    }
+
+    if (isRedirectFromAdvert === 'true') {
+      setIsfromAdvert(true);
+    }
+  };
+
+  const handleScrollToSection = () => {
     if (window.location.hash) {
       const element = document.querySelector(window.location.hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
+  };
+
+  useEffect(() => {
+    handleScrollToSection();
+    handleRedirectFromAdvert();
   }, []);
 
   return (
@@ -53,6 +75,8 @@ export default function TicketSection() {
           Back to events
         </Button>
       </Box>
+
+      <ConditionalPopup open={isFromAdvert} handleClose={() => setIsfromAdvert(false)} />
     </Container>
   );
 }

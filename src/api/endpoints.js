@@ -24,4 +24,5 @@ export const endpoints = {
   submitAudioRecording: getFullUrl('music-unison/submit-event-music-unison-audio'),
   getUserAcquiredTickets: getFullUrl('tickets/get-user-acquired-tickets'),
   submitContactUsMessage: getFullUrl('contact-us'),
+  submitEmailMarketing: getFullUrl('marketing/submit-email'),
 };
