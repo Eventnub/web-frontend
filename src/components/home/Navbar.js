@@ -38,19 +38,16 @@ export default function Navbar() {
   return (
     <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', p: '1.2rem' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Box style={{ display: 'flex', alignItems: 'center' }}>
-          <StyledNavlink to={'/'}>
-            <img src={logoImg} alt="logo" style={{ marginRight: '10px' }} />
-          </StyledNavlink>
+        <Box style={{ display: 'flex', alignItems: 'center' }} component={StyledNavlink} to={'/'}>
+          <img src={logoImg} alt="logo" style={{ marginRight: '10px' }} />
           <Typography
+            variant="h5"
             sx={{
               color: '#FFFFFF',
               fontWeight: '600',
-              letterSpacing: 5,
-              fontSize: 200,
-              [theme.breakpoints.down('sm')]: { fontSize: '20px' },
+              letterSpacing: 3,
+              fontSize: { xs: '.8rem', md: '1.2rem' }
             }}
-            variant="h5"
           >
             eventnub
           </Typography>

@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Button, Box, useMediaQuery, useTheme, styled } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, useMediaQuery, useTheme, styled, Avatar } from '@mui/material';
 import { NavLink, Link as RouterLink } from 'react-router-dom';
 import logo from '../../assets/blueLogo.png';
 import { PATH_AUTH } from '../../routes/paths';
@@ -33,7 +33,7 @@ const Sircle = styled('span')(() => ({
 export default function Navbar() {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down('lg'));
-  const { isAuthenticated } = useFirebase();
+  const { isAuthenticated, user } = useFirebase();
 
   return (
     <AppBar position="static" sx={{ backgroundColor: '#fff', boxShadow: 'none', p: '1.2rem' }}>
@@ -42,10 +42,10 @@ export default function Navbar() {
           <img src={logo} alt="logo" style={{ width: '70px', height: '70px' }} />
           <Typography
             sx={{
-              fontWeight: '600',
-              letterSpacing: { xs: '.1rem', md: '.2rem' },
-              fontSize: { xs: '.8rem', md: '1.1rem' },
               color: '#1358A5',
+              fontWeight: '600',
+              letterSpacing: 3,
+              fontSize: { xs: '.8rem', md: '1.2rem' },
             }}
           >
             eventnub
@@ -55,32 +55,36 @@ export default function Navbar() {
           <DrawerCom />
         ) : (
           <>
-            <NavbarLinksBox>
+            <NavbarLinksBox style={{ display: 'flex', flex: '1' }}>
               <StyledNavlink to="/">Home</StyledNavlink>
               <StyledNavlink to="/about">About</StyledNavlink>
               <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
               <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 My Tickets<Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
               </StyledNavlink>
-              {!isAuthenticated && (
-                <Button
-                  variant="contained"
-                  sx={{
-                    bgcolor: '#CC5A27',
-                    border: '1px solid #CC5A27',
-                    '&:hover': {
-                      color: '#CC5A27',
-                      bgcolor: 'transparent',
-                      border: '1px solid #CC5A27',
-                    },
-                  }}
-                  component={RouterLink}
-                  to={PATH_AUTH.login}
-                >
-                  Sign In
-                </Button>
-              )}
             </NavbarLinksBox>
+            {isAuthenticated ? (
+              <StyledNavlink to="/dashboard/profile">
+                <Avatar src={user?.photoURL} alt={user?.firstName} sx={{ width: '2rem', height: '2rem' }} />
+              </StyledNavlink>
+            ) : (
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: '#CC5A27',
+                  border: '1px solid #CC5A27',
+                  '&:hover': {
+                    color: '#CC5A27',
+                    bgcolor: 'transparent',
+                    border: '1px solid #CC5A27',
+                  },
+                }}
+                component={RouterLink}
+                to={PATH_AUTH.login}
+              >
+                Sign In
+              </Button>
+            )}
           </>
         )}
       </Toolbar>
