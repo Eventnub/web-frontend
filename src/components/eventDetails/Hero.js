@@ -78,7 +78,7 @@ export default function Hero() {
                 position: 'absolute',
                 bottom: '0',
                 width: '100%',
-                height: '50%',
+                minHeight: '50%',
                 background: 'rgba(0, 0, 0, 0.57)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -100,7 +100,7 @@ export default function Hero() {
                 </Typography>
                 <DrawerCom />
               </Stack>
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
+              <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mt: '1.5rem' }}>
                 <Button
                   size="large"
                   variant="contained"
