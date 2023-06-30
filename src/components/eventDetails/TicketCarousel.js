@@ -181,7 +181,7 @@ export default function TicketCarousel() {
               backgroundColor: '#595959',
               width: '250px',
               borderRadius: '1rem',
-              p: '1rem',
+              p: '1rem'
             }}
             id="tickets"
           >
@@ -244,6 +244,7 @@ export default function TicketCarousel() {
                 boxShadow: 'none',
                 color: '#FF6C2C',
                 border: '1px solid #FF6C2C',
+                mb: "1rem",
                 p: '0.5rem',
                 '&:hover': {
                   color: '#fff',
