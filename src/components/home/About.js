@@ -5,10 +5,10 @@ export default function About() {
   return (
     <Container sx={{ marginTop: '4rem', marginBottom: '4rem' }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <Typography sx={{ marginBottom: '40px', color: '#000', fontSize: '25px', fontWeight: 'bold' }}>
+        <Typography variant="h4" sx={{ color: '#000', textAlign: 'center', mb: '2rem' }}>
           How it Works
         </Typography>
-        <Box sx={{ width: '100%', padding: '0 5%' }}>
+        <Box sx={{ width: '100%' }}>
           <Typography paragraph align="center" sx={{ color: '#000', fontWeight: '200' }}>
             Find any afrobeat event in your area with your favourite performing artiste
           </Typography>

@@ -36,22 +36,18 @@ export default function Navbar() {
   const { isAuthenticated, user } = useFirebase();
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'transparent', boxShadow: 'none', p: '1.2rem' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        {/* {isMatch && <Box />} */}
-        <Box style={{ display: 'flex', alignItems: 'center' }}>
-          <StyledNavlink to={'/'}>
-            <img src={logoImg} alt="logo" style={{ marginRight: '10px' }} />
-          </StyledNavlink>
+        <Box style={{ display: 'flex', alignItems: 'center' }} component={StyledNavlink} to={'/'}>
+          <img src={logoImg} alt="logo" style={{ marginRight: '10px' }} />
           <Typography
+            variant="h5"
             sx={{
               color: '#FFFFFF',
               fontWeight: '600',
-              letterSpacing: 5,
-              fontSize: 200,
-              [theme.breakpoints.down('sm')]: { fontSize: '20px' },
+              letterSpacing: 3,
+              fontSize: { xs: '.8rem', md: '1.2rem' }
             }}
-            variant="h5"
           >
             eventnub
           </Typography>
@@ -85,7 +81,20 @@ export default function Navbar() {
                 <Avatar src={user?.photoURL} alt={user?.firstName} sx={{ width: '2rem', height: '2rem' }} />
               </StyledNavlink>
             ) : (
-              <Button variant="contained" sx={{ bgcolor: '#CC5A27' }} component={RouterLink} to={PATH_AUTH.login}>
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: '#CC5A27',
+                  border: '1px solid #CC5A27',
+                  '&:hover': {
+                    color: '#CC5A27',
+                    bgcolor: 'transparent',
+                    border: '1px solid #CC5A27',
+                  },
+                }}
+                component={RouterLink}
+                to={PATH_AUTH.login}
+              >
                 Sign In
               </Button>
             )}

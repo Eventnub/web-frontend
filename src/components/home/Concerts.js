@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Typography, useTheme } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import SearchBar from './SearchBar';
+import ConditionalPopup from './ConditionalPopup';
 import Events from './Events';
 import { requests } from '../../api/requests';
 
@@ -11,7 +12,19 @@ export default function Concerts() {
   const [artists, setArtists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [filteredEvent, setFilteredEvent] = useState([]);
-  const theme = useTheme();
+  const [isFromAdvert, setIsfromAdvert] = useState(false);
+
+  const fetchEvents = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await requests.getEvents();
+      setEvents(data);
+      setFilteredEvent(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSearchEvent = (name, country, state, artist) => {
     let fEventByName = [];
@@ -38,19 +51,22 @@ export default function Concerts() {
     console.log({ fEvent });
   };
 
-  useEffect(() => {
-    async function fetchEvents() {
-      try {
-        setIsLoading(true);
-        const { data } = await requests.getEvents();
-        setEvents(data);
-        setFilteredEvent(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
+  const handleRedirectFromAdvert = () => {
+    let isRedirectFromAdvert;
+    const queryString = window.location.search;
+
+    if (queryString) {
+      const urlParams = new URLSearchParams(queryString);
+      isRedirectFromAdvert = urlParams.get('redirect_from_advert');
     }
 
+    if (isRedirectFromAdvert === 'true') {
+      setIsfromAdvert(true);
+    }
+  };
+
+  useEffect(() => {
+    handleRedirectFromAdvert();
     fetchEvents();
   }, []);
 
@@ -72,35 +88,35 @@ export default function Concerts() {
   }, [events]);
 
   return (
-    <Box>
-      <Container maxWidth="3xl">
-        <Box
+    <Container maxWidth="xl">
+      <Box
+        sx={{
+          display: 'flex',
+          marginTop: '3em',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: '2.5rem',
+          flexDirection: { xs: 'column', lg: 'row' },
+        }}
+      >
+        <Typography
           sx={{
-            display: 'flex',
-            marginTop: '3em',
-            justifyContent: 'space-between',
-            gap: '2.5rem',
-            flexDirection: { xs: 'column', lg: 'row' },
-            // [theme.breakpoints.down('sm')]: { flexDirection: 'column' },
+            color: '#000000',
+            fontWeight: '600px',
+            fontSize: { xs: '1.3rem', md: '1.5rem' },
+            lineHeight: '38.7px',
+            textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography
-            sx={{
-              color: '#000000',
-              fontWeight: '600px',
-              fontSize: '36px',
-              lineHeight: '38.7px',
-              [theme.breakpoints.down('sm')]: { fontSize: 16, width: '100', textAlign: 'center' },
-            }}
-          >
-            Up Coming Events
-          </Typography>
-          <Box sx={{ flex: 1 }}>
-            <SearchBar handleSearchEvent={handleSearchEvent} countries={countries} states={states} artists={artists} />
-          </Box>
+          Up Coming Events
+        </Typography>
+        <Box sx={{ flex: 1 }}>
+          <SearchBar handleSearchEvent={handleSearchEvent} countries={countries} states={states} artists={artists} />
         </Box>
-        <Events events={filteredEvent} isLoading={isLoading} />
-      </Container>
-    </Box>
+      </Box>
+      <Events events={filteredEvent} isLoading={isLoading} />
+      
+      <ConditionalPopup open={isFromAdvert} handleClose={() => setIsfromAdvert(false)} />
+    </Container>
   );
 }

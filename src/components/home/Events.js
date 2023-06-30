@@ -188,8 +188,28 @@ export default function Events({ events, isLoading }) {
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px' }}>
-        <Button variant="contained" disableElevation sx={{ px: '3rem', bgcolor: 'grey.600' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '50px',
+        }}
+      >
+        <Button
+          variant="contained"
+          disableElevation
+          sx={{
+            px: '3rem',
+            bgcolor: 'grey.600',
+            border: '1px solid #fff',
+            '&:hover': {
+              color: 'grey.600',
+              bgcolor: '#fff',
+              border: '1px solid #637381',
+            },
+          }}
+        >
           Load More Events
         </Button>
       </Box>

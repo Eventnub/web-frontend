@@ -35,7 +35,7 @@ const data = [
   },
 ];
 
-function SliderCom() {
+function TestimonialsSlider() {
   const [value] = useState(5);
 
   const slideRef = useRef(null);
@@ -76,7 +76,7 @@ function SliderCom() {
   };
 
   return (
-    <Container maxWidth="3xl" sx={{ mt: 8, position: 'relative' }}>
+    <Container maxWidth="3xl" sx={{ position: 'relative' }}>
       <Slider {...settings} ref={slideRef}>
         {data.map((item) => (
           <Box
@@ -173,4 +173,4 @@ function SliderCom() {
   );
 }
 
-export default SliderCom;
+export default TestimonialsSlider;

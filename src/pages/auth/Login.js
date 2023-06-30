@@ -4,8 +4,6 @@ import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
 import Page from '../../components/Page';
 import GoogleIcon from '../../assets/images/auth/google.png';
-// import FacebookIcon from '../../assets/images/auth/facebook.png';
-// import AppleIcon from '../../assets/apple.png';
 import bg from '../../assets/background-img.png';
 import logo from '../../assets/blueLogo.png';
 import { LoginForm } from '../../sections/auth/login';
@@ -23,14 +21,6 @@ export default function Login() {
     }
   };
 
-  // const handleLoginFacebook = async () => {
-  //   try {
-  //     await loginWithFacebook();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
   return (
     <Page title="Log In">
       {isMatch ? (
@@ -39,7 +29,7 @@ export default function Login() {
             <Box display="flex" flexDirection="column">
               <Box display="flex" alignItems="center" justifyContent="center">
                 <Link to="/" component={RouterLink} underline="none">
-                  <img src={logo} alt="logo" style={{ width: '25px', height: '25px' }} />
+                  <img src={logo} alt="logo" style={{ width: '4rem', height: '4rem' }} />
                 </Link>
                 <Typography
                   variant="subtitle1"
@@ -48,16 +38,13 @@ export default function Login() {
                   eventnub
                 </Typography>
               </Box>
-              <Typography variant="h4" sx={{ color: '#000', ml: '1.5rem', mt: '1rem' }}>
+              <Typography variant="h4" sx={{ textAlign: 'center', color: '#000', mt: '1rem' }}>
                 Sign In
               </Typography>
-              <Typography variant="subtitle2" sx={{ ml: '1rem', color: '#000', fontWeight: '100' }}>
+              <Typography variant="subtitle2" sx={{ textAlign: 'center', color: '#000', fontWeight: '100' }}>
                 Continue with
               </Typography>
-              <Stack spacing={1} direction="row" justifyContent="center">
-                {/* <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
-                  <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
-                </IconButton> */}
+              <Stack spacing={1} direction="row" justifyContent="center" sx={{ my: '1rem' }}>
                 <IconButton
                   variant="outlined"
                   sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
@@ -65,13 +52,6 @@ export default function Login() {
                 >
                   <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
                 </IconButton>
-                {/* <IconButton
-                  variant="outlined"
-                  sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
-                  onClick={handleLoginFacebook}
-                >
-                  <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
-                </IconButton> */}
               </Stack>
               <Typography mt={'1rem'} sx={{ color: '#000', textAlign: 'center' }}>
                 OR
@@ -162,7 +142,7 @@ export default function Login() {
                       component={RouterLink}
                       underline="none"
                       variant="outlined"
-                      sx={{ border: '1px solid #ffffff', color: '#ffffff' }}
+                      sx={{ border: '1px solid #ffffff', color: '#ffffff', p: '0.5rem' }}
                     >
                       Create Eventnub Account
                     </Button>
@@ -172,7 +152,7 @@ export default function Login() {
               <Box
                 sx={{
                   backgroundColor: '#fff',
-                  height: '75vh',
+                  minHeight: '75vh',
                   position: 'relative',
                   left: '50%',
                   bottom: '10%',
@@ -184,32 +164,17 @@ export default function Login() {
                 <Container>
                   <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ marginTop: '1.5rem' }}>
                     <Box>
-                      <Typography variant="h5" sx={{ color: '#000', fontWeight: '600' }}>
-                        Sign In
+                      <Typography variant="h5" sx={{ color: '#000', fontWeight: '500' }}>
+                        Sign In with
                       </Typography>
                     </Box>
-                    <Box display="flex" alignItems="center" gap={2}>
-                      <Typography variant="subtitle2" sx={{ color: '#000', fontWeight: '100' }}>
-                        With
-                      </Typography>
-                      {/* <IconButton variant="outlined" sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}>
-                        <img src={AppleIcon} alt="apple icon" style={{ width: '20px', height: '20px' }} />
-                      </IconButton> */}
-                      <IconButton
-                        variant="outlined"
-                        sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
-                        onClick={handleLoginGoogle}
-                      >
-                        <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
-                      </IconButton>
-                      {/* <IconButton
-                        variant="outlined"
-                        sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
-                        onClick={handleLoginFacebook}
-                      >
-                        <img src={FacebookIcon} alt="facebook icon" style={{ width: '20px', height: '20px' }} />
-                      </IconButton> */}
-                    </Box>
+                    <IconButton
+                      variant="outlined"
+                      sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
+                      onClick={handleLoginGoogle}
+                    >
+                      <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
+                    </IconButton>
                   </Box>
                   <Typography align="center" my={5} variant="h6" sx={{ color: '#000' }}>
                     Or

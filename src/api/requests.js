@@ -61,4 +61,5 @@ export const requests = {
   getUserAcquiredTickets: (idToken, uid) =>
     axios.get(`${endpoints.getUserAcquiredTickets}/${uid}`, getJsonHeaderWithAuthToken(idToken)),
   submitContactUsMessage: (data) => axios.post(endpoints.submitContactUsMessage, data, jsonHeader),
+  submitEmailMarketing: (data) => axios.post(endpoints.submitEmailMarketing, data, jsonHeader),
 };

@@ -53,8 +53,6 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
     } catch (error) {
       console.log(error.request);
     }
-    // replace with your actual code to handle the token
-    // navigate(`/quiz/${eventId}`);
   };
 
   const config = {
@@ -108,15 +106,14 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
     if (objective === 'purchase') {
       handleOpenPaymentSuccessfulDialog();
     }
-    // } else {
-    //   handleOpenDialog();
-    // }
   };
 
   const onClose = () => {
     navigate(`/event-details/${eventId}`);
   };
   const initializePayment = usePaystackPayment(config);
+
+  console.log({ extraPaymentData });
 
   return (
     <>
@@ -180,8 +177,8 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
                 <StripeCheckout
                   token={onToken}
                   stripeKey="pk_live_51NJWgPLWplPuQFeHbyHKseV2ZeGDedXX7XdMDAaBTK1eUlEV6WtVnsgnSzyxQEE8YG0r02vReuXRcBJjUKlZxAsJ000qEMzcij"
-                  name="Your App Name"
-                  amount={amount}
+                  name="Globeventnub"
+                  amount={amount*100}
                   currency="USD"
                   allowRememberMe={false}
                 >

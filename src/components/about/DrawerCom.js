@@ -58,7 +58,20 @@ export default function DrawerCom() {
             <ListItemIcon>
               <ListItemText>
                 {!isAuthenticated && (
-                  <Button variant="contained" sx={{ bgcolor: '#CC5A27' }} component={RouterLink} to={PATH_AUTH.login}>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      bgcolor: '#CC5A27',
+                      border: '1px solid #CC5A27',
+                      '&:hover': {
+                        color: '#CC5A27',
+                        bgcolor: 'transparent',
+                        border: '1px solid #CC5A27',
+                      },
+                    }}
+                    component={RouterLink}
+                    to={PATH_AUTH.login}
+                  >
                     Sign In
                   </Button>
                 )}
