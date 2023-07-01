@@ -16,7 +16,7 @@ import useFirebase from '../hooks/useFirebase';
 import { requests } from '../api/requests';
 import QuizTakenDialog from '../components/raffle/QuizTakenDialog';
 import Page from '../components/Page';
-import CountdownTimerQuestion from '../components/CountdownTimerQuestion';
+import CountdownTimerGame from '../components/CountdownTimerGame';
 import logo from '../assets/blueLogo.png';
 import mixpanel from '../utils/mixpanel';
 
@@ -33,7 +33,6 @@ const StyledLabel = styled(FormControlLabel)({
 const StyledOption = styled(Box)({
   background: '#6EC6D2',
   height: '10%',
-  // width: '130px',
   borderRadius: '30px',
   pl: '2rem',
 });
@@ -176,7 +175,7 @@ export default function Question() {
             }}
           >
             {questions.length > 0 && (
-              <CountdownTimerQuestion
+              <CountdownTimerGame
                 countdownDate={quizEndTime}
                 isTimeElapsed={isTimeElapsed}
                 onTimeElapsed={handleTimeElapsed}
@@ -223,42 +222,6 @@ export default function Question() {
               </>
             )}
           </Box>
-          {/* <Box sx={{ mt: '10%', textAlign: 'center' }}>
-            {isLoading ? (
-              <CircularProgress />
-            ) : (
-              <>
-                <Typography sx={{ color: '#000', fontSize: '2rem', fontWeight: '400' }}>
-                  {questions[currentQuestionIndex]?.question}
-                </Typography>
-                <FormControl component="fieldset" sx={{ mt: '4%' }}>
-                  <RadioGroup>
-                    <Grid container spacing={2}>
-                      {questions[currentQuestionIndex]?.answerOptions?.map((option) => (
-                        <Grid item xs={6} md={3} key={option}>
-                          <StyledOption>
-                            <StyledLabel
-                              value={option}
-                              control={
-                                <Radio
-                                  onChange={() => handleChange(option)}
-                                  checked={option === currentQuestionAnswer}
-                                  size="small"
-                                  sx={{ ml: '1rem' }}
-                                />
-                              }
-                              label={option}
-                            />
-                          </StyledOption>
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </RadioGroup>
-                </FormControl>
-              </>
-            )}
-          </Box> */}
-
           <LoadingButton
             variant="contained"
             loading={isSubmitting}
