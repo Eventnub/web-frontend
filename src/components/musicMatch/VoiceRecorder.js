@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Box, Stack, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
@@ -68,7 +68,7 @@ const StyledBox = styled('div')(({ animationName }) => ({
   animationName,
 }));
 
-const VoiceRecorder = ({ musicMatchId }) => {
+const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
   const [recording, setRecording] = useState(false);
   const [audioURL, setAudioURL] = useState(null);
   const [recordingStarted, setRecordingStarted] = useState(false);
@@ -145,6 +145,15 @@ const VoiceRecorder = ({ musicMatchId }) => {
     }
   };
 
+  useEffect(() => {
+    if (isTimeElapsed) {
+      setTimeout(async () => {
+        await uploadRecording();
+      }, 500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTimeElapsed]);
+
   return (
     <Stack sx={{ padding: '.8rem' }}>
       <Stack justifyContent="space-between" direction="row" spacing={2} sx={{ marginBottom: '.8rem' }}>
@@ -202,12 +211,18 @@ const VoiceRecorder = ({ musicMatchId }) => {
         <LoadingButton
           loading={isSubmitting}
           variant="contained"
+          disabled={isTimeElapsed}
           sx={{ bgcolor: '#1358A5', boxShadow: 'none' }}
           onClick={uploadRecording}
         >
           Submit
         </LoadingButton>
-        <Button variant="contained" sx={{ bgcolor: '#1358A5', boxShadow: 'none' }} onClick={resetRecording}>
+        <Button
+          variant="contained"
+          disabled={isTimeElapsed}
+          sx={{ bgcolor: '#1358A5', boxShadow: 'none' }}
+          onClick={resetRecording}
+        >
           Reset
         </Button>
       </Box>
@@ -219,4 +234,5 @@ export default VoiceRecorder;
 
 VoiceRecorder.propTypes = {
   musicMatchId: PropTypes.string,
+  isTimeElapsed: PropTypes.bool,
 };

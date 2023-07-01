@@ -4,13 +4,13 @@ import { Typography } from '@mui/material';
 import { isFutureDate } from '../utils/compareTime';
 import useCountdown from '../hooks/useCountdown';
 
-CountdownTimerQuestion.propTypes = {
+CountdownTimerGame.propTypes = {
   countdownDate: PropTypes.number,
   isTimeElapsed: PropTypes.bool,
   onTimeElapsed: PropTypes.func,
 };
 
-export default function CountdownTimerQuestion({ countdownDate, isTimeElapsed, onTimeElapsed }) {
+export default function CountdownTimerGame({ countdownDate, isTimeElapsed, onTimeElapsed }) {
   const dateThen = new Date(countdownDate);
   const { days, hours, minutes, seconds } = useCountdown(dateThen);
 
@@ -22,12 +22,30 @@ export default function CountdownTimerQuestion({ countdownDate, isTimeElapsed, o
   }, [days, hours, minutes, seconds]);
 
   if (isTimeElapsed) {
-    return <Typography sx={{ color: '#000', fontWeight: '600', fontSize: '1.3rem' }}>Time up</Typography>;
+    return (
+      <Typography
+        sx={{
+          color: '#000',
+          fontWeight: '600',
+          fontSize: '1.3rem',
+          textAlign: 'center',
+        }}
+      >
+        Time up
+      </Typography>
+    );
   }
 
   return (
     <Typography
-      sx={{ color: '#000', fontWeight: '600', fontSize: '1.3rem' }}
-    >{`${hours} : ${minutes} : ${seconds}`}</Typography>
+      sx={{
+        color: '#000',
+        fontWeight: '600',
+        fontSize: '1.3rem',
+        textAlign: 'center',
+      }}
+    >
+      {`${hours} : ${minutes} : ${seconds}`}
+    </Typography>
   );
 }
