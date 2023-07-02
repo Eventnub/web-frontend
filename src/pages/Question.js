@@ -44,7 +44,7 @@ const StyledCard = styled(Box)({
   position: 'relative',
 });
 
-const quizEndTime = Date.now() + 5 * 60 * 1000;
+const gameDuration = 5 * 60 * 1000;
 
 export default function Question() {
   const [questions, setQuestions] = useState([]);
@@ -74,12 +74,12 @@ export default function Question() {
   const { user } = useFirebase();
 
   const handleNext = () => {
-    if (currentQuestionIndex < 2) {
+    if (currentQuestionIndex < 4) {
       const answer = { questionId: questions[currentQuestionIndex].uid, answer: currentQuestionAnswer };
       setAnswers([...answers, answer]);
       const nextQuestionIndex = currentQuestionIndex + 1;
       setCurrentQuestionIndex(nextQuestionIndex);
-      if (nextQuestionIndex === 2) {
+      if (nextQuestionIndex === 4) {
         setIsLastQuestion(true);
       }
     }
@@ -176,7 +176,7 @@ export default function Question() {
           >
             {questions.length > 0 && (
               <CountdownTimerGame
-                countdownDate={quizEndTime}
+                countdownDate={Date.now() + gameDuration}
                 isTimeElapsed={isTimeElapsed}
                 onTimeElapsed={handleTimeElapsed}
               />
@@ -237,7 +237,7 @@ export default function Question() {
             onClick={handleNext}
             disabled={isNextDisabled}
           >
-            {currentQuestionIndex === 2 ? 'Submit' : 'Next'}
+            {currentQuestionIndex === 4 ? 'Submit' : 'Next'}
           </LoadingButton>
           <QuizTakenDialog open={dialogShown} errorMessage={errorMessage} />
         </StyledCard>

@@ -20,7 +20,7 @@ const Container = styled(Box)({
   alignItems: 'center',
 });
 
-const gameDuration = 1 * 60 * 1000;
+const gameDuration = 8 * 60 * 1000;
 
 export default function MusicMatch() {
   const [musicMatch, setMusicMatch] = useState(null);
