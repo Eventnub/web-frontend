@@ -44,7 +44,7 @@ const StyledCard = styled(Box)({
   position: 'relative',
 });
 
-const quizEndTime = Date.now() + 5 * 60 * 1000;
+const gameDuration = 5 * 60 * 1000;
 
 export default function Question() {
   const [questions, setQuestions] = useState([]);
@@ -176,7 +176,7 @@ export default function Question() {
           >
             {questions.length > 0 && (
               <CountdownTimerGame
-                countdownDate={quizEndTime}
+                countdownDate={Date.now() + gameDuration}
                 isTimeElapsed={isTimeElapsed}
                 onTimeElapsed={handleTimeElapsed}
               />
