@@ -74,12 +74,12 @@ export default function Question() {
   const { user } = useFirebase();
 
   const handleNext = () => {
-    if (currentQuestionIndex < 2) {
+    if (currentQuestionIndex < 4) {
       const answer = { questionId: questions[currentQuestionIndex].uid, answer: currentQuestionAnswer };
       setAnswers([...answers, answer]);
       const nextQuestionIndex = currentQuestionIndex + 1;
       setCurrentQuestionIndex(nextQuestionIndex);
-      if (nextQuestionIndex === 2) {
+      if (nextQuestionIndex === 4) {
         setIsLastQuestion(true);
       }
     }
@@ -237,7 +237,7 @@ export default function Question() {
             onClick={handleNext}
             disabled={isNextDisabled}
           >
-            {currentQuestionIndex === 2 ? 'Submit' : 'Next'}
+            {currentQuestionIndex === 4 ? 'Submit' : 'Next'}
           </LoadingButton>
           <QuizTakenDialog open={dialogShown} errorMessage={errorMessage} />
         </StyledCard>
