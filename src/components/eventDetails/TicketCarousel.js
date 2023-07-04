@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, Typography, Container, IconButton, CircularProgress } from '@mui/material';
+import { Box, Button, Typography, Container, IconButton, CircularProgress, Tooltip } from '@mui/material';
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
 import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 import 'slick-carousel/slick/slick.css';
@@ -12,6 +12,7 @@ import SelectGameDialog from './SelectGameDialog';
 import useFirebase from '../../hooks/useFirebase';
 import ComingSoonDialog from './ComingSoonDialog';
 import PlayGameAgainNotificationDialog from './PlayGameAgainNotificationDialog';
+import Iconify from '../Iconify';
 
 export default function TicketCarousel() {
   const [data, setData] = useState([]);
@@ -178,17 +179,53 @@ export default function TicketCarousel() {
           <Box
             key={item.index}
             sx={{
+              position: 'relative',
               backgroundColor: '#595959',
               width: '250px',
               borderRadius: '1rem',
-              p: '1rem'
+              p: '1rem',
             }}
             id="tickets"
           >
+            <Tooltip
+              leaveDelay={1000}
+              title={
+                <Typography variant="body2">
+                  Click{' '}
+                  <a
+                    href={item.description}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      fontWeight: '500',
+                    }}
+                  >
+                    here
+                  </a>{' '}
+                  to view this ticket's seat map
+                </Typography>
+              }
+              sx={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+              }}
+            >
+              <IconButton>
+                <Iconify
+                  icon={'bi:info-circle'}
+                  width={16}
+                  height={16}
+                  sx={{
+                    color: 'common.white',
+                  }}
+                />
+              </IconButton>
+            </Tooltip>
             <Typography
               sx={{
                 color: '#FFF',
-                fontSize: '2rem',
+                fontSize: '1.6rem',
                 fontWeight: '600',
                 mb: '0.8rem',
               }}
@@ -197,9 +234,10 @@ export default function TicketCarousel() {
             </Typography>
             <Typography
               sx={{
-                fontSize: '1.5rem',
+                fontSize: '1.1rem',
                 color: '#fff',
                 fontWeight: '400',
+                mb: '0.3rem',
               }}
             >
               {item.type}
@@ -208,7 +246,7 @@ export default function TicketCarousel() {
               sx={{
                 color: '#fff',
                 fontWeight: '600',
-                fontSize: '1rem',
+                fontSize: '0.9rem',
               }}
             >
               {`Pay $${toFixedFloat(item.price * 0.15)} of the ticket price and 
@@ -244,7 +282,7 @@ export default function TicketCarousel() {
                 boxShadow: 'none',
                 color: '#FF6C2C',
                 border: '1px solid #FF6C2C',
-                mb: "1rem",
+                mb: '1rem',
                 p: '0.5rem',
                 '&:hover': {
                   color: '#fff',
