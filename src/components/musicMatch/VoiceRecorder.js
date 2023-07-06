@@ -65,7 +65,7 @@ const StyledBox = styled('div')(({ animationname }) => ({
   animationTimingFunction: 'ease-in-out',
   animationIterationCount: 'infinite',
   borderRadius: '8px',
-  animationname,
+  animationName: animationname,
 }));
 
 const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
