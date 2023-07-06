@@ -35,7 +35,6 @@ export default function TicketCarousel() {
   const handleOpenDialog = (amount, index) => {
     if (isAuthenticated) {
       const payments = userPayments.filter((payment) => payment.ticketIndex === index);
-      console.log(payments);
       // When user has no payment record
       if (payments.length === 0) {
         setDialogShown(true);
