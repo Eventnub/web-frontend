@@ -36,7 +36,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
         paymentService: 'stripe',
         paymentObjective: objective,
         paymentEventId: eventId,
-        paymentTicketIndex: index
+        paymentTicketIndex: index,
       });
 
       if (objective === 'quiz and music match') {
@@ -58,7 +58,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
   const config = {
     reference: new Date().getTime(),
     email,
-    amount: amount * 100,
+    amount: amount * 100 * 760,
     publicKey: 'pk_test_6b28a0a394da79d85f0824ee2b9b366744dd9966',
   };
 
@@ -178,7 +178,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
                   token={onToken}
                   stripeKey="pk_live_51NJWgPLWplPuQFeHbyHKseV2ZeGDedXX7XdMDAaBTK1eUlEV6WtVnsgnSzyxQEE8YG0r02vReuXRcBJjUKlZxAsJ000qEMzcij"
                   name="Globeventnub"
-                  amount={amount*100}
+                  amount={amount * 100}
                   currency="USD"
                   allowRememberMe={false}
                 >

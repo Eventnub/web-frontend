@@ -23,7 +23,7 @@ export default function CheckOutPage() {
   const config = {
     reference: new Date().getTime(),
     email,
-    amount: amount * 100,
+    amount: amount * 100 * 760,
     publicKey: 'pk_test_6b28a0a394da79d85f0824ee2b9b366744dd9966',
   };
 
