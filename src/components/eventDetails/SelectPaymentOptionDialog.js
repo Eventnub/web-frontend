@@ -113,8 +113,6 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
   };
   const initializePayment = usePaystackPayment(config);
 
-  console.log({ extraPaymentData });
-
   return (
     <>
       <Dialog
