@@ -48,7 +48,7 @@ const loudKeyframes = keyframes`
 `;
 
 const BoxContainer = styled('div')(({ visible }) => ({
-  display: visible ? 'flex' : 'none',
+  display: visible === 'true' ? 'flex' : 'none',
   justifyContent: 'space-between',
   height: '64px',
   '--boxSize': '8px',
@@ -56,7 +56,7 @@ const BoxContainer = styled('div')(({ visible }) => ({
   width: '100%',
 }));
 
-const StyledBox = styled('div')(({ animationName }) => ({
+const StyledBox = styled('div')(({ animationname }) => ({
   transform: 'scaleY(.4)',
   height: '100%',
   width: 'var(--boxSize)',
@@ -65,7 +65,7 @@ const StyledBox = styled('div')(({ animationName }) => ({
   animationTimingFunction: 'ease-in-out',
   animationIterationCount: 'infinite',
   borderRadius: '8px',
-  animationName,
+  animationname,
 }));
 
 const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
@@ -83,7 +83,6 @@ const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
     setRecordingStarted(true);
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     setStream(stream);
-    // mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/mp3' });
     mediaRecorder = new MediaRecorder(stream);
 
     mediaRecorder.addEventListener('dataavailable', (event) => {
@@ -103,24 +102,31 @@ const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
 
   const stopRecording = () => {
     setRecordingStarted(false);
-    if (stream.getAudioTracks) {
-      const tracks = stream.getAudioTracks();
-      tracks.forEach((track) => {
-        track.stop();
-      });
-    } else {
-      console.log('No Tracks Found');
+    try {
+      if (stream.getAudioTracks) {
+        const tracks = stream.getAudioTracks();
+        tracks.forEach((track) => {
+          track.stop();
+        });
+      } else {
+        console.log('No Tracks Found');
+      }
+      mediaRecorder.stop();
+    } catch (error) {
+      console.log(error);
     }
-    mediaRecorder.stop();
     setRecording(false);
   };
 
   const resetRecording = () => {
-    setRecording(false);
-    setAudioURL(null);
-    setAudioFile(null);
-    setStream(null);
-    window.location.reload();
+    stopRecording(false);
+
+    setTimeout(() => {
+      setRecording(false);
+      setAudioURL(null);
+      setAudioFile(null);
+      setStream(null);
+    }, 5);
   };
 
   const uploadRecording = async () => {
@@ -187,17 +193,17 @@ const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
         </Button>
       </Stack>
 
-      <BoxContainer visible={recordingStarted}>
-        <StyledBox animationName={quietKeyframes} />
-        <StyledBox animationName={normalKeyframes} />
-        <StyledBox animationName={quietKeyframes} />
-        <StyledBox animationName={loudKeyframes} />
-        <StyledBox animationName={quietKeyframes} />
-        <StyledBox animationName={quietKeyframes} />
-        <StyledBox animationName={normalKeyframes} />
-        <StyledBox animationName={quietKeyframes} />
-        <StyledBox animationName={loudKeyframes} />
-        <StyledBox animationName={quietKeyframes} />
+      <BoxContainer visible={recordingStarted.toString()}>
+        <StyledBox animationname={quietKeyframes} />
+        <StyledBox animationname={normalKeyframes} />
+        <StyledBox animationname={quietKeyframes} />
+        <StyledBox animationname={loudKeyframes} />
+        <StyledBox animationname={quietKeyframes} />
+        <StyledBox animationname={quietKeyframes} />
+        <StyledBox animationname={normalKeyframes} />
+        <StyledBox animationname={quietKeyframes} />
+        <StyledBox animationname={loudKeyframes} />
+        <StyledBox animationname={quietKeyframes} />
       </BoxContainer>
       {audioURL && (
         <audio controls>
