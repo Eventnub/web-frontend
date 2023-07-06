@@ -285,7 +285,6 @@ export default function MusicMatch() {
                 <Box
                   sx={{
                     bgcolor: '#DBDBDB',
-                    width: '50%',
                     m: 'auto',
                     height: '50px',
                     borderRadius: '360px',
