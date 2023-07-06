@@ -9,7 +9,7 @@ import useFirebase from '../../hooks/useFirebase';
 import mixpanel from '../../utils/mixpanel';
 
 let mediaRecorder;
-const chunks = [];
+let chunks = [];
 
 const quietKeyframes = keyframes`
   25% {
@@ -122,6 +122,7 @@ const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
     stopRecording(false);
 
     setTimeout(() => {
+      chunks = [];
       setRecording(false);
       setAudioURL(null);
       setAudioFile(null);
