@@ -6,6 +6,7 @@ import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightS
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
+import Swal from 'sweetalert2';
 import { requests } from '../../api/requests';
 import { toFixedFloat } from '../../utils/formatNumber';
 import SelectGameDialog from './SelectGameDialog';
@@ -15,7 +16,7 @@ import PlayGameAgainNotificationDialog from './PlayGameAgainNotificationDialog';
 import Iconify from '../Iconify';
 
 export default function TicketCarousel() {
-  const [data, setData] = useState([]);
+  const [event, setEvent] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [dialogShown, setDialogShown] = useState(false);
   const [playGameAgainDialogShown, setPlayGameAgainDialogShown] = useState(false);
@@ -33,6 +34,34 @@ export default function TicketCarousel() {
   const location = useLocation();
 
   const handleOpenDialog = (amount, index) => {
+    if (event.gameEndTimestamp === 0) {
+      Swal.fire({
+        title: 'Oops!',
+        text: 'The event games are yet to be set by the admin',
+        icon: 'warning',
+        confirmButtonText: 'Okay',
+        confirmButtonAttributes: {
+          href: '/',
+          target: '_self',
+        },
+      });
+      return null;
+    }
+
+    if (event.gameEndTimestamp < Date.now()) {
+      Swal.fire({
+        title: 'Oops!',
+        text: 'The event game duration has ended.',
+        icon: 'warning',
+        confirmButtonText: 'Okay',
+        confirmButtonAttributes: {
+          href: '/',
+          target: '_self',
+        },
+      });
+      return null;
+    }
+
     if (isAuthenticated) {
       const payments = userPayments.filter((payment) => payment.ticketIndex === index);
       // When user has no payment record
@@ -96,6 +125,7 @@ export default function TicketCarousel() {
   const handleCloseComingSoonDialog = () => {
     setComingSoonDialogShown(false);
   };
+
   const handleOpenComingSoonDialog = () => {
     setComingSoonDialogShown(true);
   };
@@ -105,7 +135,7 @@ export default function TicketCarousel() {
       try {
         setIsLoading(true);
         const { data } = await requests.getEvent(eventId);
-        setData(data.tickets);
+        setEvent(data);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -174,7 +204,7 @@ export default function TicketCarousel() {
   return (
     <Container maxWidth="xl" sx={{ position: 'relative' }}>
       <Slider {...settings} ref={slideRef}>
-        {data.map((item) => (
+        {event?.tickets?.map((item) => (
           <Box
             key={item.index}
             sx={{
