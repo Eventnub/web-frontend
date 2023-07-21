@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Box, Typography, Grid, Button, styled, Paper, CircularProgress } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
-// import { IconButton  } from '@mui/material';
-// import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 
 const StyledLink = styled(Link)(() => ({
   textDecoration: 'none',
@@ -104,41 +102,17 @@ export default function Events({ events, isLoading }) {
               >
                 {item.type}
               </Box>
-              {/* <Box
-                    sx={{
-                      background: 'rgba(255, 255, 255, 0.72)',
-                      width: '16%',
-                      height: '7%',
-                      position: 'absolute',
-                      top: '8px',
-                      right: '8px',
-                      borderRadius: '5px',
-                      padding: '0.3em',
-                      fontSize: '10px',
-                      color: '#000000',
-                      fontWeight: '400',
-                      border: '1px solid #FF6C2C',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '.3rem',
-                    }}
-                  >
-                    <IconButton sx={{ width: '22px', height: '20px' }}>
-                      <ThumbUpOffAltOutlinedIcon sx={{ color: '#FF6C2C', width: '22px', height: '20px' }} />
-                    </IconButton>
-                    <Typography sx={{ color: '#FF6C2C', fontsize: '1rem', fontWeight: '600' }}>3k</Typography>
-                  </Box> */}
               <Box sx={{ display: 'flex', marginTop: '15px', padding: '1rem' }}>
                 <Box sx={{ marginRight: '10px' }}>
-                  <Typography variant="h6" sx={{ color: '#000' }}>
+                  <Typography variant="h6" sx={{ color: '#000', fontWeight: '600' }}>
                     {item.date.substring(8)}
                   </Typography>
-                  <Typography variant="h6" sx={{ color: '#000' }}>
+                  <Typography variant="h6" sx={{ color: '#000', fontWeight: '600' }}>
                     {month[Number(item.date.substring(5, 7)) - 1]}
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography variant="h6" sx={{ color: '#000' }}>
+                  <Typography variant="h6" sx={{ color: '#000', fontWeight: '600' }}>
                     {item.name}
                   </Typography>
                   <Tooltip
@@ -182,7 +156,16 @@ export default function Events({ events, isLoading }) {
                   </Tooltip>
                 </Box>
               </Box>
-              <Box sx={{ p: '1rem', position: 'absolute', bottom: 0, left: 0, right: 0, mt: '.8rem' }}>
+              <Box
+                sx={{
+                  p: '1rem',
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  mt: '.8rem',
+                }}
+              >
                 <Button
                   fullWidth
                   size="large"
