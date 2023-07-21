@@ -6,15 +6,18 @@ import Tooltip from '@mui/material/Tooltip';
 // import { IconButton  } from '@mui/material';
 // import ThumbUpOffAltOutlinedIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 
+const StyledLink = styled(Link)(() => ({
+  textDecoration: 'none',
+  padding: '20px',
+}));
+
+const month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
 export default function Events({ events, isLoading }) {
-  const displayData = events?.slice(0, 5);
+  const [shownEvents, setShownEvents] = useState([]);
   const [open, setOpen] = useState(false);
   const [itemId, setItemId] = useState(null);
-  const StyledLink = styled(Link)(() => ({
-    textDecoration: 'none',
-    padding: '20px',
-  }));
-  const month = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  const ref = useRef(null);
 
   const handleTooltipClose = () => {
     setOpen(false);
@@ -25,7 +28,14 @@ export default function Events({ events, isLoading }) {
     setOpen((prev) => !prev);
   };
 
-  const ref = useRef(null);
+  const handleLoadMoreEvents = () => {
+    setShownEvents(events);
+  };
+
+  useEffect(() => {
+    setShownEvents(events?.slice(0, 3));
+  }, [events]);
+
   useEffect(() => {
     const checkClickedOutSide = (e) => {
       if (itemId != null && ref.current && !ref.current.contains(e.target)) {
@@ -49,7 +59,7 @@ export default function Events({ events, isLoading }) {
   return (
     <>
       <Grid container spacing={5} sx={{ marginTop: '15px' }} id="nextSection">
-        {displayData?.map((item) => (
+        {shownEvents?.map((item) => (
           <Grid item xs={12} sm={12} md={6} lg={4} key={item.uid}>
             <Paper
               elevation={10}
@@ -188,31 +198,34 @@ export default function Events({ events, isLoading }) {
           </Grid>
         ))}
       </Grid>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '50px',
-        }}
-      >
-        <Button
-          variant="contained"
-          disableElevation
+      {events?.length > shownEvents?.length && (
+        <Box
           sx={{
-            px: '3rem',
-            bgcolor: 'grey.600',
-            border: '1px solid #fff',
-            '&:hover': {
-              color: 'grey.600',
-              bgcolor: '#fff',
-              border: '1px solid #637381',
-            },
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '50px',
           }}
         >
-          Load More Events
-        </Button>
-      </Box>
+          <Button
+            variant="contained"
+            disableElevation
+            onClick={handleLoadMoreEvents}
+            sx={{
+              px: '3rem',
+              bgcolor: 'grey.600',
+              border: '1px solid #fff',
+              '&:hover': {
+                color: 'grey.600',
+                bgcolor: '#fff',
+                border: '1px solid #637381',
+              },
+            }}
+          >
+            Load More Events
+          </Button>
+        </Box>
+      )}
     </>
   );
 }
