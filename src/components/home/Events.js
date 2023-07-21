@@ -104,15 +104,15 @@ export default function Events({ events, isLoading }) {
               </Box>
               <Box sx={{ display: 'flex', marginTop: '15px', padding: '1rem' }}>
                 <Box sx={{ marginRight: '10px' }}>
-                  <Typography variant="h6" sx={{ color: '#000' }}>
+                  <Typography variant="h6" sx={{ color: '#000', fontWeight: '600' }}>
                     {item.date.substring(8)}
                   </Typography>
-                  <Typography variant="h6" sx={{ color: '#000' }}>
+                  <Typography variant="h6" sx={{ color: '#000', fontWeight: '600' }}>
                     {month[Number(item.date.substring(5, 7)) - 1]}
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography variant="h6" sx={{ color: '#000' }}>
+                  <Typography variant="h6" sx={{ color: '#000', fontWeight: '600' }}>
                     {item.name}
                   </Typography>
                   <Tooltip
