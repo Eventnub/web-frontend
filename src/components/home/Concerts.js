@@ -31,24 +31,22 @@ export default function Concerts() {
     let fEventByCountry = [];
     let fEventByState = [];
     let fEventByArtist = [];
+
     if (name) {
       fEventByName = events.filter((event) => event.name.toLowerCase().indexOf(name.toLowerCase()) !== -1);
     }
     if (country) {
-      fEventByCountry = filteredEvent.filter(
-        (event) => event.country.toLowerCase().indexOf(country.toLowerCase()) !== -1
-      );
+      fEventByCountry = events.filter((event) => event.country.toLowerCase().indexOf(country.toLowerCase()) !== -1);
     }
     if (state) {
-      fEventByState = filteredEvent.filter((event) => event.state.toLowerCase().indexOf(state.toLowerCase()) !== -1);
+      fEventByState = events.filter((event) => event.state.toLowerCase().indexOf(state.toLowerCase()) !== -1);
     }
     if (artist) {
-      fEventByArtist = filteredEvent.filter((event) => event.artists.includes(artist));
+      fEventByArtist = events.filter((event) => event.artists.includes(artist));
     }
 
     const fEvent = [...new Set([...fEventByCountry, ...fEventByName, ...fEventByState, ...fEventByArtist])];
     setFilteredEvent(fEvent);
-    console.log({ fEvent });
   };
 
   const handleRedirectFromAdvert = () => {
@@ -115,7 +113,7 @@ export default function Concerts() {
         </Box>
       </Box>
       <Events events={filteredEvent} isLoading={isLoading} />
-      
+
       <ConditionalPopup open={isFromAdvert} handleClose={() => setIsfromAdvert(false)} />
     </Container>
   );
