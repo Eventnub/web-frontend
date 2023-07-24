@@ -25,4 +25,5 @@ export const endpoints = {
   getUserAcquiredTickets: getFullUrl('tickets/get-user-acquired-tickets'),
   submitContactUsMessage: getFullUrl('contact-us'),
   submitEmailMarketing: getFullUrl('marketing/submit-email'),
+  getBasicStatistics: getFullUrl('statistics/get-basic-statistics'),
 };

@@ -62,4 +62,5 @@ export const requests = {
     axios.get(`${endpoints.getUserAcquiredTickets}/${uid}`, getJsonHeaderWithAuthToken(idToken)),
   submitContactUsMessage: (data) => axios.post(endpoints.submitContactUsMessage, data, jsonHeader),
   submitEmailMarketing: (data) => axios.post(endpoints.submitEmailMarketing, data, jsonHeader),
+  getBasicStatistics: () => axios.get(`${endpoints.getBasicStatistics}`, jsonHeader),
 };
