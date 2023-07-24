@@ -31,7 +31,7 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
 
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12} md={3}>
+      <Grid item xs={12} md={2}>
         <TextField
           fullWidth
           variant="standard"

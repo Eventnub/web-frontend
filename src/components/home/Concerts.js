@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Stack, Container, Typography, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Refresh';
 import SearchBar from './SearchBar';
 import ConditionalPopup from './ConditionalPopup';
 import Events from './Events';
@@ -63,6 +64,10 @@ export default function Concerts() {
     }
   };
 
+  const handleReset = () => {
+    setFilteredEvent(events);
+  };
+
   useEffect(() => {
     handleRedirectFromAdvert();
     fetchEvents();
@@ -97,17 +102,21 @@ export default function Concerts() {
           flexDirection: { xs: 'column', lg: 'row' },
         }}
       >
-        <Typography
-          sx={{
-            color: '#000000',
-            fontWeight: '600px',
-            fontSize: { xs: '1.3rem', md: '1.5rem' },
-            lineHeight: '38.7px',
-            textAlign: { xs: 'center', md: 'left' },
-          }}
-        >
-          Up Coming Events
-        </Typography>
+        <Stack direction="row" spacing={1} alignItems={'center'}>
+          <Typography
+            sx={{
+              color: '#000000',
+              fontWeight: '600px',
+              fontSize: { xs: '1.3rem', md: '1.5rem' },
+              lineHeight: '38.7px',
+            }}
+          >
+            Up Coming Events
+          </Typography>
+          <IconButton onClick={handleReset} sx={{ bgcolor: 'grey.300', width: '1.7rem', height: '1.7rem' }}>
+            <MenuIcon sx={{ color: 'grey.700', width: '1.1rem', height: '1.1rem' }} />
+          </IconButton>
+        </Stack>
         <Box sx={{ flex: 1 }}>
           <SearchBar handleSearchEvent={handleSearchEvent} countries={countries} states={states} artists={artists} />
         </Box>
