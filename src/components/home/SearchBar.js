@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Select, MenuItem, Button, Grid } from '@mui/material';
 
-const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
+const SearchBar = ({ didReset, handleSearchEvent, countries, states, artists }) => {
   const [name, setName] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
@@ -11,6 +11,10 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
 
   const handleSearch = () => {
     handleSearchEvent(name, country, state, artist, date);
+  };
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
   };
 
   const handleStateChange = (event) => {
@@ -29,6 +33,16 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
     setArtist(event.target.value);
   };
 
+  useEffect(() => {
+    if (didReset) {
+      setName('');
+      setState('');
+      setCountry('');
+      setArtist('');
+      setDate('');
+    }
+  }, [didReset]);
+
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} md={3}>
@@ -37,7 +51,7 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
           variant="standard"
           placeholder="Event name"
           value={name}
-          onChange={(event) => setName(event.target.value)}
+          onChange={handleNameChange}
           InputProps={{
             disableUnderline: true,
           }}
@@ -113,6 +127,7 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
 };
 
 SearchBar.propTypes = {
+  didReset: PropTypes.bool,
   handleSearchEvent: PropTypes.func,
   countries: PropTypes.array,
   states: PropTypes.array,
