@@ -26,7 +26,7 @@ const Page = forwardRef(({ children, title = '', ...other }, ref) => {
   return (
     <Box ref={ref} {...other}>
       <Helmet>
-        <title>{`${title} | EventNub`}</title>
+        <title>{`${title} | Eventnub`}</title>
       </Helmet>
       {children}
     </Box>
