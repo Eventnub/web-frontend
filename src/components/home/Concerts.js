@@ -14,6 +14,7 @@ export default function Concerts() {
   const [isLoading, setIsLoading] = useState(false);
   const [filteredEvent, setFilteredEvent] = useState([]);
   const [isFromAdvert, setIsfromAdvert] = useState(false);
+  const [didReset, setDidReset] = useState(false);
 
   const fetchEvents = async () => {
     try {
@@ -33,6 +34,10 @@ export default function Concerts() {
     let fEventByState = [];
     let fEventByArtist = [];
 
+    if (!name && !country && !state && !artist) {
+      return;
+    }
+
     if (name) {
       fEventByName = events.filter((event) => event.name.toLowerCase().indexOf(name.toLowerCase()) !== -1);
     }
@@ -48,6 +53,7 @@ export default function Concerts() {
 
     const fEvent = [...new Set([...fEventByCountry, ...fEventByName, ...fEventByState, ...fEventByArtist])];
     setFilteredEvent(fEvent);
+    setDidReset(false);
   };
 
   const handleRedirectFromAdvert = () => {
@@ -66,6 +72,7 @@ export default function Concerts() {
 
   const handleReset = () => {
     setFilteredEvent(events);
+    setDidReset(true);
   };
 
   useEffect(() => {
@@ -118,7 +125,13 @@ export default function Concerts() {
           </IconButton>
         </Stack>
         <Box sx={{ flex: 1 }}>
-          <SearchBar handleSearchEvent={handleSearchEvent} countries={countries} states={states} artists={artists} />
+          <SearchBar
+            didReset={didReset}
+            handleSearchEvent={handleSearchEvent}
+            countries={countries}
+            states={states}
+            artists={artists}
+          />
         </Box>
       </Box>
       <Events events={filteredEvent} isLoading={isLoading} />
