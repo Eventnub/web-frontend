@@ -35,7 +35,7 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
         <TextField
           fullWidth
           variant="standard"
-          placeholder="Event Name"
+          placeholder="Event name"
           value={name}
           onChange={(event) => setName(event.target.value)}
           InputProps={{ disableUnderline: true }}
@@ -44,7 +44,9 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
       </Grid>
       <Grid item xs={6} md={2}>
         <Select fullWidth value={country} onChange={handleCountryChange} displayEmpty>
-          <MenuItem value="">Country</MenuItem>
+          <MenuItem disabled value="">
+            <em>Country</em>
+          </MenuItem>
           {countries.map((c) => (
             <MenuItem value={c} key={Math.random()}>
               {c}
@@ -54,7 +56,9 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
       </Grid>
       <Grid item xs={6} md={2}>
         <Select fullWidth value={state} onChange={handleStateChange} displayEmpty>
-          <MenuItem value="">State</MenuItem>
+          <MenuItem disabled value="">
+            <em>State</em>
+          </MenuItem>
           {states.map((s) => (
             <MenuItem value={s} key={Math.random()}>
               {s}
@@ -64,7 +68,9 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
       </Grid>
       <Grid item xs={6} md={2}>
         <Select fullWidth value={artist} onChange={handleArtistChange} displayEmpty>
-          <MenuItem value="">Artist</MenuItem>
+          <MenuItem disabled value="">
+            <em>Artist</em>
+          </MenuItem>
           {artists.map((a) => (
             <MenuItem value={a} key={Math.random()}>
               {a}
