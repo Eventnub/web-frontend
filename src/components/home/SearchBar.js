@@ -31,15 +31,22 @@ const SearchBar = ({ handleSearchEvent, countries, states, artists }) => {
 
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12} md={2}>
+      <Grid item xs={12} md={3}>
         <TextField
           fullWidth
           variant="standard"
           placeholder="Event name"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          InputProps={{ disableUnderline: true }}
-          sx={{ background: '#F4F4F4', height: { xs: '3.5rem', md: '100%' }, p: 1 }}
+          InputProps={{
+            disableUnderline: true,
+          }}
+          sx={{
+            border: '1px solid #C4CDD5',
+            borderRadius: '0.4rem',
+            height: { xs: '3.5rem', md: '100%' },
+            p: 1,
+          }}
         />
       </Grid>
       <Grid item xs={6} md={2}>
