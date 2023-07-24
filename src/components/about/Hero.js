@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, Button, styled, Stack } from '@mui/material';
 import Navbar from './Navbar';
+import { requests } from '../../api/requests';
 import concert from '../../assets/concerts.png';
 
 const Num = styled(Typography)({
@@ -29,6 +30,21 @@ const Text = styled(Typography)({
 });
 
 function Hero() {
+  const [statistics, setStatistics] = useState(null);
+
+  const fetchStatistics = async () => {
+    try {
+      const { data } = await requests.getBasicStatistics();
+      setStatistics(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStatistics();
+  }, []);
+
   return (
     <Box>
       <Box sx={{ height: 'fit-content', backgroundColor: '#fff' }}>
@@ -101,16 +117,16 @@ function Hero() {
             </Button>
             <Stack direction="row" my={{ xs: 5, md: 10 }} spacing={{ xs: 5, md: 25 }}>
               <Box display="flex" flexDirection="column">
-                <Num>3.5M</Num>
+                <Num>{statistics?.usersCount || 0}</Num>
                 <Title>HAPPY FANS</Title>
               </Box>
               <Box display="flex" flexDirection="column">
-                <Num>100</Num>
-                <Title>ARTISTS</Title>
+                <Num>{statistics?.eventsCount || 0}</Num>
+                <Title>EVENTS</Title>
               </Box>
               <Box display="flex" flexDirection="column">
-                <Num>15</Num>
-                <Title>STAFF</Title>
+                <Num>{statistics?.artistsCount || 0}</Num>
+                <Title>ARTISTS</Title>
               </Box>
             </Stack>
           </Box>
