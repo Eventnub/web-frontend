@@ -7,7 +7,7 @@ import blueLogo from '../assets/blueLogo.png';
 import microphone from '../assets/old-microphone.png';
 import { requests } from '../api/requests';
 import useFirebase from '../hooks/useFirebase';
-import VoiceRecorder from '../components/musicMatch/VoiceRecorder';
+import VoiceRecorder from '../components/musicMatch/VoiceRecorder2';
 import CountdownTimerGame from '../components/CountdownTimerGame';
 import MusicMatchInfoDialog from '../components/musicMatch/MusicMatchInfoDialog';
 
