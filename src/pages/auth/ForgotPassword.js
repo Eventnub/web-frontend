@@ -64,7 +64,7 @@ function ForgotPassword() {
             })}
             onSubmit={async (values, { setErrors, setSubmitting, resetForm }) => {
               try {
-                await requests.forgot(values);
+                await requests.sendForgotPasswordEmail(values);
                 if (isMountedRef.current) {
                   setSubmitting(false);
                   handleOpenDialog();
@@ -75,7 +75,6 @@ function ForgotPassword() {
                   setErrors({ afterSubmit: error.message });
                   setSubmitting(false);
                 }
-                console.log(error.request);
               }
             }}
           >
