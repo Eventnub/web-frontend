@@ -1,12 +1,13 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { IconButton, Typography, Box, Container, Link, Button, useMediaQuery, useTheme, Stack } from '@mui/material';
+import { IconButton, Typography, Box, Divider, Link, Button, useMediaQuery, useTheme, Stack } from '@mui/material';
 import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
 import Page from '../../components/Page';
 import GoogleIcon from '../../assets/images/auth/google.png';
 import bg from '../../assets/background-img.png';
-import logo from '../../assets/blueLogo.png';
+import logo from '../../assets/Vector.png';
 import { LoginForm } from '../../sections/auth/login';
+import Image from '../../components/Image';
 
 export default function Login() {
   const theme = useTheme();
@@ -97,16 +98,7 @@ export default function Login() {
               backgroundSize: 'cover',
               height: '100vh',
               width: '100vw',
-              position: 'relative',
-              '&::after': {
-                content: '" "',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                height: '100%',
-                width: '100%',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-              },
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -114,79 +106,87 @@ export default function Login() {
           >
             <Box
               sx={{
-                height: '60%',
                 width: '70%',
-                backgroundColor: 'rgba(80, 79, 79, 0.72)',
                 display: 'flex',
+                alignItems: 'center',
+                position: 'relative',
               }}
             >
-              <Box width={'50%'} sx={{ zIndex: '2', position: 'absolute' }}>
-                <Box display="flex" flexDirection="column">
-                  <Link to="/" component={RouterLink} underline="none" sx={{ display: 'flex', alignItems: 'center' }}>
-                    <img src={logo} alt="logo" />
-                    <Typography variant="h6" sx={{ color: '#1358A5', letterSpacing: '0.1em', fontsize: '2rem' }}>
-                      eventnub
-                    </Typography>
-                  </Link>
-                  <Box sx={{ width: '180px', ml: 4 }}>
-                    <Typography variant="h4" sx={{ color: '#ffffff', fontWeight: '100', fontSize: '1rem' }}>
-                      Don't have an account?
-                    </Typography>
-                    <Typography variant="subtitle2" sx={{ color: '#ffffff', fontSize: '0.8rem', pt: '1em' }}>
-                      Join us and let's help you get that live concert experience
-                    </Typography>
-                  </Box>
-                  <Box sx={{ mt: '1em', ml: 4 }}>
-                    <Button
-                      to={PATH_AUTH.register}
-                      component={RouterLink}
-                      underline="none"
-                      variant="outlined"
-                      sx={{ border: '1px solid #ffffff', color: '#ffffff', p: '0.5rem' }}
-                    >
-                      Create Eventnub Account
-                    </Button>
-                  </Box>
+              <Box
+                sx={{
+                  my: '3rem',
+                  p: '1.5rem',
+                  py: '2rem',
+                  width: '100%',
+                  zIndex: '2',
+                  bgcolor: 'rgba(80, 79, 79, 0.72)',
+                }}
+              >
+                <Link to="/" component={RouterLink} underline="none" sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Image src={logo} alt="logo" sx={{ width: '2.5rem', mr: '0.7rem' }} />
+                  <Typography variant="h6" sx={{ color: '#fff', letterSpacing: '0.1em', fontsize: '2rem' }}>
+                    eventnub
+                  </Typography>
+                </Link>
+                <Box sx={{ width: '180px', my: 3 }}>
+                  <Typography variant="h4" sx={{ color: '#ffffff', fontWeight: '100', fontSize: '1rem' }}>
+                    Don't have an account?
+                  </Typography>
+                  <Typography variant="subtitle2" sx={{ color: '#ffffff', fontSize: '0.8rem', pt: '1em' }}>
+                    Join us and let's help you get that live concert experience
+                  </Typography>
                 </Box>
+                <Button
+                  to={PATH_AUTH.register}
+                  component={RouterLink}
+                  underline="none"
+                  size="large"
+                  variant="outlined"
+                  sx={{ border: '1px solid #ffffff', color: '#ffffff', mb: 4 }}
+                >
+                  Create Eventnub Account
+                </Button>
               </Box>
               <Box
                 sx={{
                   backgroundColor: '#fff',
-                  minHeight: '75vh',
-                  position: 'relative',
-                  left: '50%',
-                  bottom: '10%',
+                  position: 'absolute',
+                  right: '3rem',
                   zIndex: '2',
                   width: '45%',
-                  borderRadius: '5px',
+                  borderRadius: '0.6rem',
+                  padding: '1rem',
                 }}
               >
-                <Container>
-                  <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ marginTop: '1.5rem' }}>
-                    <Box>
-                      <Typography variant="h5" sx={{ color: '#000', fontWeight: '500' }}>
-                        Sign In with
-                      </Typography>
-                    </Box>
-                    <IconButton
-                      variant="outlined"
-                      sx={{ border: '1px solid #F5F5F5', borderRadius: '20%' }}
-                      onClick={handleLoginGoogle}
-                    >
-                      <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
-                    </IconButton>
-                  </Box>
-                  <Typography align="center" my={5} variant="h6" sx={{ color: '#000' }}>
-                    Or
+                <Typography variant="h6" sx={{ color: '#000', fontWeight: '500' }}>
+                  Sign In with
+                </Typography>
+                <Stack justifyContent={'center'} alignItems={'center'}>
+                  <IconButton
+                    variant="outlined"
+                    sx={{ border: '1px solid #F5F5F5', borderRadius: '50%', bgcolor: 'grey.300' }}
+                    onClick={handleLoginGoogle}
+                  >
+                    <img src={GoogleIcon} alt="google icon" style={{ width: '20px', height: '20px' }} />
+                  </IconButton>
+                </Stack>
+                <Divider sx={{ my: 4 }}>
+                  <Typography variant="body2" sx={{ color: '#000', fontWeight: '500' }}>
+                    OR
                   </Typography>
-
-                  <LoginForm />
-                  <Link component={RouterLink} variant="subtitle2" to={PATH_AUTH.forgetPassword} underline="none">
-                    <Typography textAlign="center" sx={{ color: '#000', mt: 2 }}>
-                      Forgot Password?
-                    </Typography>
+                </Divider>
+                <LoginForm />
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', my: '1rem' }}>
+                  <Link
+                    component={RouterLink}
+                    variant="subtitle2"
+                    to={PATH_AUTH.forgetPassword}
+                    underline="none"
+                    sx={{ color: '#000', fontWeight: '500' }}
+                  >
+                    Forgot Password?
                   </Link>
-                </Container>
+                </Box>
               </Box>
             </Box>
           </Box>

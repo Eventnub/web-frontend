@@ -23,7 +23,7 @@ const getMultipartHeaderWithAuthToken = (idToken) => ({
 export const requests = {
   register: (data) => axios.post(endpoints.register, data, jsonHeader),
   registerViaProvider: (data) => axios.post(endpoints.registerViaProvider, data, jsonHeader),
-  forgot: (data) => axios.post(endpoints.forgot, data, jsonHeader),
+  sendForgotPasswordEmail: (data) => axios.post(endpoints.sendForgotPasswordEmail, data, jsonHeader),
   getUser: (uid, idToken) => axios.get(`${endpoints.getUser}/${uid}`, getJsonHeaderWithAuthToken(idToken)),
   getEvents: () => axios.get(endpoints.getEvents, jsonHeader),
   getEvent: (uid) => axios.get(`${endpoints.getEvents}/${uid}`, jsonHeader),
