@@ -1,71 +1,180 @@
-import React, { useState } from 'react';
-import { Recorder } from 'react-voice-recorder';
-import 'react-voice-recorder/dist/index.css';
+import React, { useState, useEffect } from 'react';
+import { Button, Box, Stack } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { LoadingButton } from '@mui/lab';
+import PropTypes from 'prop-types';
 import { requests } from '../../api/requests';
 import useFirebase from '../../hooks/useFirebase';
+import mixpanel from '../../utils/mixpanel';
+import Image from '../Image';
+import Waves from '../../assets/waves.gif';
 
-const VoiceRecorder = () => {
-  const [audioDetails, setAudioDetails] = useState({
-    url: null,
-    blob: null,
-    chunks: null,
-    duration: {
-      h: 0,
-      m: 0,
-      s: 0,
-    },
-  });
+let mediaRecorder;
+let chunks = [];
+
+const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
+  const [recording, setRecording] = useState(false);
+  const [audioURL, setAudioURL] = useState(null);
+  const [recordingStarted, setRecordingStarted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(null);
+  const [audioFile, setAudioFile] = useState(null);
+  const [stream, setStream] = useState(null);
   const { user } = useFirebase();
+  const navigate = useNavigate();
+  const paymentId = localStorage.getItem('paymentId');
 
-  const handleAudioStop = (data) => {
-    console.log(data);
-    setAudioDetails(data);
+  const startRecording = async () => {
+    setRecordingStarted(true);
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    setStream(stream);
+    mediaRecorder = new MediaRecorder(stream);
+
+    mediaRecorder.addEventListener('dataavailable', (event) => {
+      chunks.push(event.data);
+    });
+
+    mediaRecorder.addEventListener('stop', () => {
+      const audioBlob = new Blob(chunks, { type: 'audio/mp3' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      setAudioURL(audioUrl);
+      setAudioFile(audioBlob);
+    });
+
+    mediaRecorder.start();
+    setRecording(true);
   };
 
-  const handleAudioUpload = async (file) => {
-    const blobFile = new File([file], 'recorded_audio');
+  const stopRecording = () => {
+    setRecordingStarted(false);
+    try {
+      if (stream.getAudioTracks) {
+        const tracks = stream.getAudioTracks();
+        tracks.forEach((track) => {
+          track.stop();
+        });
+      } else {
+        console.log('No Tracks Found');
+      }
+      mediaRecorder.stop();
+    } catch (error) {
+      console.log(error);
+    }
+    setRecording(false);
+  };
+
+  const resetRecording = () => {
+    stopRecording(false);
+
+    setTimeout(() => {
+      chunks = [];
+      setRecording(false);
+      setAudioURL(null);
+      setAudioFile(null);
+      setStream(null);
+    }, 5);
+  };
+
+  const uploadRecording = async () => {
+    const blobFile = new File([audioFile], 'recorded_audio');
     const formData = new FormData();
     formData.append('audio', blobFile);
+    formData.append('musicUnisonId', musicMatchId);
+    formData.append('paymentId', paymentId);
     try {
-      const { data } = await requests.transcribeAudio(user.idToken, formData);
-      console.log(data);
+      setIsSubmitting(true);
+      await requests.submitAudioRecording(user.idToken, formData);
+
+      mixpanel.track('Game played', {
+        gameType: 'Music Match',
+        userEmail: user.email,
+      });
+
+      setIsSubmitting(false);
+      navigate('/quiz-completed');
     } catch (error) {
       console.log(error.request);
     }
-    console.log(file);
   };
 
-  // const handleCountDown = (data) => {
-  //   // console.log(data);
-  // };
-
-  const handleReset = () => {
-    const reset = {
-      url: null,
-      blob: null,
-      chunks: null,
-      duration: {
-        h: 0,
-        m: 0,
-        s: 0,
-      },
-    };
-    setAudioDetails(reset);
-  };
+  useEffect(() => {
+    if (isTimeElapsed) {
+      setTimeout(async () => {
+        await uploadRecording();
+      }, 500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTimeElapsed]);
 
   return (
-    <Recorder
-      record
-      title={'New recording'}
-      audioURL={audioDetails.url}
-      showUIAudio
-      handleAudioStop={(data) => handleAudioStop(data)}
-      handleAudioUpload={(data) => handleAudioUpload(data)}
-      // handleCountDown={(data) => handleCountDown(data)}
-      handleReset={() => handleReset()}
-      mimeTypeToUseWhenRecording={`audio/webm`} // For specific mimetype.
-    />
+    <Stack sx={{ padding: '.8rem' }}>
+      <Stack justifyContent="space-between" direction="row" spacing={2} sx={{ marginBottom: '.8rem' }}>
+        <Button
+          onClick={startRecording}
+          disabled={recording}
+          variant="contained"
+          sx={{
+            boxShadow: 'none',
+            bgcolor: '#FF6C2C',
+            '&:hover': {
+              backgroundColor: '#FF6C2C',
+            },
+          }}
+        >
+          Start Recording
+        </Button>
+        <Button
+          onClick={stopRecording}
+          disabled={!recording}
+          variant="contained"
+          sx={{
+            boxShadow: 'none',
+            bgcolor: '#FF6C2C',
+            '&:hover': {
+              backgroundColor: '#FF6C2C',
+            },
+          }}
+        >
+          Stop Recording
+        </Button>
+      </Stack>
+      {recordingStarted && (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Image src={Waves} />
+        </Box>
+      )}
+      {audioURL && (
+        <audio controls>
+          <source src={audioURL} type="audio/ogg" />
+          <source src={audioURL} type="audio/mpeg" />
+          <track src="dav.vtt" kind="captions" label="English" />
+        </audio>
+      )}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '1.2rem' }}>
+        <LoadingButton
+          loading={isSubmitting}
+          variant="contained"
+          disabled={isTimeElapsed}
+          sx={{ bgcolor: '#1358A5', boxShadow: 'none' }}
+          onClick={uploadRecording}
+        >
+          Submit
+        </LoadingButton>
+        <Button
+          variant="contained"
+          disabled={isTimeElapsed}
+          sx={{ bgcolor: '#1358A5', boxShadow: 'none' }}
+          onClick={resetRecording}
+        >
+          Reset
+        </Button>
+      </Box>
+    </Stack>
   );
 };
 
 export default VoiceRecorder;
+
+VoiceRecorder.propTypes = {
+  musicMatchId: PropTypes.string,
+  isTimeElapsed: PropTypes.bool,
+};
