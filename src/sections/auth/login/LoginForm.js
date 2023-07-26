@@ -34,7 +34,13 @@ export default function LoginForm() {
         resetForm();
         if (isMountedRef.current) {
           setSubmitting(false);
-          setErrors({ afterSubmit: error.message });
+          if (error.code === 'auth/user-not-found') {
+            setErrors({ afterSubmit: "User with the email doesn't exist" });
+          } else if (error.code === 'auth/wrong-password') {
+            setErrors({ afterSubmit: 'The password is wrong' });
+          } else {
+            setErrors({ afterSubmit: error.message });
+          }
         }
       }
     },
