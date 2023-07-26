@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TextField, Select, MenuItem, Button, Grid } from '@mui/material';
+import { TextField, Select, MenuItem, Button, Grid, styled } from '@mui/material';
+
+const Cem = styled('em')(() => ({
+  color: '#919EAB',
+  fontStyle: 'normal',
+  fontSize: '0.9rem',
+}));
 
 const SearchBar = ({ didReset, handleSearchEvent, countries, states, artists }) => {
   const [name, setName] = useState('');
@@ -48,25 +54,18 @@ const SearchBar = ({ didReset, handleSearchEvent, countries, states, artists }) 
       <Grid item xs={12} md={3}>
         <TextField
           fullWidth
-          variant="standard"
-          placeholder="Event name"
+          placeholder="Event Name"
           value={name}
           onChange={handleNameChange}
           InputProps={{
             disableUnderline: true,
-          }}
-          sx={{
-            border: '1px solid #C4CDD5',
-            borderRadius: '0.4rem',
-            height: { xs: '3.5rem', md: '100%' },
-            p: 1,
           }}
         />
       </Grid>
       <Grid item xs={6} md={2}>
         <Select fullWidth value={country} onChange={handleCountryChange} displayEmpty>
           <MenuItem disabled value="">
-            <em>Country</em>
+            <Cem>Country</Cem>
           </MenuItem>
           {countries.map((c) => (
             <MenuItem value={c} key={Math.random()}>
@@ -78,7 +77,7 @@ const SearchBar = ({ didReset, handleSearchEvent, countries, states, artists }) 
       <Grid item xs={6} md={2}>
         <Select fullWidth value={state} onChange={handleStateChange} displayEmpty>
           <MenuItem disabled value="">
-            <em>State</em>
+            <Cem>State</Cem>
           </MenuItem>
           {states.map((s) => (
             <MenuItem value={s} key={Math.random()}>
@@ -90,7 +89,7 @@ const SearchBar = ({ didReset, handleSearchEvent, countries, states, artists }) 
       <Grid item xs={6} md={2}>
         <Select fullWidth value={artist} onChange={handleArtistChange} displayEmpty>
           <MenuItem disabled value="">
-            <em>Artist</em>
+            <Cem>Artist</Cem>
           </MenuItem>
           {artists.map((a) => (
             <MenuItem value={a} key={Math.random()}>
@@ -100,7 +99,17 @@ const SearchBar = ({ didReset, handleSearchEvent, countries, states, artists }) 
         </Select>
       </Grid>
       <Grid item xs={6} md={2}>
-        <TextField fullWidth type="date" value={date} onChange={handleDateChange} />
+        <TextField
+          fullWidth
+          type="text"
+          value={date}
+          placeholder="Date"
+          onChange={handleDateChange}
+          onMouseOver={(e) => (e.target.type = 'date')}
+          onMouseOut={(e) => (e.target.type = 'text')}
+          onFocus={(e) => (e.target.type = 'date')}
+          onBlur={(e) => (e.target.type = 'text')}
+        />
       </Grid>
       <Grid item xs={12} md={1}>
         <Button
