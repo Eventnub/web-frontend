@@ -9,7 +9,6 @@ import mixpanel from '../../utils/mixpanel';
 import Image from '../Image';
 import Waves from '../../assets/waves.gif';
 
-let mediaRecorder;
 let chunks = [];
 
 const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
@@ -19,6 +18,7 @@ const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
   const [isSubmitting, setIsSubmitting] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
   const [stream, setStream] = useState(null);
+  const [mediaRecorder, setMediaRecorder] = useState(null);
   const { user } = useFirebase();
   const navigate = useNavigate();
   const paymentId = localStorage.getItem('paymentId');
@@ -27,35 +27,32 @@ const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
     setRecordingStarted(true);
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     setStream(stream);
-    mediaRecorder = new MediaRecorder(stream);
+    const recorder = new MediaRecorder(stream);
 
-    mediaRecorder.addEventListener('dataavailable', (event) => {
+    recorder.addEventListener('dataavailable', (event) => {
       chunks.push(event.data);
     });
 
-    mediaRecorder.addEventListener('stop', () => {
+    recorder.addEventListener('stop', () => {
       const audioBlob = new Blob(chunks, { type: 'audio/mp3' });
       const audioUrl = URL.createObjectURL(audioBlob);
       setAudioURL(audioUrl);
       setAudioFile(audioBlob);
     });
 
-    mediaRecorder.start();
+    recorder.start();
+
+    setMediaRecorder(recorder);
     setRecording(true);
   };
 
   const stopRecording = () => {
     setRecordingStarted(false);
     try {
-      if (stream.getAudioTracks) {
-        const tracks = stream.getAudioTracks();
-        tracks.forEach((track) => {
-          track.stop();
-        });
-      } else {
-        console.log('No Tracks Found');
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        stream.getTracks().forEach((track) => track.stop());
       }
-      mediaRecorder.stop();
     } catch (error) {
       console.log(error);
     }
@@ -153,7 +150,7 @@ const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
         <LoadingButton
           loading={isSubmitting}
           variant="contained"
-          disabled={isTimeElapsed}
+          disabled={isTimeElapsed || !audioFile}
           sx={{ bgcolor: '#1358A5', boxShadow: 'none' }}
           onClick={uploadRecording}
         >
