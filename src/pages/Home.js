@@ -6,16 +6,9 @@ import About from '../components/home/About';
 import Testimonials from '../components/home/Testimonials';
 import Footer from '../components/home/Footer';
 import mixpanel from '../utils/mixpanel';
-import { getUserOS } from '../utils/getUserOS';
 
 export default function HomePage() {
   useEffect(() => {
-    setTimeout(() => {
-      console.clear();
-      const uos = getUserOS();
-      window.alert(uos);
-    }, 4000);
-
     mixpanel.track('Page viewed', {
       page: window.location.pathname,
     });
