@@ -34,6 +34,21 @@ export default function TicketCarousel() {
   const location = useLocation();
 
   const handleOpenDialog = (amount, index) => {
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      Swal.fire({
+        title: 'iOS Issue!',
+        text: `Due to some issues with iOS, it is recommended you take the quiz and music match 
+          game on an android or desktop device. Music match is not optimised for iOS yet!`,
+        icon: 'warning',
+        confirmButtonText: 'Okay',
+        confirmButtonAttributes: {
+          href: '/',
+          target: '_self',
+        },
+      });
+      return null;
+    }
+
     if (event.gameEndTimestamp === 0) {
       Swal.fire({
         title: 'Oops!',
