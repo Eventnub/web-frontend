@@ -86,7 +86,7 @@ export default function Hero() {
                 p: '.5rem',
               }}
             >
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
+              <Stack direction="row" justifyContent="space-between" alignItems="top">
                 <Typography
                   sx={{
                     color: '#fff',
