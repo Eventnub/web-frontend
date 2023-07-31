@@ -86,14 +86,14 @@ export default function Hero() {
                 p: '.5rem',
               }}
             >
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
+              <Stack direction="row" justifyContent="space-between" alignItems="top">
                 <Typography
                   sx={{
                     color: '#fff',
                     textTransform: 'capitalize',
                     fontSize: '1.25rem',
                     fontWeight: '800',
-                    maxWidth: '159px',
+                    maxWidth: '160px',
                   }}
                 >
                   {event.name}
@@ -102,9 +102,8 @@ export default function Hero() {
               </Stack>
               <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mt: '1.5rem' }}>
                 <Button
-                  size="large"
                   variant="contained"
-                  sx={{ boxShadow: 'none', backgroundColor: '#1358A5' }}
+                  sx={{ boxShadow: 'none', backgroundColor: '#1358A5', fontWeight: '500' }}
                   onClick={handleButtonClick}
                 >
                   Find Available Tickets
