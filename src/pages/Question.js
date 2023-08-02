@@ -48,6 +48,8 @@ const gameDuration = 5 * 60 * 1000;
 
 export default function Question() {
   const [questions, setQuestions] = useState([]);
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
+  const [expectedQuestionsCount, setExpectedQuestionsCount] = useState(0);
   const [dialogShown, setDialogShown] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState('');
@@ -73,13 +75,15 @@ export default function Question() {
   const { eventId } = useParams();
   const { user } = useFirebase();
 
-  const handleNext = () => {
-    if (currentQuestionIndex < 4) {
+  const handleNext = async () => {
+    const lastQuestionIndex = expectedQuestionsCount - 1;
+
+    if (currentQuestionIndex < lastQuestionIndex) {
       const answer = { questionId: questions[currentQuestionIndex].uid, answer: currentQuestionAnswer };
       setAnswers([...answers, answer]);
       const nextQuestionIndex = currentQuestionIndex + 1;
       setCurrentQuestionIndex(nextQuestionIndex);
-      if (nextQuestionIndex === 4) {
+      if (nextQuestionIndex === lastQuestionIndex) {
         setIsLastQuestion(true);
       }
     }
@@ -88,26 +92,31 @@ export default function Question() {
       const answer = { questionId: questions[currentQuestionIndex].uid, answer: currentQuestionAnswer };
       setAnswers([...answers, answer]);
       setIsLastQuestion(false);
-      const handleSubmit = async () => {
-        try {
-          setIsSubmitting(true);
-          await requests.submitEventQuizAnswers(eventId, user.idToken, { answers: [...answers, answer], paymentId });
+      try {
+        setIsSubmitting(true);
+        await requests.submitEventQuizAnswers(eventId, user.idToken, {
+          paymentId,
+          isIOSDevice,
+          answers: [...answers, answer],
+        });
 
-          mixpanel.track('Game played', {
-            gameType: 'Quiz',
-            userEmail: user.email,
-          });
+        mixpanel.track('Game played', {
+          gameType: 'Quiz',
+          userEmail: user.email,
+        });
 
-          setIsSubmitting(false);
+        setIsSubmitting(false);
+        if (isIOSDevice && expectedQuestionsCount === 10) {
+          navigate('/quiz-completed');
+        } else {
           navigate(`/music-match/${eventId}`);
-        } catch (error) {
-          setErrorMessage(error.response.data.message);
-          setIsSubmitting(false);
-          handleOpenDialog();
-          console.log(error.response.data.message);
         }
-      };
-      handleSubmit();
+      } catch (error) {
+        setErrorMessage(error.response.data.message);
+        setIsSubmitting(false);
+        handleOpenDialog();
+        console.log(error.response.data.message);
+      }
     }
     setCurrentQuestionAnswer('');
   };
@@ -118,9 +127,13 @@ export default function Question() {
     if (answers.length > 0) {
       try {
         setIsSubmitting(true);
-        await requests.submitEventQuizAnswers(eventId, user.idToken, { answers });
+        await requests.submitEventQuizAnswers(eventId, user.idToken, { paymentId, isIOSDevice, answers });
         setIsSubmitting(false);
-        navigate(`/music-match/${eventId}`);
+        if (isIOSDevice && expectedQuestionsCount === 10) {
+          navigate('/quiz-completed');
+        } else {
+          navigate(`/music-match/${eventId}`);
+        }
       } catch (error) {
         setErrorMessage(error.response.data.message);
         setIsSubmitting(false);
@@ -135,8 +148,12 @@ export default function Question() {
       try {
         setIsLoading(true);
         if (user.idToken) {
-          const { data } = await requests.getQuestions(eventId, user.idToken);
+          const isIOSDevice = !/iPhone|iPad|iPod/i.test(navigator.userAgent);
+          const expectedQuestionsCount = isIOSDevice ? 10 : 5;
+          const { data } = await requests.getQuestions(eventId, user.idToken, isIOSDevice);
           setQuestions(data);
+          setIsIOSDevice(isIOSDevice);
+          setExpectedQuestionsCount(expectedQuestionsCount);
           setIsLoading(false);
         }
       } catch (error) {
