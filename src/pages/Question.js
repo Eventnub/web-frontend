@@ -148,7 +148,7 @@ export default function Question() {
       try {
         setIsLoading(true);
         if (user.idToken) {
-          const isIOSDevice = !/iPhone|iPad|iPod/i.test(navigator.userAgent);
+          const isIOSDevice = /iPhone|iPad|iPod/i.test(navigator.userAgent);
           const expectedQuestionsCount = isIOSDevice ? 10 : 5;
           const { data } = await requests.getQuestions(eventId, user.idToken, isIOSDevice);
           setQuestions(data);
