@@ -27,8 +27,8 @@ export const requests = {
   getUser: (uid, idToken) => axios.get(`${endpoints.getUser}/${uid}`, getJsonHeaderWithAuthToken(idToken)),
   getEvents: () => axios.get(endpoints.getEvents, jsonHeader),
   getEvent: (uid) => axios.get(`${endpoints.getEvents}/${uid}`, jsonHeader),
-  getQuestions: (eventId, idToken) =>
-    axios.get(`${endpoints.getQuestions}/${eventId}`, getJsonHeaderWithAuthToken(idToken)),
+  getQuestions: (eventId, idToken, isIOSDevice) =>
+    axios.get(`${endpoints.getQuestions}/${eventId}?isIOSDevice=${isIOSDevice}`, getJsonHeaderWithAuthToken(idToken)),
   submitEventQuizAnswers: (eventId, idToken, data) =>
     axios.post(`${endpoints.submitEventQuizAnswers}/${eventId}`, data, getJsonHeaderWithAuthToken(idToken)),
   verifyTicketPayment: (idToken, data) =>
