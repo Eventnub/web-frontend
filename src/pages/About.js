@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import Page from '../components/Page';
-import Hero from '../components/about/Hero';
-import Mission from '../components/about/Mission';
+import AboutUs from '../components/about/AboutUs';
+import Purpose from '../components/about/Purpose';
 import Footer from '../components/home/Footer';
-import OurPartners from '../components/about/OurPartners';
+import Partners from '../components/about/Partners';
 import mixpanel from '../utils/mixpanel';
 
 function About() {
@@ -15,9 +15,9 @@ function About() {
 
   return (
     <Page title="About">
-      <Hero />
-      <Mission />
-      <OurPartners />
+      <AboutUs />
+      <Purpose />
+      <Partners />
       <Footer />
     </Page>
   );
