@@ -43,6 +43,7 @@ export default function CountdownTimerGame({ countdownDate, isTimeElapsed, onTim
         fontWeight: '600',
         fontSize: '1.3rem',
         textAlign: 'center',
+        px: "0.8rem"
       }}
     >
       {`${hours} : ${minutes} : ${seconds}`}

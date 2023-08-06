@@ -37,10 +37,11 @@ const StyledOption = styled(Box)({
   pl: '2rem',
 });
 
-const StyledCard = styled(Box)({
-  height: '80%',
+const StyledCard = styled(Stack)({
+  minHeight: '80%',
   borderRadius: '10px',
   boxShadow: '0px 0px 7px 3px rgba(0, 0, 0, 0.25)',
+  padding: '1.25rem',
   position: 'relative',
 });
 
@@ -166,23 +167,16 @@ export default function Question() {
 
   return (
     <Page title="Questions">
-      <Stack
-        sx={{
-          height: '100vh',
-          px: '3%',
-        }}
-      >
+      <Stack sx={{ height: '100vh', px: '3%' }}>
         <Stack direction="row" sx={{ height: '15%', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <img src={logo} alt="logo" style={{ width: '44px', height: '44px' }} />
-            <Typography sx={{ fontWeight: '600', letterSpacing: '.3rem', fontSize: '1.3rem', color: '#1358A5' }}>
+            <Typography sx={{ fontWeight: '600', letterSpacing: '.2rem', fontSize: '1.3rem', color: '#1358A5' }}>
               eventnub
             </Typography>
           </Box>
           <Box
             sx={{
-              width: { xs: '35%', md: '25%', lg: '13%' },
-              height: { xs: '34%', md: '34%' },
               background: '#DBDBDB',
               borderRadius: '10px',
               textAlign: 'center',
@@ -202,16 +196,18 @@ export default function Question() {
         </Stack>
 
         <StyledCard>
-          <Typography sx={{ mt: '2%', ml: '2%', fontSize: '1.5rem', fontWeight: '600', color: '#848484' }}>
-            {currentQuestionIndex + 1}/<span style={{ fontSize: '.8rem', fontWeight: '200' }}>{questions.length}</span>
+          <Typography sx={{ fontSize: '1.5rem', fontWeight: '600', color: '#848484' }}>
+            {currentQuestionIndex + 1}
+            {'/'}
+            <span style={{ fontSize: '.8rem', fontWeight: '200' }}>{questions.length}</span>
           </Typography>
 
-          <Box sx={{ mt: '10%', textAlign: 'center' }}>
+          <Box sx={{ my: '8%', textAlign: 'center', flexGrow: 1 }}>
             {isLoading ? (
               <CircularProgress />
             ) : (
               <>
-                <Typography sx={{ color: '#000', fontSize: '2rem', fontWeight: '400' }}>
+                <Typography sx={{ color: '#000', fontSize: { xs: '1.3rem', md: '2rem' }, fontWeight: '400' }}>
                   {questions[currentQuestionIndex]?.question}
                 </Typography>
                 <FormControl component="fieldset" sx={{ mt: { xs: '6%', md: '4%' } }}>
@@ -239,23 +235,23 @@ export default function Question() {
               </>
             )}
           </Box>
-          <LoadingButton
-            variant="contained"
-            loading={isSubmitting}
-            sx={{
-              position: 'absolute',
-              bottom: '5%',
-              right: '3%',
-              boxShadow: 'none',
-              background: '#1358A5',
-              borderRadius: '5px',
-              width: '10%',
-            }}
-            onClick={handleNext}
-            disabled={isNextDisabled}
-          >
-            {currentQuestionIndex === 4 ? 'Submit' : 'Next'}
-          </LoadingButton>
+          <Box sx={{ display: 'flex', justifyContent: 'end', mb: '1rem' }}>
+            <LoadingButton
+              variant="contained"
+              loading={isSubmitting}
+              sx={{
+                boxShadow: 'none',
+                background: '#1358A5',
+                borderRadius: '5px',
+                px: '2rem',
+              }}
+              onClick={handleNext}
+              disabled={isNextDisabled}
+            >
+              {currentQuestionIndex === expectedQuestionsCount - 1 ? 'Submit' : 'Next'}
+            </LoadingButton>
+          </Box>
+
           <QuizTakenDialog open={dialogShown} errorMessage={errorMessage} />
         </StyledCard>
       </Stack>
