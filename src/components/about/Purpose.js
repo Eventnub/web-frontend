@@ -39,7 +39,7 @@ function Purpose() {
         <Title sx={{ mb: '2rem' }}>Vision</Title>
         <Text>
           To create an inclusive and accessible platform that empowers genuine connections between passionate Afrobeat
-          fans and celebs,
+          fans and celebs.
         </Text>
         <Title sx={{ mt: '5rem', mb: '2rem' }}>Mission</Title>
         <Text>Eventnub: Empowering Afrobeat fans with equitable access to their favorite artists' performances.</Text>
