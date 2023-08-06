@@ -30,27 +30,29 @@ export default function Quiz() {
   return (
     <Page title="Quiz">
       <Box sx={{ display: 'flex', justifyContent: 'center', height: '100vh' }}>
-        <Box sx={{ mt: '8%', display: 'flex', flexDirection: 'column', p: 3 }}>
+        <Box sx={{ mt: '6%', display: 'flex', flexDirection: 'column', p: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: '3%' }}>
             <img src={logo} alt="logo" />
-            <Typography sx={{ fontWeight: '600', letterSpacing: '.3rem', fontSize: '1.3rem', color: '#1358A5' }}>
+            <Typography sx={{ fontWeight: '600', letterSpacing: '.2rem', fontSize: '1.3rem', color: '#1358A5' }}>
               eventnub
             </Typography>
           </Box>
           <Typography textAlign="center" sx={{ color: '#000', fontWeight: '600', fontSize: '1.5rem' }}>
             Congratulations! you have joined successfully
           </Typography>
-          <Typography sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: '1.25rem', textAlign: 'center', my: 1 }}>
+          <Typography
+            sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: '1.25rem', textAlign: 'center', my: '1.25rem' }}
+          >
             You are just a step away to get your FREE ticket to {event.name}.
           </Typography>
           <Box
-            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', mt: '6%' }}
+            sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', mt: '2rem' }}
           >
             {countdownDate && <CountdownTimer countdownDate={countdownDate} eventId={event.uid} />}
             <Button
               variant="contained"
               sx={{
-                width: '70%',
+                width: { xs: '70%', md: '50%' },
                 height: '39px',
                 boxShadow: 'none',
                 mb: '2%',

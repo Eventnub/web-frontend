@@ -17,7 +17,7 @@ export default function QuizCompleted() {
           Completed successfully
         </Typography>
         <Typography sx={{ textAlign: 'center', color: '#6B6B6B', fontWeight: '400', fontSize: '1.4rem' }}>
-          Your result will be sent to your mail within 24 hours
+          Your result will be sent to your mail within 48 hours
         </Typography>
         <Box sx={{ textAlign: 'center', mt: '7%' }}>
           <Button
