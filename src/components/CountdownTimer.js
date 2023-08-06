@@ -12,9 +12,9 @@ const Num = styled(Typography)({
 });
 
 const Title = styled(Typography)({
-  fontSize: '.8rem',
+  fontSize: '.6rem',
   color: '#6B6B6B',
-  fontWeight: '400',
+  fontWeight: '600',
   textAlign: 'center',
 });
 
@@ -32,7 +32,7 @@ export default function CountdownTimer({ countdownDate, eventId }) {
       <Button
         variant="contained"
         sx={{
-          width: '50%',
+          width: { xs: '70%', md: '50%' },
           height: '39px',
           boxShadow: 'none',
           mb: '2%',
@@ -48,12 +48,19 @@ export default function CountdownTimer({ countdownDate, eventId }) {
 
   return (
     <>
-      <Typography textAlign="center" sx={{ color: '#6B6B6B', fontWeight: '400', fontSize: '1.25rem' }}>
+      <Typography
+        textAlign="center"
+        sx={{
+          color: '#6B6B6B',
+          fontWeight: '400',
+          fontSize: '1rem',
+        }}
+      >
         The quiz will start in
       </Typography>
       <Box
         sx={{
-          width: '50%',
+          width: { xs: '70%', md: '50%' },
           height: '80px',
           backgroundColor: '#F7F7F7',
           mt: '1%',
