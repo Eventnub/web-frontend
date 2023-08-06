@@ -29,7 +29,7 @@ const Text = styled(Typography)({
   marginTop: '1.2rem',
 });
 
-function Hero() {
+function AboutUs() {
   const [statistics, setStatistics] = useState(null);
 
   const fetchStatistics = async () => {
@@ -68,37 +68,24 @@ function Hero() {
               maxWidth: '100%',
             }}
           >
-            <Typography
-              sx={{
-                fontWeight: '500',
-                color: '#000',
-                fontSize: { xs: '1.5rem', md: '2.5rem' },
-                lineHeight: { xs: '43.5px', sm: '43.5px', md: '58px' },
-                mb: '1.5rem',
-                textAlign: 'center',
-              }}
-            >
-              Our Mission
-            </Typography>
+            <Text>Globe Eventnub, is the ultimate Afrobeat event platform made for passionate fans and artists.</Text>
             <Text>
-              Welcome to Eventnub, the ultimate Afrobeat event platform made for artists and true fans. Our mission is
-              to make Afrobeat events accessible to genuine fans who have longed to see their favorite artists perform
-              but can’t afford the high cost of tickets.
+              We help create better connections between passionate Afrobeat fans and artists. We achieve this by
+              offering a unique approach to ticketing through various gamified activities that are fun and engaging.
             </Text>
             <Text>
-              We achieve this by offering a unique approach to ticketing through various gamified activities that are
-              fun and engaging. By playing the ‘How well you know your artiste’ game, fans have the chance to win free
-              or highly discounted passes to attend events of their favorite Afrobeat celebrities.
+              By playing the ‘How well you know your artiste’ game, passionate fans have the chance to win free or
+              highly discounted passes to attend events of their favorite Afrobeat celebrities.
             </Text>
             <Text>
-              As a platform, we strive to create a community that supports true fans and celebrities alike. We aim to
-              connect fans with the celebrities they love and help emerging artists grow their fanbase.
+              As an Organisation, we strive to create a community that supports true fans and celebrities alike. We aim
+              to better connect passionate fans with the celebrities and help emerging artists grow their fanbase.
             </Text>
             <Text>
-              At Eventnub, we believe that events are a great way to bring people together. That's why we are dedicated
-              to providing an innovative and accessible way for true fans to experience their favorite celebrities'
-              events. Join our community today and discover a world of unforgettable events and experiences.
+              At Eventnub, we believe that events are a great way to bring people together. That's why we chose to
+              provide an innovative and accessible way for true fans to experience their favourite celebrities' events.
             </Text>
+            <Text>Join our community today and discover a world of unforgettable events and experiences!</Text>
             <Button
               variant="contained"
               size="large"
@@ -139,4 +126,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default AboutUs;
