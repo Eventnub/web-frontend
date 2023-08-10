@@ -11,6 +11,10 @@ import PaymentSuccessDialog from './PaymentSuccessDialog';
 import { requests } from '../../api/requests';
 import mixpanel from '../../utils/mixpanel';
 
+const PAYSTACK_KEY = 'pk_test_6b28a0a394da79d85f0824ee2b9b366744dd9966';
+const STRIPE_KEY =
+  'pk_live_51NJWgPLWplPuQFeHbyHKseV2ZeGDedXX7XdMDAaBTK1eUlEV6WtVnsgnSzyxQEE8YG0r02vReuXRcBJjUKlZxAsJ000qEMzcij';
+
 export default function SelectPaymentOption({ open, handleClose, extraPaymentData }) {
   const [isProduction, setIsProduction] = useState(false);
   const [paymentSuccessfulDialogShown, setPaymentSuccessdulDialogShown] = useState(false);
@@ -53,13 +57,6 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
     } catch (error) {
       console.log(error.request);
     }
-  };
-
-  const config = {
-    reference: new Date().getTime(),
-    email,
-    amount: amount * 100 * 760,
-    publicKey: 'pk_test_6b28a0a394da79d85f0824ee2b9b366744dd9966',
   };
 
   const handleOpenPaymentSuccessfulDialog = () => {
@@ -111,7 +108,12 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
   const onClose = () => {
     navigate(`/event-details/${eventId}`);
   };
-  const initializePayment = usePaystackPayment(config);
+  const initializePayment = usePaystackPayment({
+    reference: new Date().getTime(),
+    email,
+    amount: amount * 100 * 760,
+    publicKey: PAYSTACK_KEY,
+  });
 
   useEffect(() => {
     const baseUrl = window.location.origin;
@@ -123,7 +125,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
   const getStripeUI = () => (
     <StripeCheckout
       token={onToken}
-      stripeKey="pk_live_51NJWgPLWplPuQFeHbyHKseV2ZeGDedXX7XdMDAaBTK1eUlEV6WtVnsgnSzyxQEE8YG0r02vReuXRcBJjUKlZxAsJ000qEMzcij"
+      stripeKey={STRIPE_KEY}
       name="Globeventnub"
       amount={amount * 100}
       currency="USD"
