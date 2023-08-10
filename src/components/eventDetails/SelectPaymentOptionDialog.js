@@ -172,7 +172,7 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
         <DialogTitle sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography sx={{ color: '#000', fontWeight: '700', fontSize: '1.3rem' }}>PAYMENT</Typography>
         </DialogTitle>
-        {!isProduction ? (
+        {isProduction ? (
           <DialogContent>
             <Box sx={{ width: { xs: '100%', md: '50%' } }}>
               <Typography sx={{ color: '#4E4E4E', fontWeight: '400', fontSize: '1rem', mb: '1rem' }}>
