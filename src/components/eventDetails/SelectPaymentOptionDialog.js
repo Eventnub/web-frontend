@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Dialog, DialogTitle, DialogContent, Button, Typography, Stack } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
 import StripeCheckout from 'react-stripe-checkout';
 import { usePaystackPayment } from 'react-paystack';
 import stripeLogo from '../../assets/stripe-logo.png';
@@ -13,6 +12,7 @@ import { requests } from '../../api/requests';
 import mixpanel from '../../utils/mixpanel';
 
 export default function SelectPaymentOption({ open, handleClose, extraPaymentData }) {
+  const [isProduction, setIsProduction] = useState(false);
   const [paymentSuccessfulDialogShown, setPaymentSuccessdulDialogShown] = useState(false);
   const { eventId } = useParams();
   const navigate = useNavigate();
@@ -113,6 +113,48 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
   };
   const initializePayment = usePaystackPayment(config);
 
+  useEffect(() => {
+    const baseUrl = window.location.origin;
+    if (baseUrl.indexOf('globeventnub.com') !== -1) {
+      setIsProduction(true);
+    }
+  }, []);
+
+  const getStripeUI = () => (
+    <StripeCheckout
+      token={onToken}
+      stripeKey="pk_live_51NJWgPLWplPuQFeHbyHKseV2ZeGDedXX7XdMDAaBTK1eUlEV6WtVnsgnSzyxQEE8YG0r02vReuXRcBJjUKlZxAsJ000qEMzcij"
+      name="Globeventnub"
+      amount={amount * 100}
+      currency="USD"
+      allowRememberMe={false}
+    >
+      <Button
+        variant="contained"
+        endIcon={<img src={stripeLogo} alt="stripe" />}
+        sx={{
+          borderRadius: '5px',
+          width: '100%',
+          boxShadow: 'none',
+          display: 'flex',
+          justifyContent: 'space-between',
+          background: '#fff',
+          alignItems: 'center',
+          color: '#022069',
+          fontWeight: '600',
+          fontSize: { xs: '1rem', md: '1.5rem' },
+          height: { xs: '41px', md: '91px' },
+          border: '2px solid #FF6C2C',
+          '&:hover': {
+            backgroundColor: '#fff',
+          },
+        }}
+      >
+        Stripe
+      </Button>
+    </StripeCheckout>
+  );
+
   return (
     <>
       <Dialog
@@ -128,86 +170,61 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
         }}
       >
         <DialogTitle sx={{ display: 'flex', alignItems: 'center' }}>
-          <AddIcon />
           <Typography sx={{ color: '#000', fontWeight: '700', fontSize: '1.3rem' }}>PAYMENT</Typography>
         </DialogTitle>
-        <DialogContent>
-          <Typography sx={{ color: '#4E4E4E', fontWeight: '400', fontSize: '1rem' }}>
-            Choose a payment option
-          </Typography>
-          <Box sx={{ background: '#F1F1F1', height: '190px', mt: '.5rem', p: '1.5rem' }}>
-            <Typography sx={{ color: '#4E4E4E', fontSize: '1rem', fontWeight: '600' }}>
-              How do you want to pay?
+        {!isProduction ? (
+          <DialogContent>
+            <Box sx={{ width: { xs: '100%', md: '50%' } }}>
+              <Typography sx={{ color: '#4E4E4E', fontWeight: '400', fontSize: '1rem', mb: '1rem' }}>
+                Pay with:
+              </Typography>
+              {getStripeUI()}
+            </Box>
+          </DialogContent>
+        ) : (
+          <DialogContent>
+            <Typography sx={{ color: '#4E4E4E', fontWeight: '400', fontSize: '1rem' }}>
+              Choose a payment option
             </Typography>
-            <Stack
-              sx={{ mt: { xs: '1rem', md: '2rem' } }}
-              direction={{ xs: 'column', md: 'row' }}
-              spacing={{ xs: 1, md: 4 }}
-            >
-              <Button
-                variant="contained"
-                endIcon={<img src={paystackLogo} alt="paystack" />}
-                // component={Link}
-                // to={`/payment/${eventId}`}
-                onClick={() => {
-                  initializePayment(onSuccess, onClose);
-                }}
-                sx={{
-                  borderRadius: '5px',
-                  flex: 1,
-                  boxShadow: 'none',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  background: '#fff',
-                  color: '#022069',
-                  fontWeight: '600',
-                  fontSize: { xs: '1rem', md: '1.5rem' },
-                  height: { xs: '41px', md: '91px' },
-                  border: '2px solid #FF6C2C',
-                  '&:hover': {
-                    backgroundColor: '#fff',
-                  },
-                }}
+            <Box sx={{ background: '#F1F1F1', height: '190px', mt: '.5rem', p: '1.5rem' }}>
+              <Typography sx={{ color: '#4E4E4E', fontSize: '1rem', fontWeight: '600' }}>
+                How do you want to pay?
+              </Typography>
+              <Stack
+                sx={{ mt: { xs: '1rem', md: '2rem' } }}
+                direction={{ xs: 'column', md: 'row' }}
+                spacing={{ xs: 1, md: 4 }}
               >
-                Paystack
-              </Button>
-              <Box sx={{ flex: 1 }}>
-                <StripeCheckout
-                  token={onToken}
-                  stripeKey="pk_live_51NJWgPLWplPuQFeHbyHKseV2ZeGDedXX7XdMDAaBTK1eUlEV6WtVnsgnSzyxQEE8YG0r02vReuXRcBJjUKlZxAsJ000qEMzcij"
-                  name="Globeventnub"
-                  amount={amount * 100}
-                  currency="USD"
-                  allowRememberMe={false}
+                <Button
+                  variant="contained"
+                  endIcon={<img src={paystackLogo} alt="paystack" />}
+                  onClick={() => {
+                    initializePayment(onSuccess, onClose);
+                  }}
+                  sx={{
+                    borderRadius: '5px',
+                    flex: 1,
+                    boxShadow: 'none',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    background: '#fff',
+                    color: '#022069',
+                    fontWeight: '600',
+                    fontSize: { xs: '1rem', md: '1.5rem' },
+                    height: { xs: '41px', md: '91px' },
+                    border: '2px solid #FF6C2C',
+                    '&:hover': {
+                      backgroundColor: '#fff',
+                    },
+                  }}
                 >
-                  <Button
-                    variant="contained"
-                    endIcon={<img src={stripeLogo} alt="stripe" />}
-                    sx={{
-                      borderRadius: '5px',
-                      width: '100%',
-                      boxShadow: 'none',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      background: '#fff',
-                      alignItems: 'center',
-                      color: '#022069',
-                      fontWeight: '600',
-                      fontSize: { xs: '1rem', md: '1.5rem' },
-                      height: { xs: '41px', md: '91px' },
-                      border: '2px solid #FF6C2C',
-                      '&:hover': {
-                        backgroundColor: '#fff',
-                      },
-                    }}
-                  >
-                    Stripe
-                  </Button>
-                </StripeCheckout>
-              </Box>
-            </Stack>
-          </Box>
-        </DialogContent>
+                  Paystack
+                </Button>
+                <Box sx={{ flex: 1 }}>{getStripeUI()}</Box>
+              </Stack>
+            </Box>
+          </DialogContent>
+        )}
       </Dialog>
       <PaymentSuccessDialog open={paymentSuccessfulDialogShown} />
     </>
