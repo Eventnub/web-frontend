@@ -67,14 +67,6 @@ export default function Router() {
     {
       path: 'auth',
       children: [
-        // {
-        //   element: (
-        //     <GuestGuard>
-        //       <Auth />
-        //     </GuestGuard>
-        //   ),
-        //   index: true,
-        // },
         {
           path: 'login',
           element: (
@@ -241,7 +233,3 @@ export default function Router() {
     { path: '*', element: <Navigate to="/404" replace /> },
   ]);
 }
-
-// IMPORT COMPONENTS
-
-// Authentication
