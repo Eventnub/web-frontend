@@ -1,5 +1,5 @@
 // routes
-import { PATH_DASHBOARD } from './routes/paths';
+import { PATH_PAGE } from './routes/paths';
 
 // API
 // ----------------------------------------------------------------------
@@ -17,7 +17,7 @@ export const FIREBASE_API = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-export const MIXPANEL_API = "eeec135c90e54e1b2662351363c80f54";
+export const MIXPANEL_API = 'eeec135c90e54e1b2662351363c80f54';
 
 export const COGNITO_API = {
   userPoolId: process.env.REACT_APP_AWS_COGNITO_USER_POOL_ID,
@@ -34,7 +34,7 @@ export const MAPBOX_API = process.env.REACT_APP_MAPBOX;
 export const GOOGLE_ANALYTICS_API = process.env.REACT_APP_GA_MEASUREMENT_ID;
 
 // ROOT PATH AFTER LOGIN SUCCESSFUL
-export const PATH_AFTER_LOGIN = PATH_DASHBOARD.general.profile;
+export const PATH_AFTER_LOGIN = PATH_PAGE.home;
 
 // LAYOUT
 // ----------------------------------------------------------------------

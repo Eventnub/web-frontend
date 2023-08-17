@@ -31,7 +31,6 @@ export default function TicketSection() {
   };
 
   useEffect(() => {
-    handleScrollToSection();
     handleRedirectFromAdvert();
   }, []);
 
@@ -47,7 +46,7 @@ export default function TicketSection() {
       >
         Get Your Ticket
       </Typography>
-      <TicketCarousel />
+      <TicketCarousel onTicketsLoaded={handleScrollToSection} />
       <Box
         sx={{
           display: 'flex',
