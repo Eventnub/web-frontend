@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Box, Button, Typography, Container, IconButton, CircularProgress, Tooltip } from '@mui/material';
 import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
@@ -15,7 +16,7 @@ import ComingSoonDialog from './ComingSoonDialog';
 import PlayGameAgainNotificationDialog from './PlayGameAgainNotificationDialog';
 import Iconify from '../Iconify';
 
-export default function TicketCarousel() {
+export default function TicketCarousel({ onTicketsLoaded }) {
   const [event, setEvent] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [dialogShown, setDialogShown] = useState(false);
@@ -137,12 +138,15 @@ export default function TicketCarousel() {
         const { data } = await requests.getEvent(eventId);
         setEvent(data);
         setIsLoading(false);
+        onTicketsLoaded();
       } catch (error) {
         console.log(error);
       }
     }
 
     fetchEvents();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventId]);
 
   useEffect(() => {
@@ -368,3 +372,7 @@ export default function TicketCarousel() {
     </Container>
   );
 }
+
+TicketCarousel.propTypes = {
+  onTicketsLoaded: PropTypes.func,
+};

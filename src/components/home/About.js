@@ -24,7 +24,7 @@ export default function About() {
       </Typography>
       <Grid container gap={1}>
         {STEPS.map((step) => (
-          <Grid key={step.index} Item xs={12}>
+          <Grid key={step.index} item xs={12}>
             <Stack direction="column" justifyContent="center" alignItems="center" sx={{ px: '1rem' }}>
               <Typography variant="subtitle1" sx={{ textAlign: 'center', color: 'grey.500' }}>
                 Step {step.index}.
