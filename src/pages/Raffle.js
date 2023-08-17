@@ -91,19 +91,37 @@ export default function Raffle() {
     <Page title="Raffle">
       <Box sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
         <Box sx={{ mt: '3%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <img src={logo} alt="logo" style={{ width: '44px', height: '44px' }} />
-          <Typography sx={{ fontWeight: '600', letterSpacing: '.3rem', fontSize: '1.3rem', color: '#1358A5' }}>
+          <img src={logo} alt="logo" style={{ width: '60px', height: '60px' }} />
+          <Typography sx={{ fontWeight: '600', letterSpacing: '0.1rem', fontSize: '1.4rem', color: '#1358A5' }}>
             eventnub
           </Typography>
         </Box>
-        <Typography sx={{ color: '#000', fontWeight: '400', fontSize: '1.2rem', textAlign: 'center', mt: '1%' }}>
-          Pick 5 random numbers and stand a chance to win your free ticket
-        </Typography>
-        <Typography sx={{ color: '#000', fontWeight: '400', fontSize: '1.2rem', textAlign: 'center' }}>
-          when two out of the 5 numbers matches with a random selection
-        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: '1rem', px: '1rem' }}>
+          <Typography
+            sx={{
+              color: '#000',
+              fontWeight: '400',
+              fontSize: { xs: '1rem', md: '1.2rem' },
+              textAlign: 'center',
+              maxWidth: '600px',
+            }}
+          >
+            Pick 5 random numbers and stand a chance to win your free ticket when two out of the 5 numbers matches with
+            a random selection
+          </Typography>
+        </Box>
         <Box sx={{ height: '75%', width: '100%', px: { xs: '5%', sm: '10%', md: '18%' } }}>
-          <Box sx={{ height: '100%', width: '100%', display: 'flex', flexWrap: 'wrap', gap: '1rem', mt: '2%' }}>
+          <Box
+            sx={{
+              height: '100%',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              gap: '1rem',
+              my: '2rem',
+            }}
+          >
             {isLoading ? (
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                 <CircularProgress />
@@ -132,13 +150,13 @@ export default function Raffle() {
               </>
             )}
           </Box>
-          <Box sx={{ textAlign: 'center', mt: '4%' }}>
+          <Box sx={{ textAlign: 'center' }}>
             <LoadingButton
               variant="contained"
               onClick={handleSubmit}
               loading={isSubmitting}
               disabled={selectedButtons.length !== 5}
-              sx={{ background: '#1358A5', boxShadow: 'none', borderRadius: '5px', width: '20%' }}
+              sx={{ background: '#1358A5', boxShadow: 'none', borderRadius: '5px', px: '2rem' }}
             >
               Submit
             </LoadingButton>
