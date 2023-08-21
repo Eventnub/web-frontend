@@ -8,6 +8,7 @@ import DrawerCom from './DrawerCom';
 import { requests } from '../../api/requests';
 import bg from '../../assets/bgImg-lhd.png';
 import mixpanel from '../../utils/mixpanel';
+import GoogleAnalytics from '../../utils/googleAnalytics';
 
 const StyledBox = styled(Box)({
   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url(${bg})`,
@@ -44,6 +45,14 @@ export default function Hero() {
         setIsLoading(false);
 
         mixpanel.track('Event details viewed', {
+          eventName: data.name,
+          eventUid: data.uid,
+          eventCountry: data.country,
+          eventState: data.state,
+          eventVenue: data.venue,
+        });
+
+        GoogleAnalytics.trackEvent('Event details viewed', {
           eventName: data.name,
           eventUid: data.uid,
           eventCountry: data.country,

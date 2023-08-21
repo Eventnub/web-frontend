@@ -5,6 +5,7 @@ import 'firebase/compat/auth';
 import { FIREBASE_API } from '../config';
 import { requests } from '../api/requests';
 import mixpanel from '../utils/mixpanel';
+import GoogleAnalytics from '../utils/googleAnalytics';
 
 if (!firebase.apps.length) {
   firebase.initializeApp(FIREBASE_API);
@@ -97,7 +98,13 @@ function FirebaseProvider({ children }) {
       mixpanel.track('Signed up', {
         name: user.displayName,
         email: user.email,
-        favoriteCelebrity: "Not set",
+        favoriteCelebrity: 'Not set',
+        method: 'Google',
+      });
+      GoogleAnalytics.trackEvent('Signed up', {
+        name: user.displayName,
+        email: user.email,
+        favoriteCelebrity: 'Not set',
         method: 'Google',
       });
     } catch (error) {

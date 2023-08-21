@@ -28,19 +28,15 @@ import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-// @mui
+import ReactGA4 from "react-ga4";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// contexts
 import { SettingsProvider } from './contexts/SettingsContext';
 import { CollapseDrawerProvider } from './contexts/CollapseDrawerContext';
 import { FirebaseProvider } from './contexts/FirebaseContext';
-
-//
-
 import App from './App';
 
-// ----------------------------------------------------------------------
+ReactGA4.initialize("G-RNQ60M4Z8N");
 
 ReactDOM.render(
   <FirebaseProvider>

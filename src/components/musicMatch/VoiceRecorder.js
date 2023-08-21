@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { requests } from '../../api/requests';
 import useFirebase from '../../hooks/useFirebase';
 import mixpanel from '../../utils/mixpanel';
+import GoogleAnalytics from '../../utils/googleAnalytics';
 
 let mediaRecorder;
 let chunks = [];
@@ -141,6 +142,11 @@ const VoiceRecorder = ({ musicMatchId, isTimeElapsed }) => {
       await requests.submitAudioRecording(user.idToken, formData);
 
       mixpanel.track('Game played', {
+        gameType: 'Music Match',
+        userEmail: user.email,
+      });
+
+      GoogleAnalytics.trackEvent('Game played', {
         gameType: 'Music Match',
         userEmail: user.email,
       });

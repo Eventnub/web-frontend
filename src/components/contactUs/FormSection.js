@@ -6,6 +6,7 @@ import { LoadingButton } from '@mui/lab';
 import Swal from 'sweetalert2';
 import { requests } from '../../api/requests';
 import mixpanel from '../../utils/mixpanel';
+import GoogleAnalytics from '../../utils/googleAnalytics';
 
 export default function FormSection() {
   const initialValues = {
@@ -33,6 +34,11 @@ export default function FormSection() {
             await requests.submitContactUsMessage(values);
 
             mixpanel.track('Contact form submitted', {
+              userName: values.name,
+              userEmail: values.email,
+            });
+
+            GoogleAnalytics.trackEvent('Contact form submitted', {
               userName: values.name,
               userEmail: values.email,
             });

@@ -12462,6 +12462,11 @@
   "resolved" "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz"
   "version" "3.2.0"
 
+"react-ga4@^2.1.0":
+  "integrity" "sha512-ZKS7PGNFqqMd3PJ6+C2Jtz/o1iU9ggiy8Y8nUeksgVuvNISbmrQtJiZNvC/TjDsqD0QlU5Wkgs7i+w9+OjHhhQ=="
+  "resolved" "https://registry.npmjs.org/react-ga4/-/react-ga4-2.1.0.tgz"
+  "version" "2.1.0"
+
 "react-helmet-async@^1.2.2":
   "integrity" "sha512-XgSQezeCbLfCxdZhDA3T/g27XZKnOYyOkruopTLSJj8RvFZwdXnM4djnfYaiBSDzOidDgTo1jcEozoRu/+P9UQ=="
   "resolved" "https://registry.npmjs.org/react-helmet-async/-/react-helmet-async-1.2.2.tgz"

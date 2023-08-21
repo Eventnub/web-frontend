@@ -9,6 +9,7 @@ import RaffleSuccessDialog from '../components/raffle/RaffleSuccessDialog';
 import AlreadySubmittedDialog from '../components/raffle/AlreadySubmitDialog';
 import logo from '../assets/blueLogo.png';
 import mixpanel from '../utils/mixpanel';
+import GoogleAnalytics from '../utils/googleAnalytics';
 
 export default function Raffle() {
   const [selectedButtons, setSelectedButtons] = useState([]);
@@ -72,6 +73,11 @@ export default function Raffle() {
       });
 
       mixpanel.track('Game played', {
+        gameType: 'Raffle Draw',
+        userEmail: user.email,
+      });
+
+      GoogleAnalytics.trackEvent('Game played', {
         gameType: 'Raffle Draw',
         userEmail: user.email,
       });

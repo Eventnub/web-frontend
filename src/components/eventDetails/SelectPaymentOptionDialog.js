@@ -10,6 +10,7 @@ import useFirebase from '../../hooks/useFirebase';
 import PaymentSuccessDialog from './PaymentSuccessDialog';
 import { requests } from '../../api/requests';
 import mixpanel from '../../utils/mixpanel';
+import GoogleAnalytics from '../../utils/googleAnalytics';
 
 const PAYSTACK_KEY = 'pk_test_6b28a0a394da79d85f0824ee2b9b366744dd9966';
 const STRIPE_KEY =
@@ -36,6 +37,14 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
       });
 
       mixpanel.track('Payment made', {
+        userEmail: user.email,
+        paymentService: 'stripe',
+        paymentObjective: objective,
+        paymentEventId: eventId,
+        paymentTicketIndex: index,
+      });
+
+      GoogleAnalytics.trackEvent('Payment made', {
         userEmail: user.email,
         paymentService: 'stripe',
         paymentObjective: objective,
@@ -74,14 +83,6 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
           eventId,
           ticketIndex: index,
           objective,
-        });
-
-        mixpanel.track('Payment made', {
-          userEmail: user.email,
-          paymentService: 'paystack',
-          paymentObjective: objective,
-          paymentEventId: eventId,
-          paymentTicketIndex: index,
         });
 
         const paymentId = data.data.uid;
