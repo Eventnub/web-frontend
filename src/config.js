@@ -1,8 +1,4 @@
-// routes
 import { PATH_PAGE } from './routes/paths';
-
-// API
-// ----------------------------------------------------------------------
 
 export const HOST_API = process.env.REACT_APP_HOST_API_KEY || '';
 
@@ -33,11 +29,7 @@ export const MAPBOX_API = process.env.REACT_APP_MAPBOX;
 
 export const GOOGLE_ANALYTICS_API = process.env.REACT_APP_GA_MEASUREMENT_ID;
 
-// ROOT PATH AFTER LOGIN SUCCESSFUL
 export const PATH_AFTER_LOGIN = PATH_PAGE.home;
-
-// LAYOUT
-// ----------------------------------------------------------------------
 
 export const DRAWER_WIDTH = 260;
 
@@ -52,9 +44,6 @@ export const DASHBOARD_NAVBAR_ICON_ITEM_SIZE = 22;
 
 export const MAIN_HEADER_DESKTOP = 88;
 export const MAIN_HEADER_MOBILE = 64;
-
-// SETTINGS
-// ----------------------------------------------------------------------
 
 export const defaultSettings = {
   themeMode: 'light',

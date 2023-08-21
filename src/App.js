@@ -1,10 +1,7 @@
 import './App.css';
-// routes
 import Router from './routes';
-// theme
 import ThemeProvider from './theme';
 import GlobalStyles from './theme/globalStyles';
-// components
 import RtlLayout from './components/RtlLayout';
 import { ChartStyle } from './components/chart';
 import ScrollToTop from './components/ScrollToTop';
