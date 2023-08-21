@@ -5,12 +5,14 @@ import Purpose from '../components/about/Purpose';
 import Footer from '../components/home/Footer';
 import Partners from '../components/about/Partners';
 import mixpanel from '../utils/mixpanel';
+import GoogleAnalytics from '../utils/googleAnalytics';
 
 function About() {
   useEffect(() => {
     mixpanel.track('Page viewed', {
       page: window.location.pathname,
     });
+    GoogleAnalytics.trackPageView(window.location.pathname);
   }, []);
 
   return (

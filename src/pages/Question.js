@@ -19,6 +19,7 @@ import Page from '../components/Page';
 import CountdownTimerGame from '../components/CountdownTimerGame';
 import logo from '../assets/blueLogo.png';
 import mixpanel from '../utils/mixpanel';
+import GoogleAnalytics from '../utils/googleAnalytics';
 
 const StyledLabel = styled(FormControlLabel)({
   '& .MuiTypography-body1': {
@@ -102,6 +103,11 @@ export default function Question() {
         });
 
         mixpanel.track('Game played', {
+          gameType: 'Quiz',
+          userEmail: user.email,
+        });
+
+        GoogleAnalytics.trackEvent('Game played', {
           gameType: 'Quiz',
           userEmail: user.email,
         });

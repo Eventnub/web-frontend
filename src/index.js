@@ -36,7 +36,7 @@ import { CollapseDrawerProvider } from './contexts/CollapseDrawerContext';
 import { FirebaseProvider } from './contexts/FirebaseContext';
 import App from './App';
 
-ReactGA4.initialize("");
+ReactGA4.initialize("G-RNQ60M4Z8N");
 
 ReactDOM.render(
   <FirebaseProvider>

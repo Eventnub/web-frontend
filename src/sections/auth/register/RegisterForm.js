@@ -9,6 +9,7 @@ import { requests } from '../../../api/requests';
 import DialogSuccess from './DialogSuccess';
 import useIsMountedRef from '../../../hooks/useIsMountedRef';
 import mixpanel from '../../../utils/mixpanel';
+import GoogleAnalytics from '../../../utils/googleAnalytics';
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -54,6 +55,12 @@ const RegisterForm = () => {
           }
           await requests.register(values);
           mixpanel.track('Signed up', {
+            name: `${values.firstName} ${values.firstName}`,
+            email: values.email,
+            favoriteCelebrity: values.favoriteCelebrity,
+            method: 'Email and password',
+          });
+          GoogleAnalytics.trackEvent('Signed up', {
             name: `${values.firstName} ${values.firstName}`,
             email: values.email,
             favoriteCelebrity: values.favoriteCelebrity,

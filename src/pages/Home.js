@@ -6,12 +6,14 @@ import About from '../components/home/About';
 import Testimonials from '../components/home/Testimonials';
 import Footer from '../components/home/Footer';
 import mixpanel from '../utils/mixpanel';
+import GoogleAnalytics from '../utils/googleAnalytics';
 
 export default function HomePage() {
   useEffect(() => {
     mixpanel.track('Page viewed', {
       page: window.location.pathname,
     });
+    GoogleAnalytics.trackPageView(window.location.pathname);
   }, []);
 
   return (
