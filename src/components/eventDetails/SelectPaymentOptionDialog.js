@@ -85,22 +85,6 @@ export default function SelectPaymentOption({ open, handleClose, extraPaymentDat
           objective,
         });
 
-        mixpanel.track('Payment made', {
-          userEmail: user.email,
-          paymentService: 'paystack',
-          paymentObjective: objective,
-          paymentEventId: eventId,
-          paymentTicketIndex: index,
-        });
-
-        GoogleAnalytics.trackEvent('Payment made', {
-          userEmail: user.email,
-          paymentService: 'paystack',
-          paymentObjective: objective,
-          paymentEventId: eventId,
-          paymentTicketIndex: index,
-        });
-
         const paymentId = data.data.uid;
         localStorage.setItem('paymentId', paymentId);
         console.log(paymentId);
