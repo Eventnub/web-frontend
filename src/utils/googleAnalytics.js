@@ -1,14 +1,19 @@
 import ReactGA4 from 'react-ga4';
+import { isProduction } from './environment';
 
 const GoogleAnalytics = {
   trackPageView: (page) => {
-    ReactGA4.send({
-      hitType: 'pageview',
-      page,
-    });
+    if (isProduction()) {
+      ReactGA4.send({
+        hitType: 'pageview',
+        page,
+      });
+    }
   },
   trackEvent: (name, params) => {
-    ReactGA4.event(name, params);
+    if (isProduction()) {
+      ReactGA4.event(name, params);
+    }
   },
 };
 
