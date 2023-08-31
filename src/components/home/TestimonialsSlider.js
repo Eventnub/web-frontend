@@ -1,13 +1,11 @@
-import React, { useState, useRef } from 'react';
-import { Box, Rating, Typography, Container, IconButton } from '@mui/material';
-import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
-import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
+import React, { useState } from 'react';
+import { Box, Rating, Typography, Container } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import './slider.css';
 import Slider from 'react-slick';
-// import avatarImg from '../../assets/avatar.png';
 
-const data = [
+const testimonials = [
   {
     name: 'Sarah J.',
     testimony:
@@ -38,15 +36,14 @@ const data = [
 function TestimonialsSlider() {
   const [value] = useState(5);
 
-  const slideRef = useRef(null);
   const settings = {
-    dots: false,
-    infinite: true,
+    dots: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
     initialSlide: 0,
-    arrows: false,
+    arrows: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -54,7 +51,7 @@ function TestimonialsSlider() {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: false,
+          dots: true,
         },
       },
       {
@@ -76,99 +73,34 @@ function TestimonialsSlider() {
   };
 
   return (
-    <Container maxWidth="3xl" sx={{ position: 'relative' }}>
-      <Slider {...settings} ref={slideRef}>
-        {data.map((item) => (
-          <Box
-            sx={{ border: '1px solid #838383', borderRadius: '10px', height: '300px', py: '1.2rem', px: '.5rem' }}
-            key={Math.random()}
-          >
+    <Container maxWidth="xl" sx={{ position: 'relative' }}>
+      <Slider {...settings}>
+        {testimonials.map((item, index) => (
+          <Box key={index} sx={{ px: '1rem', height: { xs: '350px', md: '300px' } }}>
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '.8rem',
+                border: '1px solid #838383',
+                borderRadius: '10px',
+                height: '100%',
+                py: '2rem',
+                px: '1rem',
               }}
-              component="span"
             >
-              <Box component="span" sx={{}}>
-                <Rating name="read-only" value={value} readOnly size="small" />
-              </Box>
-              <Box
-                component="span"
-                sx={{
-                  marginTop: '.9rem',
-                }}
+              <Rating name="read-only" value={value} readOnly size="small" />
+              <Typography
+                variant="body1"
+                paragraph
+                sx={{ fontSize: '.8rem', color: '#838383', fontWeight: '400', my: '1rem' }}
               >
-                <Typography variant="body1" paragraph sx={{ fontSize: '.8rem', color: '#838383', fontWeight: '400' }}>
-                  "{item.testimony}"
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  marginLeft: 0,
-                  marginRight: 0,
-                  justifyContent: 'start',
-                  alignItems: 'center',
-                  padding: 0,
-                  gap: '1rem',
-                }}
-                component="span"
-              >
-                {/* <Avatar
-                  src={avatarImg}
-                  alt="avatar"
-                  sx={{
-                    marginTop: '10px',
-                    width: 70,
-                    height: 70,
-                    padding: 0,
-                    marginLeft: 0,
-                    marginRight: 0,
-                    [theme.breakpoints.down('sm')]: { width: 40, height: 40 },
-                  }}
-                  component="span"
-                /> */}
-
-                <Typography sx={{ fontSize: '1rem', marginTop: '10px', fontWeight: '600', color: '#838383' }}>
-                  {item.name}
-                </Typography>
-              </Box>
+                "{item.testimony}"
+              </Typography>
+              <Typography sx={{ fontSize: '1rem', mt: '10px', fontWeight: '600', color: '#838383' }}>
+                {item.name}
+              </Typography>
             </Box>
           </Box>
         ))}
       </Slider>
-      <IconButton
-        sx={{
-          borderRadius: '50%',
-          background: 'transparent',
-          height: '2rem',
-          width: '2rem',
-          border: '1px solid #838383',
-          position: 'absolute',
-          top: '50%',
-          left: '3%',
-        }}
-        onClick={() => slideRef?.current.slickPrev()}
-      >
-        <KeyboardArrowLeftSharpIcon />
-      </IconButton>
-      <IconButton
-        sx={{
-          borderRadius: '50%',
-          background: 'transparent',
-          height: '2rem',
-          width: '2rem',
-          border: '1px solid #838383',
-          position: 'absolute',
-          top: '50%',
-          right: '0.5%',
-        }}
-        onClick={() => slideRef?.current.slickNext()}
-      >
-        <KeyboardArrowRightSharpIcon />
-      </IconButton>
     </Container>
   );
 }

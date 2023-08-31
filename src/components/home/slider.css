@@ -1,0 +1,8 @@
+.slick-prev:before,
+.slick-next:before {
+  color: rgb(53, 53, 53);
+}
+
+.slick-slide div {
+  margin: 0 !important
+}
