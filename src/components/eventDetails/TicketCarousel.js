@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Box, Button, Typography, Container, IconButton, CircularProgress, Tooltip } from '@mui/material';
-import KeyboardArrowLeftSharpIcon from '@mui/icons-material/KeyboardArrowLeftSharp';
-import KeyboardArrowRightSharpIcon from '@mui/icons-material/KeyboardArrowRightSharp';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
@@ -162,13 +160,13 @@ export default function TicketCarousel({ onTicketsLoaded }) {
   }, [user.idToken, eventId]);
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
     initialSlide: 0,
-    arrows: false,
+    arrows: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -209,123 +207,124 @@ export default function TicketCarousel({ onTicketsLoaded }) {
     <Container maxWidth="xl" sx={{ position: 'relative' }}>
       <Slider {...settings} ref={slideRef}>
         {event?.tickets?.map((item) => (
-          <Box
-            key={item.index}
-            sx={{
-              position: 'relative',
-              backgroundColor: '#595959',
-              width: '250px',
-              borderRadius: '1rem',
-              p: '1rem',
-            }}
-            id="tickets"
-          >
-            <Tooltip
-              leaveDelay={1000}
-              title={
-                <Typography variant="body2">
-                  Click{' '}
-                  <a
-                    href={item.description}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      fontWeight: '500',
+          <Box key={item.index} sx={{ px: '0.8rem', width: '250px' }}>
+            <Box
+              sx={{
+                position: 'relative',
+                backgroundColor: '#595959',
+                width: '100%',
+                borderRadius: '1rem',
+                p: '1rem',
+              }}
+              id="tickets"
+            >
+              <Tooltip
+                leaveDelay={1000}
+                title={
+                  <Typography variant="body2">
+                    Click{' '}
+                    <a
+                      href={item.description}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        fontWeight: '500',
+                      }}
+                    >
+                      here
+                    </a>{' '}
+                    to view this ticket's seat map
+                  </Typography>
+                }
+                sx={{
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '1rem',
+                }}
+              >
+                <IconButton>
+                  <Iconify
+                    icon={'bi:info-circle'}
+                    width={16}
+                    height={16}
+                    sx={{
+                      color: 'common.white',
                     }}
-                  >
-                    here
-                  </a>{' '}
-                  to view this ticket's seat map
-                </Typography>
-              }
-              sx={{
-                position: 'absolute',
-                top: '1rem',
-                right: '1rem',
-              }}
-            >
-              <IconButton>
-                <Iconify
-                  icon={'bi:info-circle'}
-                  width={16}
-                  height={16}
-                  sx={{
-                    color: 'common.white',
-                  }}
-                />
-              </IconButton>
-            </Tooltip>
-            <Typography
-              sx={{
-                color: '#FFF',
-                fontSize: '1.6rem',
-                fontWeight: '600',
-                mb: '0.8rem',
-              }}
-            >
-              {`$${item.price}`}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '1.1rem',
-                color: '#fff',
-                fontWeight: '400',
-                mb: '0.3rem',
-              }}
-            >
-              {item.type}
-            </Typography>
-            <Typography
-              sx={{
-                color: '#fff',
-                fontWeight: '600',
-                fontSize: '0.9rem',
-              }}
-            >
-              {`Pay $${toFixedFloat(item.price * 0.15)} of the ticket price and 
-              get it for free by playing a game.`}
-            </Typography>
-            <Button
-              fullWidth
-              variant="contained"
-              onClick={() => handleOpenDialog(toFixedFloat(item.price * 0.15), item.index)}
-              sx={{
-                boxShadow: 'none',
-                backgroundColor: '#FF6C2C',
-                border: '1px solid #FF6C2C',
-                color: '#fff',
-                mt: { xs: '6rem', md: '8rem' },
-                p: '0.5rem',
-                mb: '1rem',
-                '&:hover': {
-                  color: '#FF6C2C',
-                  backgroundColor: 'transparent',
-                  border: '1px solid #FF6C2C',
-                },
-              }}
-            >
-              Play a game and win ticket
-            </Button>
-
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={handleOpenComingSoonDialog}
-              sx={{
-                boxShadow: 'none',
-                color: '#FF6C2C',
-                border: '1px solid #FF6C2C',
-                mb: '1rem',
-                p: '0.5rem',
-                '&:hover': {
+                  />
+                </IconButton>
+              </Tooltip>
+              <Typography
+                sx={{
+                  color: '#FFF',
+                  fontSize: '1.6rem',
+                  fontWeight: '600',
+                  mb: '0.8rem',
+                }}
+              >
+                {`$${item.price}`}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: '1.1rem',
                   color: '#fff',
-                  bgcolor: '#FF6C2C',
+                  fontWeight: '400',
+                  mb: '0.3rem',
+                }}
+              >
+                {item.type}
+              </Typography>
+              <Typography
+                sx={{
+                  color: '#fff',
+                  fontWeight: '600',
+                  fontSize: '0.9rem',
+                }}
+              >
+                {`Pay $${toFixedFloat(item.price * 0.15)} of the ticket price and 
+              get it for free by playing a game.`}
+              </Typography>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={() => handleOpenDialog(toFixedFloat(item.price * 0.15), item.index)}
+                sx={{
+                  boxShadow: 'none',
+                  backgroundColor: '#FF6C2C',
                   border: '1px solid #FF6C2C',
-                },
-              }}
-            >
-              {`Buy with $${item.price}`}
-            </Button>
+                  color: '#fff',
+                  mt: { xs: '6rem', md: '8rem' },
+                  p: '0.5rem',
+                  mb: '1rem',
+                  '&:hover': {
+                    color: '#FF6C2C',
+                    backgroundColor: 'transparent',
+                    border: '1px solid #FF6C2C',
+                  },
+                }}
+              >
+                Play a game and win ticket
+              </Button>
+
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={handleOpenComingSoonDialog}
+                sx={{
+                  boxShadow: 'none',
+                  color: '#FF6C2C',
+                  border: '1px solid #FF6C2C',
+                  mb: '1rem',
+                  p: '0.5rem',
+                  '&:hover': {
+                    color: '#fff',
+                    bgcolor: '#FF6C2C',
+                    border: '1px solid #FF6C2C',
+                  },
+                }}
+              >
+                {`Buy with $${item.price}`}
+              </Button>
+            </Box>
           </Box>
         ))}
       </Slider>
@@ -338,37 +337,6 @@ export default function TicketCarousel({ onTicketsLoaded }) {
         handleCancel={handleCancel}
         handleContinue={handleContinue}
       />
-
-      <IconButton
-        sx={{
-          borderRadius: '50%',
-          background: '#C3C3C3',
-          height: '2rem',
-          width: '2rem',
-          border: '1px solid #838383',
-          position: 'absolute',
-          top: '50%',
-          left: '3%',
-        }}
-        onClick={() => slideRef?.current.slickPrev()}
-      >
-        <KeyboardArrowLeftSharpIcon />
-      </IconButton>
-      <IconButton
-        sx={{
-          borderRadius: '50%',
-          background: '#C3C3C3',
-          height: '2rem',
-          width: '2rem',
-          border: '1px solid #838383',
-          position: 'absolute',
-          top: '50%',
-          right: '0.5%',
-        }}
-        onClick={() => slideRef?.current.slickNext()}
-      >
-        <KeyboardArrowRightSharpIcon />
-      </IconButton>
     </Container>
   );
 }

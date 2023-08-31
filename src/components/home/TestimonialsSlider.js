@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Box, Rating, Typography, Container } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './slider.css';
 import Slider from 'react-slick';
 
 const testimonials = [
