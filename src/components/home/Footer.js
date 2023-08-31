@@ -63,7 +63,7 @@ export default function Footer() {
               <a href="https://twitter.com/globeventnub?s=20" target="_blank" rel="noreferrer">
                 <img src={twitter} alt="twitter" style={{ width: '25px', height: '25px' }} />
               </a>
-              <a href="https://instagram.com/globeventnub?igshid=YmMyMTA2M2Y=" target="_blank" rel="noreferrer">
+              <a href="https://www.instagram.com/eventnub/" target="_blank" rel="noreferrer">
                 <img src={instagram} alt="instagram" style={{ width: '25px', height: '25px' }} />
               </a>
             </Stack>
