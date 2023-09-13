@@ -13,19 +13,34 @@ import {
   Stack,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
+
+const StyledNavlink = styled(NavLink)(() => ({
+  textDecoration: 'none',
+  activeStyle: '#FF6C2C',
+  color: '#FFFFFF',
+  fontWeight: '400',
+  cursor: 'pointer',
+}));
+
+const Circle = styled('span')(() => ({
+  width: '16px',
+  height: '16px',
+  borderRadius: '50px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#fff',
+  background: '#FF6C2C',
+  textAlign: 'center',
+  fontSize: '8px',
+}));
 
 export default function DrawerCom() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const { isAuthenticated, user } = useFirebase();
-  const StyledNavlink = styled(NavLink)(() => ({
-    textDecoration: 'none',
-    activeStyle: '#FF6C2C',
-    color: '#FFFFFF',
-    fontWeight: '400',
-    cursor: 'pointer',
-  }));
 
   return (
     <div>
@@ -60,7 +75,19 @@ export default function DrawerCom() {
           <ListItemButton>
             <ListItemIcon>
               <ListItemText>
-                <StyledNavlink to="/dashboard/tickets">My Tickets</StyledNavlink>
+                <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  My Tickets <Circle> 0</Circle>
+                </StyledNavlink>
+              </ListItemText>
+            </ListItemIcon>
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <ListItemText>
+                <StyledNavlink to="/leaderboard" sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  Leaderboard
+                  <EmojiEventsIcon sx={{ color: '#FFD700', width: '1.2rem', height: '1.2rem' }} />
+                </StyledNavlink>
               </ListItemText>
             </ListItemIcon>
           </ListItemButton>
