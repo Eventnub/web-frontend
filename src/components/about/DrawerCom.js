@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink, Link as RouterLink } from 'react-router-dom';
 import { Drawer, Button, List, ListItemButton, ListItemText, ListItemIcon, styled, IconButton } from '@mui/material';
-import { MenuIcon, EmojiEventsIcon } from '@mui/icons-material';
+import MenuIcon from '@mui/icons-material/Menu';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { PATH_AUTH } from '../../routes/paths';
 import useFirebase from '../../hooks/useFirebase';
 
