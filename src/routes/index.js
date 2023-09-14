@@ -61,6 +61,9 @@ const MusicMatchPage = Loadable(lazy(() => import('../pages/MusicMatch')));
 // Payment
 const CheckOutPage = Loadable(lazy(() => import('../pages/CheckOutPage')));
 
+// Leaderboard
+const Leaderboard = Loadable(lazy(() => import('../pages/leaderboard/Leaderboard')));
+
 export default function Router() {
   return useRoutes([
     // Authentication Routes
@@ -226,6 +229,14 @@ export default function Router() {
       element: (
         <AuthGuard>
           <CheckOutPage />
+        </AuthGuard>
+      ),
+    },
+    {
+      path: 'leaderboard',
+      element: (
+        <AuthGuard>
+          <Leaderboard />
         </AuthGuard>
       ),
     },
