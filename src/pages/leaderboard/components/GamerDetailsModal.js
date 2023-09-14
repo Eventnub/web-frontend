@@ -5,7 +5,7 @@ import GamerStatistics from './GamerStatistics';
 
 export default function GamerDetailsModal({ open, handleClose, gamer }) {
   return (
-    <Dialog open={open} maxWidth="md" scroll="body">
+    <Dialog fullScreen open={open} maxWidth="md" scroll="body">
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', bgcolor: 'primary.main' }}>
         <IconButton aria-label="Close" onClick={handleClose} sx={{ color: '#ffffff' }}>
           <Iconify icon="eva:close-fill" width={22} height={22} />
