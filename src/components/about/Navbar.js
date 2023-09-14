@@ -1,5 +1,6 @@
 import { AppBar, Toolbar, Typography, Button, Box, useMediaQuery, useTheme, styled, Avatar } from '@mui/material';
 import { NavLink, Link as RouterLink } from 'react-router-dom';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import logo from '../../assets/blueLogo.png';
 import { PATH_AUTH } from '../../routes/paths';
 import DrawerCom from './DrawerCom';
@@ -61,6 +62,10 @@ export default function Navbar() {
               <StyledNavlink to="/contact-us">Contact Us</StyledNavlink>
               <StyledNavlink to="/dashboard/tickets" sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 My Tickets<Sircle sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>0</Sircle>
+              </StyledNavlink>
+              <StyledNavlink to="/leaderboard" sx={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                Leaderboard
+                <EmojiEventsIcon sx={{ color: '#FFD700' }} />
               </StyledNavlink>
             </NavbarLinksBox>
             {isAuthenticated ? (
