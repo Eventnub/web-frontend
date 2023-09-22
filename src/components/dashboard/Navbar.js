@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Box, styled, Link, Popover, Avatar, IconButton } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  styled,
+  Link,
+  Popover,
+  Avatar,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MenuIcon from '@mui/icons-material/Menu';
+import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LogoutButton from '../../layouts/dashboard/navbar/LogoutButton';
 import useFirebase from '../../hooks/useFirebase';
 import logo from '../../assets/blueLogo.png';
@@ -62,11 +79,6 @@ export default function Navbar() {
             <Link component={RouterLink} underline="none" to="/contact-us">
               <Typography sx={{ color: '#000', fontWeight: '200', fontSize: '.9rem' }}>Contact Us</Typography>
             </Link>
-            {/* {isAuthenticated && user.role === 'host' && (
-              <Link component={RouterLink} underline="none" to="/my-events">
-                <Typography sx={{ color: '#000', fontWeight: '200', fontSize: '.9rem' }}>My Events</Typography>
-              </Link>
-            )} */}
             <Link component={RouterLink} underline="none" to="/dashboard/tickets">
               <Typography
                 sx={{
@@ -111,9 +123,26 @@ export default function Navbar() {
               horizontal: 'center',
             }}
           >
-            <Box sx={{ p: 1, bgcolor: '#fff' }}>
-              <LogoutButton />
-            </Box>
+            <List sx={{ width: '100%', bgcolor: 'common.white' }}>
+              <ListItemButton component={RouterLink} to="/">
+                <ListItemIcon>
+                  <AirplaneTicketIcon />
+                </ListItemIcon>
+                <ListItemText primary="My Tickets" />
+              </ListItemButton>
+              <ListItemButton component={RouterLink} to="/my-results">
+                <ListItemIcon>
+                  <EmojiEventsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Game Results" />
+              </ListItemButton>
+              <Divider />
+              <ListItemButton component={RouterLink} to="/">
+                <ListItemIcon>
+                  <LogoutButton />
+                </ListItemIcon>
+              </ListItemButton>
+            </List>
           </Popover>
           <IconButton onClick={handleDrawerOpen} sx={{ display: { lg: 'none', xl: 'none' } }}>
             <MenuIcon sx={{ display: { lg: 'none', xl: 'none' } }} />

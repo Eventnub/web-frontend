@@ -1,8 +1,6 @@
-// @mui
-import { Button, Typography } from '@mui/material';
-// hooks
+import { Button } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 import useFirebase from '../../../hooks/useFirebase';
-//
 
 export default function LogoutButton() {
   const { logout } = useFirebase();
@@ -16,8 +14,16 @@ export default function LogoutButton() {
   };
 
   return (
-    <Typography component={Button} onClick={handleLogout} variant="body2">
+    <Button
+      onClick={handleLogout}
+      variant="text"
+      startIcon={<LogoutIcon />}
+      sx={{
+        fontWeight: '300',
+        color: "error.main"
+      }}
+    >
       Logout
-    </Typography>
+    </Button>
   );
 }
