@@ -130,7 +130,7 @@ export default function Navbar() {
                 </ListItemIcon>
                 <ListItemText primary="My Tickets" />
               </ListItemButton>
-              <ListItemButton component={RouterLink} to="/">
+              <ListItemButton component={RouterLink} to="/my-results">
                 <ListItemIcon>
                   <EmojiEventsIcon />
                 </ListItemIcon>
